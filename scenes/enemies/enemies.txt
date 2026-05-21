@@ -2,7 +2,7 @@
 
 ##Enemy
 	Public Attributes:
-		sting[] array ""
+		sting[] array "lootTable" --> has all the possible Drops for the specific enemy [LOOTtABLE is organized from higheset RARITY value of the SHIPpART to lowest value]
 
 ##Dropping salvage
 

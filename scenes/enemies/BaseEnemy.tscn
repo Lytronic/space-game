@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://lvlgmxl6u820"]
+
+[ext_resource type="Script" uid="uid://rh28g860bekh" path="res://scenes/enemies/BaseEnemyScript.cs" id="1_xyabd"]
+[ext_resource type="Script" uid="uid://bb0ka28yv7y8k" path="res://scenes/enemies/SalvageScript.cs" id="2_ob6f1"]
+
+[node name="BaseEnemy" type="Node2D" unique_id=296247195]
+script = ExtResource("1_xyabd")
+
+[node name="Salvage" type="Node" parent="." unique_id=1373146539]
+script = ExtResource("2_ob6f1")

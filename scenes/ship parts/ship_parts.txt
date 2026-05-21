@@ -5,11 +5,17 @@
 # Interface Class "ShipPart" 
 	Public Attributes:
 		string "displayTooltip" --> contains the tooltip including malleable values for stats
+		double "rarity" --> number that gets used to weigh rarity degree and the final drop upon generation
+		bool "isActive" --> determinees if the part will be skipped when the PLAYER calls the effect methods 
 	
 	Public Methods:
-		"activateEffect" 
+		"activateEffect" --> calls the other methods used to make up the effect of an item
 		
 
 ## Extentions ShipParts
 
 # Class "Debug Multitool"
+	extends "ShipPart"
+	
+	Unique Public Attributes:
+		
