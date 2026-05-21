@@ -1,0 +1,17 @@
+###Documentation concernign everything about the enemies 
+
+##Dropping salvage
+
+# "Salvage" Node
+	Dropped salvage will be predetermined on creating the enemy SCENE 
+	and saved in the attatched "Salvage" NODE which is attatched to 
+	every enemy.
+	
+# Class "Salvage"
+	The class contains the reference to the "ShipPart" object that 
+	will then show up in the uprade menu after the round.
+	
+	
+
+# Interface Class "ShipPart" 
+	oegj

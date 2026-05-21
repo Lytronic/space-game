@@ -2,6 +2,7 @@
 .godot/
 <<<<<<< HEAD
 /android/
+<<<<<<< Updated upstream
 =======
 .nomedia
 
@@ -19,3 +20,6 @@ export_credentials.cfg
 data_*/
 mono_crash.*.json
 >>>>>>> 74cdb5a35a7b8fc018e64a6733e33b8be649776c
+=======
+addons/godot-git-plugin/windows/~libgit_plugin.windows.editor.x86_64.dll
+>>>>>>> Stashed changes
