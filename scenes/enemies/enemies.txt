@@ -1,17 +1,24 @@
 ###Documentation concernign everything about the enemies 
 
+##Enemy
+	Public Attributes:
+		sting[] array ""
+
 ##Dropping salvage
 
 # "Salvage" Node
-	Dropped salvage will be predetermined on creating the enemy SCENE 
-	and saved in the attatched "Salvage" NODE which is attatched to 
-	every enemy.
-	
-# Class "Salvage"
+
 	The class contains the reference to the "ShipPart" object that 
 	will then show up in the uprade menu after the round.
 	
 	
-
-# Interface Class "ShipPart" 
-	oegj
+# Class "Salvage"
+	
+	Dropped salvage will be predetermined on creation of the enemy SCENE 
+	and saved in the attatched "Salvage" NODE which will be attatched to 
+	every enemy.
+	
+	Public Methods:
+		"createLoot(int amount)" --> creates a random value RNGESUS and choses an extention of the class SHIPpARTS from the parent ENEMY's LOOTtABLE array and returns it; the method does so AMOUNT number of times
+		"getSalvage" --> returns the array SALVAGEaRRAY that stores the dropped SHIPpARTS
+	

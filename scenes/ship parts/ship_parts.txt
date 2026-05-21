@@ -1,0 +1,15 @@
+###Documentation concerning everything extending and including the Interface "ShipParts" 
+
+##Interface
+
+# Interface Class "ShipPart" 
+	Public Attributes:
+		string "displayTooltip" --> contains the tooltip including malleable values for stats
+	
+	Public Methods:
+		"activateEffect" 
+		
+
+## Extentions ShipParts
+
+# Class "Debug Multitool"
