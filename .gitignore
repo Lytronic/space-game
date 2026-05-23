@@ -15,6 +15,9 @@ export_credentials.cfg
 # Imported translations (automatically generated from CSV files)
 *.translation
 
+# Visual Studio-specific ignores
+.vs/
+
 # Mono-specific ignores
 .mono/
 data_*/
