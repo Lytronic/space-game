@@ -1,0 +1,83 @@
+[gd_scene format=3 uid="uid://bk4nrti57yy2a"]
+
+[ext_resource type="Script" uid="uid://b6k3gvyuak224" path="res://util/DBTestScene.cs" id="1_5hku5"]
+
+[node name="DBTest" type="Control" unique_id=1273799402]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_5hku5")
+
+[node name="DBTestContainer" type="HBoxContainer" parent="." unique_id=215614565]
+layout_mode = 0
+offset_left = 22.0
+offset_top = 31.0
+offset_right = 762.0
+offset_bottom = 329.0
+
+[node name="ContainerLeft" type="VBoxContainer" parent="DBTestContainer" unique_id=1085785731]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="AddLabel" type="Label" parent="DBTestContainer/ContainerLeft" unique_id=1243856475]
+layout_mode = 2
+text = "Add high score to database"
+horizontal_alignment = 1
+
+[node name="NameLine" type="LineEdit" parent="DBTestContainer/ContainerLeft" unique_id=622241288]
+layout_mode = 2
+placeholder_text = "Player name"
+
+[node name="ScoreLine" type="LineEdit" parent="DBTestContainer/ContainerLeft" unique_id=620278441]
+layout_mode = 2
+placeholder_text = "Score"
+
+[node name="AddButton" type="Button" parent="DBTestContainer/ContainerLeft" unique_id=137560327]
+layout_mode = 2
+text = "Add"
+
+[node name="ContainerRight" type="VBoxContainer" parent="DBTestContainer" unique_id=675363695]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="QueryLabel" type="Label" parent="DBTestContainer/ContainerRight" unique_id=95422131]
+layout_mode = 2
+text = "Query saved high scores"
+horizontal_alignment = 1
+
+[node name="QueryContainer" type="HBoxContainer" parent="DBTestContainer/ContainerRight" unique_id=42352279]
+layout_mode = 2
+
+[node name="QueryAllButton" type="Button" parent="DBTestContainer/ContainerRight/QueryContainer" unique_id=414282826]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Query all"
+
+[node name="QueryPlayerButton" type="Button" parent="DBTestContainer/ContainerRight/QueryContainer" unique_id=2020403128]
+layout_mode = 2
+text = "Query by player"
+
+[node name="NameLine" type="LineEdit" parent="DBTestContainer/ContainerRight/QueryContainer" unique_id=478171767]
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "Player name"
+
+[node name="QueryLabel2" type="Label" parent="DBTestContainer/ContainerRight" unique_id=1542550926]
+layout_mode = 2
+text = "ID        Player        Score"
+
+[node name="ItemList" type="ItemList" parent="DBTestContainer/ContainerRight" unique_id=1259979886]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 11
+
+[node name="Label" type="Label" parent="." unique_id=166566752]
+layout_mode = 0
+offset_left = 3.0
+offset_top = 3.0
+offset_right = 562.0
+offset_bottom = 26.0
+text = "Scene for testing database access from within the engine"
