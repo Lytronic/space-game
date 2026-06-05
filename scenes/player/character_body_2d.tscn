@@ -1,5 +1,7 @@
 [gd_scene format=3 uid="uid://doswvj43ed2ue"]
 
+[ext_resource type="Script" uid="uid://datpt1os2yqtd" path="res://scenes/player/PartsManager.cs" id="1_4bq1r"]
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_ix64g"]
 
 [node name="Player" type="CharacterBody2D" unique_id=2075203121]
@@ -8,3 +10,6 @@
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2010192033]
 shape = SubResource("CircleShape2D_ix64g")
+
+[node name="PartsManager" type="Node2D" parent="." unique_id=1752467098]
+script = ExtResource("1_4bq1r")
