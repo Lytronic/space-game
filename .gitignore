@@ -3,8 +3,9 @@
 /android/
 .nomedia
 
-# Godot-specific ignores
-.import/
+# Godot-specific ignores (updated: don't ignore *.import files)
+.godot/imported/
+.godot/cache/
 export.cfg
 export_credentials.cfg
 *.tmp
