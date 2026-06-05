@@ -1,15 +1,24 @@
 [gd_scene format=3 uid="uid://doswvj43ed2ue"]
 
 [ext_resource type="Script" uid="uid://datpt1os2yqtd" path="res://scenes/player/PartsManager.cs" id="1_4bq1r"]
+[ext_resource type="Script" uid="uid://bw5ie1tyljuyd" path="res://scenes/player/Player.cs" id="1_lxlh8"]
+[ext_resource type="Texture2D" uid="uid://dbrj5in4ywc6n" path="res://gfx/gui/templates/rocket_template.png" id="2_lxlh8"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ix64g"]
 
 [node name="Player" type="CharacterBody2D" unique_id=2075203121]
+script = ExtResource("1_lxlh8")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=366547732]
+position = Vector2(-4.7683716e-07, 0)
+scale = Vector2(0.15625, 0.15625)
+texture = ExtResource("2_lxlh8")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2010192033]
 shape = SubResource("CircleShape2D_ix64g")
 
 [node name="PartsManager" type="Node2D" parent="." unique_id=1752467098]
 script = ExtResource("1_4bq1r")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1566197548]
+zoom = Vector2(3, 3)
