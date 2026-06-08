@@ -1,4 +1,5 @@
 using Godot;
+using System.Threading.Tasks;
 
 public partial class Player : CharacterBody2D
 {
@@ -20,23 +21,61 @@ public partial class Player : CharacterBody2D
 	private float _throttleSpeed = 0.0f;
 	private float _strafeSpeed = 0.0f;
 
+	// User Interfaces
+	private Control _hud;
+	private Control _deathScreen;
+
+	// Labels (not the queer kind.. probably...)
 	private Label PlayerSpeedLabel;
+	private Label PlayerHealthLabel;
+
+	// Healthy variables
+	private float _health = 100.0f;
+	private bool _isAlive = true;
 
 	public override void _Ready()
 	{
-		PlayerSpeedLabel = GetNode<Label>("../CanvasLayer/HUD/PlayerSpeedLabel");
+		// Assign user interfaces
+		_hud = GetNode<Control>("../CanvasLayer/HUD");
+		_deathScreen = GetNode<Control>("../CanvasLayer/DeathScreen");
+
+		// Assign labels
+		PlayerSpeedLabel = _hud.GetNode<Label>("PlayerSpeedLabel");
+		PlayerHealthLabel = _hud.GetNode<Label>("PlayerHealthLabel");
+
+		// You get the point
+		_hud.Show();
+		_deathScreen.Hide();
 	}
 
 	public override void _PhysicsProcess(double delta)
 	{
 		float dt = (float)delta;
 
-		RotateTowardMouse(dt);
-		UpdateLinearMovement(dt);
-		MoveAndSlide();
+		if (_isAlive)
+		{
+			// Ship movement & behavior
+			RotateTowardMouse(dt);
+			UpdateLinearMovement(dt);
+			MoveAndSlide();
 
+			// Check for player death
+			if (_health <= 0.0001f)
+			{
+				_isAlive = false;
+				InitiateDeathSequence();
+			}
+		}
+
+	}
+
+	public override void _Process(double delta)
+	{
 		// Update speed value on HUD
 		PlayerSpeedLabel.Text = $"Speed: {Velocity.Length():0}";
+
+		// Update health value on HUD
+		PlayerHealthLabel.Text = $"Health: {_health:0}";
 	}
 
 	private void RotateTowardMouse(float dt)
@@ -109,7 +148,7 @@ public partial class Player : CharacterBody2D
 		Velocity = forward * _throttleSpeed + right * _strafeSpeed;
 	}
 
-	private float UpdateAxisSpeed(float currentSpeed, float input, float maxSpeed, float accel, float delta)
+	private static float UpdateAxisSpeed(float currentSpeed, float input, float maxSpeed, float accel, float delta)
 	{
 		if (Mathf.IsZeroApprox(input)) return MoveToward(currentSpeed, 0.0f, accel * delta); // If no axis input, start slowing down
 
@@ -122,10 +161,27 @@ public partial class Player : CharacterBody2D
 		return MoveToward(currentSpeed, targetSpeed, actualAccel * delta);
 	}
 
-	private float MoveToward(float current, float target, float maxDelta)
+	private static float MoveToward(float current, float target, float maxDelta)
 	{
 		if (current < target) return Mathf.Min(current + maxDelta, target);
 		else if (current > target) return Mathf.Max(current - maxDelta, target);
 		else return target;
+	}
+
+	public void TakeDamage(float amount)
+	{
+		_health -= amount;
+	}
+
+	private async void InitiateDeathSequence()
+	{
+		// Disable HUD
+		_hud.Hide();
+
+		// Wait briefly
+		await ToSignal(GetTree().CreateTimer(2.5), SceneTreeTimer.SignalName.Timeout);
+
+		// Display game over screen
+		_deathScreen.Show();
 	}
 }

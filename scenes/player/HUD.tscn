@@ -17,3 +17,12 @@ offset_right = 40.0
 offset_bottom = 23.0
 text = "Speed"
 label_settings = SubResource("LabelSettings_j6s56")
+
+[node name="PlayerHealthLabel" type="Label" parent="." unique_id=555668858]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 37.0
+offset_right = 104.0
+offset_bottom = 82.0
+text = "Health"
+label_settings = SubResource("LabelSettings_j6s56")

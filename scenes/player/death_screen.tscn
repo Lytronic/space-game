@@ -1,0 +1,58 @@
+[gd_scene format=3 uid="uid://lcvge125o3th"]
+
+[ext_resource type="Script" uid="uid://3hhwguakw3q" path="res://scenes/player/DeathScreen.cs" id="1_qx3x0"]
+
+[sub_resource type="InputEventKey" id="InputEventKey_unn6m"]
+device = -1
+keycode = 32
+unicode = 32
+
+[sub_resource type="InputEventKey" id="InputEventKey_qx3x0"]
+device = -1
+keycode = 4194309
+
+[sub_resource type="Shortcut" id="Shortcut_n56rn"]
+events = [SubResource("InputEventKey_unn6m"), SubResource("InputEventKey_qx3x0")]
+
+[node name="DeathScreen" type="Control" unique_id=1972921983]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_qx3x0")
+
+[node name="RetryButton" type="Button" parent="." unique_id=1439780253]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -74.611694
+offset_top = -52.0
+offset_right = 74.611755
+offset_bottom = -125.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 31
+action_mode = 0
+shortcut = SubResource("Shortcut_n56rn")
+text = "Retry"
+
+[node name="GameOverLabel" type="Label" parent="." unique_id=650636322]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -266.0
+offset_top = 106.0
+offset_right = 266.0
+offset_bottom = 133.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 90
+text = "GAME OVER"
+horizontal_alignment = 1
+
+[connection signal="pressed" from="RetryButton" to="." method="_on_retry_button_pressed"]
