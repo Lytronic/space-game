@@ -34,7 +34,9 @@ namespace SpaceGame.util
 				UpdateList([]);
 				return;
 			}
-			UpdateList(DB.GetHighScores(name));
+
+			int limit = (int) GetNode<SpinBox>("DBTestContainer/ContainerRight/QueryContainer/LimitBox").Value;
+			UpdateList(DB.GetHighScores(name, limit));
 		}
 
 		private void UpdateList(System.Collections.Generic.List<HighScore> results)

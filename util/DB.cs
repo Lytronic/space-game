@@ -84,8 +84,9 @@ namespace SpaceGame.util
 		/// Get a list of <c>HighScore</c> objects for all saved high scores in the database.
 		/// </summary>
 		/// <param name="PlayerName">(Optional) Return only this player's high scores.</param>
+		/// <param name="Count">(Optional) Maximum amount of high scores to return. 0 for no limit.</param>
 		/// <returns>List of <c>HighScore</c> sorted from highest to lowest</returns>
-		public static List<HighScore> GetHighScores(string PlayerName = null)
+		public static List<HighScore> GetHighScores(string PlayerName = null, int Count = 0)
 		{
 			SQLiteConnection connection = Connect();
 			if (connection == null)
@@ -101,12 +102,18 @@ namespace SpaceGame.util
 
 			string selectSql = "SELECT * FROM high_scores"
 								+ (PlayerName != null ? " WHERE player_name IS @player_name" : "")
-								+ " ORDER BY score DESC";
+								+ " ORDER BY score DESC"
+								+ (Count > 0 ? " LIMIT @count" : "");
 
 			SQLiteCommand selectCommand = new(selectSql, connection);
 			if (PlayerName != null)
 			{
 				selectCommand.Parameters.AddWithValue("@player_name", PlayerName);
+			}
+
+			if (Count > 0)
+			{
+				selectCommand.Parameters.AddWithValue("@count", Count);
 			}
 
 			List<HighScore> ret = [];

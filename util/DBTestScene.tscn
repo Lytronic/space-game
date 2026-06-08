@@ -65,6 +65,13 @@ layout_mode = 2
 size_flags_horizontal = 3
 placeholder_text = "Player name"
 
+[node name="LimitBox" type="SpinBox" parent="DBTestContainer/ContainerRight/QueryContainer" unique_id=1315030058]
+layout_mode = 2
+size_flags_horizontal = 3
+rounded = true
+prefix = "Top"
+suffix = "scores"
+
 [node name="QueryLabel2" type="Label" parent="DBTestContainer/ContainerRight" unique_id=1542550926]
 layout_mode = 2
 text = "ID        Player        Score"
