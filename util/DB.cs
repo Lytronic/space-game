@@ -7,7 +7,7 @@ namespace SpaceGame.util
 {
 	/// <summary>
 	/// Struct to store high score information.
-	/// </summary
+	/// </summary>
 	public struct HighScore
 	{
 		/// <value><c>Id</c>: Unique identifier for this high score (primary key in SQLite)</value>
@@ -47,7 +47,7 @@ namespace SpaceGame.util
 
 		/// <summary>
 		/// Add a new high score for a given player.
-		/// </summary
+		/// </summary>
 		/// <param name="PlayerName">Name of the player</param>
 		/// <param name="Score">Score integer</param>
 		public static void AddHighScore(string PlayerName, int Score)
@@ -130,7 +130,7 @@ namespace SpaceGame.util
 
 		/// <summary>
 		/// Create the high_scores table if it does not exist yet.
-		/// </summary
+		/// </summary>
 		/// <returns>Success value to check for</returns>
 		private static bool CreateHighScoreTable(SQLiteConnection connection)
 		{
