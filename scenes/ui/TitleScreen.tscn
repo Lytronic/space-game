@@ -1,0 +1,45 @@
+[gd_scene format=3 uid="uid://dw2tl0v70rq3f"]
+
+[ext_resource type="Script" uid="uid://cs8utcdwhwj" path="res://scenes/ui/TitleScreen.cs" id="1_ny3vc"]
+
+[node name="VBoxContainer" type="VBoxContainer" unique_id=1008936293]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_ny3vc")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=193731170]
+layout_mode = 2
+alignment = 2
+
+[node name="SettingsButton" type="Button" parent="HBoxContainer" unique_id=1518896938]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "⚙"
+
+[node name="QuitButton" type="Button" parent="HBoxContainer" unique_id=1683992160]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "⏻ "
+
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=1245991133]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="CenterContainer" unique_id=803780843]
+layout_mode = 2
+theme_override_font_sizes/font_size = 96
+text = "///// MICROGRAVITY /////"
+
+[node name="CenterContainer2" type="CenterContainer" parent="." unique_id=1007428601]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="CenterContainer2" unique_id=1019551126]
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
+text = "— 	PRESS ANY KEY TO PLAY —"
