@@ -18,8 +18,8 @@ namespace SpaceGame.util
 
 	public partial class DB
 	{
-		private static readonly string DBPath = ProjectSettings.GlobalizePath("user://game_db.db");
-		private static readonly string ConnectionString = $"Data Source={DBPath};Version=3;";
+		private static readonly string _dbPath = ProjectSettings.GlobalizePath("user://game_db.db");
+		private static readonly string _connectionString = $"Data Source={_dbPath};Version=3;";
 
 		/// <summary>
 		/// Open a new connection to SQLite.
@@ -31,7 +31,7 @@ namespace SpaceGame.util
 		/// <returns>Object of <c>SQLiteConnection</c></returns>
 		private static SQLiteConnection Connect()
 		{
-			SQLiteConnection connection = new(ConnectionString);
+			SQLiteConnection connection = new(_connectionString);
 
 			try
 			{
@@ -48,9 +48,9 @@ namespace SpaceGame.util
 		/// <summary>
 		/// Add a new high score for a given player.
 		/// </summary>
-		/// <param name="PlayerName">Name of the player</param>
-		/// <param name="Score">Score integer</param>
-		public static void AddHighScore(string PlayerName, int Score)
+		/// <param name="playerName">Name of the player</param>
+		/// <param name="score">Score integer</param>
+		public static void AddHighScore(string playerName, int score)
 		{
 			SQLiteConnection connection = Connect();
 			if (connection == null)
@@ -68,8 +68,8 @@ namespace SpaceGame.util
 			{
 				string insertSql = "INSERT INTO high_scores (player_name, score) VALUES (@player_name, @score)";
 				SQLiteCommand insertCommand = new(insertSql, connection);
-				insertCommand.Parameters.AddWithValue("@player_name", PlayerName);
-				insertCommand.Parameters.AddWithValue("@score", Score);
+				insertCommand.Parameters.AddWithValue("@player_name", playerName);
+				insertCommand.Parameters.AddWithValue("@score", score);
 				insertCommand.ExecuteNonQuery();
 			}
 			catch (Exception ex)
@@ -83,10 +83,10 @@ namespace SpaceGame.util
 		/// <summary>
 		/// Get a list of <c>HighScore</c> objects for all saved high scores in the database.
 		/// </summary>
-		/// <param name="PlayerName">(Optional) Return only this player's high scores.</param>
-		/// <param name="Count">(Optional) Maximum amount of high scores to return. 0 for no limit.</param>
+		/// <param name="playerName">(Optional) Return only this player's high scores.</param>
+		/// <param name="count">(Optional) Maximum amount of high scores to return. 0 for no limit.</param>
 		/// <returns>List of <c>HighScore</c> sorted from highest to lowest</returns>
-		public static List<HighScore> GetHighScores(string PlayerName = null, int Count = 0)
+		public static List<HighScore> GetHighScores(string playerName = null, int count = 0)
 		{
 			SQLiteConnection connection = Connect();
 			if (connection == null)
@@ -101,19 +101,19 @@ namespace SpaceGame.util
 			}
 
 			string selectSql = "SELECT * FROM high_scores"
-								+ (PlayerName != null ? " WHERE player_name IS @player_name" : "")
+								+ (playerName != null ? " WHERE player_name IS @player_name" : "")
 								+ " ORDER BY score DESC"
-								+ (Count > 0 ? " LIMIT @count" : "");
+								+ (count > 0 ? " LIMIT @count" : "");
 
 			SQLiteCommand selectCommand = new(selectSql, connection);
-			if (PlayerName != null)
+			if (playerName != null)
 			{
-				selectCommand.Parameters.AddWithValue("@player_name", PlayerName);
+				selectCommand.Parameters.AddWithValue("@player_name", playerName);
 			}
 
-			if (Count > 0)
+			if (count > 0)
 			{
-				selectCommand.Parameters.AddWithValue("@count", Count);
+				selectCommand.Parameters.AddWithValue("@count", count);
 			}
 
 			List<HighScore> ret = [];
