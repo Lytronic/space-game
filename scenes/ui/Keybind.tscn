@@ -1,0 +1,41 @@
+[gd_scene format=3 uid="uid://b82ev02x1e8pc"]
+
+[ext_resource type="Script" uid="uid://cto85h3ajyb0r" path="res://scenes/ui/Keybind.cs" id="1_72ek2"]
+
+[node name="Keybind" type="HBoxContainer" unique_id=850695939]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -617.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 0
+alignment = 1
+script = ExtResource("1_72ek2")
+
+[node name="SpacerLeft" type="Control" parent="." unique_id=1033618837]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+
+[node name="Description" type="Label" parent="." unique_id=1713249465]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Description"
+vertical_alignment = 1
+
+[node name="ValueButton" type="Button" parent="." unique_id=706633225]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+text = "Not Bound"
+
+[node name="ResetButton" type="Button" parent="." unique_id=1463793855]
+layout_mode = 2
+size_flags_vertical = 0
+text = "Reset"
+
+[node name="SpacerRight" type="Control" parent="." unique_id=962356626]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0

@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://j833hjinvcp3"]
+
+[ext_resource type="Script" uid="uid://cog8skeotgmxb" path="res://scenes/ui/SettingsScreen.cs" id="1_ajtmc"]
+
+[node name="SettingsScreen" type="HBoxContainer" unique_id=1859618080]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ajtmc")
+
+[node name="VBoxContainerLeft" type="VBoxContainer" parent="." unique_id=443829402]
+layout_mode = 2
+
+[node name="Button" type="Button" parent="VBoxContainerLeft" unique_id=846467950]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "↩"
+
+[node name="VBoxContainerRight" type="VBoxContainer" parent="." unique_id=1458067294]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="VBoxContainerRight" unique_id=208459312]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Settings"
+horizontal_alignment = 1
+
+[node name="TabContainer" type="TabContainer" parent="VBoxContainerRight" unique_id=1228738774]
+layout_mode = 2
+size_flags_vertical = 3

@@ -23,11 +23,11 @@ namespace SpaceGame.util
 	/// </summary>
 	public abstract record SettingsEntry
 	{
-		public sealed record String(string Value, string Description) : SettingsEntry
+		public sealed record Keybind(string Value, string Description) : SettingsEntry
 		{
 			public override string ToString() => Value;
 		}
-		public sealed record Float(float Value, string Description) : SettingsEntry
+		public sealed record Float(float Value, float Min, float Max, string Description) : SettingsEntry
 		{
 			public override string ToString() => Value.ToString(CultureInfo.InvariantCulture);
 		}
@@ -42,10 +42,12 @@ namespace SpaceGame.util
 		/// </value>
 		public static readonly Dictionary<string, SettingsEntry> DefaultSettings = new()
 		{
-			["keybinds.forward"] = new String("W", "Move forward"),
-			["keybinds.backward"] = new String("S", "Move backward"),
-			["keybinds.left"] = new String("A", "Strafe left"),
-			["keybinds.right"] = new String("D", "Strafe right"),
+			["controls.forward"] = new Keybind("W", "Move forward"),
+			["controls.backward"] = new Keybind("S", "Move backward"),
+			["controls.left"] = new Keybind("A", "Strafe left"),
+			["controls.right"] = new Keybind("D", "Strafe right"),
+			["controls.test_value"] = new Bool(false, "Test Value"),
+			["controls.test_slider"] = new Float(1.0f, -5.0f, 10.0f, "Example Slider")
 		};
 	}
 
@@ -55,7 +57,7 @@ namespace SpaceGame.util
 		private static readonly string _connectionString = $"Data Source={_dbPath};Version=3;";
 
 		private static readonly string _highScoresLayout = "CREATE TABLE IF NOT EXISTS high_scores (id INTEGER PRIMARY KEY, player_name TEXT, score INTEGER)";
-		private static readonly string _settingsLayout = "CREATE TABLE IF NOT EXISTS settings (id INTEGER PRIMARY KEY, key TEXT, value TEXT)";
+		private static readonly string _settingsLayout = "CREATE TABLE IF NOT EXISTS settings (id INTEGER PRIMARY KEY, key TEXT, value TEXT, UNIQUE(key))";
 
 		/// <summary>
 		/// Open a new connection to SQLite.
@@ -192,7 +194,7 @@ namespace SpaceGame.util
 			}
 
 			// initialise return value to defaults
-			var ret = SettingsEntry.DefaultSettings;
+			Dictionary<string, SettingsEntry> ret = new(SettingsEntry.DefaultSettings);
 
 			string selectSql = "SELECT * FROM settings";
 			var reader = new SQLiteCommand(selectSql, connection).ExecuteReader();
@@ -211,7 +213,7 @@ namespace SpaceGame.util
 					// convert entries in the DB into their respective type in the settings Dictionary and update them there		
 					ret[entryKey] = ret[entryKey] switch
 					{
-						SettingsEntry.String s => s with { Value = reader.GetString(2) },
+						SettingsEntry.Keybind k => k with { Value = reader.GetString(2) },
 						SettingsEntry.Float f => f with { Value = float.Parse(reader.GetString(2), CultureInfo.InvariantCulture) },
 						SettingsEntry.Bool b => b with { Value = bool.Parse(reader.GetString(2)) },
 						_ => throw new UnreachableException()
@@ -248,7 +250,7 @@ namespace SpaceGame.util
 
 			try
 			{
-				string updateSql = "INSERT OR REPLACE INTO settings (key, value) VALUES (@key, @value)";
+				string updateSql = "INSERT INTO settings (key, value) VALUES (@key, @value) ON CONFLICT(key) DO UPDATE SET value = EXCLUDED.value";
 
 				SQLiteCommand updateCommand = new(updateSql, connection);
 				updateCommand.Parameters.AddWithValue("@key", key);
