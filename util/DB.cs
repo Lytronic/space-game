@@ -2,6 +2,8 @@ using Godot;
 using System;
 using System.Collections.Generic;
 using System.Data.SQLite;
+using System.Diagnostics;
+using System.Globalization;
 
 namespace SpaceGame.util
 {
@@ -16,14 +18,48 @@ namespace SpaceGame.util
 		public int Score;
 	}
 
+	/// <summary>
+	/// Wrapper for storing settings entries of varying types along with their descriptions in the same Dictionary.
+	/// </summary>
+	public abstract record SettingsEntry
+	{
+		public sealed record String(string Value, string Description) : SettingsEntry
+		{
+			public override string ToString() => Value;
+		}
+		public sealed record Float(float Value, string Description) : SettingsEntry
+		{
+			public override string ToString() => Value.ToString(CultureInfo.InvariantCulture);
+		}
+		public sealed record Bool(bool Value, string Description) : SettingsEntry
+		{
+			public override string ToString() => Value.ToString(CultureInfo.InvariantCulture);
+		}
+
+		/// <value>
+		/// These is the exhaustive list of all settings options with their names and defaults.
+		/// Add new entries here!
+		/// </value>
+		public static readonly Dictionary<string, SettingsEntry> DefaultSettings = new()
+		{
+			["keybinds.forward"] = new String("W", "Move forward"),
+			["keybinds.backward"] = new String("S", "Move backward"),
+			["keybinds.left"] = new String("A", "Strafe left"),
+			["keybinds.right"] = new String("D", "Strafe right"),
+		};
+	}
+
 	public partial class DB
 	{
 		private static readonly string _dbPath = ProjectSettings.GlobalizePath("user://game_db.db");
 		private static readonly string _connectionString = $"Data Source={_dbPath};Version=3;";
 
+		private static readonly string _highScoresLayout = "CREATE TABLE IF NOT EXISTS high_scores (id INTEGER PRIMARY KEY, player_name TEXT, score INTEGER)";
+		private static readonly string _settingsLayout = "CREATE TABLE IF NOT EXISTS settings (id INTEGER PRIMARY KEY, key TEXT, value TEXT)";
+
 		/// <summary>
 		/// Open a new connection to SQLite.
-		/// For the sake of simplicity, a new connection is established every time a member of <c>DB</c> is called,
+		/// For the sake of simplicity, a new connection is established every time a public member of <c>DB</c> is called,
 		/// which is fine for the purpose of storing only a few values that aren't frequently accessed.
 		///
 		/// After usage, Close() should be called on the <c>SQLiteConnection</c> object.
@@ -40,7 +76,7 @@ namespace SpaceGame.util
 			}
 			catch (Exception ex)
 			{
-				GD.Print($"DB: Error: {ex.Message}");
+				GD.Print($"DB: Could not connect to database: {ex.Message}");
 				return null;
 			}
 		}
@@ -58,7 +94,7 @@ namespace SpaceGame.util
 				return;
 			}
 
-			bool tableCreated = CreateHighScoreTable(connection);
+			bool tableCreated = CreateTable(connection, _highScoresLayout);
 			if (!tableCreated)
 			{
 				return;
@@ -94,8 +130,7 @@ namespace SpaceGame.util
 				return [];
 			}
 
-			bool tableCreated = CreateHighScoreTable(connection);
-			if (!tableCreated)
+			if (!CreateTable(connection, _highScoresLayout))
 			{
 				return [];
 			}
@@ -125,6 +160,8 @@ namespace SpaceGame.util
 				{
 					ret.Add(new HighScore { Id = reader.GetInt32(0), PlayerName = reader.GetString(1), Score = reader.GetInt32(2) });
 				}
+
+				reader.Close();
 			}
 			catch (Exception ex)
 			{
@@ -136,15 +173,105 @@ namespace SpaceGame.util
 		}
 
 		/// <summary>
-		/// Create the high_scores table if it does not exist yet.
+		/// Load all settings, merging the defaults with database entries.
+		/// If ran for the first time, create the settings table.
 		/// </summary>
+		/// <returns> Dictionary of settings entries addressable by key </returns>
+		public static Dictionary<string, SettingsEntry> GetSettings()
+		{
+			SQLiteConnection connection = Connect();
+			if (connection == null)
+			{
+				return [];
+			}
+
+			// if the table does not exist yet, create it
+			if (!CreateTable(connection, _settingsLayout))
+			{
+				return [];
+			}
+
+			// initialise return value to defaults
+			var ret = SettingsEntry.DefaultSettings;
+
+			string selectSql = "SELECT * FROM settings";
+			var reader = new SQLiteCommand(selectSql, connection).ExecuteReader();
+
+			while (reader.Read())
+			{
+				string entryKey = reader.GetString(1);
+				// ignore additional rows not declared in DefaultSettings
+				if (!ret.ContainsKey(entryKey))
+				{
+					continue;
+				}
+
+				try
+				{
+					// convert entries in the DB into their respective type in the settings Dictionary and update them there		
+					ret[entryKey] = ret[entryKey] switch
+					{
+						SettingsEntry.String s => s with { Value = reader.GetString(2) },
+						SettingsEntry.Float f => f with { Value = float.Parse(reader.GetString(2), CultureInfo.InvariantCulture) },
+						SettingsEntry.Bool b => b with { Value = bool.Parse(reader.GetString(2)) },
+						_ => throw new UnreachableException()
+					};
+				}
+				catch (FormatException e)
+				{
+					GD.Print($"DB: Bad settings format, using the default value for {entryKey}: {e.Message}");
+				}
+			}
+
+			reader.Close();
+			connection.Close();
+
+			return ret;
+		}
+
+		/// <summary>
+		/// Update a single settings entry with the given value or insert it if it wasn't there before.
+		/// </summary>
+		public static void UpdateSettingsEntry(string key, SettingsEntry value)
+		{
+			SQLiteConnection connection = Connect();
+			if (connection == null)
+			{
+				return;
+			}
+
+			// make sure the table exists, though it should have been created already when this function is called
+			if (!CreateTable(connection, _settingsLayout))
+			{
+				return;
+			}
+
+			try
+			{
+				string updateSql = "INSERT OR REPLACE INTO settings (key, value) VALUES (@key, @value)";
+
+				SQLiteCommand updateCommand = new(updateSql, connection);
+				updateCommand.Parameters.AddWithValue("@key", key);
+				updateCommand.Parameters.AddWithValue("@value", value.ToString());
+
+				updateCommand.ExecuteNonQuery();
+			}
+			catch (Exception e)
+			{
+				GD.Print($"DB: Failed to write settings entry {key}: {e.Message}");
+			}
+		}
+
+		/// <summary>
+		/// Create a table using the given CREATE TABLE command.
+		/// </summary>
+		/// <param name="createSql">String containing the CREATE TABLE SQL command to execute</param>
 		/// <returns>Success value to check for</returns>
-		private static bool CreateHighScoreTable(SQLiteConnection connection)
+		private static bool CreateTable(SQLiteConnection connection, string createSql)
 		{
 			try
 			{
-				string createTableSql = "CREATE TABLE IF NOT EXISTS high_scores (id INTEGER PRIMARY KEY, player_name TEXT, score INTEGER)";
-				SQLiteCommand createTableCommand = new(createTableSql, connection);
+				SQLiteCommand createTableCommand = new(createSql, connection);
 				createTableCommand.ExecuteNonQuery();
 			}
 			catch (Exception ex)
