@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://cog8skeotgmxb" path="res://scenes/ui/SettingsScreen.cs" id="1_ajtmc"]
 
 [node name="SettingsScreen" type="HBoxContainer" unique_id=1859618080]
+process_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -13,12 +14,13 @@ script = ExtResource("1_ajtmc")
 [node name="VBoxContainerLeft" type="VBoxContainer" parent="." unique_id=443829402]
 layout_mode = 2
 
-[node name="Button" type="Button" parent="VBoxContainerLeft" unique_id=846467950]
+[node name="BackButton" type="Button" parent="VBoxContainerLeft" unique_id=846467950]
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
 text = "↩"
 
 [node name="VBoxContainerRight" type="VBoxContainer" parent="." unique_id=1458067294]
+process_mode = 3
 layout_mode = 2
 size_flags_horizontal = 3
 

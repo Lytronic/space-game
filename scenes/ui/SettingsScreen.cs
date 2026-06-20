@@ -2,15 +2,22 @@ using Godot;
 using System;
 using SpaceGame.util;
 using System.Collections.Generic;
+using System.Reflection.Metadata.Ecma335;
 
 public partial class SettingsScreen : HBoxContainer
 {
 	public Dictionary<string, SettingsEntry> Settings;
-	
-	public override void _Ready() {
+
+	[Signal]
+	public delegate void CloseEventHandler();
+
+	public override void _Ready()
+	{
 		Settings = DB.GetSettings();
-		
-		foreach (string category in new List<string>{ "General", "Video", "Audio", "Controls" })
+
+		GetNode<Button>("./VBoxContainerLeft/BackButton").Pressed += CloseScreen;
+
+		foreach (string category in new List<string> { "General", "Video", "Audio", "Controls" })
 		{
 			SettingsPage page = (SettingsPage)ResourceLoader.Load<PackedScene>("res://scenes/ui/SettingsPage.tscn").Instantiate();
 			page.Name = category;
@@ -18,5 +25,20 @@ public partial class SettingsScreen : HBoxContainer
 			page.Settings = Settings;
 			GetNode<TabContainer>("VBoxContainerRight/TabContainer").AddChild(page);
 		}
+	}
+
+	public override void _Input(InputEvent @event)
+	{
+		if (@event.IsActionPressed("pause_or_back"))
+		{
+			GetViewport().SetInputAsHandled();
+			CloseScreen();
+		}
+	}
+
+	private void CloseScreen()
+	{
+		QueueFree();
+		EmitSignal(SignalName.Close);
 	}
 }

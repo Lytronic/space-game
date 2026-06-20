@@ -1,0 +1,63 @@
+[gd_scene format=3 uid="uid://cddmgq3ad6m4q"]
+
+[sub_resource type="Environment" id="Environment_qjyxa"]
+
+[node name="VBoxContainer" type="VBoxContainer" unique_id=1008936293]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=1245991133]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="CenterContainer" unique_id=803780843]
+layout_mode = 2
+theme_override_font_sizes/font_size = 96
+text = "///// MICROGRAVITY /////"
+
+[node name="ButtonsContainer" type="HBoxContainer" parent="." unique_id=1251870363]
+layout_mode = 2
+
+[node name="Spacer2" type="Control" parent="ButtonsContainer" unique_id=1673392926]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Buttons" type="VBoxContainer" parent="ButtonsContainer" unique_id=2080196774]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Resume" type="Button" parent="ButtonsContainer/Buttons" unique_id=43099861]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Resume"
+
+[node name="Settings" type="Button" parent="ButtonsContainer/Buttons" unique_id=2087620199]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Settings"
+
+[node name="Quit" type="Button" parent="ButtonsContainer/Buttons" unique_id=1100274557]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Quit"
+
+[node name="Spacer" type="Control" parent="ButtonsContainer" unique_id=1397281479]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="CenterContainer2" type="CenterContainer" parent="." unique_id=1007428601]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="CenterContainer2" unique_id=1019551126]
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
+text = "GAME PAUSED"
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=991380056]
+environment = SubResource("Environment_qjyxa")
