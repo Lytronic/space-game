@@ -2,8 +2,12 @@
 
 ##Enemy
 	Public Attributes:
-		sting[] array "lootTable" --> has all the possible Drops for the specific enemy [LOOTtABLE is organized from higheset RARITY value of the SHIPpART to lowest value]
-
+		sting[] array "lootTable" --> has all the possible Drops for the specific enemy [LOOTtABLE is organized from lowest RARITY value of the SHIPpART to highest value] --> common item Rarity value < rare item RARITY value
+	
+	Methods:
+		
+		private "createLoot(int amount)" --> creates a random value RNGESUS and choses an extention of the class SHIPpARTS from the parent ENEMY's LOOTtABLE array and returns it; the method does so AMOUNT number of times
+		
 ##Dropping salvage
 
 # "Salvage" Node
@@ -19,6 +23,6 @@
 	every enemy.
 	
 	Public Methods:
-		"createLoot(int amount)" --> creates a random value RNGESUS and choses an extention of the class SHIPpARTS from the parent ENEMY's LOOTtABLE array and returns it; the method does so AMOUNT number of times
+		
 		"getSalvage" --> returns the array SALVAGEaRRAY that stores the dropped SHIPpARTS
 	

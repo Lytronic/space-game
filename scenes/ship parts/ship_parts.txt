@@ -1,6 +1,11 @@
 ###Documentation concerning everything extending and including the Interface "ShipParts" 
 
-##Interface
+## PartsManager
+
+# PartsManager node
+	will manage all the effects of the upgrades:  calculating revised stats upon entering a round and calling the active parts' *activateEffect* function 
+
+## Interface
 
 # Interface Class "ShipPart" 
 	Public Attributes:
