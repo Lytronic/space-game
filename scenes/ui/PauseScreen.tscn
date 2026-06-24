@@ -1,5 +1,9 @@
 [gd_scene format=3 uid="uid://cddmgq3ad6m4q"]
 
+[ext_resource type="FontFile" uid="uid://tt7j6iuhu1kc" path="res://gfx/gui/Oxanium-Regular.ttf" id="1_uuji5"]
+[ext_resource type="Texture2D" uid="uid://c34wyifbyxdro" path="res://gfx/gui/menu/option_pause.png" id="2_8abry"]
+[ext_resource type="Texture2D" uid="uid://fh4unt4slaa7" path="res://gfx/gui/menu/option_pause_hover.png" id="3_kh7v7"]
+
 [sub_resource type="Environment" id="Environment_qjyxa"]
 
 [node name="VBoxContainer" type="VBoxContainer" unique_id=1008936293]
@@ -17,8 +21,9 @@ size_flags_vertical = 3
 
 [node name="Label" type="Label" parent="CenterContainer" unique_id=803780843]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("1_uuji5")
 theme_override_font_sizes/font_size = 96
-text = "///// MICROGRAVITY /////"
+text = "/////// MICROGRAVITY ///////"
 
 [node name="ButtonsContainer" type="HBoxContainer" parent="." unique_id=1251870363]
 layout_mode = 2
@@ -31,19 +36,79 @@ size_flags_horizontal = 3
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Resume" type="Button" parent="ButtonsContainer/Buttons" unique_id=43099861]
+[node name="#Resume" type="Button" parent="ButtonsContainer/Buttons" unique_id=43099861]
+visible = false
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
 text = "Resume"
 
-[node name="Settings" type="Button" parent="ButtonsContainer/Buttons" unique_id=2087620199]
+[node name="#Settings" type="Button" parent="ButtonsContainer/Buttons" unique_id=2087620199]
+visible = false
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
 text = "Settings"
 
-[node name="Quit" type="Button" parent="ButtonsContainer/Buttons" unique_id=1100274557]
+[node name="#Quit" type="Button" parent="ButtonsContainer/Buttons" unique_id=1100274557]
+visible = false
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
+text = "Quit"
+
+[node name="Resume" type="TextureButton" parent="ButtonsContainer/Buttons" unique_id=417410121]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture_normal = ExtResource("2_8abry")
+texture_pressed = ExtResource("2_8abry")
+texture_hover = ExtResource("3_kh7v7")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="ButtonsContainer/Buttons/Resume" unique_id=1026046319]
+layout_mode = 0
+offset_left = 144.5
+offset_top = 19.0
+offset_right = 250.5
+offset_bottom = 48.0
+theme_override_fonts/font = ExtResource("1_uuji5")
+theme_override_font_sizes/font_size = 28
+text = "Resume"
+
+[node name="Settings" type="TextureButton" parent="ButtonsContainer/Buttons" unique_id=873881356]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture_normal = ExtResource("2_8abry")
+texture_pressed = ExtResource("2_8abry")
+texture_hover = ExtResource("3_kh7v7")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="ButtonsContainer/Buttons/Settings" unique_id=515145206]
+layout_mode = 0
+offset_left = 144.5
+offset_top = 19.0
+offset_right = 252.5
+offset_bottom = 48.0
+theme_override_fonts/font = ExtResource("1_uuji5")
+theme_override_font_sizes/font_size = 28
+text = "Settings"
+
+[node name="Quit" type="TextureButton" parent="ButtonsContainer/Buttons" unique_id=1310866004]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture_normal = ExtResource("2_8abry")
+texture_pressed = ExtResource("2_8abry")
+texture_hover = ExtResource("3_kh7v7")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="ButtonsContainer/Buttons/Quit" unique_id=1410628345]
+layout_mode = 0
+offset_left = 170.5
+offset_top = 19.0
+offset_right = 229.5
+offset_bottom = 48.0
+theme_override_fonts/font = ExtResource("1_uuji5")
+theme_override_font_sizes/font_size = 28
 text = "Quit"
 
 [node name="Spacer" type="Control" parent="ButtonsContainer" unique_id=1397281479]
@@ -56,6 +121,7 @@ size_flags_vertical = 3
 
 [node name="Label" type="Label" parent="CenterContainer2" unique_id=1019551126]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("1_uuji5")
 theme_override_font_sizes/font_size = 22
 text = "GAME PAUSED"
 

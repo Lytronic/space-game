@@ -15,7 +15,7 @@ public partial class SettingsScreen : HBoxContainer
 	{
 		Settings = DB.GetSettings();
 
-		GetNode<Button>("./VBoxContainerLeft/BackButton").Pressed += CloseScreen;
+		GetNode<TextureButton>("./VBoxContainerLeft/BackButton").Pressed += CloseScreen;
 
 		foreach (string category in new List<string> { "General", "Video", "Audio", "Controls" })
 		{

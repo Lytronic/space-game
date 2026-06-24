@@ -1,12 +1,72 @@
 [gd_scene format=3 uid="uid://j833hjinvcp3"]
 
 [ext_resource type="Script" uid="uid://cog8skeotgmxb" path="res://scenes/ui/SettingsScreen.cs" id="1_ajtmc"]
+[ext_resource type="Texture2D" uid="uid://brehfrdmmlon1" path="res://gfx/gui/menu/back.png" id="2_fq24e"]
+[ext_resource type="Texture2D" uid="uid://chomid451xw22" path="res://gfx/gui/menu/back_hover.png" id="3_bmw6m"]
+[ext_resource type="FontFile" uid="uid://tt7j6iuhu1kc" path="res://gfx/gui/Oxanium-Regular.ttf" id="4_b6tum"]
+[ext_resource type="Texture2D" uid="uid://bqd4ii15qjmhh" path="res://gfx/gui/menu/panel.png" id="5_rv0ln"]
+[ext_resource type="Texture2D" uid="uid://b2k3p3m1tatg3" path="res://gfx/gui/menu/tab_bar.png" id="6_mhnw4"]
+[ext_resource type="Texture2D" uid="uid://m18lr8keof2a" path="res://gfx/gui/menu/tab_closed.png" id="7_43osi"]
+[ext_resource type="Texture2D" uid="uid://dka5ofmpu283g" path="res://gfx/gui/menu/tab_hover.png" id="8_muxnm"]
+[ext_resource type="Texture2D" uid="uid://c2nrv25uo7nim" path="res://gfx/gui/menu/tab_open.png" id="9_ur50u"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_5dlhu"]
+texture = ExtResource("5_rv0ln")
+texture_margin_left = 16.0
+texture_margin_right = 62.0
+texture_margin_bottom = 60.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_torwl"]
+texture = ExtResource("6_mhnw4")
+texture_margin_left = 62.0
+texture_margin_top = 15.0
+texture_margin_right = 16.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_w2yon"]
+content_margin_left = 45.0
+content_margin_top = 30.0
+content_margin_right = 30.0
+content_margin_bottom = 30.0
+texture = ExtResource("7_43osi")
+texture_margin_left = 45.0
+texture_margin_top = 60.0
+texture_margin_right = 45.0
+expand_margin_right = 45.0
+axis_stretch_vertical = 1
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_b7qfw"]
+content_margin_left = 45.0
+content_margin_top = 30.0
+content_margin_right = 30.0
+content_margin_bottom = 30.0
+texture = ExtResource("8_muxnm")
+texture_margin_left = 45.0
+texture_margin_top = 60.0
+texture_margin_right = 45.0
+expand_margin_right = 45.0
+axis_stretch_vertical = 1
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ufgf6"]
+content_margin_left = 45.0
+content_margin_top = 30.0
+content_margin_right = 30.0
+content_margin_bottom = 30.0
+texture = ExtResource("9_ur50u")
+texture_margin_left = 45.0
+texture_margin_top = 60.0
+texture_margin_right = 45.0
+expand_margin_right = 45.0
+axis_stretch_vertical = 1
 
 [node name="SettingsScreen" type="HBoxContainer" unique_id=1859618080]
 process_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 6.0
+offset_top = 5.0
+offset_right = -65.0
+offset_bottom = -11.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_ajtmc")
@@ -14,10 +74,20 @@ script = ExtResource("1_ajtmc")
 [node name="VBoxContainerLeft" type="VBoxContainer" parent="." unique_id=443829402]
 layout_mode = 2
 
-[node name="BackButton" type="Button" parent="VBoxContainerLeft" unique_id=846467950]
+[node name="#BackButton" type="Button" parent="VBoxContainerLeft" unique_id=846467950]
+visible = false
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
 text = "↩"
+
+[node name="BackButton" type="TextureButton" parent="VBoxContainerLeft" unique_id=80882782]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture_normal = ExtResource("2_fq24e")
+texture_pressed = ExtResource("2_fq24e")
+texture_hover = ExtResource("3_bmw6m")
+ignore_texture_size = true
+stretch_mode = 0
 
 [node name="VBoxContainerRight" type="VBoxContainer" parent="." unique_id=1458067294]
 process_mode = 3
@@ -26,6 +96,7 @@ size_flags_horizontal = 3
 
 [node name="Label" type="Label" parent="VBoxContainerRight" unique_id=208459312]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("4_b6tum")
 theme_override_font_sizes/font_size = 32
 text = "Settings"
 horizontal_alignment = 1
@@ -33,3 +104,11 @@ horizontal_alignment = 1
 [node name="TabContainer" type="TabContainer" parent="VBoxContainerRight" unique_id=1228738774]
 layout_mode = 2
 size_flags_vertical = 3
+theme_override_constants/side_margin = 0
+theme_override_fonts/font = ExtResource("4_b6tum")
+theme_override_font_sizes/font_size = 22
+theme_override_styles/panel = SubResource("StyleBoxTexture_5dlhu")
+theme_override_styles/tabbar_background = SubResource("StyleBoxTexture_torwl")
+theme_override_styles/tab_unselected = SubResource("StyleBoxTexture_w2yon")
+theme_override_styles/tab_hovered = SubResource("StyleBoxTexture_b7qfw")
+theme_override_styles/tab_selected = SubResource("StyleBoxTexture_ufgf6")

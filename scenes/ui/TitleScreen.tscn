@@ -1,6 +1,11 @@
 [gd_scene format=3 uid="uid://dw2tl0v70rq3f"]
 
 [ext_resource type="Script" uid="uid://cs8utcdwhwj" path="res://scenes/ui/TitleScreen.cs" id="1_ny3vc"]
+[ext_resource type="Texture2D" uid="uid://cbpokk7dntah0" path="res://gfx/gui/menu/quit.png" id="2_j4pmt"]
+[ext_resource type="Texture2D" uid="uid://duo3f5os7le7w" path="res://gfx/gui/menu/quit_hover.png" id="3_6j5qt"]
+[ext_resource type="Texture2D" uid="uid://coe5y8aikw68x" path="res://gfx/gui/menu/settings.png" id="4_p52wy"]
+[ext_resource type="Texture2D" uid="uid://ol7itepre76y" path="res://gfx/gui/menu/settings_hover.png" id="5_bj1w8"]
+[ext_resource type="FontFile" uid="uid://tt7j6iuhu1kc" path="res://gfx/gui/Oxanium-Regular.ttf" id="6_cle6h"]
 
 [node name="Node" type="Node" unique_id=605533311]
 
@@ -8,6 +13,10 @@
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 13.0
+offset_top = 6.0
+offset_right = -7.0
+offset_bottom = 8.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
@@ -16,17 +25,38 @@ script = ExtResource("1_ny3vc")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=193731170]
 layout_mode = 2
+theme_override_constants/separation = 18
 alignment = 2
 
-[node name="SettingsButton" type="Button" parent="VBoxContainer/HBoxContainer" unique_id=1518896938]
+[node name="#SettingsButton" type="Button" parent="VBoxContainer/HBoxContainer" unique_id=1518896938]
+visible = false
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
 text = "⚙"
 
-[node name="QuitButton" type="Button" parent="VBoxContainer/HBoxContainer" unique_id=1683992160]
+[node name="#QuitButton" type="Button" parent="VBoxContainer/HBoxContainer" unique_id=1683992160]
+visible = false
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
 text = "⏻ "
+
+[node name="SettingsButton" type="TextureButton" parent="VBoxContainer/HBoxContainer" unique_id=1827474258]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture_normal = ExtResource("4_p52wy")
+texture_pressed = ExtResource("4_p52wy")
+texture_hover = ExtResource("5_bj1w8")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="QuitButton" type="TextureButton" parent="VBoxContainer/HBoxContainer" unique_id=64763255]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture_normal = ExtResource("2_j4pmt")
+texture_pressed = ExtResource("2_j4pmt")
+texture_hover = ExtResource("3_6j5qt")
+ignore_texture_size = true
+stretch_mode = 0
 
 [node name="CenterContainer" type="CenterContainer" parent="VBoxContainer" unique_id=1245991133]
 layout_mode = 2
@@ -34,8 +64,9 @@ size_flags_vertical = 3
 
 [node name="Label" type="Label" parent="VBoxContainer/CenterContainer" unique_id=803780843]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("6_cle6h")
 theme_override_font_sizes/font_size = 96
-text = "///// MICROGRAVITY /////"
+text = "////// MICROGRAVITY //////"
 
 [node name="CenterContainer2" type="CenterContainer" parent="VBoxContainer" unique_id=1007428601]
 layout_mode = 2
@@ -43,5 +74,6 @@ size_flags_vertical = 3
 
 [node name="Label" type="Label" parent="VBoxContainer/CenterContainer2" unique_id=1019551126]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("6_cle6h")
 theme_override_font_sizes/font_size = 22
 text = "— 	PRESS ANY KEY TO PLAY —"

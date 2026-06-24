@@ -7,15 +7,15 @@ public partial class PauseScreen : VBoxContainer
 
 	public override void _Ready()
 	{
-		GetNode<Button>("./ButtonsContainer/Buttons/Resume").Pressed += Toggle;
-		GetNode<Button>("./ButtonsContainer/Buttons/Settings").Pressed += () => {
+		GetNode<TextureButton>("./ButtonsContainer/Buttons/Resume").Pressed += Toggle;
+		GetNode<TextureButton>("./ButtonsContainer/Buttons/Settings").Pressed += () => {
 			SettingsScreen settings = (SettingsScreen)ResourceLoader.Load<PackedScene>("res://scenes/ui/SettingsScreen.tscn").Instantiate();
 			settings.Close += () => Visible = true; // restore visibility when settings close
 			GetNode<CanvasLayer>("..").AddChild(settings);
 			Visible = false; // make this invisible
 		};
 
-		GetNode<Button>("./ButtonsContainer/Buttons/Quit").Pressed += () => {
+		GetNode<TextureButton>("./ButtonsContainer/Buttons/Quit").Pressed += () => {
 			GetTree().Paused = false;
 			GetTree().ChangeSceneToFile("res://scenes/ui/TitleScreen.tscn");
 		};
