@@ -18,7 +18,7 @@ public partial class BaseEnemyScript : Node
     }
     public override void _Ready()
 	{
-        
+        generateDroppedstats();
     }
 
 	public override void _Process(double delta)
@@ -29,23 +29,18 @@ public partial class BaseEnemyScript : Node
     private void createLootTable()
     {
         // if you don't order these by smallest rarity first, I'm murdering you; the first one must be 'null' unlesss the enemy has guaranteed drops
-        lootTable = new ShipPart[amountOfLoot] 
+        lootTable = new ShipPart[amountOfLoot]
         {
-            null,
-            new ShipPart(),
-            new ShipPart(),
-            new ShipPart(),
-            new ShipPart(), 
-        };
-
-
-        // generate const int amt amount of loot objects type Ship Part
-        for (int i = 0; i < amountOfLoot; i++)
-        {
-            if(lootTable[i] != null)
-            {
-                lootTable[i].generateStats();
-            }
-        }
+            null, new ShipPart(), new ShipPart(), new ShipPart(), new ShipPart(),};
     }
+    private void generateDroppedstats()
+    {
+        foreach (ShipPart part in lootTable)
+        {
+            part.generateStats();
+        }
+        GD.Print("Generated Stats for dropped loot ");
+    }
+
 }
+

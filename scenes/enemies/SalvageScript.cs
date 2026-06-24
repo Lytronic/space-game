@@ -6,7 +6,7 @@ public partial class SalvageScript : Node2D
     BaseEnemyScript parent;
 
     public ShipPart[] droppedParts;
-    private ShipPart[] parentLoot;
+    private ShipPart[] possibleLoot;
 
     private float wholeRarity;
     private float playerLuck;
@@ -17,43 +17,51 @@ public partial class SalvageScript : Node2D
         playerLuck = getPlayerLuckLevel();
         wholeRarity = getWholeRarity();
 
+        //the actual dropping
         dropLoot();
-        GD.Print(droppedParts);
+        GD.Print($"compleded dropping process, dropped parts: {droppedParts}");
 	}
 
 	public void dropLoot()
 	{
-        parentLoot = parent.lootTable;
-        GD.Print($"parentLoot table: {parentLoot}"); //debug
+        possibleLoot = parent.lootTable;
+        GD.Print($"parentLoot table: {possibleLoot}"); //debug
 
         float random = GD.Randf();
-        float holyRNG = random + playerLuck;
-        int maxRange = (int) Math.Ceiling(holyRNG / wholeRarity);
+        float lootStrength = random + playerLuck;
+        int maxRange = (int) Math.Ceiling(lootStrength / wholeRarity);
 
         droppedParts = new ShipPart[maxRange];
         GD.Print($"random: {random} | playerLuck: {playerLuck} | wholeRarity: {wholeRarity} | max Range: {maxRange}"); //debug
 
 
-        for (int x = 0; x <= maxRange - 1; x++)
+        for (int x = 0; x < maxRange; x++)
         {
+            if (possibleLoot == null) { break; }
             wholeRarity = getWholeRarity();
-            GD.Print($"parentLoot length: {parentLoot.Length}");
+            GD.Print($"possibleLoot length: {possibleLoot.Length}");
 
-            for(int i = 1; holyRNG >= parentLoot[i].rarity;)
+            for(int i = 1; lootStrength >= possibleLoot[i].rarity;)
             {
-                GD.Print($"iterated: {i} | holyRNG: {holyRNG} | parentLoot rarity: {parentLoot[i].rarity} "); //debug
+                GD.Print($"iterated: {i} | holyRNG: {lootStrength} | parentLoot rarity: {possibleLoot[i].rarity} "); //debug
 
-                holyRNG -= parentLoot[i].rarity;
-                i++;
+                lootStrength -= possibleLoot[i].rarity;
+                i++; // <--- IMPORTANT!! the index 'i' is at this point BIGGER than the item of this current iteration
 
-                if (holyRNG <= parentLoot[i].rarity || i >= parentLoot.Length)
+                //breaks as soon as the rarest (last) object in the loottable is already reached in this iteration, the drops it -- don't forget that the length of an aray is 1 bigger than its last index
+                if (i >= possibleLoot.Length)
                 {
-
-                    droppedParts[x] = parentLoot[i - 1];
-                    parentLoot[i] = null;
-
-                    GD.Print($"break triggered: ({holyRNG <= parentLoot[i].rarity}) ({i >= parentLoot.Length})");
-
+                    droppedParts[x] = possibleLoot[possibleLoot.Length - 1];
+                    removeFromPossibleLoot(possibleLoot.Length - 1);
+                    GD.Print($"rarest loot reached, breaking - dropped: {droppedParts[x]} | parent: {possibleLoot[possibleLoot.Length - 1]} ");//only correct if dropped: -something- | parent: -nothing- !!!
+                    break;
+                }
+                //if the loot strengt isn't greater than the next possible loot, then drop the loot of this iteration
+                if (lootStrength < possibleLoot[i].rarity)
+                {
+                    droppedParts[x] = possibleLoot[i - 1];
+                    removeFromPossibleLoot(i - 1);
+                    GD.Print($"loot strength too low for next item, breaking - dropped: {droppedParts[x]} | parent: {possibleLoot[possibleLoot.Length - 1]} ");
                     break;
                 }
             }
@@ -78,11 +86,28 @@ public partial class SalvageScript : Node2D
             if(part != null)
             {
                 wholeRar += part.rarity;
-
             }
         }
 
         return wholeRar;
     }
 
+
+    private void removeFromPossibleLoot(int indexToRemove)
+    {
+        ShipPart[] newLoot = new ShipPart[possibleLoot.Length - 1];
+        int x = 0;
+        for (int i = 0; i < newLoot.Length; i++)
+        {
+            //skipping the item that's not supposed to be in the final product
+            if (i == indexToRemove)
+            {
+                i++;
+            }
+            newLoot[x] = possibleLoot[i];
+            x++;
+        }
+        possibleLoot = newLoot;
+
+    }
 }
