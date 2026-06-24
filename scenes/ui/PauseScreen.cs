@@ -33,7 +33,7 @@ public partial class PauseScreen : VBoxContainer
 
 	public override void _UnhandledInput(InputEvent @event)
 	{
-		if (@event.IsActionPressed("pause_or_back"))
+		if (@event.IsActionPressed("ui_close_dialog"))
 		{
 			Toggle();
 		}

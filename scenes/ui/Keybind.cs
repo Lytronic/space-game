@@ -26,9 +26,9 @@ public partial class Keybind : HBoxContainer
 
 	public override void _UnhandledInput(InputEvent @event)
 	{
-		if (_listening && @event is InputEventKey)
+		if (_listening && @event is InputEventKey eventKey)
 		{
-			var asText = @event.AsText();
+			var asText = OS.GetKeycodeString(eventKey.Keycode);
 			DB.UpdateSettingsEntry(KVP.Key, KVP.Value with { Value = asText });
 			GetNode<Button>("./ValueButton").Text = asText;
 			_listening = false;

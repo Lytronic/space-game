@@ -122,8 +122,8 @@ public partial class Player : CharacterBody2D
 
 	private void UpdateLinearMovement(float dt)
 	{
-		float verticalInput = Input.GetAxis("move_down", "move_up");
-		float horizontalInput = Input.GetAxis("move_left", "move_right");
+		float verticalInput = Input.GetAxis("backward", "forward");
+		float horizontalInput = Input.GetAxis("left", "right");
 
 		_throttleSpeed = UpdateAxisSpeed(
 			_throttleSpeed,
