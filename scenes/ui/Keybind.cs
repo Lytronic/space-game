@@ -24,7 +24,7 @@ public partial class Keybind : HBoxContainer
 		};
 	}
 
-	public override void _UnhandledInput(InputEvent @event)
+	public override void _Input(InputEvent @event)
 	{
 		if (_listening && @event is InputEventKey eventKey)
 		{
@@ -32,6 +32,7 @@ public partial class Keybind : HBoxContainer
 			SettingsController.Instance.SetKeybind(KVP.Key, eventKey.Keycode);
 			GetNode<Button>("./ValueButton").Text = asText;
 			_listening = false;
+			GetViewport().SetInputAsHandled();
 		}
 	}
 }
