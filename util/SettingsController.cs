@@ -28,7 +28,6 @@ public partial class SettingsController : Node
 			{
 				// settings keys follow the pattern "<category>.<action_name>", e. g. "controls.forward"
 				StringName name = entry.Key.Split(".")[1];
-				GD.Print(name);
 				InputMap.AddAction(name);
 
 				var inputEvent = new InputEventKey
@@ -40,4 +39,28 @@ public partial class SettingsController : Node
 			}
 		}
 	}	
+
+	/// <summary>
+	/// Update a keybind both in the SettingsModel and in Godot's Input system
+	/// The model is responsible for saving it to the database.
+	/// </summary>
+	public void SetKeybind(string settingsKey, Key keycode)
+	{
+		if (!SettingsModel.Instance.Settings.TryGetValue(settingsKey, out SettingsEntry value))
+		{
+			GD.Print($"Error: Attempting to set nonexistent keybind {settingsKey}!");
+			return;
+		}
+		
+		// update model
+		if (value is SettingsEntry.Keybind kb)
+		{
+			SettingsModel.Instance.SetEntry(settingsKey, kb with { Value = OS.GetKeycodeString(keycode) });
+		}
+
+		// update InputMap
+		StringName name = settingsKey.Split(".")[1];
+		InputMap.ActionEraseEvents(name);
+		InputMap.ActionAddEvent(name, new InputEventKey { Keycode = keycode });
+	}
 }

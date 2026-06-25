@@ -19,7 +19,7 @@ public partial class Keybind : HBoxContainer
 		};
 
 		GetNode<Button>("./ResetButton").Pressed += () => {
-			DB.UpdateSettingsEntry(KVP.Key, SettingsEntry.DefaultSettings[KVP.Key]);
+			SettingsController.Instance.SetKeybind(KVP.Key, OS.FindKeycodeFromString(SettingsEntry.DefaultSettings[KVP.Key].ToString()));
 			button.Text =  SettingsEntry.DefaultSettings[KVP.Key].ToString();
 		};
 	}
@@ -29,7 +29,7 @@ public partial class Keybind : HBoxContainer
 		if (_listening && @event is InputEventKey eventKey)
 		{
 			var asText = OS.GetKeycodeString(eventKey.Keycode);
-			DB.UpdateSettingsEntry(KVP.Key, KVP.Value with { Value = asText });
+			SettingsController.Instance.SetKeybind(KVP.Key, eventKey.Keycode);
 			GetNode<Button>("./ValueButton").Text = asText;
 			_listening = false;
 		}

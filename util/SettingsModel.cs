@@ -18,4 +18,13 @@ public partial class SettingsModel : Node
 	{
 		Settings = DB.GetSettings();
 	}
+
+	/// <summary>
+	/// Update an entry both in memory and on disk in the database
+	/// </summary>
+	public void SetEntry(string key, SettingsEntry value)
+	{
+		Settings[key] = value;
+		DB.UpdateSettingsEntry(key, value);
+	}
 }
