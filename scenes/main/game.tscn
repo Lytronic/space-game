@@ -2,14 +2,19 @@
 
 [ext_resource type="Script" uid="uid://bhj8733dl4al1" path="res://scenes/main/Background.cs" id="1_e3dby"]
 [ext_resource type="PackedScene" uid="uid://doswvj43ed2ue" path="res://scenes/player/character_body_2d.tscn" id="1_e64el"]
+[ext_resource type="Shader" uid="uid://40v316ef6xib" path="res://scenes/main/Background.gdshader" id="2_0rn35"]
 [ext_resource type="PackedScene" uid="uid://dbk6dtnrg4ubv" path="res://scenes/player/HUD.tscn" id="2_ma5rq"]
 [ext_resource type="PackedScene" uid="uid://lcvge125o3th" path="res://scenes/player/death_screen.tscn" id="4_gsayk"]
 [ext_resource type="PackedScene" uid="uid://cddmgq3ad6m4q" path="res://scenes/ui/PauseScreen.tscn" id="5_gf1f2"]
 [ext_resource type="Script" uid="uid://cp8qpckd81n1e" path="res://scenes/ui/PauseScreen.cs" id="6_em1bs"]
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0rn35"]
+shader = ExtResource("2_0rn35")
+
 [node name="game" type="Node2D" unique_id=777428364]
 
 [node name="Background" type="Node2D" parent="." unique_id=121379331]
+material = SubResource("ShaderMaterial_0rn35")
 script = ExtResource("1_e3dby")
 playerPath = NodePath("../Player")
 

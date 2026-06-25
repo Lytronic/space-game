@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://dw2tl0v70rq3f"]
 
+[ext_resource type="Shader" uid="uid://40v316ef6xib" path="res://scenes/main/Background.gdshader" id="1_6j5qt"]
 [ext_resource type="Script" uid="uid://cs8utcdwhwj" path="res://scenes/ui/TitleScreen.cs" id="1_ny3vc"]
 [ext_resource type="Texture2D" uid="uid://cbpokk7dntah0" path="res://gfx/gui/menu/quit.png" id="2_j4pmt"]
 [ext_resource type="Texture2D" uid="uid://duo3f5os7le7w" path="res://gfx/gui/menu/quit_hover.png" id="3_6j5qt"]
@@ -7,7 +8,17 @@
 [ext_resource type="Texture2D" uid="uid://ol7itepre76y" path="res://gfx/gui/menu/settings_hover.png" id="5_bj1w8"]
 [ext_resource type="FontFile" uid="uid://tt7j6iuhu1kc" path="res://gfx/gui/Oxanium-Regular.ttf" id="6_cle6h"]
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6j5qt"]
+shader = ExtResource("1_6j5qt")
+
 [node name="Node" type="Node" unique_id=605533311]
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=97308718]
+material = SubResource("ShaderMaterial_6j5qt")
+offset_left = -10.0
+offset_top = -8.0
+offset_right = 1160.0
+offset_bottom = 655.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1008936293]
 anchors_preset = 15
