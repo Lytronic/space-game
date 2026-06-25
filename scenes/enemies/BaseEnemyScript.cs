@@ -15,10 +15,11 @@ public partial class BaseEnemyScript : Node
     {
         //here the loot table will be created before all the children are loaded
         createLootTable();
+        generateDroppedstats();
+
     }
     public override void _Ready()
 	{
-        generateDroppedstats();
     }
 
 	public override void _Process(double delta)
@@ -37,9 +38,18 @@ public partial class BaseEnemyScript : Node
     {
         foreach (ShipPart part in lootTable)
         {
-            part.generateStats();
+            if(part != null)
+            {
+                part.generateStats();
+            }
         }
         GD.Print("Generated Stats for dropped loot ");
+    }
+
+    private void enemyDie()
+    {
+        Salvage salvageNode = GetNode<SalvageScript>;
+        salvageNode.dropLoot
     }
 
 }

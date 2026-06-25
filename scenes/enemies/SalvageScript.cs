@@ -16,10 +16,7 @@ public partial class SalvageScript : Node2D
 
         playerLuck = getPlayerLuckLevel();
         wholeRarity = getWholeRarity();
-
-        //the actual dropping
-        dropLoot();
-        GD.Print($"compleded dropping process, dropped parts: {droppedParts}");
+        
 	}
 
 	public void dropLoot()
@@ -29,7 +26,15 @@ public partial class SalvageScript : Node2D
 
         float random = GD.Randf();
         float lootStrength = random + playerLuck;
-        int maxRange = (int) Math.Ceiling(lootStrength / wholeRarity);
+        int maxRange = 0;
+        if(wholeRarity >= 1)
+        {
+            maxRange = (int)Math.Ceiling(lootStrength / wholeRarity);
+        }
+        else 
+        {
+            maxRange = 1;
+        }
 
         droppedParts = new ShipPart[maxRange];
         GD.Print($"random: {random} | playerLuck: {playerLuck} | wholeRarity: {wholeRarity} | max Range: {maxRange}"); //debug
@@ -37,7 +42,7 @@ public partial class SalvageScript : Node2D
 
         for (int x = 0; x < maxRange; x++)
         {
-            if (possibleLoot == null) { break; }
+            if (possibleLoot == null || possibleLoot.Length == 1) { break; }
             wholeRarity = getWholeRarity();
             GD.Print($"possibleLoot length: {possibleLoot.Length}");
 
@@ -53,7 +58,7 @@ public partial class SalvageScript : Node2D
                 {
                     droppedParts[x] = possibleLoot[possibleLoot.Length - 1];
                     removeFromPossibleLoot(possibleLoot.Length - 1);
-                    GD.Print($"rarest loot reached, breaking - dropped: {droppedParts[x]} | parent: {possibleLoot[possibleLoot.Length - 1]} ");//only correct if dropped: -something- | parent: -nothing- !!!
+                    GD.Print($"rarest loot reached, breaking - dropped: {droppedParts[x]} | parent: {possibleLoot[possibleLoot.Length - 1]} ");//only correct if dropped: -dropped obj- | parent: -moved up obj- !!!
                     break;
                 }
                 //if the loot strengt isn't greater than the next possible loot, then drop the loot of this iteration
@@ -65,12 +70,13 @@ public partial class SalvageScript : Node2D
                     break;
                 }
             }
+            GD.Print($"compleded dropping process, dropped parts: {droppedParts}");
         }
     }
 
     public float getPlayerLuckLevel()
     {
-        float luck = 1f;
+        float luck = 99f;
 
         //here the playre luck stat will be read
 
