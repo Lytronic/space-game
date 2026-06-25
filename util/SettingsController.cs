@@ -31,13 +31,13 @@ public partial class SettingsController : Node
 				GD.Print(name);
 				InputMap.AddAction(name);
 
-                var inputEvent = new InputEventKey
-                {
-                    Keycode = OS.FindKeycodeFromString(keybind.Value)
-                };
+				var inputEvent = new InputEventKey
+				{
+					Keycode = OS.FindKeycodeFromString(keybind.Value)
+				};
 
-                InputMap.ActionAddEvent(name, inputEvent);
-            }
+				InputMap.ActionAddEvent(name, inputEvent);
+			}
 		}
 	}	
 }
