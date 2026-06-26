@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dxq0vuj3070l6"
-path="res://.godot/imported/weapon_missile.png-0a53b63916df9ad681d2e570474376bb.ctex"
+uid="uid://sry8sollyqun"
+path="res://.godot/imported/weapon_arc.png-a1537e0dccf9221949680b0f642533a9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://gfx/gui/parts/weapon_missile.png"
-dest_files=["res://.godot/imported/weapon_missile.png-0a53b63916df9ad681d2e570474376bb.ctex"]
+source_file="res://gfx/gui/parts/weapon_arc.png"
+dest_files=["res://.godot/imported/weapon_arc.png-a1537e0dccf9221949680b0f642533a9.ctex"]
 
 [params]
 

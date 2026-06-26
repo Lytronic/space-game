@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dxq0vuj3070l6"
-path="res://.godot/imported/weapon_missile.png-0a53b63916df9ad681d2e570474376bb.ctex"
+uid="uid://dlug6c5783e1e"
+path="res://.godot/imported/weapon_laser.png-65b31d3c8313df12053a60cb002d2515.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://gfx/gui/parts/weapon_missile.png"
-dest_files=["res://.godot/imported/weapon_missile.png-0a53b63916df9ad681d2e570474376bb.ctex"]
+source_file="res://gfx/gui/parts/weapon_laser.png"
+dest_files=["res://.godot/imported/weapon_laser.png-65b31d3c8313df12053a60cb002d2515.ctex"]
 
 [params]
 
