@@ -8,12 +8,12 @@ The actual structure of the game is described in scenes, which are the `.tscn` f
 
 ## Scenes
 
-A scene is a collection of nodes arranged in a tree structure. When the game runs, the `TitleScreen` scene is loaded first, which upon pressing a key leads to the `game` scene. All other scenes are instantiated inside these two (e. g. in [SettingsScreen.cs](scenes/ui/SettingScreen.cs) where using scenes allows for reusing code since every scene with a script corresponds to a C# class).
+A scene is a collection of nodes arranged in a tree structure. When the game runs, the `TitleScreen` scene is loaded first, which upon pressing a key leads to the `game` scene. All other scenes are instantiated inside these two (e. g. in [SettingsScreen.cs](../scenes/ui/SettingsScreen.cs) where using scenes allows for reusing code since every scene with a script corresponds to a C# class).
 
 ## Other code
 
-Some C# code does not belong to a scene because it is responsible for handling background tasks like the database. It's located in the [util](util) directory and is then called by scene code where needed.
+Some C# code does not belong to a scene because it is responsible for handling background tasks like the database. It's located in the [util](../util) directory and is then called by scene code where needed.
 
 Shaders for the game are saved as `.gdshader` files and written in Godot's shading language, which is very similar to the more well-known GLSL.
 
-Lastly, the [addons](addons) directory is reserved for third-party Godot extensions, which is currently just the Git integration for the editor. These files are thus not part of this project.
+Lastly, the [addons](../addons) directory is reserved for third-party Godot extensions, which is currently just the Git integration for the editor. These files are thus not part of this project.
