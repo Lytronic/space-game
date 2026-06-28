@@ -1,0 +1,74 @@
+[gd_scene format=3 uid="uid://dla6ot12l3i14"]
+
+[ext_resource type="Script" uid="uid://co510b6qqr2gw" path="res://scenes/player/BuildMenu.cs" id="1_p6oaq"]
+[ext_resource type="Script" uid="uid://d0dn7fdqdcffw" path="res://scenes/player/BuildUi.cs" id="2_qg2rf"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_p6oaq"]
+
+[sub_resource type="InputEventKey" id="InputEventKey_p6oaq"]
+device = -1
+keycode = 4194309
+
+[sub_resource type="Shortcut" id="Shortcut_qg2rf"]
+events = [SubResource("InputEventKey_p6oaq")]
+
+[node name="BuildMenu" type="Node2D" unique_id=2127117897]
+script = ExtResource("1_p6oaq")
+
+[node name="TopWall" type="StaticBody2D" parent="." unique_id=61641532]
+position = Vector2(864, 0)
+scale = Vector2(7.5, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TopWall" unique_id=492530308]
+rotation = 3.1415927
+shape = SubResource("WorldBoundaryShape2D_p6oaq")
+
+[node name="BottomWall" type="StaticBody2D" parent="." unique_id=1247373333]
+position = Vector2(864, 648)
+scale = Vector2(7.5, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BottomWall" unique_id=425753047]
+shape = SubResource("WorldBoundaryShape2D_p6oaq")
+
+[node name="LeftWall" type="StaticBody2D" parent="." unique_id=1905973922]
+position = Vector2(576, 324)
+scale = Vector2(1, 5)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftWall" unique_id=2012269171]
+rotation = 1.5707964
+shape = SubResource("WorldBoundaryShape2D_p6oaq")
+
+[node name="RightWall" type="StaticBody2D" parent="." unique_id=1544865848]
+position = Vector2(1152, 324)
+scale = Vector2(1, 5)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RightWall" unique_id=163763063]
+rotation = -1.5707964
+shape = SubResource("WorldBoundaryShape2D_p6oaq")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=675919705]
+
+[node name="BuildUI" type="Control" parent="CanvasLayer" unique_id=1245039034]
+layout_mode = 3
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -41.5
+offset_top = -31.0
+offset_right = 41.5
+grow_horizontal = 2
+grow_vertical = 0
+script = ExtResource("2_qg2rf")
+
+[node name="Button" type="Button" parent="CanvasLayer/BuildUI" unique_id=881468032]
+layout_mode = 0
+offset_top = -20.0
+offset_right = 83.0
+offset_bottom = 11.0
+action_mode = 0
+shortcut = SubResource("Shortcut_qg2rf")
+text = "Complete"
+
+[connection signal="pressed" from="CanvasLayer/BuildUI/Button" to="CanvasLayer/BuildUI" method="_on_button_pressed"]

@@ -1,6 +1,0 @@
-[gd_scene format=3 uid="uid://d41ak84s03mi"]
-
-[ext_resource type="Script" uid="uid://bssrsifb2ho1k" path="res://scenes/ship parts/ShipPart.cs" id="1_wdstu"]
-
-[node name="ShipPart" type="Node2D" unique_id=2079868896]
-script = ExtResource("1_wdstu")

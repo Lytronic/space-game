@@ -63,6 +63,7 @@ public partial class BaseEnemy : CharacterBody2D
 		{
 			if(part != null)
 			{
+                part.Initialize();
 				part.generateStats();
 			}
 		}
@@ -90,19 +91,38 @@ public partial class BaseEnemy : CharacterBody2D
 		damage -= damage * resistance; //percentual decrease in damage taken 
 		health -= (int)damage;
 
-		if(health <= 0 )
-		{
-			this.enemyDie();
-		}
-		//GD.Print($"Enemy damaged {damage}"); //debug
-	}
+		if(health <= 0 ) enemyDie();
+        //GD.Print($"Enemy damaged {damage}"); //debug
+    }
+    public bool IsLastEnemy()
+    {
+        var scene = GetTree().CurrentScene;
+        if (scene == null) return false;
+
+        foreach (Node child in scene.GetChildren())
+        {
+            if (child == this) continue;
+
+            if (child is BaseEnemy enemy && !enemy.IsQueuedForDeletion())
+                return false;
+        }
+
+        return true;
+    }
     public void enemyDie()
     {
         GD.Print($"Enemy {this} died");
         //detatch ai script for resurrection
         //delete collisions for resurrection
         GetNode<EnemySalvage>(salvagePath).dropLoot();
-		//free all memory and stuff
-		this.QueueFree();
+
+		// Check if another enemy exists
+		bool levelCleared = IsLastEnemy();
+
+		// Remove node
+		QueueFree();
+
+		// Initiate change to build menu scene if this was the last enemy
+        if (levelCleared) GetTree().CurrentScene.Call("OpenBuildMenuAfterDelay", 1.5f);
     }
 }
