@@ -1,0 +1,70 @@
+[gd_scene format=3 uid="uid://cgrstr1ttypq3"]
+
+[ext_resource type="Script" uid="uid://fwoqqdkalmlk" path="res://scenes/ui/HighScoresScreen.cs" id="1_0it8a"]
+[ext_resource type="Texture2D" uid="uid://brehfrdmmlon1" path="res://gfx/gui/menu/back.png" id="2_k2ehb"]
+[ext_resource type="Texture2D" uid="uid://chomid451xw22" path="res://gfx/gui/menu/back_hover.png" id="3_v7h41"]
+[ext_resource type="FontFile" uid="uid://tt7j6iuhu1kc" path="res://gfx/gui/Oxanium-Regular.ttf" id="4_xjk4w"]
+[ext_resource type="Texture2D" uid="uid://bqd4ii15qjmhh" path="res://gfx/gui/menu/panel.png" id="5_rvkte"]
+
+[sub_resource type="Theme" id="Theme_0it8a"]
+default_font = ExtResource("4_xjk4w")
+default_font_size = 24
+
+[node name="HighScoresScreen" type="HBoxContainer" unique_id=1859618080]
+process_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 6.0
+offset_top = 5.0
+offset_right = -65.0
+offset_bottom = -11.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_0it8a")
+
+[node name="VBoxContainerLeft" type="VBoxContainer" parent="." unique_id=443829402]
+layout_mode = 2
+
+[node name="BackButton" type="TextureButton" parent="VBoxContainerLeft" unique_id=80882782]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture_normal = ExtResource("2_k2ehb")
+texture_pressed = ExtResource("2_k2ehb")
+texture_hover = ExtResource("3_v7h41")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="VBoxContainerRight" type="VBoxContainer" parent="." unique_id=1458067294]
+process_mode = 3
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="VBoxContainerRight" unique_id=208459312]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_xjk4w")
+theme_override_font_sizes/font_size = 32
+text = "High Scores"
+horizontal_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainerRight" unique_id=1662953617]
+clip_children = 2
+y_sort_enabled = true
+layout_mode = 2
+size_flags_vertical = 3
+texture = ExtResource("5_rvkte")
+expand_mode = 2
+
+[node name="ItemList" type="VBoxContainer" parent="VBoxContainerRight/TextureRect" unique_id=1502351852]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+theme = SubResource("Theme_0it8a")
+
+[node name="AspectRatioContainer" type="AspectRatioContainer" parent="VBoxContainerRight/TextureRect/ItemList" unique_id=764827696]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2

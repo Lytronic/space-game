@@ -11,6 +11,13 @@ public partial class TitleScreen : VBoxContainer
 			GetNode<Node>("..").AddChild(settings);
 			Visible = false; // make this invisible
 		};
+
+		GetNode<TextureButton>("./HBoxContainer/HighScoresButton").Pressed += () => {
+			HighScoresScreen settings = (HighScoresScreen)ResourceLoader.Load<PackedScene>("res://scenes/ui/HighScoresScreen.tscn").Instantiate();
+			settings.Close += () => Visible = true;
+			GetNode<Node>("..").AddChild(settings);
+			Visible = false;
+		};
 		
 		GetNode<TextureButton>("./HBoxContainer/QuitButton").Pressed += () => GetTree().Quit();
 	}
