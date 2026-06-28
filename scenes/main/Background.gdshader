@@ -92,6 +92,8 @@ void fragment() {
 	// generate a random temperature and transform it to rgb
 	vec3 kcol = kelvin2rgb(clamp(randomf(SCREEN_UV) * 50000.0, 1000.0, 40000.0));
 	
+	float brightness = clamp(randomf(SCREEN_UV + 42.324), 0.0f, 1.0f);
+	
 	// add even more randomness and a sine wave to make some stars twinkle
-	COLOR = vec4(kcol * v.r * (sin(TIME * length(random(SCREEN_UV) * 5.0)) + 1.0), 1.0);
+	COLOR = vec4(kcol * brightness * v.r * (sin(TIME * length(random(SCREEN_UV) * 5.0)) + 1.0), 1.0);
 }
