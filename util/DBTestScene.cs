@@ -1,6 +1,6 @@
 using Godot;
 
-namespace SpaceGame.util
+namespace Microgravity.util
 {
 	public partial class DBTestScene : Control
 	{

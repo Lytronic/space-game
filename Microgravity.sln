@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.14.36930.0 d17.14
+VisualStudioVersion = 17.14.36930.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Space Game", "Space Game.csproj", "{F17885C4-2A95-4AD3-A74A-A0142C05F5DC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Microgravity", "Microgravity.csproj", "{F17885C4-2A95-4AD3-A74A-A0142C05F5DC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

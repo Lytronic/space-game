@@ -3,7 +3,7 @@
     <TargetFramework>net8.0</TargetFramework>
     <TargetFramework Condition=" '$(GodotTargetPlatform)' == 'android' ">net9.0</TargetFramework>
     <EnableDynamicLoading>true</EnableDynamicLoading>
-    <RootNamespace>SpaceGame</RootNamespace>
+    <RootNamespace>Microgravity</RootNamespace>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="SourceGear.sqlite3" Version="3.50.4.5" />

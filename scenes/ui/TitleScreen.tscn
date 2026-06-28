@@ -4,6 +4,8 @@
 [ext_resource type="Script" uid="uid://cs8utcdwhwj" path="res://scenes/ui/TitleScreen.cs" id="1_ny3vc"]
 [ext_resource type="Texture2D" uid="uid://cbpokk7dntah0" path="res://gfx/gui/menu/quit.png" id="2_j4pmt"]
 [ext_resource type="Texture2D" uid="uid://duo3f5os7le7w" path="res://gfx/gui/menu/quit_hover.png" id="3_6j5qt"]
+[ext_resource type="Texture2D" uid="uid://ddltgl0s71v34" path="res://gfx/gui/menu/extras.png" id="3_bj1w8"]
+[ext_resource type="Texture2D" uid="uid://d4cohn6f2t05s" path="res://gfx/gui/menu/extras_hover.png" id="4_cle6h"]
 [ext_resource type="Texture2D" uid="uid://coe5y8aikw68x" path="res://gfx/gui/menu/settings.png" id="4_p52wy"]
 [ext_resource type="Texture2D" uid="uid://ol7itepre76y" path="res://gfx/gui/menu/settings_hover.png" id="5_bj1w8"]
 [ext_resource type="FontFile" uid="uid://tt7j6iuhu1kc" path="res://gfx/gui/Oxanium-Regular.ttf" id="6_cle6h"]
@@ -51,6 +53,15 @@ visible = false
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
 text = "⏻ "
+
+[node name="HighScoresButton" type="TextureButton" parent="VBoxContainer/HBoxContainer" unique_id=412953295]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture_normal = ExtResource("3_bj1w8")
+texture_pressed = ExtResource("3_bj1w8")
+texture_hover = ExtResource("4_cle6h")
+ignore_texture_size = true
+stretch_mode = 0
 
 [node name="SettingsButton" type="TextureButton" parent="VBoxContainer/HBoxContainer" unique_id=1827474258]
 custom_minimum_size = Vector2(64, 64)

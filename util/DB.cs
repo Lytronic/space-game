@@ -5,7 +5,7 @@ using System.Data.SQLite;
 using System.Diagnostics;
 using System.Globalization;
 
-namespace SpaceGame.util
+namespace Microgravity.util
 {
 	/// <summary>
 	/// Struct to store high score information.

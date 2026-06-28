@@ -1,8 +1,7 @@
 using Godot;
 using System;
-using SpaceGame.util;
+using Microgravity.util;
 using System.Collections.Generic;
-using System.Reflection.Metadata.Ecma335;
 
 public partial class SettingsScreen : HBoxContainer
 {
@@ -29,9 +28,13 @@ public partial class SettingsScreen : HBoxContainer
 
 	public override void _Input(InputEvent @event)
 	{
-		if (@event.IsActionPressed("ui_close_dialog"))
+		if (@event is InputEventKey)
 		{
 			GetViewport().SetInputAsHandled();
+		}
+
+		if (@event.IsActionPressed("ui_close_dialog"))
+		{
 			CloseScreen();
 		}
 	}

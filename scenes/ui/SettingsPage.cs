@@ -1,7 +1,7 @@
 using Godot;
 using System;
 using System.Collections.Generic;
-using SpaceGame.util;
+using Microgravity.util;
 using System.Globalization;
 
 public partial class SettingsPage : ScrollContainer
