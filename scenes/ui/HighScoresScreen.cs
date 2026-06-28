@@ -1,5 +1,5 @@
 using Godot;
-using SpaceGame.util;
+using Microgravity.util;
 
 public partial class HighScoresScreen : Control
 {
