@@ -1,9 +1,10 @@
 using Godot;
 using System;
 
-public partial class SalvageScript : Node2D
+[GlobalClass]
+public partial class EnemySalvage : Node
 {
-    BaseEnemyScript parent;
+    BaseEnemy parent;
 
     public ShipPart[] droppedParts;
     private ShipPart[] possibleLoot;
@@ -12,7 +13,7 @@ public partial class SalvageScript : Node2D
     private float playerLuck;
 	public override void _Ready()
 	{
-        parent = GetParent<BaseEnemyScript>();
+        parent = GetParent<BaseEnemy>();
 
         playerLuck = getPlayerLuckLevel();
         wholeRarity = getWholeRarity();
@@ -22,7 +23,7 @@ public partial class SalvageScript : Node2D
 	public void dropLoot()
 	{
         possibleLoot = parent.lootTable;
-        GD.Print($"parentLoot table: {possibleLoot}"); //debug
+        //GD.Print($"parentLoot table: {possibleLoot}"); //debug
 
         float random = GD.Randf();
         float lootStrength = random + playerLuck;
@@ -44,11 +45,11 @@ public partial class SalvageScript : Node2D
         {
             if (possibleLoot == null || possibleLoot.Length == 1) { break; }
             wholeRarity = getWholeRarity();
-            GD.Print($"possibleLoot length: {possibleLoot.Length}");
+            GD.Print($"possibleLoot length: {possibleLoot.Length}");  //debug
 
             for(int i = 1; lootStrength >= possibleLoot[i].rarity;)
             {
-                GD.Print($"iterated: {i} | holyRNG: {lootStrength} | parentLoot rarity: {possibleLoot[i].rarity} "); //debug
+                GD.Print($"iteration: {i} | lootStrength: {lootStrength} | possibleLoot rarity: {possibleLoot[i].rarity} "); //debug
 
                 lootStrength -= possibleLoot[i].rarity;
                 i++; // <--- IMPORTANT!! the index 'i' is at this point BIGGER than the item of this current iteration
@@ -66,20 +67,18 @@ public partial class SalvageScript : Node2D
                 {
                     droppedParts[x] = possibleLoot[i - 1];
                     removeFromPossibleLoot(i - 1);
-                    GD.Print($"loot strength too low for next item, breaking - dropped: {droppedParts[x]} | parent: {possibleLoot[possibleLoot.Length - 1]} ");
+                    GD.Print($"loot strength too low for next item, breaking - dropped: {droppedParts[x]} | parent: {possibleLoot[possibleLoot.Length - 1]} "); //debug
                     break;
                 }
             }
-            GD.Print($"compleded dropping process, dropped parts: {droppedParts}");
+            GD.Print($"compleded dropping process, dropped parts: {droppedParts}");   //debug
         }
+        PlayerVariables.Instance.addLootToCollection(droppedParts);
     }
 
-    public float getPlayerLuckLevel()
+    private float getPlayerLuckLevel()
     {
-        float luck = 99f;
-
-        //here the playre luck stat will be read
-
+        float luck = PlayerVariables.Instance.luck_stat;
         return luck;
     }
 
@@ -92,12 +91,12 @@ public partial class SalvageScript : Node2D
             if(part != null)
             {
                 wholeRar += part.rarity;
+                GD.Print($"getWholeRarity - part rarity: {part.rarity}");
             }
         }
 
         return wholeRar;
     }
-
 
     private void removeFromPossibleLoot(int indexToRemove)
     {

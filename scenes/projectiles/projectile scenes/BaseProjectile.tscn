@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://c0nrrq16hsgke"]
+
+[ext_resource type="Script" uid="uid://b6icg8cl8kl3p" path="res://scenes/projectiles/projectile scripts/BaseProjectile.cs" id="1_ty5s1"]
+[ext_resource type="Texture2D" uid="uid://bytd8nurf5xpk" path="res://scenes/enemies/projtest.png" id="2_c21g3"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ty5s1"]
+size = Vector2(10, 10)
+
+[node name="BaseProjectile" type="Area2D" unique_id=273606959]
+script = ExtResource("1_ty5s1")
+
+[node name="BaseProjectileCollisionShape2D" type="CollisionShape2D" parent="." unique_id=1962684198]
+shape = SubResource("RectangleShape2D_ty5s1")
+
+[node name="BaseProjectileSprite2D" type="Sprite2D" parent="." unique_id=1899909286]
+texture = ExtResource("2_c21g3")

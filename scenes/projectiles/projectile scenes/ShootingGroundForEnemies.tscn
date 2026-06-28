@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://lfwf3b7lsati"]
+
+[ext_resource type="PackedScene" uid="uid://lvlgmxl6u820" path="res://scenes/enemies/enemy bases/BaseEnemy.tscn" id="1_xeidp"]
+[ext_resource type="PackedScene" uid="uid://b87rrodgmxi86" path="res://scenes/projectiles/projectile scenes/LinearTestProjectile.tscn" id="2_r2x6u"]
+
+[node name="ShootingGroundForEnemies" type="Node2D" unique_id=1253480725]
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1089866081]
+zoom = Vector2(3, 3)
+
+[node name="BaseEnemy" parent="." unique_id=1478611968 instance=ExtResource("1_xeidp")]
+
+[node name="LinearTestProjectile" parent="." unique_id=496190851 instance=ExtResource("2_r2x6u")]
+position = Vector2(-40, 0)

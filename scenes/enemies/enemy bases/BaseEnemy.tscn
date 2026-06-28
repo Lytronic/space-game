@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://lvlgmxl6u820"]
+
+[ext_resource type="Script" uid="uid://bb0ka28yv7y8k" path="res://scenes/enemies/EnemyScripts/EnemySalvage.cs" id="1_koma5"]
+[ext_resource type="Script" uid="uid://rh28g860bekh" path="res://scenes/enemies/EnemyScripts/BaseEnemy.cs" id="1_xyabd"]
+[ext_resource type="Texture2D" uid="uid://tw30mygcuye6" path="res://scenes/enemies/BunniTest.png" id="2_ob6f1"]
+[ext_resource type="Script" uid="uid://crbskh2rywuhb" path="res://scenes/enemies/EnemyScripts/BaseEnemyAi.cs" id="4_kcbdb"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_v5y83"]
+size = Vector2(50, 50)
+
+[node name="BaseEnemy" type="CharacterBody2D" unique_id=1478611968 node_paths=PackedStringArray("lootTable")]
+script = ExtResource("1_xyabd")
+lootTable = []
+metadata/_custom_type_script = "uid://rh28g860bekh"
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1287483316]
+texture = ExtResource("2_ob6f1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1151903888]
+shape = SubResource("RectangleShape2D_v5y83")
+
+[node name="EnemySalvage" type="Node2D" parent="." unique_id=1983881625]
+script = ExtResource("1_koma5")
+metadata/_custom_type_script = "uid://bb0ka28yv7y8k"
+
+[node name="BaseEnemyAi" type="Node" parent="." unique_id=765804216]
+script = ExtResource("4_kcbdb")
+metadata/_custom_type_script = "uid://crbskh2rywuhb"
