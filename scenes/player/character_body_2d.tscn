@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://datpt1os2yqtd" path="res://scenes/player/PartsManager.cs" id="1_4bq1r"]
 [ext_resource type="Script" uid="uid://bw5ie1tyljuyd" path="res://scenes/player/Player.cs" id="1_lxlh8"]
-[ext_resource type="Texture2D" uid="uid://c1wykehoqntuu" path="res://gfx/gui/templates/player_placeholder.png" id="2_lxlh8"]
+[ext_resource type="Texture2D" uid="uid://bspqn8j4pcve8" path="res://gfx/game/ship.png" id="2_lxlh8"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ix64g"]
 
@@ -11,7 +11,7 @@ script = ExtResource("1_lxlh8")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=366547732]
 position = Vector2(-4.7683716e-07, 0)
-scale = Vector2(0.15625, 0.15625)
+scale = Vector2(0.035, 0.035)
 texture = ExtResource("2_lxlh8")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2010192033]

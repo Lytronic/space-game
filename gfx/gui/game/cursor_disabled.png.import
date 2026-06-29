@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cmrqawuv4f5ds"
-path="res://.godot/imported/throttle.png-d8bc823c5d7f98279ef0f074035ed73f.ctex"
+uid="uid://dxrvnyg3aop8x"
+path="res://.godot/imported/cursor_disabled.png-cb27691310fb4edba37216c66aa6faf0.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://gfx/gui/game/throttle.png"
-dest_files=["res://.godot/imported/throttle.png-d8bc823c5d7f98279ef0f074035ed73f.ctex"]
+source_file="res://gfx/gui/game/cursor_disabled.png"
+dest_files=["res://.godot/imported/cursor_disabled.png-cb27691310fb4edba37216c66aa6faf0.ctex"]
 
 [params]
 

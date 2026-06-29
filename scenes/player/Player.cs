@@ -190,5 +190,5 @@ public partial class Player : CharacterBody2D
 
 		// Display game over screen
 		_deathScreen.Show();
-    }
+	}
 }
