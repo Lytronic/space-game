@@ -1,4 +1,5 @@
 using Godot;
+using Microgravity.util;
 using System.Threading.Tasks;
 
 public partial class Player : CharacterBody2D
@@ -24,6 +25,7 @@ public partial class Player : CharacterBody2D
 	// User Interfaces
 	private Control _hud;
 	private Control _deathScreen;
+	private ColorRect _damageOverlay;
 
 	// Labels (not the queer kind.. probably...)
 	private Label PlayerSpeedLabel;
@@ -38,6 +40,7 @@ public partial class Player : CharacterBody2D
 		// Assign user interfaces
 		_hud = GetNode<Control>("../CanvasLayer/HUD");
 		_deathScreen = GetNode<Control>("../CanvasLayer/DeathScreen");
+		_damageOverlay = GetNode<ColorRect>("../CanvasLayer/DamageOverlay");
 
 		// Assign labels
 		PlayerSpeedLabel = _hud.GetNode<Label>("PlayerSpeedLabel");
@@ -51,6 +54,10 @@ public partial class Player : CharacterBody2D
 	public override void _PhysicsProcess(double delta)
 	{
 		float dt = (float)delta;
+
+		((ShaderMaterial)_damageOverlay.Material).SetShaderParameter("intensity", _health <= 25.0f ?
+			((1.0f - _health / 100.0f) * (((SettingsEntry.Float)SettingsModel.Instance.Settings["video.damage_overlay_intensity"]).Value / 100.0f))
+			: 0.0f);
 
 		if (_isAlive)
 		{

@@ -7,10 +7,16 @@
 [ext_resource type="PackedScene" uid="uid://dbk6dtnrg4ubv" path="res://scenes/player/HUD.tscn" id="2_ma5rq"]
 [ext_resource type="PackedScene" uid="uid://lcvge125o3th" path="res://scenes/player/death_screen.tscn" id="4_gsayk"]
 [ext_resource type="PackedScene" uid="uid://cddmgq3ad6m4q" path="res://scenes/ui/PauseScreen.tscn" id="5_gf1f2"]
+[ext_resource type="Shader" uid="uid://r6am024pafhb" path="res://scenes/main/DamageTint.gdshader" id="5_se30j"]
 [ext_resource type="Script" uid="uid://cp8qpckd81n1e" path="res://scenes/ui/PauseScreen.cs" id="6_em1bs"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_0rn35"]
 shader = ExtResource("2_0rn35")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ktwa8"]
+shader = ExtResource("5_se30j")
+shader_parameter/intensity = 1.0
+shader_parameter/colour = Vector3(1, 0, 0)
 
 [node name="game" type="Node2D" unique_id=777428364]
 script = ExtResource("1_kjrfb")
@@ -24,6 +30,14 @@ playerPath = NodePath("../Player")
 position = Vector2(0, -10)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1360992928]
+
+[node name="DamageOverlay" type="ColorRect" parent="CanvasLayer" unique_id=489709134]
+material = SubResource("ShaderMaterial_ktwa8")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="HUD" parent="CanvasLayer" unique_id=1311629540 instance=ExtResource("2_ma5rq")]
 

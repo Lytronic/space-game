@@ -42,6 +42,7 @@ namespace Microgravity.util
 		/// </value>
 		public static readonly Dictionary<string, SettingsEntry> DefaultSettings = new()
 		{
+			["video.damage_overlay_intensity"] = new Float(40.0f, 0.0f, 100.0f, "Damage overlay intensity (%)"),
 			["controls.forward"] = new Keybind("W", "Move forward"),
 			["controls.backward"] = new Keybind("S", "Move backward"),
 			["controls.left"] = new Keybind("A", "Strafe left"),

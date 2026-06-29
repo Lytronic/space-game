@@ -57,7 +57,7 @@ public partial class SettingsPage : ScrollContainer
 							// Updating on every change is potentially expensive when the slider is dragged too often.
 							// I didn't notice any issues, however, so it's been kept simple for now.
 							// Otherwise there should be a debounce timer of some sort...
-							DB.UpdateSettingsEntry(entry.Key, f with { Value = (float)value });
+							SettingsModel.Instance.SetEntry(entry.Key, f with { Value = (float)value });
 							valueLabel.Text = value.ToString(CultureInfo.InvariantCulture);
 						};
 
