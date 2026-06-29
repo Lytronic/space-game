@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://brehfrdmmlon1" path="res://gfx/gui/menu/back.png" id="2_k2ehb"]
 [ext_resource type="Texture2D" uid="uid://chomid451xw22" path="res://gfx/gui/menu/back_hover.png" id="3_v7h41"]
 [ext_resource type="FontFile" uid="uid://tt7j6iuhu1kc" path="res://gfx/gui/Oxanium-Regular.ttf" id="4_xjk4w"]
-[ext_resource type="Texture2D" uid="uid://bqd4ii15qjmhh" path="res://gfx/gui/menu/panel.png" id="5_rvkte"]
+[ext_resource type="Texture2D" uid="uid://vqy6dmj1yju6" path="res://gfx/gui/menu/panel_basic.png" id="5_0it8a"]
 
 [sub_resource type="Theme" id="Theme_0it8a"]
 default_font = ExtResource("4_xjk4w")
@@ -52,7 +52,7 @@ clip_children = 2
 y_sort_enabled = true
 layout_mode = 2
 size_flags_vertical = 3
-texture = ExtResource("5_rvkte")
+texture = ExtResource("5_0it8a")
 expand_mode = 2
 
 [node name="ItemList" type="VBoxContainer" parent="VBoxContainerRight/TextureRect" unique_id=1502351852]
