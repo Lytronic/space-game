@@ -64,14 +64,17 @@ ignore_texture_size = true
 stretch_mode = 0
 
 [node name="Label" type="Label" parent="ButtonsContainer/Buttons/Resume" unique_id=1026046319]
-layout_mode = 0
-offset_left = 144.5
-offset_top = 19.0
-offset_right = 250.5
-offset_bottom = 48.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 theme_override_fonts/font = ExtResource("1_uuji5")
 theme_override_font_sizes/font_size = 28
 text = "Resume"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Settings" type="TextureButton" parent="ButtonsContainer/Buttons" unique_id=873881356]
 custom_minimum_size = Vector2(64, 64)
@@ -83,14 +86,17 @@ ignore_texture_size = true
 stretch_mode = 0
 
 [node name="Label" type="Label" parent="ButtonsContainer/Buttons/Settings" unique_id=515145206]
-layout_mode = 0
-offset_left = 144.5
-offset_top = 19.0
-offset_right = 252.5
-offset_bottom = 48.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 theme_override_fonts/font = ExtResource("1_uuji5")
 theme_override_font_sizes/font_size = 28
 text = "Settings"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Quit" type="TextureButton" parent="ButtonsContainer/Buttons" unique_id=1310866004]
 custom_minimum_size = Vector2(64, 64)
@@ -102,14 +108,17 @@ ignore_texture_size = true
 stretch_mode = 0
 
 [node name="Label" type="Label" parent="ButtonsContainer/Buttons/Quit" unique_id=1410628345]
-layout_mode = 0
-offset_left = 170.5
-offset_top = 19.0
-offset_right = 229.5
-offset_bottom = 48.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 theme_override_fonts/font = ExtResource("1_uuji5")
 theme_override_font_sizes/font_size = 28
 text = "Quit"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Spacer" type="Control" parent="ButtonsContainer" unique_id=1397281479]
 layout_mode = 2
