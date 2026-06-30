@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://b0fwtvp23vmx7"]
+
+[ext_resource type="Texture2D" uid="uid://bwfp4dowy7o5c" path="res://gfx/gui/game/cursor.png" id="1_5kgj7"]
+[ext_resource type="Script" uid="uid://cdpua45ni13di" path="res://scenes/ui/Cursor/Cursor.cs" id="1_q1rhh"]
+
+[node name="Cursor" type="Node2D" unique_id=515763207]
+scale = Vector2(0.25, 0.25)
+script = ExtResource("1_q1rhh")
+CursorTexture = ExtResource("1_5kgj7")

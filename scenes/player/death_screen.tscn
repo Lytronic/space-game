@@ -1,6 +1,18 @@
 [gd_scene format=3 uid="uid://lcvge125o3th"]
 
 [ext_resource type="Script" uid="uid://3hhwguakw3q" path="res://scenes/player/DeathScreen.cs" id="1_qx3x0"]
+[ext_resource type="Texture2D" uid="uid://c34wyifbyxdro" path="res://gfx/gui/menu/option_pause.png" id="2_1m70l"]
+[ext_resource type="Texture2D" uid="uid://fh4unt4slaa7" path="res://gfx/gui/menu/option_pause_hover.png" id="3_v55e6"]
+[ext_resource type="FontFile" uid="uid://tt7j6iuhu1kc" path="res://gfx/gui/Oxanium-Regular.ttf" id="4_q4lvt"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_1m70l"]
+texture = ExtResource("2_1m70l")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_v55e6"]
+texture = ExtResource("2_1m70l")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_q4lvt"]
+texture = ExtResource("3_v55e6")
 
 [sub_resource type="InputEventKey" id="InputEventKey_unn6m"]
 device = -1
@@ -36,7 +48,11 @@ offset_right = 74.611755
 offset_bottom = -125.0
 grow_horizontal = 2
 grow_vertical = 0
+theme_override_fonts/font = ExtResource("4_q4lvt")
 theme_override_font_sizes/font_size = 31
+theme_override_styles/normal = SubResource("StyleBoxTexture_1m70l")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_v55e6")
+theme_override_styles/hover = SubResource("StyleBoxTexture_q4lvt")
 action_mode = 0
 shortcut = SubResource("Shortcut_n56rn")
 text = "Retry"
@@ -51,6 +67,7 @@ offset_top = 106.0
 offset_right = 266.0
 offset_bottom = 133.0
 grow_horizontal = 2
+theme_override_fonts/font = ExtResource("4_q4lvt")
 theme_override_font_sizes/font_size = 90
 text = "GAME OVER"
 horizontal_alignment = 1

@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://dbk6dtnrg4ubv" path="res://scenes/player/HUD.tscn" id="2_ma5rq"]
 [ext_resource type="PackedScene" uid="uid://lcvge125o3th" path="res://scenes/player/death_screen.tscn" id="4_gsayk"]
 [ext_resource type="PackedScene" uid="uid://cddmgq3ad6m4q" path="res://scenes/ui/PauseScreen.tscn" id="5_gf1f2"]
+[ext_resource type="PackedScene" uid="uid://b0fwtvp23vmx7" path="res://scenes/ui/Cursor/Cursor.tscn" id="5_ktwa8"]
 [ext_resource type="Shader" uid="uid://r6am024pafhb" path="res://scenes/main/DamageTint.gdshader" id="5_se30j"]
 [ext_resource type="Script" uid="uid://cp8qpckd81n1e" path="res://scenes/ui/PauseScreen.cs" id="6_em1bs"]
 
@@ -28,6 +29,9 @@ playerPath = NodePath("../Player")
 
 [node name="Player" parent="." unique_id=2075203121 instance=ExtResource("1_e64el")]
 position = Vector2(0, -10)
+
+[node name="Cursor" parent="." unique_id=515763207 instance=ExtResource("5_ktwa8")]
+PlayerShip = NodePath("../Player")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1360992928]
 

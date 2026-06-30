@@ -12,6 +12,7 @@ public partial class SettingsScreen : HBoxContainer
 
 	public override void _Ready()
 	{
+		Input.SetMouseMode(Input.MouseModeEnum.Visible);
 		Settings = DB.GetSettings();
 
 		GetNode<TextureButton>("./VBoxContainerLeft/BackButton").Pressed += CloseScreen;

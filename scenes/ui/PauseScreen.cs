@@ -41,6 +41,13 @@ public partial class PauseScreen : VBoxContainer
 
 	private void Toggle()
 	{
+		
+		if (Input.MouseMode == Input.MouseModeEnum.Visible) {
+			Input.SetMouseMode(Input.MouseModeEnum.Hidden);
+		}
+		else if (Input.MouseMode == Input.MouseModeEnum.Hidden) {
+			Input.SetMouseMode(Input.MouseModeEnum.Visible);
+		}
 		GetTree().Paused = !GetTree().Paused;
 		_hud.Visible = !_hud.Visible;
 		Visible = !Visible;
