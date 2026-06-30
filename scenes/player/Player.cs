@@ -28,11 +28,11 @@ public partial class Player : CharacterBody2D
 	private ColorRect _damageOverlay;
 
 	// Labels (not the queer kind.. probably...)
-	private Label PlayerSpeedLabel;
-	private Label PlayerHealthLabel;
+	private Label _playerSpeedLabel;
+	private Label _playerHealthLabel;
+	private Label _playerScoreLabel;
 
 	// Healthy variables
-	private float _health = 100.0f;
 	private bool _isAlive = true;
 
 	public override void _Ready()
@@ -43,8 +43,9 @@ public partial class Player : CharacterBody2D
 		_damageOverlay = GetNode<ColorRect>("../CanvasLayer/DamageOverlay");
 
 		// Assign labels
-		PlayerSpeedLabel = _hud.GetNode<Label>("PlayerSpeedLabel");
-		PlayerHealthLabel = _hud.GetNode<Label>("PlayerHealthLabel");
+		_playerSpeedLabel = _hud.GetNode<Label>("PlayerSpeedLabel");
+		_playerHealthLabel = _hud.GetNode<Label>("PlayerHealthLabel");
+		_playerScoreLabel = _hud.GetNode<Label>("PlayerScoreLabel");
 
 		// You get the point
 		_hud.Show();
@@ -55,8 +56,8 @@ public partial class Player : CharacterBody2D
 	{
 		float dt = (float)delta;
 
-		((ShaderMaterial)_damageOverlay.Material).SetShaderParameter("intensity", _health <= 25.0f ?
-			((1.0f - _health / 100.0f) * (((SettingsEntry.Float)SettingsModel.Instance.Settings["video.damage_overlay_intensity"]).Value / 100.0f))
+		((ShaderMaterial)_damageOverlay.Material).SetShaderParameter("intensity", PlayerVariables.Instance.CurrentHealth <= 25.0f ?
+			((1.0f - PlayerVariables.Instance.CurrentHealth / 100.0f) * (((SettingsEntry.Float)SettingsModel.Instance.Settings["video.damage_overlay_intensity"]).Value / 100.0f))
 			: 0.0f);
 
 		if (_isAlive)
@@ -67,7 +68,7 @@ public partial class Player : CharacterBody2D
 			MoveAndSlide();
 
 			// Check for player death
-			if (_health <= 0.0001f)
+			if (PlayerVariables.Instance.CurrentHealth <= 0.0001f)
 			{
 				_isAlive = false;
 				InitiateDeathSequence();
@@ -79,10 +80,12 @@ public partial class Player : CharacterBody2D
 	public override void _Process(double delta)
 	{
 		// Update speed value on HUD
-		PlayerSpeedLabel.Text = $"Speed: {Velocity.Length():0}";
+		_playerSpeedLabel.Text = $"Speed: {Velocity.Length():0}";
 
 		// Update health value on HUD
-		PlayerHealthLabel.Text = $"Health: {_health:0}";
+		_playerHealthLabel.Text = $"Health: {PlayerVariables.Instance.CurrentHealth:0}";
+
+		_playerScoreLabel.Text = PlayerVariables.Instance.Score.ToString();
 	}
 
 	private void RotateTowardMouse(float dt)
@@ -177,7 +180,7 @@ public partial class Player : CharacterBody2D
 
 	public void TakeDamage(float amount)
 	{
-		_health -= amount;
+		PlayerVariables.Instance.CurrentHealth -= amount;
 	}
 
 	private async void InitiateDeathSequence()

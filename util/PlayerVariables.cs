@@ -6,15 +6,18 @@ public partial class PlayerVariables : Node
     public static PlayerVariables Instance { get; private set; }
     public Node Space { get; set; }
 
+    // The player's current score
+    public int Score = 0;
+
     // difficulty level scales all enemy power exponentially
     public int DangerLevel {  get; private set; } = 1;
     public float LuckStat { get; set; } = 1;
 
     //durrability stats stuff: armor and shield toughness are scaling stats reducing percentual damage scaling in a power curve | Math.Pow
-    public int MaxHealth { get; set; } = 1;
-    public int CurrentHealth { get; set; } = 1;
-    public int MaxShield { get; set; } = 1;
-    public int CurrentShield { get; set; } = 1;
+    public float MaxHealth { get; set; } = 100.0f;
+    public float CurrentHealth { get; set; } = 100.0f;
+    public float MaxShield { get; set; } = 100.0f;
+    public float CurrentShield { get; set; } = 0.0f;
     public float ArmorToughness {  get; set; } = 1;
     public float ShieldToughness { get; set; } = 1;
     public int ShieldRegen {  get; set; } = 1; // regen is a flat increase in current shield that gets applied AT THE END OF EVERY FULL SECOND 

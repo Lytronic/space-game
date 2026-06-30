@@ -5,6 +5,10 @@
 [sub_resource type="LabelSettings" id="LabelSettings_j6s56"]
 font_size = 32
 
+[sub_resource type="LabelSettings" id="LabelSettings_kk26m"]
+font_size = 32
+font_color = Color(1, 1, 0, 1)
+
 [node name="Control" type="Control" unique_id=1311629540]
 layout_mode = 3
 anchors_preset = 15
@@ -32,3 +36,18 @@ offset_bottom = 101.0
 theme_override_fonts/font = ExtResource("1_kk26m")
 text = "Health"
 label_settings = SubResource("LabelSettings_j6s56")
+
+[node name="PlayerScoreLabel" type="Label" parent="." unique_id=737400542]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -51.5
+offset_right = 51.5
+offset_bottom = 45.0
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("1_kk26m")
+text = "0"
+label_settings = SubResource("LabelSettings_kk26m")
+horizontal_alignment = 1
+vertical_alignment = 1
