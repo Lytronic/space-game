@@ -77,12 +77,12 @@ public partial class BaseEnemy : CharacterBody2D
 	//make it more difficult according to the danger Level
 	public int scaleStat(int stat)
 	{
-		stat *= (int)Math.Pow(scaling, PlayerVariables.Instance.danger_level);
+		stat *= (int)Math.Pow(scaling, PlayerVariables.Instance.DangerLevel);
 		return stat;
 	}
 	public float scaleStat(float stat)
 	{
-        stat *= (float)Math.Pow(scaling, PlayerVariables.Instance.danger_level);
+        stat *= (float)Math.Pow(scaling, PlayerVariables.Instance.DangerLevel);
         return stat;
     }
 

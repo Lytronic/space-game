@@ -73,12 +73,12 @@ public partial class EnemySalvage : Node
             }
             GD.Print($"compleded dropping process, dropped parts: {droppedParts}");   //debug
         }
-        PlayerVariables.Instance.addLootToCollection(droppedParts);
+        PlayerVariables.Instance.AddLootToCollection(droppedParts);
     }
 
     private float getPlayerLuckLevel()
     {
-        float luck = PlayerVariables.Instance.luck_stat;
+        float luck = PlayerVariables.Instance.LuckStat;
         return luck;
     }
 
