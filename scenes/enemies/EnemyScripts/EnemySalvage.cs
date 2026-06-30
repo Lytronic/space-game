@@ -4,115 +4,115 @@ using System;
 [GlobalClass]
 public partial class EnemySalvage : Node
 {
-    BaseEnemy parent;
+	BaseEnemy parent;
 
-    public ShipPart[] droppedParts;
-    private ShipPart[] possibleLoot;
+	public ShipPart[] droppedParts;
+	private ShipPart[] possibleLoot;
 
-    private float wholeRarity;
-    private float playerLuck;
+	private float wholeRarity;
+	private float playerLuck;
 	public override void _Ready()
 	{
-        parent = GetParent<BaseEnemy>();
+		parent = GetParent<BaseEnemy>();
 
-        playerLuck = getPlayerLuckLevel();
-        wholeRarity = getWholeRarity();
-        
+		playerLuck = getPlayerLuckLevel();
+		wholeRarity = getWholeRarity();
+		
 	}
 
 	public void dropLoot()
 	{
-        possibleLoot = parent.lootTable;
-        //GD.Print($"parentLoot table: {possibleLoot}"); //debug
+		possibleLoot = parent.lootTable;
+		//GD.Print($"parentLoot table: {possibleLoot}"); //debug
 
-        float random = GD.Randf();
-        float lootStrength = random + playerLuck;
-        int maxRange = 0;
-        if(wholeRarity >= 1)
-        {
-            maxRange = (int)Math.Ceiling(lootStrength / wholeRarity);
-        }
-        else 
-        {
-            maxRange = 1;
-        }
+		float random = GD.Randf();
+		float lootStrength = random + playerLuck;
+		int maxRange = 0;
+		if(wholeRarity >= 1)
+		{
+			maxRange = (int)Math.Ceiling(lootStrength / wholeRarity);
+		}
+		else 
+		{
+			maxRange = 1;
+		}
 
-        droppedParts = new ShipPart[maxRange];
-        GD.Print($"random: {random} | playerLuck: {playerLuck} | wholeRarity: {wholeRarity} | max Range: {maxRange}"); //debug
+		droppedParts = new ShipPart[maxRange];
+		GD.Print($"random: {random} | playerLuck: {playerLuck} | wholeRarity: {wholeRarity} | max Range: {maxRange}"); //debug
 
 
-        for (int x = 0; x < maxRange; x++)
-        {
-            if (possibleLoot == null || possibleLoot.Length == 1) { break; }
-            wholeRarity = getWholeRarity();
-            GD.Print($"possibleLoot length: {possibleLoot.Length}");  //debug
+		for (int x = 0; x < maxRange; x++)
+		{
+			if (possibleLoot == null || possibleLoot.Length == 1) { break; }
+			wholeRarity = getWholeRarity();
+			GD.Print($"possibleLoot length: {possibleLoot.Length}");  //debug
 
-            for(int i = 1; lootStrength >= possibleLoot[i].rarity;)
-            {
-                GD.Print($"iteration: {i} | lootStrength: {lootStrength} | possibleLoot rarity: {possibleLoot[i].rarity} "); //debug
+			for(int i = 1; lootStrength >= possibleLoot[i].rarity;)
+			{
+				GD.Print($"iteration: {i} | lootStrength: {lootStrength} | possibleLoot rarity: {possibleLoot[i].rarity} "); //debug
 
-                lootStrength -= possibleLoot[i].rarity;
-                i++; // <--- IMPORTANT!! the index 'i' is at this point BIGGER than the item of this current iteration
+				lootStrength -= possibleLoot[i].rarity;
+				i++; // <--- IMPORTANT!! the index 'i' is at this point BIGGER than the item of this current iteration
 
-                //breaks as soon as the rarest (last) object in the loottable is already reached in this iteration, the drops it -- don't forget that the length of an aray is 1 bigger than its last index
-                if (i >= possibleLoot.Length)
-                {
-                    droppedParts[x] = possibleLoot[possibleLoot.Length - 1];
-                    removeFromPossibleLoot(possibleLoot.Length - 1);
-                    GD.Print($"rarest loot reached, breaking - dropped: {droppedParts[x]} | parent: {possibleLoot[possibleLoot.Length - 1]} ");//only correct if dropped: -dropped obj- | parent: -moved up obj- !!!
-                    break;
-                }
-                //if the loot strengt isn't greater than the next possible loot, then drop the loot of this iteration
-                if (lootStrength < possibleLoot[i].rarity)
-                {
-                    droppedParts[x] = possibleLoot[i - 1];
-                    removeFromPossibleLoot(i - 1);
-                    GD.Print($"loot strength too low for next item, breaking - dropped: {droppedParts[x]} | parent: {possibleLoot[possibleLoot.Length - 1]} "); //debug
-                    break;
-                }
-            }
-            GD.Print($"compleded dropping process, dropped parts: {droppedParts}");   //debug
-        }
-        PlayerVariables.Instance.AddLootToCollection(droppedParts);
-    }
+				//breaks as soon as the rarest (last) object in the loottable is already reached in this iteration, the drops it -- don't forget that the length of an aray is 1 bigger than its last index
+				if (i >= possibleLoot.Length)
+				{
+					droppedParts[x] = possibleLoot[possibleLoot.Length - 1];
+					removeFromPossibleLoot(possibleLoot.Length - 1);
+					GD.Print($"rarest loot reached, breaking - dropped: {droppedParts[x]} | parent: {possibleLoot[possibleLoot.Length - 1]} ");//only correct if dropped: -dropped obj- | parent: -moved up obj- !!!
+					break;
+				}
+				//if the loot strengt isn't greater than the next possible loot, then drop the loot of this iteration
+				if (lootStrength < possibleLoot[i].rarity)
+				{
+					droppedParts[x] = possibleLoot[i - 1];
+					removeFromPossibleLoot(i - 1);
+					GD.Print($"loot strength too low for next item, breaking - dropped: {droppedParts[x]} | parent: {possibleLoot[possibleLoot.Length - 1]} "); //debug
+					break;
+				}
+			}
+			GD.Print($"compleded dropping process, dropped parts: {droppedParts}");   //debug
+		}
+		PlayerVariables.Instance.AddLootToCollection(droppedParts);
+	}
 
-    private float getPlayerLuckLevel()
-    {
-        float luck = PlayerVariables.Instance.LuckStat;
-        return luck;
-    }
+	private float getPlayerLuckLevel()
+	{
+		float luck = PlayerVariables.Instance.LuckStat;
+		return luck;
+	}
 
-    private float getWholeRarity()
-    {
-        float wholeRar = 0;
+	private float getWholeRarity()
+	{
+		float wholeRar = 0;
 
-        foreach(ShipPart part  in parent.lootTable)
-        {
-            if(part != null)
-            {
-                wholeRar += part.rarity;
-                GD.Print($"getWholeRarity - part rarity: {part.rarity}");
-            }
-        }
+		foreach(ShipPart part  in parent.lootTable)
+		{
+			if(part != null)
+			{
+				wholeRar += part.rarity;
+				GD.Print($"getWholeRarity - part rarity: {part.rarity}");
+			}
+		}
 
-        return wholeRar;
-    }
+		return wholeRar;
+	}
 
-    private void removeFromPossibleLoot(int indexToRemove)
-    {
-        ShipPart[] newLoot = new ShipPart[possibleLoot.Length - 1];
-        int x = 0;
-        for (int i = 0; i < newLoot.Length; i++)
-        {
-            //skipping the item that's not supposed to be in the final product
-            if (i == indexToRemove)
-            {
-                i++;
-            }
-            newLoot[x] = possibleLoot[i];
-            x++;
-        }
-        possibleLoot = newLoot;
+	private void removeFromPossibleLoot(int indexToRemove)
+	{
+		ShipPart[] newLoot = new ShipPart[possibleLoot.Length - 1];
+		int x = 0;
+		for (int i = 0; i < newLoot.Length; i++)
+		{
+			//skipping the item that's not supposed to be in the final product
+			if (i == indexToRemove)
+			{
+				i++;
+			}
+			newLoot[x] = possibleLoot[i];
+			x++;
+		}
+		possibleLoot = newLoot;
 
-    }
+	}
 }
