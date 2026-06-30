@@ -1,0 +1,124 @@
+[gd_scene format=3 uid="uid://cgpqql7kvgolg"]
+
+[ext_resource type="Texture2D" uid="uid://brehfrdmmlon1" path="res://gfx/gui/menu/back.png" id="1_hcv51"]
+[ext_resource type="Texture2D" uid="uid://chomid451xw22" path="res://gfx/gui/menu/back_hover.png" id="2_02n1o"]
+[ext_resource type="FontFile" uid="uid://tt7j6iuhu1kc" path="res://gfx/gui/Oxanium-Regular.ttf" id="3_cq80k"]
+[ext_resource type="Texture2D" uid="uid://vqy6dmj1yju6" path="res://gfx/gui/menu/panel_basic.png" id="4_7w1i5"]
+[ext_resource type="Texture2D" uid="uid://3vy8cpnsn7lh" path="res://gfx/gui/menu/new_game.png" id="5_te1xk"]
+[ext_resource type="Texture2D" uid="uid://cfds4wjynf43g" path="res://gfx/gui/menu/new_game_hover.png" id="6_0p2xp"]
+[ext_resource type="Texture2D" uid="uid://dndsuhwqwh8ga" path="res://gfx/gui/menu/load_game.png" id="7_cq80k"]
+[ext_resource type="Texture2D" uid="uid://ddltgl0s71v34" path="res://gfx/gui/menu/extras.png" id="7_wja2o"]
+[ext_resource type="Texture2D" uid="uid://d4cohn6f2t05s" path="res://gfx/gui/menu/extras_hover.png" id="8_5ulor"]
+[ext_resource type="Texture2D" uid="uid://bjl8ryc2k1e2l" path="res://gfx/gui/menu/load_game_hover.png" id="8_7w1i5"]
+[ext_resource type="Texture2D" uid="uid://coe5y8aikw68x" path="res://gfx/gui/menu/settings.png" id="9_j7kvo"]
+[ext_resource type="Texture2D" uid="uid://ol7itepre76y" path="res://gfx/gui/menu/settings_hover.png" id="10_mhgig"]
+[ext_resource type="Texture2D" uid="uid://cbpokk7dntah0" path="res://gfx/gui/menu/quit.png" id="11_6kdyd"]
+[ext_resource type="Texture2D" uid="uid://duo3f5os7le7w" path="res://gfx/gui/menu/quit_hover.png" id="12_g0iai"]
+
+[node name="HBoxContainer" type="HBoxContainer" unique_id=2054712006]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -71.0
+offset_bottom = -16.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="VBoxContainerLeft" type="VBoxContainer" parent="." unique_id=1619888183]
+layout_mode = 2
+
+[node name="BackButton" type="TextureButton" parent="VBoxContainerLeft" unique_id=1947868298]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture_normal = ExtResource("1_hcv51")
+texture_pressed = ExtResource("1_hcv51")
+texture_hover = ExtResource("2_02n1o")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="VBoxContainerRight" type="VBoxContainer" parent="." unique_id=1335754863]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="VBoxContainerRight" unique_id=572168732]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_cq80k")
+theme_override_font_sizes/font_size = 32
+text = "M I C R O G R A V I T Y"
+horizontal_alignment = 1
+
+[node name="Control" type="Control" parent="VBoxContainerRight" unique_id=838362193]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainerRight" unique_id=1111380132]
+clip_children = 2
+y_sort_enabled = true
+layout_mode = 2
+size_flags_vertical = 3
+texture = ExtResource("4_7w1i5")
+expand_mode = 2
+
+[node name="NewGame" type="TextureButton" parent="VBoxContainerRight/TextureRect" unique_id=647831315]
+layout_mode = 0
+offset_left = 264.0
+offset_top = 71.0
+offset_right = 444.0
+offset_bottom = 371.0
+texture_normal = ExtResource("5_te1xk")
+texture_pressed = ExtResource("5_te1xk")
+texture_hover = ExtResource("6_0p2xp")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="LoadGame" type="TextureButton" parent="VBoxContainerRight/TextureRect" unique_id=865328198]
+layout_mode = 0
+offset_left = 549.0
+offset_top = 72.0
+offset_right = 729.0
+offset_bottom = 372.0
+texture_normal = ExtResource("7_cq80k")
+texture_pressed = ExtResource("7_cq80k")
+texture_hover = ExtResource("8_7w1i5")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="HighScoresButton" type="TextureButton" parent="VBoxContainerRight/TextureRect" unique_id=1538461423]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 0
+offset_left = 318.0
+offset_top = 450.0
+offset_right = 382.0
+offset_bottom = 514.0
+texture_normal = ExtResource("7_wja2o")
+texture_pressed = ExtResource("7_wja2o")
+texture_hover = ExtResource("8_5ulor")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="SettingsButton" type="TextureButton" parent="VBoxContainerRight/TextureRect" unique_id=703038177]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 0
+offset_left = 454.0
+offset_top = 450.0
+offset_right = 518.0
+offset_bottom = 514.0
+texture_normal = ExtResource("9_j7kvo")
+texture_pressed = ExtResource("9_j7kvo")
+texture_hover = ExtResource("10_mhgig")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="QuitButton" type="TextureButton" parent="VBoxContainerRight/TextureRect" unique_id=519813611]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 0
+offset_left = 586.0
+offset_top = 450.0
+offset_right = 650.0
+offset_bottom = 514.0
+texture_normal = ExtResource("11_6kdyd")
+texture_pressed = ExtResource("11_6kdyd")
+texture_hover = ExtResource("12_g0iai")
+ignore_texture_size = true
+stretch_mode = 0
