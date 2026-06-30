@@ -9,6 +9,10 @@
 export.cfg
 export_credentials.cfg
 *.tmp
+Microgravity.exe
+Microgravity.pck
+Microgravity.app
+Microgravity.x86_64
 
 # ignore generated backups
 *.csproj.*
