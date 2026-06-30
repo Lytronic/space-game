@@ -22,9 +22,11 @@ public partial class TitleScreen : VBoxContainer
 		GetNode<TextureButton>("./HBoxContainer/QuitButton").Pressed += () => GetTree().Quit();
 	}
 	
-	public override void _UnhandledKeyInput(InputEvent @event)
+	public override void _UnhandledInput(InputEvent @event)
 	{
-		if (@event.IsPressed())
+		if (@event.IsPressed()
+			&& (@event is InputEventKey || @event is InputEventMouseButton)
+			&& Visible)
 		{
 			GetTree().ChangeSceneToFile("res://scenes/main/game.tscn");
 		}
