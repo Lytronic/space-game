@@ -89,18 +89,24 @@ namespace Microgravity.util
 		/// </summary>
 		/// <param name="playerName">Name of the player</param>
 		/// <param name="score">Score integer</param>
-		public static void AddHighScore(string playerName, int score)
+		public static bool AddHighScore(string playerName, int score)
 		{
+			playerName = playerName?.Trim();
+			if (string.IsNullOrEmpty(playerName))
+			{
+				return false;
+			}
+
 			SQLiteConnection connection = Connect();
 			if (connection == null)
 			{
-				return;
+				return false;
 			}
 
 			bool tableCreated = CreateTable(connection, _highScoresLayout);
 			if (!tableCreated)
 			{
-				return;
+				return false;
 			}
 
 			try
@@ -108,15 +114,18 @@ namespace Microgravity.util
 				string insertSql = "INSERT INTO high_scores (player_name, score) VALUES (@player_name, @score)";
 				SQLiteCommand insertCommand = new(insertSql, connection);
 				insertCommand.Parameters.AddWithValue("@player_name", playerName);
-				insertCommand.Parameters.AddWithValue("@score", score);
+				insertCommand.Parameters.AddWithValue("@score", Math.Max(0, score));
 				insertCommand.ExecuteNonQuery();
 			}
 			catch (Exception ex)
 			{
 				GD.Print($"DB: Failed to write to table: {ex.Message}");
+				connection.Close();
+				return false;
 			}
 
 			connection.Close();
+			return true;
 		}
 
 		/// <summary>

@@ -1,6 +1,5 @@
 using Godot;
 using Microgravity.util;
-using System;
 
 public partial class DeathScreen : Control
 {
@@ -9,13 +8,15 @@ public partial class DeathScreen : Control
 		GetNode<Label>("VBoxContainer/ScoreLabel").Text = $"Your Score: {PlayerVariables.Instance.Score}";
 
 		GetNode<Button>("QuitButton").Pressed += () => GetTree().ChangeSceneToFile("res://scenes/ui/TitleScreen.tscn");
-		
-		GetNode<Button>("VBoxContainer/HBoxContainer/SaveButton").Pressed += () =>
+
+		Button saveButton = GetNode<Button>("VBoxContainer/HBoxContainer/SaveButton");
+		saveButton.Pressed += () =>
 		{
-			string name = GetNode<LineEdit>("VBoxContainer/HBoxContainer/NameLine").Text;
-			if (name.Length > 0)
+			string name = GetNode<LineEdit>("VBoxContainer/HBoxContainer/NameLine").Text.Trim();
+			if (DB.AddHighScore(name, PlayerVariables.Instance.Score))
 			{
-				DB.AddHighScore(name, PlayerVariables.Instance.Score);
+				saveButton.Disabled = true;
+				saveButton.Text = "Saved";
 			}
 		};
 	}
