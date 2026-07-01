@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://dffi7wb3hagnq"
+path="res://.godot/imported/Fight Final.mp3-6153cc474b4c86ae7231db59858d8afc.mp3str"
+
+[deps]
+
+source_file="res://sfx/music/Fight Final.mp3"
+dest_files=["res://.godot/imported/Fight Final.mp3-6153cc474b4c86ae7231db59858d8afc.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

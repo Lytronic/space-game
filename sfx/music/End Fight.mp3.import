@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://cjx4swmh1g8br"
+path="res://.godot/imported/End Fight.mp3-4bda95eb6106d152614193f8c7e30785.mp3str"
+
+[deps]
+
+source_file="res://sfx/music/End Fight.mp3"
+dest_files=["res://.godot/imported/End Fight.mp3-4bda95eb6106d152614193f8c7e30785.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
