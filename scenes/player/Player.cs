@@ -34,6 +34,9 @@ public partial class Player : CharacterBody2D
 
 	// Healthy variables
 	private bool _isAlive = true;
+	
+	// Cursor Variables
+	private Sprite2D _cursorThrottle;
 
 	public override void _Ready()
 	{
@@ -50,6 +53,10 @@ public partial class Player : CharacterBody2D
 		// You get the point
 		_hud.Show();
 		_deathScreen.Hide();
+		
+		// Cursor setup
+		_cursorThrottle = GetNode<Sprite2D>("/root/game/Cursor/CursorThrottle");
+
 	}
 
 	public override void _PhysicsProcess(double delta)
@@ -88,9 +95,15 @@ public partial class Player : CharacterBody2D
 		_playerScoreLabel.Text = PlayerVariables.Instance.Score.ToString();
 	}
 
+	// Now rotates to the CursorThrottle instead of the mouse
 	private void RotateTowardMouse(float dt)
 	{
-		Vector2 mouseVec = GetGlobalMousePosition() - GlobalPosition;
+
+		Vector2 mouseVec = _cursorThrottle.GlobalPosition - GlobalPosition;
+
+		if (_cursorThrottle == null) {
+			mouseVec = GetGlobalMousePosition() - GlobalPosition;
+		}
 
 		if (mouseVec.LengthSquared() < 0.0001f) return; // Floating point correction
 

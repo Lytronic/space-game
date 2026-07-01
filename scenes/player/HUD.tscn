@@ -51,3 +51,10 @@ text = "0"
 label_settings = SubResource("LabelSettings_kk26m")
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="WeaponAbilities" type="HBoxContainer" parent="." unique_id=99223588]
+layout_mode = 0
+offset_left = 6.0
+offset_top = 533.0
+offset_right = 581.0
+offset_bottom = 641.0
