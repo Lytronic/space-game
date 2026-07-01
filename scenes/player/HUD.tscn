@@ -1,6 +1,14 @@
 [gd_scene format=3 uid="uid://dbk6dtnrg4ubv"]
 
 [ext_resource type="FontFile" uid="uid://tt7j6iuhu1kc" path="res://gfx/gui/Oxanium-Regular.ttf" id="1_kk26m"]
+[ext_resource type="Script" uid="uid://ddyw2yp8ry0m4" path="res://scenes/player/WeaponAbilities.cs" id="2_68dc6"]
+[ext_resource type="Texture2D" uid="uid://dmmt5h8pdyclt" path="res://gfx/gui/abilities/arc.png" id="3_fn62s"]
+[ext_resource type="Texture2D" uid="uid://bavn7hmpxolgh" path="res://gfx/gui/abilities/laser.png" id="4_edggo"]
+[ext_resource type="Texture2D" uid="uid://bi1027eibushd" path="res://gfx/gui/abilities/missile.png" id="5_sto77"]
+[ext_resource type="Texture2D" uid="uid://u80eenogor4b" path="res://gfx/gui/abilities/plasma.png" id="6_h35ih"]
+[ext_resource type="Texture2D" uid="uid://dnu0s0fpohis1" path="res://gfx/gui/abilities/pulse.png" id="7_n1mye"]
+[ext_resource type="Texture2D" uid="uid://doisvxl7ew8x7" path="res://gfx/gui/abilities/torpedo.png" id="8_7x8q2"]
+[ext_resource type="Texture2D" uid="uid://d250psuhmtdlj" path="res://gfx/gui/abilities/slug.png" id="9_7ntgm"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_j6s56"]
 font_size = 32
@@ -54,7 +62,15 @@ vertical_alignment = 1
 
 [node name="WeaponAbilities" type="HBoxContainer" parent="." unique_id=99223588]
 layout_mode = 0
-offset_left = 6.0
+offset_left = 8.0
 offset_top = 533.0
-offset_right = 581.0
+offset_right = 788.0
 offset_bottom = 641.0
+script = ExtResource("2_68dc6")
+SpriteAbilityARC = ExtResource("3_fn62s")
+SpriteAbilityLASER = ExtResource("4_edggo")
+SpriteAbilityMISSILE = ExtResource("5_sto77")
+SpriteAbilityPLASMA = ExtResource("6_h35ih")
+SpriteAbilityEMP = ExtResource("7_n1mye")
+SpriteAbilityTORPEDO = ExtResource("8_7x8q2")
+SpriteAbilityCANNON = ExtResource("9_7ntgm")
