@@ -23,6 +23,7 @@ public partial class DeathScreen : Control
 	
 	private void _on_retry_button_pressed()
 	{
+		PlayerVariables.Instance.ResetRun();
 		GetTree().ReloadCurrentScene();
 	}
 }
