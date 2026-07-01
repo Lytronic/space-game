@@ -3,7 +3,7 @@ using System;
 using System.Security.Cryptography.X509Certificates;
 
 [GlobalClass]
-public partial class BaseEnemy : CharacterBody2D
+public partial class BaseEnemy : RigidBody2D
 {
 
 	//here is the public loot table that EnemySalvage uses to choose a drop from; any object in here is gonna be unique

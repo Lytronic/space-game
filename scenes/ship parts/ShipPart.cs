@@ -6,12 +6,12 @@ public partial class ShipPart : Resource
 {
     //these are the non-optional stats for each item
     public int danger;
-    [Export] public string displayTooltip;
-    [Export] public float rarity;
-    [Export] public bool isActive;
-    [Export] public float partWeight;
+    [Export] public virtual string displayTooltip { get; set; }
+    [Export] public virtual float rarity { get; set; }
+    [Export] public virtual bool isActive { get; set; }
+    [Export] public virtual float partWeight { get; set; }
 
-    [Export] public Texture2D SpriteTexture { get; set; }
+    [Export] public virtual Texture2D SpriteTexture { get; set; }
 
     public void Initialize()
     {

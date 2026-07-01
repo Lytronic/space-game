@@ -8,21 +8,19 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_v5y83"]
 size = Vector2(50, 50)
 
-[node name="BaseEnemy" type="CharacterBody2D" unique_id=1478611968 node_paths=PackedStringArray("lootTable")]
+[node name="RigidBody2D" type="RigidBody2D" unique_id=220984788]
 script = ExtResource("1_xyabd")
-lootTable = []
-metadata/_custom_type_script = "uid://rh28g860bekh"
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1287483316]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1972208063]
 texture = ExtResource("2_ob6f1")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1151903888]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=318804551]
 shape = SubResource("RectangleShape2D_v5y83")
 
-[node name="EnemySalvage" type="Node2D" parent="." unique_id=1983881625]
+[node name="EnemySalvage" type="Node2D" parent="." unique_id=2101032576]
 script = ExtResource("1_koma5")
 metadata/_custom_type_script = "uid://bb0ka28yv7y8k"
 
-[node name="BaseEnemyAi" type="Node" parent="." unique_id=765804216]
+[node name="BaseEnemyAi" type="Node" parent="." unique_id=1676352923]
 script = ExtResource("4_kcbdb")
 metadata/_custom_type_script = "uid://crbskh2rywuhb"

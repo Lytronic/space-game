@@ -14,23 +14,25 @@ public partial class EnemySalvage : Node
 	public override void _Ready()
 	{
 		parent = GetParent<BaseEnemy>();
-
-		playerLuck = getPlayerLuckLevel();
-		wholeRarity = getWholeRarity();
-		
+	
 	}
 
 	public void dropLoot()
 	{
 		possibleLoot = parent.lootTable;
-		//GD.Print($"parentLoot table: {possibleLoot}"); //debug
+        //GD.Print($"parentLoot table: {possibleLoot}"); //debug
 
-		float random = GD.Randf();
+        playerLuck = getPlayerLuckLevel();
+        wholeRarity = getWholeRarity();
+
+        float random = GD.Randf();
 		float lootStrength = random + playerLuck;
+
 		int maxRange = 0;
-		if(wholeRarity >= 1)
+
+		if((lootStrength / wholeRarity) >= 1)
 		{
-			maxRange = (int)Math.Ceiling(lootStrength / wholeRarity);
+			maxRange = maxRange = Math.Max(1, (int)Math.Floor(lootStrength / Math.Max(wholeRarity, 0.0001f))); 
 		}
 		else 
 		{
@@ -40,11 +42,10 @@ public partial class EnemySalvage : Node
 		droppedParts = new ShipPart[maxRange];
 		GD.Print($"random: {random} | playerLuck: {playerLuck} | wholeRarity: {wholeRarity} | max Range: {maxRange}"); //debug
 
-
+		// here the ar
 		for (int x = 0; x < maxRange; x++)
 		{
 			if (possibleLoot == null || possibleLoot.Length == 1) { break; }
-			wholeRarity = getWholeRarity();
 			GD.Print($"possibleLoot length: {possibleLoot.Length}");  //debug
 
 			for(int i = 1; lootStrength >= possibleLoot[i].rarity;)
@@ -86,7 +87,7 @@ public partial class EnemySalvage : Node
 	{
 		float wholeRar = 0;
 
-		foreach(ShipPart part  in parent.lootTable)
+		foreach(ShipPart part  in possibleLoot)
 		{
 			if(part != null)
 			{
@@ -98,21 +99,21 @@ public partial class EnemySalvage : Node
 		return wholeRar;
 	}
 
-	private void removeFromPossibleLoot(int indexToRemove)
-	{
-		ShipPart[] newLoot = new ShipPart[possibleLoot.Length - 1];
-		int x = 0;
-		for (int i = 0; i < newLoot.Length; i++)
-		{
-			//skipping the item that's not supposed to be in the final product
-			if (i == indexToRemove)
-			{
-				i++;
-			}
-			newLoot[x] = possibleLoot[i];
-			x++;
-		}
-		possibleLoot = newLoot;
+    private void removeFromPossibleLoot(int indexToRemove)
+    {
+        ShipPart[] newLoot = new ShipPart[possibleLoot.Length - 1];
 
-	}
+        int j = 0;
+
+        for (int i = 0; i < possibleLoot.Length; i++)
+        {
+            if (i == indexToRemove)
+                continue;
+
+            newLoot[j++] = possibleLoot[i];
+        }
+
+        possibleLoot = newLoot;
+    }
+    
 }

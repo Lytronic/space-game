@@ -5,14 +5,14 @@ public partial class DebugMultitool : ShipPart
 {
 	//non-optional stats
 	[Export]
-	public new string displayTooltip = "Mayday! Mayday! ... is this fluffin' thing even working?!";
+	public override string displayTooltip { get; set; }  = "Mayday! Mayday! ... is this fluffin' thing even working?!";
 	[Export]
-	public new float rarity = 0.1f;
+	public override float rarity { get; set; } = 0.1f;
 	[Export]
-	public new bool isActive = false;
+	public override bool isActive { get; set; } = false;
 	[Export]
-	public new float partWeight = 9.11f;
-	private new float thrustIncrease = 2;
+	public override float partWeight { get; set; } = 9.11f;
+	private float thrustIncrease = 2;
 
 
 
