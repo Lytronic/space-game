@@ -40,17 +40,17 @@ public partial class EnemySalvage : Node
 		}
 
 		droppedParts = new ShipPart[maxRange];
-		GD.Print($"random: {random} | playerLuck: {playerLuck} | wholeRarity: {wholeRarity} | max Range: {maxRange}"); //debug
+		//GD.Print($"random: {random} | playerLuck: {playerLuck} | wholeRarity: {wholeRarity} | max Range: {maxRange}"); //debug
 
 		// here the ar
 		for (int x = 0; x < maxRange; x++)
 		{
 			if (possibleLoot == null || possibleLoot.Length == 1) { break; }
-			GD.Print($"possibleLoot length: {possibleLoot.Length}");  //debug
+			//GD.Print($"possibleLoot length: {possibleLoot.Length}");  //debug
 
 			for(int i = 1; lootStrength >= possibleLoot[i].rarity;)
 			{
-				GD.Print($"iteration: {i} | lootStrength: {lootStrength} | possibleLoot rarity: {possibleLoot[i].rarity} "); //debug
+				//GD.Print($"iteration: {i} | lootStrength: {lootStrength} | possibleLoot rarity: {possibleLoot[i].rarity} "); //debug
 
 				lootStrength -= possibleLoot[i].rarity;
 				i++; // <--- IMPORTANT!! the index 'i' is at this point BIGGER than the item of this current iteration
@@ -60,7 +60,7 @@ public partial class EnemySalvage : Node
 				{
 					droppedParts[x] = possibleLoot[possibleLoot.Length - 1];
 					removeFromPossibleLoot(possibleLoot.Length - 1);
-					GD.Print($"rarest loot reached, breaking - dropped: {droppedParts[x]} | parent: {possibleLoot[possibleLoot.Length - 1]} ");//only correct if dropped: -dropped obj- | parent: -moved up obj- !!!
+					//GD.Print($"rarest loot reached, breaking - dropped: {droppedParts[x]} | parent: {possibleLoot[possibleLoot.Length - 1]} ");//only correct if dropped: -dropped obj- | parent: -moved up obj- !!!
 					break;
 				}
 				//if the loot strengt isn't greater than the next possible loot, then drop the loot of this iteration
@@ -68,11 +68,11 @@ public partial class EnemySalvage : Node
 				{
 					droppedParts[x] = possibleLoot[i - 1];
 					removeFromPossibleLoot(i - 1);
-					GD.Print($"loot strength too low for next item, breaking - dropped: {droppedParts[x]} | parent: {possibleLoot[possibleLoot.Length - 1]} "); //debug
+					//GD.Print($"loot strength too low for next item, breaking - dropped: {droppedParts[x]} | parent: {possibleLoot[possibleLoot.Length - 1]} "); //debug
 					break;
 				}
 			}
-			GD.Print($"compleded dropping process, dropped parts: {droppedParts}");   //debug
+			//GD.Print($"compleded dropping process, dropped parts: {droppedParts}");   //debug
 		}
 		PlayerVariables.Instance.AddLootToCollection(droppedParts);
 	}
@@ -92,7 +92,7 @@ public partial class EnemySalvage : Node
 			if(part != null)
 			{
 				wholeRar += part.rarity;
-				GD.Print($"getWholeRarity - part rarity: {part.rarity}");
+				//GD.Print($"getWholeRarity - part rarity: {part.rarity}");
 			}
 		}
 
