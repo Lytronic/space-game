@@ -1,7 +1,5 @@
 using Godot;
-using System;
 using Microgravity.util;
-
 
 /// <summary>
 /// This class is one of two singletons for settings management, with the other one being <c>SettingsModel</c>.
@@ -28,7 +26,10 @@ public partial class SettingsController : Node
 			{
 				// settings keys follow the pattern "<category>.<action_name>", e. g. "controls.forward"
 				StringName name = entry.Key.Split(".")[1];
-				InputMap.AddAction(name);
+				if (!InputMap.HasAction(name))
+					InputMap.AddAction(name);
+				else
+					InputMap.ActionEraseEvents(name);
 
 				var inputEvent = new InputEventKey
 				{
