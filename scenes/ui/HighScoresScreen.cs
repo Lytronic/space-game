@@ -5,10 +5,17 @@ public partial class HighScoresScreen : Control
 {
 	[Signal]
 	public delegate void CloseEventHandler();
+
+	private Node _soundManager;
 	
 	public override void _Ready()
 	{
-		GetNode<TextureButton>("./VBoxContainerLeft/BackButton").Pressed += CloseScreen;
+		_soundManager = GetNode("/root/SoundManager");
+
+		GetNode<TextureButton>("./VBoxContainerLeft/BackButton").Pressed += () => {
+			_soundManager.Call("PlaySound", 0);
+			CloseScreen();
+		};
 		
 		var resultList = GetNode<VBoxContainer>("VBoxContainerRight/TextureRect/ItemList");
 		

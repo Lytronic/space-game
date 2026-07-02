@@ -5,10 +5,17 @@ public partial class PauseScreen : VBoxContainer
 	private Control _hud;
 	private Environment _env;
 
+	private Node _soundManager;
+
 	public override void _Ready()
 	{
-		GetNode<TextureButton>("./ButtonsContainer/Buttons/Resume").Pressed += Toggle;
+		_soundManager = GetNode("/root/SoundManager");
+		GetNode<TextureButton>("./ButtonsContainer/Buttons/Resume").Pressed += () => {
+			_soundManager.Call("PlaySound", 0);
+			Toggle();
+		};
 		GetNode<TextureButton>("./ButtonsContainer/Buttons/Settings").Pressed += () => {
+			_soundManager.Call("PlaySound", 0);
 			SettingsScreen settings = (SettingsScreen)ResourceLoader.Load<PackedScene>("res://scenes/ui/SettingsScreen.tscn").Instantiate();
 			settings.Close += () => Visible = true; // restore visibility when settings close
 			GetNode<CanvasLayer>("..").AddChild(settings);
@@ -16,6 +23,7 @@ public partial class PauseScreen : VBoxContainer
 		};
 
 		GetNode<TextureButton>("./ButtonsContainer/Buttons/Quit").Pressed += () => {
+			_soundManager.Call("PlaySound", 0);
 			GetTree().Paused = false;
 			GetTree().ChangeSceneToFile("res://scenes/ui/TitleScreen.tscn");
 		};

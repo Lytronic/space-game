@@ -7,15 +7,21 @@ public partial class SettingsScreen : HBoxContainer
 {
 	public Dictionary<string, SettingsEntry> Settings;
 
+	private Node _soundManager;
+
 	[Signal]
 	public delegate void CloseEventHandler();
 
 	public override void _Ready()
 	{
+		_soundManager = GetNode("/root/SoundManager");
 		Input.SetMouseMode(Input.MouseModeEnum.Visible);
 		Settings = DB.GetSettings();
 
-		GetNode<TextureButton>("./VBoxContainerLeft/BackButton").Pressed += CloseScreen;
+		GetNode<TextureButton>("./VBoxContainerLeft/BackButton").Pressed += () => { 
+			_soundManager.Call("PlaySound", 0);
+			CloseScreen();
+		};
 
 		foreach (string category in new List<string> { "General", "Video", "Audio", "Controls" })
 		{

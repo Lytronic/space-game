@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://c8fdclxn8vb4c"]
 
-[ext_resource type="Script" uid="uid://b1kn7bj8qxyu6" path="res://scenes/main/SoundManager.cs" id="1_leriu"]
+[ext_resource type="Script" uid="uid://blqy7cgkrr56h" path="res://scenes/main/SoundManager.cs" id="1_leriu"]
 
 [node name="SoundManager" type="Node2D" unique_id=2063604779]
 script = ExtResource("1_leriu")

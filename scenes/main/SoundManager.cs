@@ -4,6 +4,11 @@ using System;
 public partial class SoundManager : Node2D
 {
 
+/* EXPLANATION FOR ADDING SOUNDS TO STUFF:
+	NON-2D: Create a private variable called _soundmanager in whatever script you want to make the sound. In the script's _Ready write "_soundManager = GetNode("/root/SoundManager");"
+	and then call the sound you want to use by finding out the index of it in the array below and write this line of code: "_soundManager.Call("PlaySound", 0);"
+*/
+
 	string[] tracks; // Array for track filepaths
 	string[] sounds; // Array for sound filepaths
 
@@ -28,11 +33,25 @@ public partial class SoundManager : Node2D
 		//PlayTrack(1); // For Test Purposes
 		
 		// Add sounds here by adding it to the next index of the array "sounds" with the string: "res://sfx/..." and then updating the array size
-		sounds = new string[8];
+		sounds = new string[18];
 		sounds[0] = "res://sfx/gui/menu/click.wav";
 		sounds[1] = "res://sfx/gui/builder/assemble.mp3";
 		sounds[2] = "res://sfx/gui/builder/bubble_pop.mp3";
 		sounds[3] = "res://sfx/gui/builder/shift.mp3";
+		sounds[4] = "res://sfx/game/enemy/arc_distant.mp3";
+		sounds[5] = "res://sfx/game/enemy/explosion_distant.mp3";
+		sounds[6] = "res://sfx/game/ship/engine_loop.mp3";
+		sounds[7] = "res://sfx/game/ship/ion_loop.mp3";
+		sounds[8] = "res://sfx/game/ship/nuclear_loop.mp3";
+		sounds[9] = "res://sfx/game/ship/shield_hit.mp3";
+		sounds[10] = "res://sfx/game/weapons/arc.mp3";
+		sounds[11] = "res://sfx/game/weapons/cannon.mp3";
+		sounds[12] = "res://sfx/game/weapons/emp.mp3";
+		sounds[13] = "res://sfx/game/weapons/laser.mp3";
+		sounds[14] = "res://sfx/game/weapons/missile.mp3";
+		sounds[15] = "res://sfx/game/weapons/plasma.mp3";
+		sounds[16] = "res://sfx/game/weapons/rail_coil.mp3";
+		sounds[17] = "res://sfx/game/weapons/torpedo.mp3";
 	}
 
 	public override void _Process(double delta)

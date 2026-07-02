@@ -20,6 +20,7 @@ config/icon="res://icon.svg"
 SettingsModel="*uid://c3cbsftf0cnpn"
 SettingsController="*uid://cncw223usg3mw"
 PlayerVariables="*uid://ddp5iu7m0y2h2"
+SoundManager="*uid://c8fdclxn8vb4c"
 
 [dotnet]
 
