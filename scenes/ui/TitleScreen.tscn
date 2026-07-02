@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://coe5y8aikw68x" path="res://gfx/gui/menu/settings.png" id="4_p52wy"]
 [ext_resource type="Texture2D" uid="uid://ol7itepre76y" path="res://gfx/gui/menu/settings_hover.png" id="5_bj1w8"]
 [ext_resource type="FontFile" uid="uid://tt7j6iuhu1kc" path="res://gfx/gui/Oxanium-Regular.ttf" id="6_cle6h"]
+[ext_resource type="PackedScene" uid="uid://c8fdclxn8vb4c" path="res://scenes/main/SoundManager.tscn" id="10_cle6h"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6j5qt"]
 shader = ExtResource("1_6j5qt")
@@ -100,3 +101,5 @@ layout_mode = 2
 theme_override_fonts/font = ExtResource("6_cle6h")
 theme_override_font_sizes/font_size = 22
 text = "— 	PRESS ANY KEY TO PLAY —"
+
+[node name="SoundManager" parent="." unique_id=2063604779 instance=ExtResource("10_cle6h")]
