@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://clc15qeio7vji"
+path="res://.godot/imported/2 Workspace Final.mp3-edecea17f56c09a0a4bf6539fc1944ab.mp3str"
+
+[deps]
+
+source_file="res://sfx/music/2 Workspace Final.mp3"
+dest_files=["res://.godot/imported/2 Workspace Final.mp3-edecea17f56c09a0a4bf6539fc1944ab.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
