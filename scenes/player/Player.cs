@@ -63,10 +63,6 @@ public partial class Player : CharacterBody2D
 	{
 		float dt = (float)delta;
 
-		((ShaderMaterial)_damageOverlay.Material).SetShaderParameter("intensity", PlayerVariables.Instance.CurrentHealth <= 25.0f ?
-			((1.0f - PlayerVariables.Instance.CurrentHealth / 100.0f) * (((SettingsEntry.Float)SettingsModel.Instance.Settings["video.damage_overlay_intensity"]).Value / 100.0f))
-			: 0.0f);
-
 		if (IsAlive)
 		{
 			// Ship movement & behavior
@@ -108,6 +104,11 @@ public partial class Player : CharacterBody2D
 		_playerHealthLabel.Text = $"Health: {PlayerVariables.Instance.CurrentHealth:0}";
 
 		_playerScoreLabel.Text = PlayerVariables.Instance.Score.ToString();
+
+		// update damage overlay (< 25 health only)
+		((ShaderMaterial)_damageOverlay.Material).SetShaderParameter("intensity", PlayerVariables.Instance.CurrentHealth <= 25.0f ?
+			((1.0f - PlayerVariables.Instance.CurrentHealth / 100.0f) * (((SettingsEntry.Float)SettingsModel.Instance.Settings["video.damage_overlay_intensity"]).Value / 100.0f))
+			: 0.0f);
 	}
 
 	// Now rotates to the CursorThrottle instead of the mouse
