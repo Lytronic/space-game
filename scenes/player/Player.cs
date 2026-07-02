@@ -71,8 +71,23 @@ public partial class Player : CharacterBody2D
 		{
 			// Ship movement & behavior
 			RotateTowardMouse(dt);
-			UpdateLinearMovement(dt);
-			MoveAndSlide();
+			// MoveAndSlide();
+			var collisionInfo = MoveAndCollide(Velocity * dt);
+			if (collisionInfo != null)
+			{
+				Vector2 deltaV = Velocity.Length() > 0.0f ? Velocity - collisionInfo.GetColliderVelocity() : new Vector2(0.0f, 0.0f);
+
+				Velocity = new Vector2(0.0f, 0.0f);
+				_throttleSpeed = 0.0f;
+				_strafeSpeed = 0.0f;
+				
+				GD.Print(Velocity);
+				GD.Print($"{deltaV}, absolute: {deltaV.Length()}");				
+
+				PlayerVariables.Instance.CurrentHealth -= Mathf.Pow(deltaV.Length() * 0.01f, 2.0f);
+			} else {
+				UpdateLinearMovement(dt);
+			}
 
 			// Check for player death
 			if (PlayerVariables.Instance.CurrentHealth <= 0.0001f)
