@@ -4,12 +4,20 @@
 [ext_resource type="Script" uid="uid://ddyw2yp8ry0m4" path="res://scenes/player/WeaponAbilities.cs" id="2_68dc6"]
 [ext_resource type="Texture2D" uid="uid://dmmt5h8pdyclt" path="res://gfx/gui/abilities/arc.png" id="3_fn62s"]
 [ext_resource type="Texture2D" uid="uid://bavn7hmpxolgh" path="res://gfx/gui/abilities/laser.png" id="4_edggo"]
+[ext_resource type="Texture2D" uid="uid://cmxkhly0l5x8d" path="res://gfx/gui/abilities/switch_off.png" id="4_ohg30"]
 [ext_resource type="Texture2D" uid="uid://bi1027eibushd" path="res://gfx/gui/abilities/missile.png" id="5_sto77"]
 [ext_resource type="Texture2D" uid="uid://u80eenogor4b" path="res://gfx/gui/abilities/plasma.png" id="6_h35ih"]
+[ext_resource type="Texture2D" uid="uid://bt0ersrij8oxf" path="res://gfx/gui/abilities/slug_off.png" id="6_iourf"]
 [ext_resource type="Texture2D" uid="uid://dnu0s0fpohis1" path="res://gfx/gui/abilities/pulse.png" id="7_n1mye"]
 [ext_resource type="Texture2D" uid="uid://doisvxl7ew8x7" path="res://gfx/gui/abilities/torpedo.png" id="8_7x8q2"]
+[ext_resource type="Texture2D" uid="uid://b53ubaahk6exj" path="res://gfx/gui/abilities/missile_off.png" id="8_tu160"]
 [ext_resource type="Texture2D" uid="uid://d250psuhmtdlj" path="res://gfx/gui/abilities/slug.png" id="9_7ntgm"]
 [ext_resource type="Texture2D" uid="uid://dijdj7c5lgii6" path="res://gfx/gui/abilities/switch.png" id="10_edggo"]
+[ext_resource type="Texture2D" uid="uid://bfc2qy4gjwcb" path="res://gfx/gui/abilities/torpedo_off.png" id="10_i8lnp"]
+[ext_resource type="Texture2D" uid="uid://c77k1nl7b82tb" path="res://gfx/gui/abilities/plasma_off.png" id="12_ghe3b"]
+[ext_resource type="Texture2D" uid="uid://cdag54ejjx8rb" path="res://gfx/gui/abilities/laser_off.png" id="14_umfr4"]
+[ext_resource type="Texture2D" uid="uid://do4ujxqm51u2o" path="res://gfx/gui/abilities/arc_off.png" id="16_kw2be"]
+[ext_resource type="Texture2D" uid="uid://d2f6xve221p64" path="res://gfx/gui/abilities/pulse_off.png" id="18_iourf"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_j6s56"]
 font_size = 32
@@ -61,6 +69,54 @@ label_settings = SubResource("LabelSettings_kk26m")
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="WeaponsControls" type="HBoxContainer" parent="." unique_id=1885828609]
+layout_mode = 0
+offset_left = 39.0
+offset_top = 544.0
+offset_right = 716.0
+offset_bottom = 561.0
+theme_override_constants/separation = 85
+
+[node name="ControlQ" type="Label" parent="WeaponsControls" unique_id=410174340]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_kk26m")
+text = "Q"
+
+[node name="Control1" type="Label" parent="WeaponsControls" unique_id=2146996601]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_kk26m")
+text = "1"
+
+[node name="Control2" type="Label" parent="WeaponsControls" unique_id=303701542]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_kk26m")
+text = "2"
+
+[node name="Control3" type="Label" parent="WeaponsControls" unique_id=354093618]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_kk26m")
+text = "3"
+
+[node name="Control4" type="Label" parent="WeaponsControls" unique_id=75834248]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_kk26m")
+text = "4"
+
+[node name="Control5" type="Label" parent="WeaponsControls" unique_id=1059058324]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_kk26m")
+text = "5"
+
+[node name="Control6" type="Label" parent="WeaponsControls" unique_id=1560563598]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_kk26m")
+text = "6"
+
+[node name="Control7" type="Label" parent="WeaponsControls" unique_id=1964416058]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_kk26m")
+text = "7"
+
 [node name="WeaponAbilities" type="HBoxContainer" parent="." unique_id=99223588]
 layout_mode = 0
 offset_left = 8.0
@@ -69,13 +125,22 @@ offset_right = 757.0
 offset_bottom = 641.0
 theme_override_constants/separation = 24
 script = ExtResource("2_68dc6")
-SpriteAbilityARC = ExtResource("3_fn62s")
-SpriteAbilityLASER = ExtResource("4_edggo")
-SpriteAbilityMISSILE = ExtResource("5_sto77")
-SpriteAbilityPLASMA = ExtResource("6_h35ih")
-SpriteAbilityEMP = ExtResource("7_n1mye")
-SpriteAbilityTORPEDO = ExtResource("8_7x8q2")
-SpriteAbilityCANNON = ExtResource("9_7ntgm")
+TextureSwap = ExtResource("10_edggo")
+TextureSwapOff = ExtResource("4_ohg30")
+TextureSlug = ExtResource("9_7ntgm")
+TextureSlugOff = ExtResource("6_iourf")
+TextureMissile = ExtResource("5_sto77")
+TextureMissileOff = ExtResource("8_tu160")
+TextureTorpedo = ExtResource("8_7x8q2")
+TextureTorpedoOff = ExtResource("10_i8lnp")
+TexturePlasma = ExtResource("6_h35ih")
+TexturePlasmaOff = ExtResource("12_ghe3b")
+TextureLaser = ExtResource("4_edggo")
+TextureLaserOff = ExtResource("14_umfr4")
+TextureArc = ExtResource("3_fn62s")
+TextureArcOff = ExtResource("16_kw2be")
+TextureEMP = ExtResource("7_n1mye")
+TextureEMPOff = ExtResource("18_iourf")
 
 [node name="WeaponSwap" type="TextureRect" parent="WeaponAbilities" unique_id=2101956847]
 layout_mode = 2
