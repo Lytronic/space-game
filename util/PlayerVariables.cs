@@ -95,6 +95,30 @@ public partial class PlayerVariables : Node
         PlayerCollectedParts.Clear();
     }
     
+    /// <summary>
+    /// Applies shield mitigation first, then armor mitigation to remaining hull damage.
+    /// </summary>
+    public void ApplyDamage(float amount)
+    {
+        if (amount <= 0.0f)
+            return;
+
+        float remainingDamage = amount;
+        float shieldToughness = Mathf.Max(0.1f, ShieldToughness);
+        float armorToughness = Mathf.Max(0.1f, ArmorToughness);
+
+        if (CurrentShield > 0.0f)
+        {
+            float shieldDamage = remainingDamage / shieldToughness;
+            float absorbedShield = Mathf.Min(CurrentShield, shieldDamage);
+            CurrentShield -= absorbedShield;
+            remainingDamage -= absorbedShield * shieldToughness;
+        }
+
+        if (remainingDamage > 0.0f)
+            CurrentHealth = Mathf.Clamp(CurrentHealth - remainingDamage / armorToughness, 0.0f, MaxHealth);
+    }
+
     //changing difficulty or setting difficult easily (for settings and items)
     public void ChangeDifficulty(int change, bool setToValue)
     {

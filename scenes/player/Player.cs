@@ -26,6 +26,7 @@ public partial class Player : CharacterBody2D
 	private Control _hud;
 	private Control _deathScreen;
 	private ColorRect _damageOverlay;
+	private ShaderMaterial _damageOverlayMaterial;
 
 	// Labels (not the queer kind.. probably...)
 	private Label _playerSpeedLabel;
@@ -34,6 +35,9 @@ public partial class Player : CharacterBody2D
 
 	// Healthy variables
 	public bool IsAlive = true;
+
+	// Cooldown timers
+	private SceneTreeTimer _damageTintCooldown;
 	
 	// Cursor Variables
 	private Sprite2D _cursorThrottle;
@@ -44,6 +48,7 @@ public partial class Player : CharacterBody2D
 		_hud = GetNode<Control>("../CanvasLayer/HUD");
 		_deathScreen = GetNode<Control>("../CanvasLayer/DeathScreen");
 		_damageOverlay = GetNode<ColorRect>("../CanvasLayer/DamageOverlay");
+		_damageOverlayMaterial = _damageOverlay.Material as ShaderMaterial;
 
 		// Assign labels
 		_playerSpeedLabel = _hud.GetNode<Label>("PlayerSpeedLabel");
@@ -80,7 +85,7 @@ public partial class Player : CharacterBody2D
 				GD.Print(Velocity);
 				GD.Print($"{deltaV}, absolute: {deltaV.Length()}");				
 
-				PlayerVariables.Instance.CurrentHealth -= Mathf.Pow(deltaV.Length() * 0.01f, 2.0f);
+				TakeDamage(Mathf.Pow(deltaV.Length() * 0.01f, 2.0f));
 			} else {
 				UpdateLinearMovement(dt);
 			}
@@ -105,10 +110,31 @@ public partial class Player : CharacterBody2D
 
 		_playerScoreLabel.Text = PlayerVariables.Instance.Score.ToString();
 
-		// update damage overlay (< 25 health only)
-		((ShaderMaterial)_damageOverlay.Material).SetShaderParameter("intensity", PlayerVariables.Instance.CurrentHealth <= 25.0f ?
-			((1.0f - PlayerVariables.Instance.CurrentHealth / 100.0f) * (((SettingsEntry.Float)SettingsModel.Instance.Settings["video.damage_overlay_intensity"]).Value / 100.0f))
-			: 0.0f);
+		UpdateDamageOverlay();
+	}
+
+	/// <summary>
+	/// Update the damage overlay based on which situation the player is currently in.
+	/// This sets the intensity uniform to the highest contribution from either the health value or recent incoming damage.
+	///
+	/// If the player's shield is active, the tint should be blue to indicate its utilisation instead.
+	/// </summary>
+	private void UpdateDamageOverlay()
+	{
+		float intensityModifier = ((SettingsEntry.Float)SettingsModel.Instance.Settings["video.damage_overlay_intensity"]).Value / 100.0f;
+
+		float timeLeft = _damageTintCooldown != null ? (float)_damageTintCooldown.TimeLeft : 0.0f; 
+		float damageIntensity = (float)Mathf.Clamp(timeLeft * 10.0f, 0.0f, 1.0f);
+		float healthIntensity = 1.0f - PlayerVariables.Instance.CurrentHealth / 100.0f;
+
+		if (PlayerVariables.Instance.CurrentShield > 0.0f && !(healthIntensity > 0.0f))
+		{
+			_damageOverlayMaterial.SetShaderParameter("colour", new Vector3(0.0f, 0.0f, 1.0f));
+		} else {
+			_damageOverlayMaterial.SetShaderParameter("colour", new Vector3(1.0f, 0.0f, 0.0f));
+		}
+
+		_damageOverlayMaterial.SetShaderParameter("intensity", Mathf.Max(damageIntensity, healthIntensity) * intensityModifier);
 	}
 
 	// Now rotates to the CursorThrottle instead of the mouse
@@ -209,7 +235,12 @@ public partial class Player : CharacterBody2D
 
 	public void TakeDamage(float amount)
 	{
-		PlayerVariables.Instance.CurrentHealth -= amount;
+		if (amount > 0.5f)
+		{
+			_damageTintCooldown = GetTree().CreateTimer(Mathf.Clamp(amount / 100.0f, 0.25f, 2.0f));
+		}
+		
+		PlayerVariables.Instance.ApplyDamage(amount);
 	}
 
 	private async void InitiateDeathSequence()
