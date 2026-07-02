@@ -9,6 +9,9 @@ public partial class PlayerVariables : Node
     // The player's current score
     public int Score = 0;
 
+    // The current round the player is in
+    public int Round = 0;
+
     // difficulty level scales all enemy power exponentially
     public int DangerLevel {  get; private set; } = 1;
     public float LuckStat { get; set; } = 1;

@@ -32,6 +32,7 @@ public partial class Player : CharacterBody2D
 	private Label _playerSpeedLabel;
 	private Label _playerHealthLabel;
 	private Label _playerScoreLabel;
+	private Label _roundLabel;
 
 	// Healthy variables
 	public bool IsAlive = true;
@@ -54,6 +55,7 @@ public partial class Player : CharacterBody2D
 		_playerSpeedLabel = _hud.GetNode<Label>("PlayerSpeedLabel");
 		_playerHealthLabel = _hud.GetNode<Label>("PlayerHealthLabel");
 		_playerScoreLabel = _hud.GetNode<Label>("PlayerScoreLabel");
+		_roundLabel = _hud.GetNode<Label>("RoundIndicator/RoundLabel");
 
 		// You get the point
 		_hud.Show();
@@ -109,6 +111,7 @@ public partial class Player : CharacterBody2D
 		_playerHealthLabel.Text = $"Health: {PlayerVariables.Instance.CurrentHealth:0}";
 
 		_playerScoreLabel.Text = PlayerVariables.Instance.Score.ToString();
+		_roundLabel.Text = PlayerVariables.Instance.Round.ToString();
 
 		UpdateDamageOverlay();
 	}

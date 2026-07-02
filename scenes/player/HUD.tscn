@@ -26,6 +26,10 @@ font_size = 32
 font_size = 32
 font_color = Color(1, 1, 0, 1)
 
+[sub_resource type="LabelSettings" id="LabelSettings_iourf"]
+font_size = 32
+font_color = Color(1, 0, 0, 1)
+
 [node name="Control" type="Control" unique_id=1311629540]
 layout_mode = 3
 anchors_preset = 15
@@ -67,6 +71,29 @@ theme_override_fonts/font = ExtResource("1_kk26m")
 text = "0"
 label_settings = SubResource("LabelSettings_kk26m")
 horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RoundIndicator" type="HBoxContainer" parent="." unique_id=1211514251]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -40.0
+offset_bottom = 40.0
+grow_horizontal = 0
+
+[node name="ProgressBar" type="ProgressBar" parent="RoundIndicator" unique_id=1676460494]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+
+[node name="RoundLabel" type="Label" parent="RoundIndicator" unique_id=408356178]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_kk26m")
+text = "0"
+label_settings = SubResource("LabelSettings_iourf")
+horizontal_alignment = 2
 vertical_alignment = 1
 
 [node name="WeaponsControls" type="HBoxContainer" parent="." unique_id=1885828609]
