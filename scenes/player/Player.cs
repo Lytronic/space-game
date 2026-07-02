@@ -33,7 +33,7 @@ public partial class Player : CharacterBody2D
 	private Label _playerScoreLabel;
 
 	// Healthy variables
-	private bool _isAlive = true;
+	public bool IsAlive = true;
 	
 	// Cursor Variables
 	private Sprite2D _cursorThrottle;
@@ -67,7 +67,7 @@ public partial class Player : CharacterBody2D
 			((1.0f - PlayerVariables.Instance.CurrentHealth / 100.0f) * (((SettingsEntry.Float)SettingsModel.Instance.Settings["video.damage_overlay_intensity"]).Value / 100.0f))
 			: 0.0f);
 
-		if (_isAlive)
+		if (IsAlive)
 		{
 			// Ship movement & behavior
 			RotateTowardMouse(dt);
@@ -77,7 +77,7 @@ public partial class Player : CharacterBody2D
 			// Check for player death
 			if (PlayerVariables.Instance.CurrentHealth <= 0.0001f)
 			{
-				_isAlive = false;
+				IsAlive = false;
 				InitiateDeathSequence();
 			}
 		}
@@ -206,5 +206,8 @@ public partial class Player : CharacterBody2D
 
 		// Display game over screen
 		_deathScreen.Show();
+		
+		// Enable Cursor again
+		Input.SetMouseMode(Input.MouseModeEnum.Visible);
 	}
 }

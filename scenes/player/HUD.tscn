@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://dnu0s0fpohis1" path="res://gfx/gui/abilities/pulse.png" id="7_n1mye"]
 [ext_resource type="Texture2D" uid="uid://doisvxl7ew8x7" path="res://gfx/gui/abilities/torpedo.png" id="8_7x8q2"]
 [ext_resource type="Texture2D" uid="uid://d250psuhmtdlj" path="res://gfx/gui/abilities/slug.png" id="9_7ntgm"]
+[ext_resource type="Texture2D" uid="uid://dijdj7c5lgii6" path="res://gfx/gui/abilities/switch.png" id="10_edggo"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_j6s56"]
 font_size = 32
@@ -63,9 +64,10 @@ vertical_alignment = 1
 [node name="WeaponAbilities" type="HBoxContainer" parent="." unique_id=99223588]
 layout_mode = 0
 offset_left = 8.0
-offset_top = 533.0
-offset_right = 788.0
+offset_top = 570.0
+offset_right = 757.0
 offset_bottom = 641.0
+theme_override_constants/separation = 24
 script = ExtResource("2_68dc6")
 SpriteAbilityARC = ExtResource("3_fn62s")
 SpriteAbilityLASER = ExtResource("4_edggo")
@@ -74,3 +76,43 @@ SpriteAbilityPLASMA = ExtResource("6_h35ih")
 SpriteAbilityEMP = ExtResource("7_n1mye")
 SpriteAbilityTORPEDO = ExtResource("8_7x8q2")
 SpriteAbilityCANNON = ExtResource("9_7ntgm")
+
+[node name="WeaponSwap" type="TextureRect" parent="WeaponAbilities" unique_id=2101956847]
+layout_mode = 2
+texture = ExtResource("10_edggo")
+expand_mode = 2
+
+[node name="WeaponCannon" type="TextureRect" parent="WeaponAbilities" unique_id=145832826]
+layout_mode = 2
+texture = ExtResource("9_7ntgm")
+expand_mode = 2
+
+[node name="WeaponMissile" type="TextureRect" parent="WeaponAbilities" unique_id=855626043]
+layout_mode = 2
+texture = ExtResource("5_sto77")
+expand_mode = 2
+
+[node name="WeaponTorpedo" type="TextureRect" parent="WeaponAbilities" unique_id=1715061441]
+layout_mode = 2
+texture = ExtResource("8_7x8q2")
+expand_mode = 2
+
+[node name="WeaponPlasma" type="TextureRect" parent="WeaponAbilities" unique_id=1448792254]
+layout_mode = 2
+texture = ExtResource("6_h35ih")
+expand_mode = 2
+
+[node name="WeaponLaser" type="TextureRect" parent="WeaponAbilities" unique_id=1878213473]
+layout_mode = 2
+texture = ExtResource("4_edggo")
+expand_mode = 2
+
+[node name="WeaponArc" type="TextureRect" parent="WeaponAbilities" unique_id=1257636955]
+layout_mode = 2
+texture = ExtResource("3_fn62s")
+expand_mode = 2
+
+[node name="WeaponPulse" type="TextureRect" parent="WeaponAbilities" unique_id=2027330446]
+layout_mode = 2
+texture = ExtResource("7_n1mye")
+expand_mode = 2

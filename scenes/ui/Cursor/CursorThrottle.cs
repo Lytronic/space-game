@@ -3,8 +3,9 @@ using System;
 
 public partial class CursorThrottle : Sprite2D
 {
-	private Node2D _shipPlayer;
+	private Player _shipPlayer;
 	private Cursor _parent;
+	private bool _alive;
 	
 	private Vector2 _currentOffset = Vector2.Zero;
 	
@@ -17,7 +18,8 @@ public partial class CursorThrottle : Sprite2D
 	{
 		_parent = GetParent<Cursor>();
 		NodePath _shipPlayerPath = (NodePath)_parent.Get("PlayerShip");
-		_shipPlayer = _parent.GetNode(_shipPlayerPath) as Node2D;
+		_shipPlayer = _parent.GetNode(_shipPlayerPath) as Player;
+		
 		
 		_previousModeState = _parent.CursorModeWeapon;
 		UpdateSpriteVisuals(_previousModeState);
@@ -31,8 +33,14 @@ public partial class CursorThrottle : Sprite2D
 	public override void _Process(double delta)
 	{
 		bool currentMode = _parent.CursorModeWeapon;
-
-		if (currentMode != _previousModeState)
+		
+		_alive = _shipPlayer.IsAlive;
+		
+		if(_alive == false)
+		{
+			Visible = false;
+		}
+		else if (currentMode != _previousModeState)
 		{
 			_previousModeState = currentMode;
 			UpdateSpriteVisuals(currentMode);
@@ -54,6 +62,8 @@ public partial class CursorThrottle : Sprite2D
 			float angle = (float)Math.Atan2(direction.Y, direction.X);
 			Rotation = angle + Mathf.Pi / 2f;
 		}
+		
+		
 	}
 		private void UpdateSpriteVisuals(bool isWeaponMode)
 	{

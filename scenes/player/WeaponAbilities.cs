@@ -11,9 +11,15 @@ public partial class WeaponAbilities : HBoxContainer
 	[Export] public Texture2D SpriteAbilityTORPEDO;
 	[Export] public Texture2D SpriteAbilityCANNON;
 	
-	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
+		if(true)
+		{
+			/*var Ability1 = new TextureRect();
+			Ability1.Texture = SpriteAbilityPLASMA;
+			ExpandMode = TextureRect.ExpandModeEnum.ExpandIgnoreSize;
+			AddChild(Ability1);*/
+		}
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
