@@ -3,6 +3,7 @@ using System;
 
 public partial class WeaponAbilities : HBoxContainer
 {
+	// Export variables for the Ability Textures so that they can be called more easily
 	[Export] public Texture2D TextureSwap;
 	[Export] public Texture2D TextureSwapOff;
 	[Export] public Texture2D TextureSlug;
@@ -22,16 +23,17 @@ public partial class WeaponAbilities : HBoxContainer
 
 	TextureRect[] Abilities; // Array for the order of abilities
 
-	Label[] ControlKeys; // Array for the label paths
+	Label[] ControlKeys; // Array for the keyboard key label paths
+
 	public override void _Ready()
 	{
-		ControlKeys = new Label[8];
-		ControlKeys[0] = GetNode<Label>("/root/Control/WeaponsControls/ControlQ"); 
+		ControlKeys = new Label[8]; // Initialize ControlKeys Array
+		ControlKeys[0] = GetNode<Label>("/root/Control/WeaponsControls/ControlQ"); // Add the Q key label to the array
 		for (int i = 1; i < ControlKeys.Length; i++)
 		{
-			ControlKeys[i] = GetNode<Label>($"/root/Control/WeaponsControls/Control{i}");
+			ControlKeys[i] = GetNode<Label>($"/root/Control/WeaponsControls/Control{i}"); // Add the rest to the array
 		}
-		foreach (Node child in GetChildren())
+		foreach (Node child in GetChildren()) // Hide the abilities without adding them to an array
 		{
 			if (child is Control control)
 			{
@@ -40,7 +42,6 @@ public partial class WeaponAbilities : HBoxContainer
 		}	
 		Abilities = new TextureRect[8];
 		UpdateAbilities();
-		GD.Print(Abilities);
 	}
 
 	
@@ -49,6 +50,7 @@ public partial class WeaponAbilities : HBoxContainer
 		
 	}
 
+	// Function to update the ability hud
 	private void UpdateAbilities()
 	{
 		for (int i = 0; i < Abilities.Length; i++)

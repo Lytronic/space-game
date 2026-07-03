@@ -18,6 +18,7 @@
 [ext_resource type="Texture2D" uid="uid://cdag54ejjx8rb" path="res://gfx/gui/abilities/laser_off.png" id="14_umfr4"]
 [ext_resource type="Texture2D" uid="uid://do4ujxqm51u2o" path="res://gfx/gui/abilities/arc_off.png" id="16_kw2be"]
 [ext_resource type="Texture2D" uid="uid://d2f6xve221p64" path="res://gfx/gui/abilities/pulse_off.png" id="18_iourf"]
+[ext_resource type="Script" uid="uid://b6awv2ldv24qy" path="res://scenes/player/WeaponsCooldown.cs" id="19_tu160"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_j6s56"]
 font_size = 32
@@ -208,3 +209,60 @@ expand_mode = 2
 layout_mode = 2
 texture = ExtResource("7_n1mye")
 expand_mode = 2
+
+[node name="WeaponsCooldown" type="HBoxContainer" parent="." unique_id=1949189840]
+layout_mode = 0
+offset_left = 36.0
+offset_top = 592.0
+offset_right = 719.0
+offset_bottom = 619.0
+theme_override_constants/separation = 80
+script = ExtResource("19_tu160")
+
+[node name="Cooldown0" type="Label" parent="WeaponsCooldown" unique_id=1080218449]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_kk26m")
+theme_override_font_sizes/font_size = 26
+text = "0"
+
+[node name="Cooldown1" type="Label" parent="WeaponsCooldown" unique_id=1449120736]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_kk26m")
+theme_override_font_sizes/font_size = 26
+text = "1"
+
+[node name="Cooldown2" type="Label" parent="WeaponsCooldown" unique_id=5446393]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_kk26m")
+theme_override_font_sizes/font_size = 26
+text = "2"
+
+[node name="Cooldown3" type="Label" parent="WeaponsCooldown" unique_id=1017670013]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_kk26m")
+theme_override_font_sizes/font_size = 26
+text = "3"
+
+[node name="Cooldown4" type="Label" parent="WeaponsCooldown" unique_id=597790486]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_kk26m")
+theme_override_font_sizes/font_size = 26
+text = "4"
+
+[node name="Cooldown5" type="Label" parent="WeaponsCooldown" unique_id=1000221350]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_kk26m")
+theme_override_font_sizes/font_size = 26
+text = "5"
+
+[node name="Cooldown6" type="Label" parent="WeaponsCooldown" unique_id=506078783]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_kk26m")
+theme_override_font_sizes/font_size = 26
+text = "6"
+
+[node name="Cooldown7" type="Label" parent="WeaponsCooldown" unique_id=1990634336]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_kk26m")
+theme_override_font_sizes/font_size = 26
+text = "7"
