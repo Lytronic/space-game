@@ -21,18 +21,12 @@ public partial class WeaponAbilities : HBoxContainer
 	[Export] public Texture2D TextureEMP;
 	[Export] public Texture2D TextureEMPOff;
 
-	TextureRect[] Abilities; // Array for the order of abilities
+	public TextureRect[] Abilities; // Array for the order of abilities
 
-	Label[] ControlKeys; // Array for the keyboard key label paths
 
 	public override void _Ready()
 	{
-		ControlKeys = new Label[8]; // Initialize ControlKeys Array
-		ControlKeys[0] = GetNode<Label>("/root/Control/WeaponsControls/ControlQ"); // Add the Q key label to the array
-		for (int i = 1; i < ControlKeys.Length; i++)
-		{
-			ControlKeys[i] = GetNode<Label>($"/root/Control/WeaponsControls/Control{i}"); // Add the rest to the array
-		}
+		
 		foreach (Node child in GetChildren()) // Hide the abilities without adding them to an array
 		{
 			if (child is Control control)
@@ -42,6 +36,7 @@ public partial class WeaponAbilities : HBoxContainer
 		}	
 		Abilities = new TextureRect[8];
 		UpdateAbilities();
+		
 	}
 
 	
@@ -56,17 +51,6 @@ public partial class WeaponAbilities : HBoxContainer
 		for (int i = 0; i < Abilities.Length; i++)
 		{
 			
-		}
-		for (int i = 0; i < ControlKeys.Length; i++)
-		{
-			if(Abilities[i] != null)
-			{
-				ControlKeys[i].Show();
-			}
-			else
-			{
-				ControlKeys[i].Hide();
-			}
 		}
 	}
 	private void UseAbility(int AbilityNr)

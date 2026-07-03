@@ -17,7 +17,10 @@ public partial class WeaponsCooldown : HBoxContainer
 		{
 			Cooldowns[i].Text = $"{i}";
 		}
-
+		for (int i = 0; i < Cooldowns.Length; i++)
+		{
+			Cooldowns[i].Hide();
+		}
 	}
 	public override void _Process(double delta)
 	{
