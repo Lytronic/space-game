@@ -128,7 +128,9 @@ public partial class Player : CharacterBody2D
 
 		float timeLeft = _damageTintCooldown != null ? (float)_damageTintCooldown.TimeLeft : 0.0f; 
 		float damageIntensity = (float)Mathf.Clamp(timeLeft * 10.0f, 0.0f, 1.0f);
-		float healthIntensity = 1.0f - PlayerVariables.Instance.CurrentHealth / 100.0f;
+
+		float health = PlayerVariables.Instance.CurrentHealth / 100.0f;
+		float healthIntensity = health < 0.25f ? 1 - health : 0.0f;
 
 		if (PlayerVariables.Instance.CurrentShield > 0.0f && !(healthIntensity > 0.0f))
 		{
