@@ -80,7 +80,7 @@ public partial class Player : CharacterBody2D
 		{
 			// Ship movement & behavior
 			RotateTowardMouse(dt);
-			// MoveAndSlide();
+
 			var collisionInfo = MoveAndCollide(Velocity * dt);
 			if (collisionInfo != null)
 			{
@@ -90,9 +90,6 @@ public partial class Player : CharacterBody2D
 				_throttleSpeed = 0.0f;
 				_strafeSpeed = 0.0f;
 				
-				GD.Print(Velocity);
-				GD.Print($"{deltaV}, absolute: {deltaV.Length()}");				
-
 				TakeDamage(Mathf.Pow(deltaV.Length() * 0.01f, 2.0f));
 			} else {
 				UpdateLinearMovement(dt);
