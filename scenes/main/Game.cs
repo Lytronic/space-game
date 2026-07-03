@@ -111,16 +111,28 @@ public partial class Game : Node2D
 	{
 		int archetype = index % 4;
 
-		enemy.health = 28;
-		enemy.damage = 7.0f;
-		enemy.speed = 120.0f;
-		enemy.resistance = 0.08f;
+		// BaseEnemy applies the danger multiplier when it enters the tree.
+		enemy.Health = 28;
+		enemy.Damage = 7.0f;
+		enemy.Speed = 120.0f;
+		enemy.Resistance = 0.08f;
 
 		Sprite2D sprite = enemy.GetNodeOrNull<Sprite2D>("Sprite2D");
 		if (sprite != null && archetype < _enemyTextures.Length)
 		{
 			sprite.Texture = _enemyTextures[archetype];
 			sprite.Scale = Vector2.One * (archetype == 0 ? 0.045f : 0.052f);
+		}
+
+		BaseEnemyAI ai = enemy.GetNodeOrNull<BaseEnemyAI>("BaseEnemyAi");
+		if (ai != null)
+		{
+			ai.PreferredRange = _rng.RandfRange(230.0f, 310.0f);
+			ai.RetreatRange = _rng.RandfRange(115.0f, 155.0f);
+			ai.FireRange = 430.0f;
+			ai.FireCooldown = _rng.RandfRange(1.0f, 1.7f);
+			ai.ProjectileSpeed = _rng.RandfRange(300.0f, 370.0f);
+			ai.AimSpreadRadians = _rng.RandfRange(0.04f, 0.12f);
 		}
 	}
 

@@ -20,12 +20,12 @@ public partial class EnemySalvage : Node
 	public void dropLoot()
 	{
 		possibleLoot = parent.lootTable;
-        //GD.Print($"parentLoot table: {possibleLoot}"); //debug
+		//GD.Print($"parentLoot table: {possibleLoot}"); //debug
 
-        playerLuck = getPlayerLuckLevel();
-        wholeRarity = getWholeRarity();
+		playerLuck = getPlayerLuckLevel();
+		wholeRarity = getWholeRarity();
 
-        float random = GD.Randf();
+		float random = GD.Randf();
 		float lootStrength = random + playerLuck;
 
 		int maxRange = 0;
@@ -99,21 +99,21 @@ public partial class EnemySalvage : Node
 		return wholeRar;
 	}
 
-    private void removeFromPossibleLoot(int indexToRemove)
-    {
-        ShipPart[] newLoot = new ShipPart[possibleLoot.Length - 1];
+	private void removeFromPossibleLoot(int indexToRemove)
+	{
+		ShipPart[] newLoot = new ShipPart[possibleLoot.Length - 1];
 
-        int j = 0;
+		int j = 0;
 
-        for (int i = 0; i < possibleLoot.Length; i++)
-        {
-            if (i == indexToRemove)
-                continue;
+		for (int i = 0; i < possibleLoot.Length; i++)
+		{
+			if (i == indexToRemove)
+				continue;
 
-            newLoot[j++] = possibleLoot[i];
-        }
+			newLoot[j++] = possibleLoot[i];
+		}
 
-        possibleLoot = newLoot;
-    }
-    
+		possibleLoot = newLoot;
+	}
+	
 }

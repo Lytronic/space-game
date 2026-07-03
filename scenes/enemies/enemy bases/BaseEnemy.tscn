@@ -3,12 +3,12 @@
 [ext_resource type="Script" uid="uid://bb0ka28yv7y8k" path="res://scenes/enemies/EnemyScripts/EnemySalvage.cs" id="1_koma5"]
 [ext_resource type="Script" uid="uid://rh28g860bekh" path="res://scenes/enemies/EnemyScripts/BaseEnemy.cs" id="1_xyabd"]
 [ext_resource type="Texture2D" uid="uid://tw30mygcuye6" path="res://scenes/enemies/BunniTest.png" id="2_ob6f1"]
-[ext_resource type="Script" uid="uid://crbskh2rywuhb" path="res://scenes/enemies/EnemyScripts/BaseEnemyAi.cs" id="4_kcbdb"]
+[ext_resource type="Script" uid="uid://crbskh2rywuhb" path="res://scenes/enemies/EnemyScripts/BaseEnemyAI.cs" id="4_kcbdb"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_v5y83"]
 size = Vector2(50, 50)
 
-[node name="RigidBody2D" type="RigidBody2D" unique_id=220984788]
+[node name="CharacterBody2D" type="CharacterBody2D" unique_id=217211211]
 script = ExtResource("1_xyabd")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1972208063]

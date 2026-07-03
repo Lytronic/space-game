@@ -20,7 +20,7 @@ public partial class PlayerVariables : Node
     public float MaxHealth { get; set; } = 100.0f;
     public float CurrentHealth { get; set; } = 100.0f;
     public float MaxShield { get; set; } = 100.0f;
-    public float CurrentShield { get; set; } = 0.0f;
+    public float CurrentShield { get; set; } = 100.0f;
     public float ArmorToughness {  get; set; } = 1;
     public float ShieldToughness { get; set; } = 1;
     public int ShieldRegen {  get; set; } = 1; // regen is a flat increase in current shield that gets applied AT THE END OF EVERY FULL SECOND 

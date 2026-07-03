@@ -1,128 +1,131 @@
 using Godot;
 using System;
-using System.Security.Cryptography.X509Certificates;
 
+/// <summary>
+/// Core combat, loot, score, and wave-clear behavior for ship enemies.
+/// </summary>
 [GlobalClass]
-public partial class BaseEnemy : RigidBody2D
+public partial class BaseEnemy : CharacterBody2D
 {
 
 	//here is the public loot table that EnemySalvage uses to choose a drop from; any object in here is gonna be unique
-
 	[Export] public NodePath salvagePath = "EnemySalvage";
+	[Export] public ShipPart[] lootTable { get; set; }
 
-	//public const int amountOfLoot = 5;
-	[Export] public ShipPart[] lootTable { get; set; } 
-
-	//make the enemy have a hitbox and etc
+	public const float ScalingPerDangerLevel = 1.1f;
 
 	//the most basic and necessary enemy stats
-	public const float scaling = 1.1f;
-	public float speed = 1f;
-	[Export] public int health = 1;
-	[Export] public float damage = 1;
-	[Export] public float resistance = 0.1f;
+	[Export] public float Speed = 125.0f;
+	[Export] public int Health = 30;
+	[Export] public float Damage = 8.0f;
+	[Export] public float Resistance = 0.1f;
+	[Export] public int ScoreValue = 100;
 
+	public bool IsDead { get; private set; } = false;
 
-
-
-	public override void _EnterTree()
-	{
-		//here the loot table will be created before all the children are loaded
-
-		//createLootTable();
-		//generateDropStats();
-
-	}
 	public override void _Ready()
 	{
-		//complete the loot table with stats
-		createLootTable();
-		generateDropStats();
+		if (lootTable == null || lootTable.Length == 0)
+			CreateLootTable();
 
-
-		//correctly scale stats
-		health = scaleStat(health);
-		damage = scaleStat(damage);
-		resistance = scaleStat(resistance);
-
+		GenerateDropStats();
+		ScaleStatsForCurrentDanger();
 	}
 
-	public override void _Process(double delta)
-	{
-	
-	}
-
-	public virtual void createLootTable()
+	public virtual void CreateLootTable()
 	{
 		// if you don't order these by smallest rarity first, I'm murdering you; the first one must be 'null' unlesss the enemy has guaranteed drops
 		lootTable = new[] { null, new DebugMultitool(), new DebugMultitool(), new DebugMultitool(), new DebugMultitool() };
 	}
-	public void generateDropStats()
+
+	public void GenerateDropStats()
 	{
 		foreach (ShipPart part in lootTable)
 		{
-			if(part != null)
+			if (part != null)
 			{
 				part.Initialize();
 				part.generateStats();
 			}
 		}
-		//GD.Print("Generated Stats for loot "); //debug
 	}
 
-	public void spawnEnemy()
+	public int ScaleStat(int stat)
 	{
+		int danger = Mathf.Max(1, PlayerVariables.Instance.DangerLevel);
+		return Mathf.RoundToInt(stat * (float)Math.Pow(ScalingPerDangerLevel, danger - 1));
+	}
 
-	}
-	//make it more difficult according to the danger Level
-	public int scaleStat(int stat)
+	public float ScaleStat(float stat)
 	{
-		stat *= (int)Math.Pow(scaling, PlayerVariables.Instance.DangerLevel);
-		return stat;
-	}
-	public float scaleStat(float stat)
-	{
-		stat *= (float)Math.Pow(scaling, PlayerVariables.Instance.DangerLevel);
-		return stat;
+		int danger = Mathf.Max(1, PlayerVariables.Instance.DangerLevel);
+		return stat * (float)Math.Pow(ScalingPerDangerLevel, danger - 1);
 	}
 
 	public void TakeDamage(float damage)
 	{
-		damage -= damage * resistance; //percentual decrease in damage taken 
-		health -= (int)damage;
+		if (IsDead || damage <= 0.0f)
+			return;
 
-		if(health <= 0 ) enemyDie();
-		//GD.Print($"Enemy damaged {damage}"); //debug
+		float mitigatedDamage = damage * (1.0f - Mathf.Clamp(Resistance, 0.0f, 0.95f));
+		int finalDamage = Mathf.Max(1, Mathf.CeilToInt(mitigatedDamage));
+		Health -= finalDamage;
+
+		if (Health <= 0)
+			Die();
 	}
+
 	public bool IsLastEnemy()
 	{
 		var scene = GetTree().CurrentScene;
 		if (scene == null) return false;
 
-		foreach (Node child in scene.GetChildren())
-		{
-			if (child == this) continue;
+		return !HasOtherLivingEnemy(scene);
+	}
 
-			if (child is BaseEnemy enemy && !enemy.IsQueuedForDeletion())
-				return false;
+	private bool HasOtherLivingEnemy(Node node)
+	{
+		foreach (Node child in node.GetChildren())
+		{
+			if (child != this && child is BaseEnemy enemy && !enemy.IsDead && !enemy.IsQueuedForDeletion())
+				return true;
+
+			if (HasOtherLivingEnemy(child))
+				return true;
 		}
 
-		return true;
+		return false;
 	}
-	public void enemyDie()
+
+	public void Die()
 	{
-		GD.Print($"Enemy {this} died");
-		//detatch ai script for resurrection
-		//delete collisions for resurrection
-		GetNode<EnemySalvage>(salvagePath).dropLoot();
+		if (IsDead)
+			return;
 
-		// Check if another enemy exists
+		IsDead = true;
+		PlayerVariables.Instance.Score += ScoreValue;
+
+		GetNodeOrNull<EnemySalvage>(salvagePath)?.dropLoot();
+
 		bool levelCleared = IsLastEnemy();
-
-		// Remove node
 		QueueFree();
 
-		// Initiate change to build menu scene if this was the last enemy
-		if (levelCleared) GetTree().CurrentScene.Call("OpenBuildMenuAfterDelay", 1.5f);
+		if (levelCleared)
+		{
+			PlayerVariables.Instance.ChangeDifficulty(1);
+
+			Node currentScene = GetTree().CurrentScene;
+			if (currentScene?.HasMethod("OpenBuildMenuAfterDelay") == true)
+				currentScene.Call("OpenBuildMenuAfterDelay", 1.5f);
+		}
+	}
+
+	private void ScaleStatsForCurrentDanger()
+	{
+		Health = Mathf.Max(1, ScaleStat(Health));
+		Damage = ScaleStat(Damage);
+		Speed = ScaleStat(Speed);
+		Resistance = Mathf.Clamp(ScaleStat(Resistance), 0.0f, 0.85f);
+		ScoreValue = Mathf.Max(1, ScaleStat(ScoreValue));
 	}
 }
