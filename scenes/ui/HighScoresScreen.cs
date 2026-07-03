@@ -13,7 +13,7 @@ public partial class HighScoresScreen : Control
 		_soundManager = GetNode("/root/SoundManager");
 
 		GetNode<TextureButton>("./VBoxContainerLeft/BackButton").Pressed += () => {
-			_soundManager.Call("PlaySound", 0);
+			_soundManager.Call("PlaySound", 0, 0);
 			CloseScreen();
 		};
 		

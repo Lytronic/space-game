@@ -13,13 +13,16 @@ public partial class SoundManager : Node2D
 	string[] sounds; // Array for sound filepaths
 
 	private AudioStreamPlayer _musicPlayer;
-	private AudioStreamPlayer _soundPlayer;
+	public AudioStreamPlayer[] SoundPlayerArray;
 
 	public override void _Ready()
 	{
 		_musicPlayer = GetChild<AudioStreamPlayer>(0);
-		_soundPlayer = GetChild<AudioStreamPlayer>(1);
-
+		SoundPlayerArray = new AudioStreamPlayer[6];
+		for (int i = 1; i < SoundPlayerArray.Length; i++)
+		{
+			SoundPlayerArray[i - 1] = GetChild<AudioStreamPlayer>(i);
+		}
 		// Add music here by adding it to the next index of the array "tracks" with the string: "res://sfx/music/YOUR_TRACK_HERE" and then updating the array size
 		tracks = new string[8];
 		tracks[0] = "res://sfx/music/End Fight.mp3";
@@ -57,11 +60,11 @@ public partial class SoundManager : Node2D
 	public override void _Process(double delta)
 	{
 	}
-	public void PlaySound(int sound) { // function to play a sound
+	public void PlaySound(int SPindex, int sound) { // function to play a sound
 
-		_soundPlayer.Stream = GD.Load<AudioStream>(sounds[sound]);
+		SoundPlayerArray[SPindex].Stream = GD.Load<AudioStream>(sounds[sound]);
 			
-		_soundPlayer.Play();
+		SoundPlayerArray[SPindex].Play();
 	}
 
 	public void PlayTrack(int track) { // function to play the music
@@ -69,5 +72,12 @@ public partial class SoundManager : Node2D
 		_musicPlayer.Stream = GD.Load<AudioStream>(tracks[track]);
 			
 		_musicPlayer.Play();
+	}
+
+	public void FadeOut(int SPindex, float FadeDuration)
+	{
+		Tween tween = CreateTween();
+		tween.TweenProperty(SoundPlayerArray[SPindex], "volume_db", -80.0f, FadeDuration);
+		tween.TweenCallback(Callable.From(() => SoundPlayerArray[SPindex].Stop()));
 	}
 }

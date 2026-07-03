@@ -11,14 +11,14 @@ public partial class DeathScreen : Control
 		GetNode<Label>("VBoxContainer/ScoreLabel").Text = $"Your Score: {PlayerVariables.Instance.Score}";
 
 		GetNode<Button>("QuitButton").Pressed += () => {
-			_soundManager.Call("PlaySound", 0);
+			_soundManager.Call("PlaySound", 0, 0);
 			GetTree().ChangeSceneToFile("res://scenes/ui/TitleScreen.tscn");
 		};	
 
 		Button saveButton = GetNode<Button>("VBoxContainer/HBoxContainer/SaveButton");
 		saveButton.Pressed += () =>
 		{
-			_soundManager.Call("PlaySound", 0);
+			_soundManager.Call("PlaySound", 0, 0);
 			string name = GetNode<LineEdit>("VBoxContainer/HBoxContainer/NameLine").Text.Trim();
 			if (DB.AddHighScore(name, PlayerVariables.Instance.Score))
 			{
@@ -30,7 +30,7 @@ public partial class DeathScreen : Control
 	
 	private void _on_retry_button_pressed()
 	{
-		_soundManager.Call("PlaySound", 0);
+		_soundManager.Call("PlaySound", 0, 0);
 		PlayerVariables.Instance.ResetRun();
 		GetTree().ReloadCurrentScene();
 	}

@@ -7,6 +7,16 @@ script = ExtResource("1_leriu")
 
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="." unique_id=1233526046]
 
-[node name="SoundPlayer" type="AudioStreamPlayer" parent="." unique_id=72920496]
+[node name="SoundPlayer0" type="AudioStreamPlayer" parent="." unique_id=72920496]
+
+[node name="SoundPlayer1" type="AudioStreamPlayer" parent="." unique_id=1202841141]
+
+[node name="SoundPlayer2" type="AudioStreamPlayer" parent="." unique_id=1213433254]
+
+[node name="SoundPlayer3" type="AudioStreamPlayer" parent="." unique_id=74130040]
+
+[node name="SoundPlayer4" type="AudioStreamPlayer" parent="." unique_id=2146993578]
+
+[node name="SoundPlayer5" type="AudioStreamPlayer" parent="." unique_id=1488288482]
 
 [node name="SoundPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=29294095]
