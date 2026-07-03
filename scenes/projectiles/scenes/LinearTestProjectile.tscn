@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://b87rrodgmxi86"]
 
-[ext_resource type="Script" uid="uid://qbnm7yx6l0qy" path="res://scenes/projectiles/projectile scripts/LinearTestProjectile.cs" id="1_v0qi6"]
+[ext_resource type="Script" uid="uid://qbnm7yx6l0qy" path="res://scenes/projectiles/scripts/LinearTestProjectile.cs" id="1_v0qi6"]
 [ext_resource type="Texture2D" uid="uid://bytd8nurf5xpk" path="res://scenes/enemies/projtest.png" id="2_0xye8"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mjviw"]

@@ -1,6 +1,5 @@
 using Godot;
 using Microgravity.util;
-using System.Threading.Tasks;
 
 public partial class Player : CharacterBody2D
 {
@@ -18,9 +17,15 @@ public partial class Player : CharacterBody2D
 	[Export] public float AngularStopEpsilon = 0.01f;
 
 	// Speed Variables
+	[Export] public float WeaponDamage = 18.0f;
+	[Export] public float WeaponProjectileSpeed = 650.0f;
+	[Export] public float WeaponCooldown = 0.5f;
+	[Export] public float WeaponSpawnRadius = 10.0f;
 	private float _angularVelocity = 0.0f;
 	private float _throttleSpeed = 0.0f;
 	private float _strafeSpeed = 0.0f;
+	private float _weaponCooldownRemaining = 0.0f;
+	private PackedScene _projectileScene;
 
 	// User Interfaces
 	private Control _hud;
@@ -64,6 +69,7 @@ public partial class Player : CharacterBody2D
 		// Cursor setup
 		_cursorThrottle = GetNode<Sprite2D>("/root/game/Cursor/CursorThrottle");
 
+		_projectileScene = ResourceLoader.Load<PackedScene>("res://scenes/projectiles/scenes/BaseProjectile.tscn");
 	}
 
 	public override void _PhysicsProcess(double delta)
@@ -114,6 +120,7 @@ public partial class Player : CharacterBody2D
 		_roundLabel.Text = PlayerVariables.Instance.Round.ToString();
 
 		UpdateDamageOverlay();
+		UpdateWeapon((float)delta);
 	}
 
 	/// <summary>
@@ -216,6 +223,33 @@ public partial class Player : CharacterBody2D
 		Vector2 right = Transform.X;
 
 		Velocity = forward * _throttleSpeed + right * _strafeSpeed;
+	}
+
+	private void UpdateWeapon(float dt)
+	{
+		_weaponCooldownRemaining = Mathf.Max(0.0f, _weaponCooldownRemaining - dt);
+
+		if (Input.IsMouseButtonPressed(MouseButton.Left))
+			TryFireWeapon();
+	}
+
+	private void TryFireWeapon()
+	{
+		if (_weaponCooldownRemaining > 0.0f || _projectileScene == null)
+			return;
+
+		Vector2 direction = GetGlobalMousePosition() - GlobalPosition;
+		if (direction.LengthSquared() < 0.0001f)
+			return;
+
+		direction = direction.Normalized();
+		BaseProjectile projectile = _projectileScene.Instantiate<BaseProjectile>();
+		float damage = (WeaponDamage + PlayerVariables.Instance.DamageBase)
+			* PlayerVariables.Instance.DamageModif;
+
+		Vector2 spawnPosition = GlobalPosition + direction * WeaponSpawnRadius;
+		projectile.Launch(damage, direction, spawnPosition, false, this, WeaponProjectileSpeed);
+		_weaponCooldownRemaining = WeaponCooldown;
 	}
 
 	private static float UpdateAxisSpeed(float currentSpeed, float input, float maxSpeed, float accel, float delta)

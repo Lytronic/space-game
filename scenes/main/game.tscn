@@ -28,10 +28,10 @@ material = SubResource("ShaderMaterial_0rn35")
 script = ExtResource("1_e3dby")
 playerPath = NodePath("../Player")
 
+[node name="EntityManager" parent="." unique_id=1311935605 instance=ExtResource("5_157ky")]
+
 [node name="Player" parent="." unique_id=2075203121 instance=ExtResource("1_e64el")]
 position = Vector2(0, -10)
-
-[node name="EntityManager" parent="." unique_id=1311935605 instance=ExtResource("5_157ky")]
 
 [node name="Cursor" parent="." unique_id=515763207 instance=ExtResource("5_ktwa8")]
 PlayerShip = NodePath("../Player")

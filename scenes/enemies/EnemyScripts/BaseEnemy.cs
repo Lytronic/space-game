@@ -86,7 +86,7 @@ public partial class BaseEnemy : RigidBody2D
 		return stat;
 	}
 
-	public void enemyTakeDamage(float damage)
+	public void TakeDamage(float damage)
 	{
 		damage -= damage * resistance; //percentual decrease in damage taken 
 		health -= (int)damage;

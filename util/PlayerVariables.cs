@@ -40,7 +40,7 @@ public partial class PlayerVariables : Node
 
     //damage will be calculated through percentual damage increase and flat damage multiplication (modifier are being multiplied, mod > 1 --> increase; mod < 1 --> decrease)
     public float DamageModif {  get; set; } = 1;
-    public float DamgeBase { get; set; } = 1; //universial damage buff flat 
+    public float DamageBase { get; set; } = 1; //universial damage buff flat 
     public float PhysDamage { get; set; } = 1;
     public float PhysicalDmgMod {  get; set; } = 1; // percentage increased physical damage
     public float EnergyDamage { get; set; } = 1;
