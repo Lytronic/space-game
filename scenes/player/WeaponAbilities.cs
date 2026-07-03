@@ -21,8 +21,16 @@ public partial class WeaponAbilities : HBoxContainer
 	[Export] public Texture2D TextureEMPOff;
 
 	TextureRect[] Abilities; // Array for the order of abilities
+
+	Label[] ControlKeys; // Array for the label paths
 	public override void _Ready()
 	{
+		ControlKeys = new Label[8];
+		ControlKeys[0] = GetNode<Label>("/root/Control/WeaponsControls/ControlQ"); 
+		for (int i = 1; i < ControlKeys.Length; i++)
+		{
+			ControlKeys[i] = GetNode<Label>($"/root/Control/WeaponsControls/Control{i}");
+		}
 		foreach (Node child in GetChildren())
 		{
 			if (child is Control control)
@@ -30,8 +38,9 @@ public partial class WeaponAbilities : HBoxContainer
 				control.Hide();
 			}
 		}	
-		Abilities = new TextureRect[7];
+		Abilities = new TextureRect[8];
 		UpdateAbilities();
+		GD.Print(Abilities);
 	}
 
 	
@@ -45,8 +54,18 @@ public partial class WeaponAbilities : HBoxContainer
 		for (int i = 0; i < Abilities.Length; i++)
 		{
 			
-		}		
-		
+		}
+		for (int i = 0; i < ControlKeys.Length; i++)
+		{
+			if(Abilities[i] != null)
+			{
+				ControlKeys[i].Show();
+			}
+			else
+			{
+				ControlKeys[i].Hide();
+			}
+		}
 	}
 	private void UseAbility(int AbilityNr)
 	{
