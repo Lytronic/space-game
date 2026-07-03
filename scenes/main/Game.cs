@@ -24,7 +24,7 @@ public partial class Game : Node2D
 
 	private RandomNumberGenerator _rng;
 
-	private ProgressBar _progressbar;
+	private ProgressBar _progressBar;
 
 	public override void _Ready()
 	{
@@ -33,7 +33,7 @@ public partial class Game : Node2D
 
 		PlayerVariables.Instance.Space = GetNode<EntityManager>("EntityManager");
 
-		_progressbar = GetNode<ProgressBar>("CanvasLayer/HUD/RoundIndicator/ProgressBar");
+		_progressBar = GetNode<ProgressBar>("CanvasLayer/HUD/RoundIndicator/ProgressBar");
 
 		_asteroidScene = ResourceLoader.Load<PackedScene>(AsteroidScenePath);
 		_enemyScene = ResourceLoader.Load<PackedScene>(EnemyScenePath);
@@ -46,7 +46,7 @@ public partial class Game : Node2D
 
 	public override void _Process(double delta)
 	{
-		_progressbar.Value = (1 - _enemyCount) / _enemiesSpawned;
+		_progressBar.Value = (1 - ((float)_enemyCount / (float)_enemiesSpawned)) * 100.0f;
 	}
 
 	private void SetupRound()
@@ -103,7 +103,7 @@ public partial class Game : Node2D
 			enemy.Position = center + Vector2.Right.Rotated(angle) * radius;
 			PlayerVariables.Instance.Space.AddChild(enemy);
 
-			_enemiesSpawned++;
+			_enemyCount++;
 		}
 	}
 
@@ -116,6 +116,9 @@ public partial class Game : Node2D
 		enemy.Damage = 7.0f;
 		enemy.Speed = 120.0f;
 		enemy.Resistance = 0.08f;
+
+		// subscribe to death signal
+		enemy.Killed += () => _enemyCount--;
 
 		Sprite2D sprite = enemy.GetNodeOrNull<Sprite2D>("Sprite2D");
 		if (sprite != null && archetype < _enemyTextures.Length)

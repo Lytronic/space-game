@@ -7,7 +7,6 @@ using System;
 [GlobalClass]
 public partial class BaseEnemy : CharacterBody2D
 {
-
 	//here is the public loot table that EnemySalvage uses to choose a drop from; any object in here is gonna be unique
 	[Export] public NodePath salvagePath = "EnemySalvage";
 	[Export] public ShipPart[] lootTable { get; set; }
@@ -22,6 +21,9 @@ public partial class BaseEnemy : CharacterBody2D
 	[Export] public int ScoreValue = 100;
 
 	public bool IsDead { get; private set; } = false;
+
+	[Signal]
+	public delegate void KilledEventHandler();
 
 	public override void _Ready()
 	{
@@ -99,6 +101,8 @@ public partial class BaseEnemy : CharacterBody2D
 
 	public void Die()
 	{
+		EmitSignal(SignalName.Killed);
+		
 		if (IsDead)
 			return;
 
