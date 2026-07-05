@@ -27,6 +27,12 @@ public partial class Player : CharacterBody2D
 	private float _weaponCooldownRemaining = 0.0f;
 	private PackedScene _projectileScene;
 
+	// Particles variables
+	[Export] public float ParticleMinThrust = 10.0f;
+	private GpuParticles2D _engineParticles0;
+	private GpuParticles2D _engineParticles1;
+	private GpuParticles2D _engineParticles2;
+
 	// User Interfaces
 	private Control _hud;
 	private Control _deathScreen;
@@ -69,6 +75,11 @@ public partial class Player : CharacterBody2D
 		// Cursor setup
 		_cursorThrottle = GetNode<Sprite2D>("/root/game/Cursor/CursorThrottle");
 
+		// Particles setup
+		_engineParticles0 = GetNode<GpuParticles2D>("EngineParticles0");
+		_engineParticles1 = GetNode<GpuParticles2D>("EngineParticles1");
+		_engineParticles2 = GetNode<GpuParticles2D>("EngineParticles2");
+
 		_projectileScene = ResourceLoader.Load<PackedScene>("res://scenes/projectiles/scenes/BaseProjectile.tscn");
 	}
 
@@ -101,6 +112,7 @@ public partial class Player : CharacterBody2D
 				IsAlive = false;
 				InitiateDeathSequence();
 			}
+			
 		}
 
 	}
@@ -118,6 +130,7 @@ public partial class Player : CharacterBody2D
 
 		UpdateDamageOverlay();
 		UpdateWeapon((float)delta);
+		ManageEngineParticles();
 	}
 
 	/// <summary>
@@ -293,4 +306,41 @@ public partial class Player : CharacterBody2D
 		// Enable Cursor again
 		Input.SetMouseMode(Input.MouseModeEnum.Visible);
 	}
+	
+	// Function for the engine particles
+	private void ManageEngineParticles()
+	{
+		float currentSpeed = Velocity.Length();
+		/*bool isMoving = Velocity.Length() > ParticleMinThrust;
+		_engineParticles0.Emitting = isMoving;
+		_engineParticles1.Emitting = isMoving;
+		_engineParticles2.Emitting = isMoving;*/
+		float maxSpeed = MaxThrottleSpeed;
+		float speedRatio = Mathf.Clamp(currentSpeed / maxSpeed, 0.0f, 1.0f);
+		if (currentSpeed < 5.0f) 
+		{
+			_engineParticles0.Emitting = false;
+			_engineParticles1.Emitting = false;
+			_engineParticles2.Emitting = false;
+	   		return;
+		}
+		_engineParticles0.Emitting = true;
+		_engineParticles1.Emitting = true;
+		_engineParticles2.Emitting = true;
+
+		int targetAmount = (int)(100 * speedRatio);
+		_engineParticles0.Amount = Mathf.Max(targetAmount, 1);
+		_engineParticles1.Amount = Mathf.Max(targetAmount, 1);
+		_engineParticles2.Amount = Mathf.Max(targetAmount, 1);
+
+		 float baseScale = 0.25f;
+		
+		if (_engineParticles0.ProcessMaterial is ParticleProcessMaterial material)
+		{
+			float targetScale = baseScale * speedRatio;
+			material.SetParamMin(ParticleProcessMaterial.Parameter.Scale, targetScale);
+			material.SetParamMax(ParticleProcessMaterial.Parameter.Scale, targetScale);
+		}
+	}
+	
 }

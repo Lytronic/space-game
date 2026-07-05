@@ -3,11 +3,45 @@
 [ext_resource type="Script" uid="uid://datpt1os2yqtd" path="res://scenes/player/PartsManager.cs" id="1_4bq1r"]
 [ext_resource type="Script" uid="uid://bw5ie1tyljuyd" path="res://scenes/player/Player.cs" id="1_lxlh8"]
 [ext_resource type="Texture2D" uid="uid://bspqn8j4pcve8" path="res://gfx/game/ship.png" id="2_lxlh8"]
+[ext_resource type="Texture2D" uid="uid://0psb83uwnd6a" path="res://gfx/game/particle/flame.png" id="4_yqqr5"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_uoqog"]
+particle_flag_disable_z = true
+gravity = Vector3(0, 98, 0)
+scale_min = 0.14999999
+scale_max = 0.19999999
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ix64g"]
 
 [node name="Player" type="CharacterBody2D" unique_id=2075203121]
 script = ExtResource("1_lxlh8")
+
+[node name="EngineParticles0" type="GPUParticles2D" parent="." unique_id=138909285]
+position = Vector2(3, 7)
+scale = Vector2(0.25, 0.25)
+amount = 6
+texture = ExtResource("4_yqqr5")
+lifetime = 0.3
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_uoqog")
+
+[node name="EngineParticles1" type="GPUParticles2D" parent="." unique_id=1553680246]
+position = Vector2(0, 10)
+scale = Vector2(0.25, 0.25)
+amount = 6
+texture = ExtResource("4_yqqr5")
+lifetime = 0.3
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_uoqog")
+
+[node name="EngineParticles2" type="GPUParticles2D" parent="." unique_id=1944492841]
+position = Vector2(-3, 7)
+scale = Vector2(0.25, 0.25)
+amount = 6
+texture = ExtResource("4_yqqr5")
+lifetime = 0.3
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_uoqog")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=366547732]
 position = Vector2(-4.7683716e-07, 0)
