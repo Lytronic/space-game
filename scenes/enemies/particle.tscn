@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://bppgg50siqm2s"]
+
+[ext_resource type="Script" uid="uid://cryt77cmkwj3v" path="res://scenes/enemies/Particle.cs" id="1_716y0"]
+[ext_resource type="Texture2D" uid="uid://ciw1ifrmvbvw7" path="res://gfx/game/particle/explosion_grid.png" id="1_bga2l"]
+[ext_resource type="Material" uid="uid://b4oofdtxch87f" path="res://util/materials/explosion_canvas.tres" id="3_a7d24"]
+[ext_resource type="Material" uid="uid://gosildff47nc" path="res://util/materials/explosion_process.tres" id="4_uk4c8"]
+
+[node name="ParticleManager" type="Node2D" unique_id=607428909]
+script = ExtResource("1_716y0")
+ParticleExplosion = ExtResource("1_bga2l")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="." unique_id=249843982]
+material = ExtResource("3_a7d24")
+position = Vector2(558, 317)
+emitting = false
+amount = 1
+texture = ExtResource("1_bga2l")
+lifetime = 2.0
+one_shot = true
+preprocess = 0.62
+speed_scale = 3.9
+explosiveness = 1.0
+process_material = ExtResource("4_uk4c8")

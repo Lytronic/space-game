@@ -4,6 +4,9 @@
 [ext_resource type="Script" uid="uid://bw5ie1tyljuyd" path="res://scenes/player/Player.cs" id="1_lxlh8"]
 [ext_resource type="Texture2D" uid="uid://bspqn8j4pcve8" path="res://gfx/game/ship.png" id="2_lxlh8"]
 [ext_resource type="Texture2D" uid="uid://0psb83uwnd6a" path="res://gfx/game/particle/flame.png" id="4_yqqr5"]
+[ext_resource type="Material" uid="uid://b4oofdtxch87f" path="res://util/materials/explosion_canvas.tres" id="5_iux3d"]
+[ext_resource type="Texture2D" uid="uid://ciw1ifrmvbvw7" path="res://gfx/game/particle/explosion_grid.png" id="6_adwln"]
+[ext_resource type="Material" uid="uid://gosildff47nc" path="res://util/materials/explosion_process.tres" id="7_o1d46"]
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_uoqog"]
 particle_flag_disable_z = true
@@ -56,3 +59,16 @@ script = ExtResource("1_4bq1r")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1566197548]
 zoom = Vector2(3, 3)
+
+[node name="ExplosionParticle" type="GPUParticles2D" parent="." unique_id=386674573]
+material = ExtResource("5_iux3d")
+scale = Vector2(0.5, 0.5)
+emitting = false
+amount = 1
+texture = ExtResource("6_adwln")
+lifetime = 2.0
+preprocess = 0.62
+speed_scale = 3.9
+explosiveness = 1.0
+local_coords = true
+process_material = ExtResource("7_o1d46")

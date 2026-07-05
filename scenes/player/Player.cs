@@ -32,6 +32,9 @@ public partial class Player : CharacterBody2D
 	private GpuParticles2D _engineParticles0;
 	private GpuParticles2D _engineParticles1;
 	private GpuParticles2D _engineParticles2;
+	private GpuParticles2D _explosionParticle;
+	private Sprite2D _playerShip;
+	
 
 	// User Interfaces
 	private Control _hud;
@@ -53,6 +56,10 @@ public partial class Player : CharacterBody2D
 	
 	// Cursor Variables
 	private Sprite2D _cursorThrottle;
+
+	// Sound
+	private Node _soundManager;
+		
 
 	public override void _Ready()
 	{
@@ -76,11 +83,20 @@ public partial class Player : CharacterBody2D
 		_cursorThrottle = GetNode<Sprite2D>("/root/game/Cursor/CursorThrottle");
 
 		// Particles setup
+		_explosionParticle = GetNode<GpuParticles2D>("ExplosionParticle");
+		GD.Print(_explosionParticle);
 		_engineParticles0 = GetNode<GpuParticles2D>("EngineParticles0");
 		_engineParticles1 = GetNode<GpuParticles2D>("EngineParticles1");
 		_engineParticles2 = GetNode<GpuParticles2D>("EngineParticles2");
+		_playerShip = GetChild(3) as Sprite2D;
+		GD.Print(_playerShip);
+
+		_explosionParticle.Emitting = false;
 
 		_projectileScene = ResourceLoader.Load<PackedScene>("res://scenes/projectiles/scenes/BaseProjectile.tscn");
+
+		_soundManager = GetNode("/root/SoundManager");
+
 	}
 
 	public override void _PhysicsProcess(double delta)
@@ -294,8 +310,12 @@ public partial class Player : CharacterBody2D
 
 	private async void InitiateDeathSequence()
 	{
+		// Play the explosion particle animation and hide the ship
+		Explode();
+		
 		// Disable HUD
 		_hud.Hide();
+
 
 		// Wait briefly
 		await ToSignal(GetTree().CreateTimer(2.5), SceneTreeTimer.SignalName.Timeout);
@@ -333,7 +353,7 @@ public partial class Player : CharacterBody2D
 		_engineParticles1.Amount = Mathf.Max(targetAmount, 1);
 		_engineParticles2.Amount = Mathf.Max(targetAmount, 1);
 
-		 float baseScale = 0.25f;
+		float baseScale = 0.25f;
 		
 		if (_engineParticles0.ProcessMaterial is ParticleProcessMaterial material)
 		{
@@ -341,6 +361,16 @@ public partial class Player : CharacterBody2D
 			material.SetParamMin(ParticleProcessMaterial.Parameter.Scale, targetScale);
 			material.SetParamMax(ParticleProcessMaterial.Parameter.Scale, targetScale);
 		}
+	}
+
+	private async void Explode()
+	{
+		_playerShip.Hide();
+		_explosionParticle.OneShot = true;
+		_explosionParticle.Restart();
+		_explosionParticle.Emitting = true;
+		_soundManager.Call("PlaySound", 3, 7);
+		
 	}
 	
 }
