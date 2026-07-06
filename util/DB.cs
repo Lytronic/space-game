@@ -37,7 +37,7 @@ namespace Microgravity.util
 		}
 
 		/// <value>
-		/// These is the exhaustive list of all settings options with their names and defaults.
+		/// This is the exhaustive list of all settings options with their names and defaults.
 		/// Add new entries here!
 		/// </value>
 		public static readonly Dictionary<string, SettingsEntry> DefaultSettings = new()
