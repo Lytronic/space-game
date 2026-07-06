@@ -1,3 +1,5 @@
+using System;
+using System.Linq.Expressions;
 using Godot;
 using Microgravity.util;
 
@@ -48,6 +50,12 @@ public partial class Player : CharacterBody2D
 	private Label _playerScoreLabel;
 	private Label _roundLabel;
 
+	// Progress bars
+	private ProgressBar _playerSpeedBar;
+	private ProgressBar _playerHealthBar;
+	private ProgressBar _playerShieldBar;
+
+
 	// Healthy variables
 	public bool IsAlive = true;
 
@@ -74,6 +82,11 @@ public partial class Player : CharacterBody2D
 		_playerHealthLabel = _hud.GetNode<Label>("PlayerHealthLabel");
 		_playerScoreLabel = _hud.GetNode<Label>("PlayerScoreLabel");
 		_roundLabel = _hud.GetNode<Label>("RoundIndicator/RoundLabel");
+
+		// Assign Bars
+		_playerSpeedBar = _hud.GetNode<ProgressBar>("SpeedBar");
+		_playerHealthBar = _hud.GetNode<ProgressBar>("HealthBar");
+		_playerShieldBar = _hud.GetNode<ProgressBar>("ShieldBar");
 
 		// You get the point
 		_hud.Show();
@@ -136,12 +149,16 @@ public partial class Player : CharacterBody2D
 	public override void _Process(double delta)
 	{
 		// Update speed value on HUD
-		_playerSpeedLabel.Text = $"Speed: {Velocity.Length():0}";
+		//_playerSpeedLabel.Text = $"Speed: {Velocity.Length():0}";
+		_playerHealthBar.Value = PlayerVariables.Instance.CurrentHealth;
 
 		// Update health value on HUD
-		_playerHealthLabel.Text = $"Health: {PlayerVariables.Instance.CurrentHealth:0}";
+		//_playerHealthLabel.Text = $"Health: {PlayerVariables.Instance.CurrentHealth:0}";
+		_playerSpeedBar.Value = Velocity.Length();
 
-		_playerScoreLabel.Text = PlayerVariables.Instance.Score.ToString();
+		_playerShieldBar.Value = PlayerVariables.Instance.CurrentShield;
+
+		//_playerScoreLabel.Text = PlayerVariables.Instance.Score.ToString();
 		_roundLabel.Text = PlayerVariables.Instance.Round.ToString();
 
 		UpdateDamageOverlay();
