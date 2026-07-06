@@ -61,42 +61,22 @@ public partial class PlayerVariables : Node
 
     /// <summary>
     /// Restores the persistent player state for a fresh game run.
+    /// This is done by creating a new PlayerVariables object and deleting the old one
+    /// to make sure no state from the previous game carries over.
     /// </summary>
     public void ResetRun()
     {
-        Score = 0;
-        Round = 0;
-        DangerLevel = 1;
-        LuckStat = 1.0f;
+        // make sure the name isn't PlayerVariables so there's no conflict with the new one
+        Instance.Name = "TO_BE_DELETED";
+    
+        Instance = new();
+        Instance.Name = "PlayerVariables";
 
-        MaxHealth = 100.0f;
-        CurrentHealth = MaxHealth;
-        MaxShield = 100.0f;
-        CurrentShield = 0.0f;
-        ArmorToughness = 1.0f;
-        ShieldToughness = 1.0f;
-        ShieldRegen = 1;
+        // add the new instance to the scene tree (first one was autoloaded)
+        // though you shouldn't be accessing it through there anyway...
+        GetNode("/root").AddChild(Instance);
 
-        Ammo = 1;
-        MaxEnergy = 1.0f;
-        Energy = MaxEnergy;
-        MaxFuel = 1.0f;
-        Fuel = MaxFuel;
-        EnergyGeneration = 1.0f;
-
-        Thrust = 1.0f;
-        Weight = 1.0f;
-        Control = 1.0f;
-
-        DamageModif = 1.0f;
-        PhysDamage = 1.0f;
-        PhysicalDmgMod = 1.0f;
-        EnergyDamage = 1.0f;
-        EnergyDmgMod = 1.0f;
-
-        PlayerActiveParts.Clear();
-        PlayerPassiveParts.Clear();
-        PlayerCollectedParts.Clear();
+        this.QueueFree();
     }
     
     /// <summary>
