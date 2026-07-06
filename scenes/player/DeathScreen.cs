@@ -12,6 +12,7 @@ public partial class DeathScreen : Control
 
 		GetNode<Button>("QuitButton").Pressed += () => {
 			_soundManager.Call("PlaySound", 0, 0);
+			PlayerVariables.Instance.ResetRun();
 			GetTree().ChangeSceneToFile("res://scenes/ui/TitleScreen.tscn");
 		};	
 

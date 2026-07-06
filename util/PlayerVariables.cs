@@ -65,6 +65,7 @@ public partial class PlayerVariables : Node
     public void ResetRun()
     {
         Score = 0;
+        Round = 0;
         DangerLevel = 1;
         LuckStat = 1.0f;
 
