@@ -79,7 +79,7 @@ public partial class EnemySalvage : Node
 
 	private float getPlayerLuckLevel()
 	{
-		float luck = PlayerVariables.Instance.LuckStat;
+		float luck = PlayerVariables.Stats.LuckStat;
 		return luck;
 	}
 

@@ -136,7 +136,7 @@ public partial class Player : CharacterBody2D
 			}
 
 			// Check for player death
-			if (PlayerVariables.Instance.CurrentHealth <= 0.0001f)
+			if (PlayerVariables.Stats.CurrentHealth <= 0.0001f)
 			{
 				IsAlive = false;
 				InitiateDeathSequence();
@@ -150,16 +150,16 @@ public partial class Player : CharacterBody2D
 	{
 		// Update speed value on HUD
 		//_playerSpeedLabel.Text = $"Speed: {Velocity.Length():0}";
-		_playerHealthBar.Value = PlayerVariables.Instance.CurrentHealth;
+		_playerHealthBar.Value = PlayerVariables.Stats.CurrentHealth;
 
 		// Update health value on HUD
 		//_playerHealthLabel.Text = $"Health: {PlayerVariables.Instance.CurrentHealth:0}";
 		_playerSpeedBar.Value = Velocity.Length();
 
-		_playerShieldBar.Value = PlayerVariables.Instance.CurrentShield;
+		_playerShieldBar.Value = PlayerVariables.Stats.CurrentShield;
 
-		//_playerScoreLabel.Text = PlayerVariables.Instance.Score.ToString();
-		_roundLabel.Text = PlayerVariables.Instance.Round.ToString();
+		_playerScoreLabel.Text = PlayerVariables.Stats.Score.ToString();
+		_roundLabel.Text = PlayerVariables.Stats.Round.ToString();
 
 		UpdateDamageOverlay();
 		UpdateWeapon((float)delta);
@@ -179,10 +179,10 @@ public partial class Player : CharacterBody2D
 		float timeLeft = _damageTintCooldown != null ? (float)_damageTintCooldown.TimeLeft : 0.0f; 
 		float damageIntensity = (float)Mathf.Clamp(timeLeft * 10.0f, 0.0f, 1.0f);
 
-		float health = PlayerVariables.Instance.CurrentHealth / 100.0f;
+		float health = PlayerVariables.Stats.CurrentHealth / 100.0f;
 		float healthIntensity = health < 0.25f ? 1 - health : 0.0f;
 
-		if (PlayerVariables.Instance.CurrentShield > 0.0f && !(healthIntensity > 0.0f))
+		if (PlayerVariables.Stats.CurrentShield > 0.0f && !(healthIntensity > 0.0f))
 		{
 			_damageOverlayMaterial.SetShaderParameter("colour", new Vector3(0.0f, 0.0f, 1.0f));
 		} else {
@@ -287,8 +287,8 @@ public partial class Player : CharacterBody2D
 
 		direction = direction.Normalized();
 		BaseProjectile projectile = _projectileScene.Instantiate<BaseProjectile>();
-		float damage = (WeaponDamage + PlayerVariables.Instance.DamageBase)
-			* PlayerVariables.Instance.DamageModif;
+		float damage = (WeaponDamage + PlayerVariables.Stats.DamageBase)
+			* PlayerVariables.Stats.DamageModif;
 
 		Vector2 spawnPosition = GlobalPosition + direction * WeaponSpawnRadius;
 		projectile.Launch(damage, direction, spawnPosition, false, this, WeaponProjectileSpeed);

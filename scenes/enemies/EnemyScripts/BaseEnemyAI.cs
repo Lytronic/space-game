@@ -77,7 +77,7 @@ public partial class BaseEnemyAI : Node
 	{
 		return _target != null
 			&& !_target.IsQueuedForDeletion()
-			&& PlayerVariables.Instance.CurrentHealth > 0.0f;
+			&& PlayerVariables.Stats.CurrentHealth > 0.0f;
 	}
 
 	private void UpdateMovement(Vector2 direction, float distance, float dt)

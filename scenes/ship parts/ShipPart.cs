@@ -15,7 +15,7 @@ public partial class ShipPart : Resource
 
     public void Initialize()
     {
-        danger = PlayerVariables.Instance.DangerLevel;
+        danger = PlayerVariables.Stats.DangerLevel;
     }
     public virtual void activateEffect() { }
 

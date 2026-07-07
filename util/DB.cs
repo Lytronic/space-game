@@ -1,6 +1,8 @@
 using Godot;
+using MemoryPack;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SQLite;
 using System.Diagnostics;
 using System.Globalization;
@@ -59,6 +61,7 @@ namespace Microgravity.util
 
 		private static readonly string _highScoresLayout = "CREATE TABLE IF NOT EXISTS high_scores (id INTEGER PRIMARY KEY, player_name TEXT, score INTEGER)";
 		private static readonly string _settingsLayout = "CREATE TABLE IF NOT EXISTS settings (id INTEGER PRIMARY KEY, key TEXT, value TEXT, UNIQUE(key))";
+		private static readonly string _savesLayout = "CREATE TABLE IF NOT EXISTS saves (id INTEGER PRIMARY KEY, name TEXT, data BLOB)";
 
 		/// <summary>
 		/// Open a new connection to SQLite.
@@ -229,9 +232,9 @@ namespace Microgravity.util
 						_ => throw new UnreachableException()
 					};
 				}
-				catch (FormatException e)
+				catch (FormatException ex)
 				{
-					GD.Print($"DB: Bad settings format, using the default value for {entryKey}: {e.Message}");
+					GD.Print($"DB: Bad settings format, using the default value for {entryKey}: {ex.Message}");
 				}
 			}
 
@@ -268,10 +271,145 @@ namespace Microgravity.util
 
 				updateCommand.ExecuteNonQuery();
 			}
-			catch (Exception e)
+			catch (Exception ex)
 			{
-				GD.Print($"DB: Failed to write settings entry {key}: {e.Message}");
+				GD.Print($"DB: Failed to write settings entry {key}: {ex.Message}");
 			}
+
+			connection.Close();
+		}
+
+		/// <summary>
+		/// Save a Stats object to disk by serialising it and putting that inside the DB as a binary blob.
+		/// </summary>
+		public static void SaveGame(string name, Stats playerStats)
+		{
+			SQLiteConnection connection = Connect();
+			if (connection == null)
+			{
+				return;
+			}
+
+			if (!CreateTable(connection, _savesLayout))
+			{
+				return;
+			}
+
+			try
+			{
+				string insertSql = "INSERT INTO saves (name, data) VALUES (@name, @data)";
+
+				SQLiteCommand insertCommand = new(insertSql, connection);
+				insertCommand.Parameters.AddWithValue("@name", name);
+				insertCommand.Parameters.Add("@data", DbType.Binary).Value = MemoryPackSerializer.Serialize(playerStats);
+
+				insertCommand.ExecuteNonQuery();
+			}
+			catch (Exception ex)
+			{
+				GD.Print($"DB: Failed to save game {name}: {ex.Message}");
+			}
+
+			connection.Close();
+		}
+
+		/// <summary>
+		/// Enumerate all saves in the database.
+		/// You can then use this information to load a game by its identifier using <c>LoadGame(int)</c>.
+		/// </summary>
+		/// <returns>Dictionary with the key being the save ID in the saves table and the value being its name</returns>
+		public static Dictionary<int, string> GetSaves()
+		{
+			Dictionary<int, string> ret = [];
+			SQLiteConnection connection = Connect();
+			if (connection == null)
+			{
+				return ret;
+			}
+
+			if (!CreateTable(connection, _savesLayout))
+			{
+				return ret;
+			}
+
+			try
+			{
+				string selectSql = "SELECT id, name FROM saves ORDER BY id DESC";
+				SQLiteCommand selectCommand = new(selectSql, connection);
+
+				var reader = selectCommand.ExecuteReader();
+				while (reader.Read())
+				{
+					ret.Add(reader.GetInt32(0), reader.GetString(1));
+				}
+
+				reader.Close();
+			}
+			catch (Exception ex)
+			{
+				GD.Print($"DB: Failed to query saves table: {ex.Message}");
+			}
+			
+			connection.Close();
+			return ret;
+		}
+
+		/// <summary>
+		/// Load the game from the row with the specified ID.
+		/// </summary>
+		/// <returns>Stats object to be used as a member of PlayerVariables</returns>
+		public static Stats LoadGame(int id)
+		{
+			Stats ret = new();
+			
+			SQLiteConnection connection = Connect();
+			if (connection == null)
+			{
+				return ret;
+			}
+
+			if (!CreateTable(connection, _savesLayout))
+			{
+				return ret;
+			}
+
+			try
+			{
+				string selectSql = "SELECT id, data FROM saves WHERE id IS @id";
+
+				SQLiteCommand selectCommand = new(selectSql, connection);
+				selectCommand.Parameters.AddWithValue("@id", id);
+				
+				var reader = selectCommand.ExecuteReader(CommandBehavior.KeyInfo);
+
+				// we are guaranteed to either have 1 or 0 results since we filter by id
+				reader.Read();
+
+				if (!reader.HasRows)
+				{
+					GD.Print($"DB: Attempting to load nonexistent game save #{id}");
+
+					reader.Close();
+					return ret;	
+				}
+				
+				var blob = reader.GetBlob(1, false);
+				byte[] buf = new byte[blob.GetCount()];
+				blob.Read(buf, blob.GetCount(), 0);
+				blob.Close();
+				
+				ret = MemoryPackSerializer.Deserialize<Stats>(buf);
+				GD.Print(ret);
+
+				reader.Close();
+			}
+			catch (Exception ex)
+			{
+				GD.Print($"DB: Failed to load save #{id}: {ex.Message}");
+			}
+
+			connection.Close();
+			return ret;
 		}
 
 		/// <summary>

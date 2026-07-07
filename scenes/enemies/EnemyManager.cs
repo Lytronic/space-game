@@ -9,6 +9,6 @@ public partial class EntityManager : Node2D
 
 	public override void _EnterTree()
 	{
-		PlayerVariables.Instance.Space = this;
+		PlayerVariables.Space = this;
 	}
 }

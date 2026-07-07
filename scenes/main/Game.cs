@@ -31,7 +31,7 @@ public partial class Game : Node2D
 		_rng = new();
 		_rng.Randomize();
 
-		PlayerVariables.Instance.Space = GetNode<EntityManager>("EntityManager");
+		PlayerVariables.Space = GetNode<EntityManager>("EntityManager");
 
 		_progressBar = GetNode<ProgressBar>("CanvasLayer/HUD/RoundIndicator/ProgressBar");
 
@@ -51,9 +51,9 @@ public partial class Game : Node2D
 
 	private void SetupRound()
 	{
-		PlayerVariables.Instance.Round++;
+		PlayerVariables.Stats.Round++;
 
-		_enemiesSpawned = 2 + PlayerVariables.Instance.DangerLevel;
+		_enemiesSpawned = 2 + PlayerVariables.Stats.DangerLevel;
 		SpawnEnemyWave(_enemiesSpawned);
 		
 	}
@@ -80,7 +80,7 @@ public partial class Game : Node2D
 			}
 
 			asteroid.Scale *= _rng.RandfRange(0.5f, 1.5f);
-			PlayerVariables.Instance.Space.AddChild(asteroid);
+			PlayerVariables.Space.AddChild(asteroid);
 		}
 	}
 
@@ -91,7 +91,7 @@ public partial class Game : Node2D
 
 		Node2D player = GetNodeOrNull<Node2D>("Player");
 		Vector2 center = player?.GlobalPosition ?? Vector2.Zero;
-		int danger = PlayerVariables.Instance.DangerLevel;
+		int danger = PlayerVariables.Stats.DangerLevel;
 
 		for (int i = 0; i < amount; i++)
 		{
@@ -101,7 +101,7 @@ public partial class Game : Node2D
 			float angle = (Mathf.Pi * 2.0f * i / amount) + _rng.RandfRange(-0.35f, 0.35f);
 			float radius = _rng.RandfRange(420.0f, 650.0f + danger * 25.0f);
 			enemy.Position = center + Vector2.Right.Rotated(angle) * radius;
-			PlayerVariables.Instance.Space.AddChild(enemy);
+			PlayerVariables.Space.AddChild(enemy);
 
 			_enemyCount++;
 		}

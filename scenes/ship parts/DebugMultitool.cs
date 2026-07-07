@@ -24,10 +24,10 @@ public partial class DebugMultitool : ShipPart
 	{
 		int addOrSubtract = addOrSubtractInt(add);
 
-		PlayerVariables.Instance.Thrust += (thrustIncrease * addOrSubtract);
-		GD.Print($"increased thrust to : {PlayerVariables.Instance.Thrust}");
+		PlayerVariables.Stats.Thrust += (thrustIncrease * addOrSubtract);
+		GD.Print($"increased thrust to : {PlayerVariables.Stats.Thrust}");
 
-		PlayerVariables.Instance.Weight += (partWeight * addOrSubtract);
+		PlayerVariables.Stats.Weight += (partWeight * addOrSubtract);
 	}
 
 	public override void generateStats()

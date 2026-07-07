@@ -8,7 +8,7 @@ public partial class DeathScreen : Control
 	public override void _Ready()
 	{
 		_soundManager = GetNode("/root/SoundManager");
-		GetNode<Label>("VBoxContainer/ScoreLabel").Text = $"Your Score: {PlayerVariables.Instance.Score}";
+		GetNode<Label>("VBoxContainer/ScoreLabel").Text = $"Your Score: {PlayerVariables.Stats.Score}";
 
 		GetNode<Button>("QuitButton").Pressed += () => {
 			_soundManager.Call("PlaySound", 0, 0);
@@ -21,7 +21,7 @@ public partial class DeathScreen : Control
 		{
 			_soundManager.Call("PlaySound", 0, 0);
 			string name = GetNode<LineEdit>("VBoxContainer/HBoxContainer/NameLine").Text.Trim();
-			if (DB.AddHighScore(name, PlayerVariables.Instance.Score))
+			if (DB.AddHighScore(name, PlayerVariables.Stats.Score))
 			{
 				saveButton.Disabled = true;
 				saveButton.Text = "Saved";

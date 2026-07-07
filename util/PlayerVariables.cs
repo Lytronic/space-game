@@ -1,11 +1,17 @@
 using System.Collections.Generic;
 using Godot;
+using MemoryPack;
+using Microgravity.util;
 
-public partial class PlayerVariables : Node
+/// <summary>
+/// All serialisable data that describes the game state.
+/// This object must be kept serialisable, which is why it's its separate type.
+/// Godot classes such as Node cannot be serialised easily with MemoryPack.
+/// However, all primitive types and types declared [MemoryPackable] can be added as members.
+/// </summary>
+[MemoryPackable]
+public partial class Stats
 {
-    public static PlayerVariables Instance { get; private set; }
-    public Node Space { get; set; }
-
     // The player's current score
     public int Score = 0;
 
@@ -13,7 +19,7 @@ public partial class PlayerVariables : Node
     public int Round = 0;
 
     // difficulty level scales all enemy power exponentially
-    public int DangerLevel {  get; private set; } = 1;
+    public int DangerLevel {  get; set; } = 1;
     public float LuckStat { get; set; } = 1;
 
     //durrability stats stuff: armor and shield toughness are scaling stats reducing percentual damage scaling in a power curve | Math.Pow
@@ -45,18 +51,28 @@ public partial class PlayerVariables : Node
     public float PhysicalDmgMod {  get; set; } = 1; // percentage increased physical damage
     public float EnergyDamage { get; set; } = 1;
     public float EnergyDmgMod { get; set; } = 1; // percentage increased energy damage 
+}
 
+/// <summary>
+/// The singleton to hold all kinds of player state that requires easy access from anywhere.
+/// </summary>
+public partial class PlayerVariables : Node
+{
+    public static PlayerVariables Instance { get; private set; }
+    public static Node Space { get; set; }
+    public static Stats Stats;
+   
+    // TODO: Serialise ShipParts, probably by storing IDs about them in Stats 
     //this will store all the items the player has in their inventory
-    public List<ShipPart> PlayerActiveParts { get; private set; } = []; // active parts that get activate an effect every time their cooldown is down or under a condition
-    public List<ShipPart> PlayerPassiveParts { get; private set; } = []; // passive parts that only apply an effect on the time they are added to the ship
+    public List<ShipPart> PlayerActiveParts { get; set; } = []; // active parts that get activate an effect every time their cooldown is down or under a condition
+    public List<ShipPart> PlayerPassiveParts { get; set; } = []; // passive parts that only apply an effect on the time they are added to the ship
     public List<ShipPart> PlayerCollectedParts { get; set; } = []; // basically the stash that the game uses to store all the loot at the end of a round (this gets reset every new round)
-
-
-
 
     public override void _Ready()
     {
+        GD.Print($"New PlayerVariables object added to tree, setting Instance to {this}");
         Instance = this;
+        Stats = new();
     }
 
     /// <summary>
@@ -69,14 +85,18 @@ public partial class PlayerVariables : Node
         // make sure the name isn't PlayerVariables so there's no conflict with the new one
         Instance.Name = "TO_BE_DELETED";
     
-        Instance = new();
-        Instance.Name = "PlayerVariables";
-
-        // add the new instance to the scene tree (first one was autoloaded)
-        // though you shouldn't be accessing it through there anyway...
-        GetNode("/root").AddChild(Instance);
+        // Add the new object to the tree, Instance will be set in _Ready()
+        GetNode("/root").AddChild(new PlayerVariables(){ Name = "PlayerVariables" });
 
         this.QueueFree();
+    }
+
+    /// <summary>
+    /// Load a saved Stats object and replace the current one.
+    /// </summary>
+    public static void LoadFromSave(int id)
+    {
+        Stats = DB.LoadGame(id);
     }
     
     /// <summary>
@@ -88,19 +108,19 @@ public partial class PlayerVariables : Node
             return;
 
         float remainingDamage = amount;
-        float shieldToughness = Mathf.Max(0.1f, ShieldToughness);
-        float armorToughness = Mathf.Max(0.1f, ArmorToughness);
+        float shieldToughness = Mathf.Max(0.1f, Stats.ShieldToughness);
+        float armorToughness = Mathf.Max(0.1f, Stats.ArmorToughness);
 
-        if (CurrentShield > 0.0f)
+        if (Stats.CurrentShield > 0.0f)
         {
             float shieldDamage = remainingDamage / shieldToughness;
-            float absorbedShield = Mathf.Min(CurrentShield, shieldDamage);
-            CurrentShield -= absorbedShield;
+            float absorbedShield = Mathf.Min(Stats.CurrentShield, shieldDamage);
+            Stats.CurrentShield -= absorbedShield;
             remainingDamage -= absorbedShield * shieldToughness;
         }
 
         if (remainingDamage > 0.0f)
-            CurrentHealth = Mathf.Clamp(CurrentHealth - remainingDamage / armorToughness, 0.0f, MaxHealth);
+            Stats.CurrentHealth = Mathf.Clamp(Stats.CurrentHealth - remainingDamage / armorToughness, 0.0f, Stats.MaxHealth);
     }
 
     //changing difficulty or setting difficult easily (for settings and items)
@@ -108,18 +128,18 @@ public partial class PlayerVariables : Node
     {
         if (setToValue)
         {
-            DangerLevel = change;
+            Stats.DangerLevel = change;
         }
         else
         {
-            DangerLevel += change;
+            Stats.DangerLevel += change;
         }
     }
 
     //overload to more easily increase difficulty
     public void ChangeDifficulty(int change)
     {
-        DangerLevel += change;
+        Stats.DangerLevel += change;
     }
 
     // --------------------- managing the ship parts attatched and not attatched and activae and passive ---------------------

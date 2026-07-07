@@ -54,13 +54,13 @@ public partial class BaseEnemy : CharacterBody2D
 
 	public int ScaleStat(int stat)
 	{
-		int danger = Mathf.Max(1, PlayerVariables.Instance.DangerLevel);
+		int danger = Mathf.Max(1, PlayerVariables.Stats.DangerLevel);
 		return Mathf.RoundToInt(stat * (float)Math.Pow(ScalingPerDangerLevel, danger - 1));
 	}
 
 	public float ScaleStat(float stat)
 	{
-		int danger = Mathf.Max(1, PlayerVariables.Instance.DangerLevel);
+		int danger = Mathf.Max(1, PlayerVariables.Stats.DangerLevel);
 		return stat * (float)Math.Pow(ScalingPerDangerLevel, danger - 1);
 	}
 
@@ -107,7 +107,7 @@ public partial class BaseEnemy : CharacterBody2D
 			return;
 
 		IsDead = true;
-		PlayerVariables.Instance.Score += ScoreValue;
+		PlayerVariables.Stats.Score += ScoreValue;
 
 		GetNodeOrNull<EnemySalvage>(salvagePath)?.dropLoot();
 

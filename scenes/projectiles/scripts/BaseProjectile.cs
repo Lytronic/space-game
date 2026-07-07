@@ -84,7 +84,7 @@ public partial class BaseProjectile : Area2D
 		if (speed > 0.0f)
 			Speed = speed;
 
-		Node projectileParent = PlayerVariables.Instance.Space;
+		Node projectileParent = PlayerVariables.Space;
 		if (projectileParent == null && owner != null)
 			projectileParent = owner.GetTree()?.CurrentScene;
 

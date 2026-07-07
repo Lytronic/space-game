@@ -12,11 +12,15 @@ grow_vertical = 2
 script = ExtResource("1_5hku5")
 
 [node name="DBTestContainer" type="HBoxContainer" parent="." unique_id=215614565]
-layout_mode = 0
-offset_left = 22.0
-offset_top = 31.0
-offset_right = 762.0
-offset_bottom = 329.0
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -194.415
+offset_bottom = 171.11499
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="ContainerLeft" type="VBoxContainer" parent="DBTestContainer" unique_id=1085785731]
 layout_mode = 2
@@ -77,6 +81,34 @@ layout_mode = 2
 text = "ID        Player        Score"
 
 [node name="ItemList" type="ItemList" parent="DBTestContainer/ContainerRight" unique_id=1259979886]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 11
+
+[node name="SaveTestContainer" type="VBoxContainer" parent="DBTestContainer" unique_id=188936729]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="SaveLabel" type="Label" parent="DBTestContainer/SaveTestContainer" unique_id=1612817170]
+layout_mode = 2
+text = "Test game saves"
+horizontal_alignment = 1
+
+[node name="SaveButton" type="Button" parent="DBTestContainer/SaveTestContainer" unique_id=34966613]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Save dummy Stats"
+
+[node name="LoadButton" type="Button" parent="DBTestContainer/SaveTestContainer" unique_id=996815243]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Load latest save & open game"
+
+[node name="QueryLabel" type="Label" parent="DBTestContainer/SaveTestContainer" unique_id=921138556]
+layout_mode = 2
+text = "ID        Name"
+
+[node name="ItemList" type="ItemList" parent="DBTestContainer/SaveTestContainer" unique_id=1476538634]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_font_sizes/font_size = 11
