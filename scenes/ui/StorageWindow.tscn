@@ -1,0 +1,79 @@
+[gd_scene format=3 uid="uid://c46crb68f34dn"]
+
+[node name="MarginContainer" type="MarginContainer" unique_id=106846295]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1506247723]
+layout_mode = 2
+
+[node name="StorageBackground" type="TextureRect" parent="VBoxContainer" unique_id=1782276140]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 4.0
+
+[node name="StorageContainer" type="HBoxContainer" parent="VBoxContainer/StorageBackground" unique_id=1956016629]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0)
+size_flags_vertical = 3
+size_flags_stretch_ratio = 4.0
+
+[node name="ItemList" type="ItemList" parent="VBoxContainer/StorageBackground/StorageContainer" unique_id=1063451926]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+size_flags_stretch_ratio = 100.0
+allow_search = false
+auto_height = true
+same_column_width = true
+
+[node name="StorageScrollBar" type="VScrollBar" parent="VBoxContainer/StorageBackground/StorageContainer" unique_id=1302327107]
+layout_mode = 2
+size_flags_horizontal = 3
+rounded = true
+
+[node name="MenuBackground" type="TextureRect" parent="VBoxContainer" unique_id=744547210]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="MenuContainer" type="HBoxContainer" parent="VBoxContainer/MenuBackground" unique_id=1828858837]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SelectedItemList" type="ItemList" parent="VBoxContainer/MenuBackground/MenuContainer" unique_id=1371852463]
+layout_mode = 2
+size_flags_horizontal = 3
+allow_search = false
+same_column_width = true
+
+[node name="ConfirmButton" type="TextureButton" parent="VBoxContainer/MenuBackground/MenuContainer" unique_id=58985207]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="RewardContainer" type="HBoxContainer" parent="VBoxContainer/MenuBackground/MenuContainer" unique_id=1306736284]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Amount" type="Label" parent="VBoxContainer/MenuBackground/MenuContainer/RewardContainer" unique_id=166868956]
+layout_mode = 2
+text = "eat my ass amount"
+max_lines_visible = 1
+
+[node name="Delta" type="TextureRect" parent="VBoxContainer/MenuBackground/MenuContainer/RewardContainer" unique_id=408716201]
+layout_mode = 2
+size_flags_horizontal = 0
