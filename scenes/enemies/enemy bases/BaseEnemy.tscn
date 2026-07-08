@@ -4,9 +4,12 @@
 [ext_resource type="Script" uid="uid://rh28g860bekh" path="res://scenes/enemies/EnemyScripts/BaseEnemy.cs" id="1_xyabd"]
 [ext_resource type="Texture2D" uid="uid://tw30mygcuye6" path="res://scenes/enemies/BunniTest.png" id="2_ob6f1"]
 [ext_resource type="Script" uid="uid://crbskh2rywuhb" path="res://scenes/enemies/EnemyScripts/BaseEnemyAI.cs" id="4_kcbdb"]
+[ext_resource type="Material" uid="uid://b4oofdtxch87f" path="res://util/materials/explosion_canvas.tres" id="4_yvmku"]
+[ext_resource type="Texture2D" uid="uid://ciw1ifrmvbvw7" path="res://gfx/game/particle/explosion_grid.png" id="5_6n23a"]
+[ext_resource type="Material" uid="uid://gosildff47nc" path="res://util/materials/explosion_process.tres" id="6_sj000"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_v5y83"]
-size = Vector2(50, 50)
+[sub_resource type="CircleShape2D" id="CircleShape2D_kcbdb"]
+radius = 25.0
 
 [node name="CharacterBody2D" type="CharacterBody2D" unique_id=217211211]
 script = ExtResource("1_xyabd")
@@ -15,11 +18,24 @@ script = ExtResource("1_xyabd")
 texture = ExtResource("2_ob6f1")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=318804551]
-shape = SubResource("RectangleShape2D_v5y83")
+shape = SubResource("CircleShape2D_kcbdb")
 
 [node name="EnemySalvage" type="Node2D" parent="." unique_id=2101032576]
 script = ExtResource("1_koma5")
 metadata/_custom_type_script = "uid://bb0ka28yv7y8k"
+
+[node name="ExplosionParticle" type="GPUParticles2D" parent="." unique_id=1366384333]
+material = ExtResource("4_yvmku")
+scale = Vector2(0.5, 0.5)
+emitting = false
+amount = 1
+texture = ExtResource("5_6n23a")
+lifetime = 2.0
+preprocess = 0.62
+speed_scale = 3.9
+explosiveness = 1.0
+local_coords = true
+process_material = ExtResource("6_sj000")
 
 [node name="BaseEnemyAi" type="Node" parent="." unique_id=1676352923]
 script = ExtResource("4_kcbdb")

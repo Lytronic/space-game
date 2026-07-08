@@ -25,8 +25,16 @@ public partial class BaseEnemy : CharacterBody2D
 	[Signal]
 	public delegate void KilledEventHandler();
 
+	private GpuParticles2D _explosion;
+	private Sprite2D _sprite;
+	private CollisionShape2D _collisionShape;
+
 	public override void _Ready()
 	{
+		_explosion = GetNode<GpuParticles2D>("ExplosionParticle");
+		_sprite = GetNode<Sprite2D>("Sprite2D");
+		_collisionShape = GetNode<CollisionShape2D>("CollisionShape2D");
+		
 		if (lootTable == null || lootTable.Length == 0)
 			CreateLootTable();
 
@@ -112,7 +120,9 @@ public partial class BaseEnemy : CharacterBody2D
 		GetNodeOrNull<EnemySalvage>(salvagePath)?.dropLoot();
 
 		bool levelCleared = IsLastEnemy();
-		QueueFree();
+
+		Explode();
+		GetTree().CreateTimer(_explosion.Lifetime).Timeout += () => QueueFree();
 
 		if (levelCleared)
 		{
@@ -122,6 +132,15 @@ public partial class BaseEnemy : CharacterBody2D
 			if (currentScene?.HasMethod("OpenBuildMenuAfterDelay") == true)
 				currentScene.Call("OpenBuildMenuAfterDelay", 1.5f);
 		}
+	}
+
+	public virtual void Explode()
+	{
+		_sprite.Hide();
+		_collisionShape.SetDeferred(CollisionShape2D.PropertyName.Disabled, true);
+		_explosion.OneShot = true;
+		_explosion.Restart();
+		_explosion.Emitting = true;
 	}
 
 	private void ScaleStatsForCurrentDanger()
