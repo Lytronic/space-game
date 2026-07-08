@@ -42,7 +42,7 @@ public partial class BaseProjectile : Area2D
 		GlobalPosition += movement * Speed * dt;
 	}
 
-	public void OnBodyEntered(Node2D body)
+	public virtual void OnBodyEntered(Node2D body)
 	{
 		if (body == _owner)
 			return;

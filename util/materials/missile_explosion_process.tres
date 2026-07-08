@@ -1,0 +1,9 @@
+[gd_resource type="ParticleProcessMaterial" format=3 uid="uid://r1d7d7tvjcf7"]
+
+[resource]
+particle_flag_disable_z = true
+gravity = Vector3(0, 0, 0)
+scale_min = 0.099999994
+scale_max = 0.099999994
+anim_speed_min = 1.0
+anim_speed_max = 1.0

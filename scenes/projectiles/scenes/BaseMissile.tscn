@@ -1,0 +1,31 @@
+[gd_scene format=3 uid="uid://bjysrgtiie2t0"]
+
+[ext_resource type="PackedScene" uid="uid://c0nrrq16hsgke" path="res://scenes/projectiles/scenes/BaseProjectile.tscn" id="1_7qwx8"]
+[ext_resource type="Texture2D" uid="uid://c3ktaqj3afjla" path="res://gfx/game/projectiles/missile.png" id="2_0uh5p"]
+[ext_resource type="Script" uid="uid://dhn2uw4k3qrm5" path="res://scenes/projectiles/scripts/BaseMissile.cs" id="2_mdtsx"]
+[ext_resource type="Material" uid="uid://b4oofdtxch87f" path="res://util/materials/explosion_canvas.tres" id="3_mdtsx"]
+[ext_resource type="Texture2D" uid="uid://ciw1ifrmvbvw7" path="res://gfx/game/particle/explosion_grid.png" id="3_qvmic"]
+[ext_resource type="Material" uid="uid://r1d7d7tvjcf7" path="res://util/materials/missile_explosion_process.tres" id="6_mdtsx"]
+
+[node name="BaseProjectile" unique_id=273606959 instance=ExtResource("1_7qwx8")]
+script = ExtResource("2_mdtsx")
+Damage = 2.0
+Speed = 250.0
+Lifetime = 2.0
+
+[node name="BaseProjectileCollisionShape2D" parent="." index="0" unique_id=1962684198]
+position = Vector2(-1.7763568e-15, -2.9802322e-08)
+
+[node name="BaseProjectileSprite2D" parent="." index="1" unique_id=1899909286]
+texture = ExtResource("2_0uh5p")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="." index="2" unique_id=1180528743]
+material = ExtResource("3_mdtsx")
+emitting = false
+amount = 1
+texture = ExtResource("3_qvmic")
+lifetime = 0.25
+one_shot = true
+explosiveness = 1.0
+local_coords = true
+process_material = ExtResource("6_mdtsx")
