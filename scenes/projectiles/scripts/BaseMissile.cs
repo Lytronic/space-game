@@ -21,6 +21,7 @@ public partial class BaseMissile : BaseProjectile
 
 	public override void OnBodyEntered(Node2D body)
 	{
+		if (body == _owner) return;
 		if (_exploding) return;
 
 		_exploding = true;

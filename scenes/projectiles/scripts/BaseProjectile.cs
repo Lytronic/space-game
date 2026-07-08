@@ -12,7 +12,7 @@ public partial class BaseProjectile : Area2D
 	[Export] public bool Malicious = true;
 	[Export] public float Lifetime = 3.0f;
 
-	private Node2D _owner;
+	protected Node2D _owner;
 	private float _remainingLifetime;
 
 	public override void _Ready()
@@ -74,7 +74,7 @@ public partial class BaseProjectile : Area2D
 	/// <summary>
 	/// Places the projectile in the active play space and starts moving it.
 	/// </summary>
-	public void Launch(float damage, Vector2 direction, Vector2 startPosition, bool isMalicious, Node2D owner = null, float speed = -1.0f)
+	public virtual void Launch(float damage, Vector2 direction, Vector2 startPosition, bool isMalicious, Node2D owner = null, float speed = -1.0f)
 	{
 		Damage = damage;
 		Direction = direction.LengthSquared() > 0.0001f ? direction.Normalized() : Vector2.Right;
