@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://cgpqql7kvgolg"]
 
+[ext_resource type="Script" uid="uid://dao5apx7gdykj" path="res://scenes/ui/GameMenu.cs" id="1_7w1i5"]
 [ext_resource type="Texture2D" uid="uid://brehfrdmmlon1" path="res://gfx/gui/menu/back.png" id="1_hcv51"]
 [ext_resource type="Texture2D" uid="uid://chomid451xw22" path="res://gfx/gui/menu/back_hover.png" id="2_02n1o"]
 [ext_resource type="FontFile" uid="uid://tt7j6iuhu1kc" path="res://gfx/gui/Oxanium-Regular.ttf" id="3_cq80k"]
@@ -19,12 +20,15 @@
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 13.683472
+offset_top = 8.0
 offset_right = -71.0
 offset_bottom = -16.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+script = ExtResource("1_7w1i5")
 
 [node name="VBoxContainerLeft" type="VBoxContainer" parent="." unique_id=1619888183]
 layout_mode = 2
@@ -61,11 +65,16 @@ texture = ExtResource("4_7w1i5")
 expand_mode = 2
 
 [node name="NewGame" type="TextureButton" parent="VBoxContainerRight/TextureRect" unique_id=647831315]
-layout_mode = 0
-offset_left = 264.0
-offset_top = 71.0
-offset_right = 444.0
-offset_bottom = 371.0
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.261
+anchor_top = 0.120000005
+anchor_right = 0.43800002
+anchor_bottom = 0.628
+offset_left = -0.39300537
+offset_top = 0.0799942
+offset_right = 0.30596924
+offset_bottom = -0.14801025
 texture_normal = ExtResource("5_te1xk")
 texture_pressed = ExtResource("5_te1xk")
 texture_hover = ExtResource("6_0p2xp")
@@ -73,11 +82,16 @@ ignore_texture_size = true
 stretch_mode = 0
 
 [node name="LoadGame" type="TextureButton" parent="VBoxContainerRight/TextureRect" unique_id=865328198]
-layout_mode = 0
-offset_left = 549.0
-offset_top = 72.0
-offset_right = 729.0
-offset_bottom = 372.0
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.54200006
+anchor_top = 0.12200001
+anchor_right = 0.72
+anchor_bottom = 0.629
+offset_left = -0.046081543
+offset_top = -0.102005005
+offset_right = -0.3600464
+offset_bottom = 0.26098633
 texture_normal = ExtResource("7_cq80k")
 texture_pressed = ExtResource("7_cq80k")
 texture_hover = ExtResource("8_7w1i5")
@@ -86,11 +100,16 @@ stretch_mode = 0
 
 [node name="HighScoresButton" type="TextureButton" parent="VBoxContainerRight/TextureRect" unique_id=1538461423]
 custom_minimum_size = Vector2(64, 64)
-layout_mode = 0
-offset_left = 318.0
-offset_top = 450.0
-offset_right = 382.0
-offset_bottom = 514.0
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.314
+anchor_top = 0.76100004
+anchor_right = 0.377
+anchor_bottom = 0.87000006
+offset_left = -0.08200073
+offset_top = 0.24899292
+offset_right = 0.09899902
+offset_bottom = -0.17004395
 texture_normal = ExtResource("7_wja2o")
 texture_pressed = ExtResource("7_wja2o")
 texture_hover = ExtResource("8_5ulor")
@@ -99,11 +118,16 @@ stretch_mode = 0
 
 [node name="SettingsButton" type="TextureButton" parent="VBoxContainerRight/TextureRect" unique_id=703038177]
 custom_minimum_size = Vector2(64, 64)
-layout_mode = 0
-offset_left = 454.0
-offset_top = 450.0
-offset_right = 518.0
-offset_bottom = 514.0
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.448
+anchor_top = 0.76100004
+anchor_right = 0.51100004
+anchor_bottom = 0.87000006
+offset_left = 0.17599487
+offset_top = 0.24899292
+offset_right = 0.3569336
+offset_bottom = -0.17004395
 texture_normal = ExtResource("9_j7kvo")
 texture_pressed = ExtResource("9_j7kvo")
 texture_hover = ExtResource("10_mhgig")
@@ -112,11 +136,16 @@ stretch_mode = 0
 
 [node name="QuitButton" type="TextureButton" parent="VBoxContainerRight/TextureRect" unique_id=519813611]
 custom_minimum_size = Vector2(64, 64)
-layout_mode = 0
-offset_left = 586.0
-offset_top = 450.0
-offset_right = 650.0
-offset_bottom = 514.0
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.578
+anchor_top = 0.76100004
+anchor_right = 0.642
+anchor_bottom = 0.87000006
+offset_left = 0.4859619
+offset_top = 0.24899292
+offset_right = -0.3460083
+offset_bottom = -0.17004395
 texture_normal = ExtResource("11_6kdyd")
 texture_pressed = ExtResource("11_6kdyd")
 texture_hover = ExtResource("12_g0iai")
