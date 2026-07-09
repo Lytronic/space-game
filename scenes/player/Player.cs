@@ -19,8 +19,6 @@ public partial class Player : CharacterBody2D
 	[Export] public float AngularStopEpsilon = 0.01f;
 
 	// Speed Variables
-	[Export] public float WeaponDamage = 18.0f;
-	[Export] public float WeaponProjectileSpeed = 650.0f;
 	[Export] public float WeaponCooldown = 0.5f;
 	[Export] public float WeaponSpawnRadius = 10.0f;
 	private float _angularVelocity = 0.0f;
@@ -110,7 +108,7 @@ public partial class Player : CharacterBody2D
 
 		_explosionParticle.Emitting = false;
 
-		_projectileScene = ResourceLoader.Load<PackedScene>("res://scenes/projectiles/scenes/BaseProjectile.tscn");
+		_projectileScene = ResourceLoader.Load<PackedScene>("res://scenes/projectiles/scenes/Plasma.tscn");
 
 		_soundManager = GetNode("/root/SoundManager");
 
@@ -297,11 +295,11 @@ public partial class Player : CharacterBody2D
 
 		direction = direction.Normalized();
 		BaseProjectile projectile = _projectileScene.Instantiate<BaseProjectile>();
-		float damage = (WeaponDamage + PlayerVariables.Stats.DamageBase)
+		float damage = (projectile.Damage + PlayerVariables.Stats.DamageBase)
 			* PlayerVariables.Stats.DamageModif;
 
 		Vector2 spawnPosition = GlobalPosition + direction * WeaponSpawnRadius;
-		projectile.Launch(damage, direction, spawnPosition, false, this, WeaponProjectileSpeed);
+		projectile.Launch(damage, projectile.Speed, direction, spawnPosition, false, this);
 		_weaponCooldownRemaining = WeaponCooldown;
 	}
 

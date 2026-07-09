@@ -115,7 +115,7 @@ public partial class BaseEnemyAI : Node
 		Vector2 aimDirection = direction.Rotated(_rng.RandfRange(-AimSpreadRadians, AimSpreadRadians));
 		BaseProjectile projectile = _projectileScene.Instantiate<BaseProjectile>();
 		Vector2 spawnPosition = _enemy.GlobalPosition + aimDirection * ProjectileSpawnDistance;
-		projectile.Launch(_enemy.Damage, aimDirection, spawnPosition, true, _enemy, ProjectileSpeed);
+		projectile.Launch(aimDirection, spawnPosition, _enemy);
 
 		_fireTimer = Mathf.Max(0.1f, FireCooldown) * _rng.RandfRange(0.75f, 1.25f);
 	}

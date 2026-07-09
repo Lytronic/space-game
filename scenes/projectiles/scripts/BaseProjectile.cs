@@ -66,23 +66,28 @@ public partial class BaseProjectile : Area2D
 		}
 	}
 
-	public void SpawnProjectile(float damage, Vector2 direction)
+	/// <summary>
+	/// Places the projectile in the active play space and starts moving it.
+	/// Use this overload for the default damage and speed values of the
+	/// relevant subclass.
+	/// </summary>
+	public virtual void Launch(Vector2 direction, Vector2 startPosition, Node2D owner)
 	{
-		Launch(damage, direction, GlobalPosition, Malicious);
+		Launch(Damage, Speed, direction, startPosition, Malicious, owner);
 	}
 
 	/// <summary>
 	/// Places the projectile in the active play space and starts moving it.
+	/// This overload allows for customising damage but overrides possible
+	/// adjustments made by subclasses.
+	/// These may be modified and passed as parameters.
 	/// </summary>
-	public virtual void Launch(float damage, Vector2 direction, Vector2 startPosition, bool isMalicious, Node2D owner = null, float speed = -1.0f)
+	public virtual void Launch(float damage, float speed, Vector2 direction, Vector2 startPosition, bool isMalicious, Node2D owner)
 	{
 		Damage = damage;
 		Direction = direction.LengthSquared() > 0.0001f ? direction.Normalized() : Vector2.Right;
 		Malicious = isMalicious;
 		_owner = owner;
-
-		if (speed > 0.0f)
-			Speed = speed;
 
 		Node projectileParent = PlayerVariables.Space;
 		if (projectileParent == null && owner != null)
