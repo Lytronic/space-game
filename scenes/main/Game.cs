@@ -20,6 +20,7 @@ public partial class Game : Node2D
 	private PackedScene _asteroidScene;
 	private Array<PackedScene> _enemyScenes = [];
 
+	private Node _soundManager;
 	private int _enemiesSpawned = 0;
 	private int _enemyCount = 0;
 
@@ -29,6 +30,7 @@ public partial class Game : Node2D
 
 	public override void _Ready()
 	{
+		_soundManager = GetNode("/root/SoundManager");
 		_rng = new();
 		_rng.Randomize();
 
@@ -122,6 +124,7 @@ public partial class Game : Node2D
 	public async void OpenBuildMenuAfterDelay(float delay)
 	{
 		GD.Print("Changing scene...");
+		_soundManager.Call("Menu");
 		await ToSignal(GetTree().CreateTimer(delay), SceneTreeTimer.SignalName.Timeout);
 		GetTree().ChangeSceneToFile("res://scenes/player/BuildMenu.tscn");
 	}

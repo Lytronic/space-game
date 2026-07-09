@@ -14,6 +14,8 @@ public partial class SoundManager : Node2D
 	private AudioStreamPlayer _musicPlayer;
 	public AudioStreamPlayer[] SoundPlayerArray;
 
+	private bool _playingLoop;
+
 	public override void _Ready()
 	{
 		_musicPlayer = GetChild<AudioStreamPlayer>(0);
@@ -23,15 +25,13 @@ public partial class SoundManager : Node2D
 			SoundPlayerArray[i - 1] = GetChild<AudioStreamPlayer>(i);
 		}
 		// Add music here by adding it to the next index of the array "tracks" with the string: "res://sfx/music/YOUR_TRACK_HERE" and then updating the array size
-		tracks = new string[8];
-		tracks[0] = "res://sfx/music/End Fight.mp3";
-		tracks[1] = "res://sfx/music/Fight Final.mp3";
-		tracks[2] = "res://sfx/music/Fight.mp3";
-		tracks[3] = "res://sfx/music/Intro.mp3";
-		tracks[4] = "res://sfx/music/Outro.mp3";
-		tracks[5] = "res://sfx/music/Start Fight.mp3";
-		tracks[6] = "res://sfx/music/Workspace Final.mp3";
-		tracks[7] = "res://sfx/music/Workspace.mp3";
+		tracks = new string[6];
+		tracks[0] = "res://sfx/music/2 End Fight.mp3";
+		tracks[1] = "res://sfx/music/2 Fight Final.mp3";
+		tracks[2] = "res://sfx/music/2 Intro.mp3";
+		tracks[3] = "res://sfx/music/2 Outro.mp3";
+		tracks[4] = "res://sfx/music/2 Start Fight.mp3";
+		tracks[5] = "res://sfx/music/2 Workspace Final.mp3";
 		//PlayTrack(1); // For Test Purposes
 		
 		// Add sounds here by adding it to the next index of the array "sounds" with the string: "res://sfx/..." and then updating the array size
@@ -73,11 +73,67 @@ public partial class SoundManager : Node2D
 			
 		_musicPlayer.Play();
 	}
+	// function to play the intro
+	public async void PlayIntro()
+	{
+		_playingLoop = true;
+		PlayTrack(2);
+		while (_playingLoop == true)
+		{
+			await ToSignal(_musicPlayer, AudioStreamPlayer.SignalName.Finished);
+			PlayTrack(5);
+		}
+		//FadeOutMusic(1.0f);
+	}
+
+	// function to play the battle music
 
 	public void FadeOut(int SPindex, float FadeDuration)
 	{
 		Tween tween = CreateTween();
 		tween.TweenProperty(SoundPlayerArray[SPindex], "volume_db", -80.0f, FadeDuration);
 		tween.TweenCallback(Callable.From(() => SoundPlayerArray[SPindex].Stop()));
+	}
+	/*public void FadeOutMusic(float FadeDuration)
+	{
+		GD.Print("what");
+		Tween tween = CreateTween();
+		tween.TweenProperty(_musicPlayer, "volume_db", -80.0f, FadeDuration);
+		tween.TweenCallback(Callable.From(() => _musicPlayer.Stop()));
+	}*/
+
+	public void DisableLoop()
+	{
+		_playingLoop = false;
+	}
+
+	public void StopMusic()
+	{
+		_musicPlayer.Stop();
+	}
+
+	public async void Fight()
+	{
+		await ToSignal(_musicPlayer, AudioStreamPlayer.SignalName.Finished);
+		StopMusic();
+		PlayTrack(4);
+		_playingLoop = true;
+		while (_playingLoop == true)
+		{
+			await ToSignal(_musicPlayer, AudioStreamPlayer.SignalName.Finished);
+			PlayTrack(1);
+		}
+	}
+	public async void Menu()
+	{
+		await ToSignal(_musicPlayer, AudioStreamPlayer.SignalName.Finished);
+		StopMusic();
+		PlayTrack(0);
+		_playingLoop = true;
+		while (_playingLoop == true)
+		{
+			await ToSignal(_musicPlayer, AudioStreamPlayer.SignalName.Finished);
+			PlayTrack(5);
+		}
 	}
 }

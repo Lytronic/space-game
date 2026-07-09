@@ -4,7 +4,8 @@ using System;
 public partial class TitleScreen : VBoxContainer
 {
 	private Node _soundManager;
-	public override void _Ready()
+
+	public override async void _Ready()
 	{
 		_soundManager = GetNode("/root/SoundManager");
 
@@ -30,6 +31,7 @@ public partial class TitleScreen : VBoxContainer
 			_soundManager.Call("PlaySound", 0, 0);
 			GetTree().Quit();
 		};
+		_soundManager.Call("PlayIntro");
 	}
 	
 	public override void _UnhandledInput(InputEvent @event)
@@ -38,6 +40,7 @@ public partial class TitleScreen : VBoxContainer
 			&& (@event is InputEventKey || @event is InputEventMouseButton)
 			&& Visible)
 		{
+			_soundManager.Call("Fight");
 			GetTree().ChangeSceneToFile("res://scenes/main/game.tscn");
 		}
 	}
