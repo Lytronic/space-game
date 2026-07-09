@@ -22,7 +22,7 @@ namespace Microgravity.util
 		{
 			public override string ToString() => Value.ToString(CultureInfo.InvariantCulture);
 		}
-
+		
 		/// <value>
 		/// This is the exhaustive list of all settings options with their names and defaults.
 		/// Add new entries here!
@@ -35,7 +35,8 @@ namespace Microgravity.util
 			["controls.left"] = new Keybind("A", "Strafe left"),
 			["controls.right"] = new Keybind("D", "Strafe right"),
 			["controls.test_value"] = new Bool(false, "Test Value"),
-			["controls.test_slider"] = new Float(1.0f, -5.0f, 10.0f, "Example Slider")
+			["controls.test_slider"] = new Float(1.0f, -5.0f, 10.0f, "Example Slider"),
+			["general.player_ship"] = new Float (1.0f, 1f, 3f, "Ship Variant")
 		};
 	}
 }

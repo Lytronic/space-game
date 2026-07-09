@@ -67,7 +67,11 @@ public partial class Player : CharacterBody2D
 
 	// Sound
 	private Node _soundManager;
-		
+
+	// alternative textures
+	private Texture2D _texture1;
+	private Texture2D _texture2;
+	private Texture2D _texture3;
 
 	public override void _Ready()
 	{
@@ -109,6 +113,12 @@ public partial class Player : CharacterBody2D
 		_projectileScene = ResourceLoader.Load<PackedScene>("res://scenes/projectiles/scenes/BaseProjectile.tscn");
 
 		_soundManager = GetNode("/root/SoundManager");
+
+		//alternative ship textures loaded
+		_texture1  = GD.Load<Texture2D>("") ;
+		_texture2 = GD.Load<Texture2D>("") ;
+		_texture3 = GD.Load<Texture2D>("") ;
+		
 
 	}
 
@@ -389,5 +399,22 @@ public partial class Player : CharacterBody2D
 		_soundManager.Call("PlaySound", 3, 7);
 		
 	}
+
+	public void UpdateSprite(float sprite)
+	{
+		switch(sprite)
+		{
+			case 1 :
+				_playerShip.Texture = _texture1;
+				break;
+			case 2 : 
+				_playerShip.Texture = _texture2;
+				break;
+			case 3 :
+				_playerShip.Texture = _texture3;
+				break;
+		}
+	}
+
 	
 }
