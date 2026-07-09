@@ -4,6 +4,11 @@ using System.Collections.Generic;
 using Microgravity.util;
 using System.Globalization;
 
+/// <summary>
+/// A single page in the settings menu.
+/// Every page corresponds to a category, which defines the first part of a settings key.
+/// The option controls are then put into the SettingsList container.
+/// </summary>
 public partial class SettingsPage : ScrollContainer
 {
 	public string Category;
@@ -17,6 +22,7 @@ public partial class SettingsPage : ScrollContainer
 		{
 			if (entry.Key.Split(".")[0] == Category)
 			{
+				// Depending on the setting's type, we need different controls
 				switch (entry.Value)
 				{
 					case SettingsEntry.Keybind kb:
@@ -29,7 +35,7 @@ public partial class SettingsPage : ScrollContainer
 						CheckBox checkBox = new() { ButtonPressed = b.Value };
 						checkBox.Toggled += (toggledOn) =>
 						{
-							DB.UpdateSettingsEntry(entry.Key, b with { Value = toggledOn });
+							SettingsModel.Instance.SetEntry(entry.Key, b with { Value = toggledOn });
 						};
 
 						HBoxContainer hBoxB = new();
