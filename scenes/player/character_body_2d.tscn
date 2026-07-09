@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://bspqn8j4pcve8" path="res://gfx/game/ship.png" id="2_lxlh8"]
 [ext_resource type="Texture2D" uid="uid://0psb83uwnd6a" path="res://gfx/game/particle/flame.png" id="4_yqqr5"]
 [ext_resource type="Material" uid="uid://b4oofdtxch87f" path="res://util/materials/explosion_canvas.tres" id="5_iux3d"]
-[ext_resource type="Texture2D" uid="uid://ciw1ifrmvbvw7" path="res://gfx/game/particle/explosion_grid.png" id="6_adwln"]
+[ext_resource type="Texture2D" uid="uid://d2c3gkua0wlbx" path="res://gfx/game/particle/explosion_grid.png" id="6_adwln"]
 [ext_resource type="Material" uid="uid://gosildff47nc" path="res://util/materials/explosion_process.tres" id="7_o1d46"]
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_uoqog"]

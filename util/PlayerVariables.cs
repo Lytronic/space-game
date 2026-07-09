@@ -12,45 +12,45 @@ using Microgravity.util;
 [MemoryPackable]
 public partial class Stats
 {
-    // The player's current score
-    public int Score = 0;
+	// The player's current score
+	public int Score = 0;
 
-    // The current round the player is in
-    public int Round = 0;
+	// The current round the player is in
+	public int Round = 0;
 
-    // difficulty level scales all enemy power exponentially
-    public int DangerLevel {  get; set; } = 1;
-    public float LuckStat { get; set; } = 1;
+	// difficulty level scales all enemy power exponentially
+	public int DangerLevel {  get; set; } = 1;
+	public float LuckStat { get; set; } = 1;
 
-    //durrability stats stuff: armor and shield toughness are scaling stats reducing percentual damage scaling in a power curve | Math.Pow
-    public float MaxHealth { get; set; } = 100.0f;
-    public float CurrentHealth { get; set; } = 100.0f;
-    public float MaxShield { get; set; } = 100.0f;
-    public float CurrentShield { get; set; } = 100.0f;
-    public float ArmorToughness {  get; set; } = 1;
-    public float ShieldToughness { get; set; } = 1;
-    public int ShieldRegen {  get; set; } = 1; // regen is a flat increase in current shield that gets applied AT THE END OF EVERY FULL SECOND 
+	//durrability stats stuff: armor and shield toughness are scaling stats reducing percentual damage scaling in a power curve | Math.Pow
+	public float MaxHealth { get; set; } = 100.0f;
+	public float CurrentHealth { get; set; } = 100.0f;
+	public float MaxShield { get; set; } = 100.0f;
+	public float CurrentShield { get; set; } = 100.0f;
+	public float ArmorToughness {  get; set; } = 1;
+	public float ShieldToughness { get; set; } = 1;
+	public int ShieldRegen {  get; set; } = 1; // regen is a flat increase in current shield that gets applied AT THE END OF EVERY FULL SECOND 
 
-    //ship resources 
-    public int Ammo { get; set; } = 1;
-    public float Energy { get; set; } = 1;
-    public float MaxEnergy { get; set; } = 1;
-    public float Fuel { get; set; } = 1;
-    public float MaxFuel { get; set; } = 1;
-    public float EnergyGeneration {  get; set; } = 1;
+	//ship resources 
+	public int Ammo { get; set; } = 1;
+	public float Energy { get; set; } = 1;
+	public float MaxEnergy { get; set; } = 1;
+	public float Fuel { get; set; } = 1;
+	public float MaxFuel { get; set; } = 1;
+	public float EnergyGeneration {  get; set; } = 1;
 
-    //this should set max speed and acceleration (thrust against weight)
-    public float Thrust { get; set; } = 1; //max speed and (acceleration hindered by weight)
-    public float Weight { get; set; } = 1;
-    public float Control { get; set; } = 1;// how much the weight influences the acceleration, deceleraton and steering (0.0f - 1.0f)
+	//this should set max speed and acceleration (thrust against weight)
+	public float Thrust { get; set; } = 1; //max speed and (acceleration hindered by weight)
+	public float Weight { get; set; } = 1;
+	public float Control { get; set; } = 1;// how much the weight influences the acceleration, deceleraton and steering (0.0f - 1.0f)
 
-    //damage will be calculated through percentual damage increase and flat damage multiplication (modifier are being multiplied, mod > 1 --> increase; mod < 1 --> decrease)
-    public float DamageModif {  get; set; } = 1;
-    public float DamageBase { get; set; } = 1; //universial damage buff flat 
-    public float PhysDamage { get; set; } = 1;
-    public float PhysicalDmgMod {  get; set; } = 1; // percentage increased physical damage
-    public float EnergyDamage { get; set; } = 1;
-    public float EnergyDmgMod { get; set; } = 1; // percentage increased energy damage 
+	//damage will be calculated through percentual damage increase and flat damage multiplication (modifier are being multiplied, mod > 1 --> increase; mod < 1 --> decrease)
+	public float DamageModif {  get; set; } = 1;
+	public float DamageBase { get; set; } = 1; //universial damage buff flat 
+	public float PhysDamage { get; set; } = 1;
+	public float PhysicalDmgMod {  get; set; } = 1; // percentage increased physical damage
+	public float EnergyDamage { get; set; } = 1;
+	public float EnergyDmgMod { get; set; } = 1; // percentage increased energy damage 
 }
 
 /// <summary>
@@ -58,118 +58,118 @@ public partial class Stats
 /// </summary>
 public partial class PlayerVariables : Node
 {
-    public static PlayerVariables Instance { get; private set; }
-    public static Node Space { get; set; }
-    public static Stats Stats;
+	public static PlayerVariables Instance { get; private set; }
+	public static Node Space { get; set; }
+	public static Stats Stats;
    
-    // TODO: Serialise ShipParts, probably by storing IDs about them in Stats 
-    //this will store all the items the player has in their inventory
-    public List<ShipPart> PlayerActiveParts { get; set; } = []; // active parts that get activate an effect every time their cooldown is down or under a condition
-    public List<ShipPart> PlayerPassiveParts { get; set; } = []; // passive parts that only apply an effect on the time they are added to the ship
-    public List<ShipPart> PlayerCollectedParts { get; set; } = []; // basically the stash that the game uses to store all the loot at the end of a round (this gets reset every new round)
+	// TODO: Serialise ShipParts, probably by storing IDs about them in Stats 
+	//this will store all the items the player has in their inventory
+	public List<ShipPart> PlayerActiveParts { get; set; } = []; // active parts that get activate an effect every time their cooldown is down or under a condition
+	public List<ShipPart> PlayerPassiveParts { get; set; } = []; // passive parts that only apply an effect on the time they are added to the ship
+	public List<ShipPart> PlayerCollectedParts { get; set; } = []; // basically the stash that the game uses to store all the loot at the end of a round (this gets reset every new round)
 
-    public override void _Ready()
-    {
-        GD.Print($"New PlayerVariables object added to tree, setting Instance to {this}");
-        Instance = this;
-        Stats = new();
-    }
+	public override void _Ready()
+	{
+		GD.Print($"New PlayerVariables object added to tree, setting Instance to {this}");
+		Instance = this;
+		Stats = new();
+	}
 
-    /// <summary>
-    /// Restores the persistent player state for a fresh game run.
-    /// This is done by creating a new PlayerVariables object and deleting the old one
-    /// to make sure no state from the previous game carries over.
-    /// </summary>
-    public void ResetRun()
-    {
-        // make sure the name isn't PlayerVariables so there's no conflict with the new one
-        Instance.Name = "TO_BE_DELETED";
-    
-        // Add the new object to the tree, Instance will be set in _Ready()
-        GetNode("/root").AddChild(new PlayerVariables(){ Name = "PlayerVariables" });
+	/// <summary>
+	/// Restores the persistent player state for a fresh game run.
+	/// This is done by creating a new PlayerVariables object and deleting the old one
+	/// to make sure no state from the previous game carries over.
+	/// </summary>
+	public void ResetRun()
+	{
+		// make sure the name isn't PlayerVariables so there's no conflict with the new one
+		Instance.Name = "TO_BE_DELETED";
+	
+		// Add the new object to the tree, Instance will be set in _Ready()
+		GetNode("/root").AddChild(new PlayerVariables(){ Name = "PlayerVariables" });
 
-        this.QueueFree();
-    }
+		this.QueueFree();
+	}
 
-    /// <summary>
-    /// Load a saved Stats object and replace the current one.
-    /// </summary>
-    public static void LoadFromSave(int id)
-    {
-        Stats = DB.LoadGame(id);
-    }
-    
-    /// <summary>
-    /// Applies shield mitigation first, then armor mitigation to remaining hull damage.
-    /// </summary>
-    public void ApplyDamage(float amount)
-    {
-        if (amount <= 0.0f)
-            return;
+	/// <summary>
+	/// Load a saved Stats object and replace the current one.
+	/// </summary>
+	public static void LoadFromSave(int id)
+	{
+		Stats = DB.LoadGame(id);
+	}
+	
+	/// <summary>
+	/// Applies shield mitigation first, then armor mitigation to remaining hull damage.
+	/// </summary>
+	public void ApplyDamage(float amount)
+	{
+		if (amount <= 0.0f)
+			return;
 
-        float remainingDamage = amount;
-        float shieldToughness = Mathf.Max(0.1f, Stats.ShieldToughness);
-        float armorToughness = Mathf.Max(0.1f, Stats.ArmorToughness);
+		float remainingDamage = amount;
+		float shieldToughness = Mathf.Max(0.1f, Stats.ShieldToughness);
+		float armorToughness = Mathf.Max(0.1f, Stats.ArmorToughness);
 
-        if (Stats.CurrentShield > 0.0f)
-        {
-            float shieldDamage = remainingDamage / shieldToughness;
-            float absorbedShield = Mathf.Min(Stats.CurrentShield, shieldDamage);
-            Stats.CurrentShield -= absorbedShield;
-            remainingDamage -= absorbedShield * shieldToughness;
-        }
+		if (Stats.CurrentShield > 0.0f)
+		{
+			float shieldDamage = remainingDamage / shieldToughness;
+			float absorbedShield = Mathf.Min(Stats.CurrentShield, shieldDamage);
+			Stats.CurrentShield -= absorbedShield;
+			remainingDamage -= absorbedShield * shieldToughness;
+		}
 
-        if (remainingDamage > 0.0f)
-            Stats.CurrentHealth = Mathf.Clamp(Stats.CurrentHealth - remainingDamage / armorToughness, 0.0f, Stats.MaxHealth);
-    }
+		if (remainingDamage > 0.0f)
+			Stats.CurrentHealth = Mathf.Clamp(Stats.CurrentHealth - remainingDamage / armorToughness, 0.0f, Stats.MaxHealth);
+	}
 
-    //changing difficulty or setting difficult easily (for settings and items)
-    public void ChangeDifficulty(int change, bool setToValue)
-    {
-        if (setToValue)
-        {
-            Stats.DangerLevel = change;
-        }
-        else
-        {
-            Stats.DangerLevel += change;
-        }
-    }
+	//changing difficulty or setting difficult easily (for settings and items)
+	public void ChangeDifficulty(int change, bool setToValue)
+	{
+		if (setToValue)
+		{
+			Stats.DangerLevel = change;
+		}
+		else
+		{
+			Stats.DangerLevel += change;
+		}
+	}
 
-    //overload to more easily increase difficulty
-    public void ChangeDifficulty(int change)
-    {
-        Stats.DangerLevel += change;
-    }
+	//overload to more easily increase difficulty
+	public void ChangeDifficulty(int change)
+	{
+		Stats.DangerLevel += change;
+	}
 
-    // --------------------- managing the ship parts attatched and not attatched and activae and passive ---------------------
+	// --------------------- managing the ship parts attatched and not attatched and activae and passive ---------------------
 
-    //adding a part to the ship
-    public void AddPartToShip(ShipPart part)    
-    {
-        if(part.isActive)
-        {
-            PlayerActiveParts.Add(part);
-        }
-        if(!part.isActive)
-        {
-            PlayerPassiveParts.Add(part);
-            part.changeStats(true); //adds the part's stats to the player's stats
-        }
-        PlayerCollectedParts.Remove(part);
-        //GD.Print($"Part moved!! moved {part} from collection to ship");//debug
-    }
+	//adding a part to the ship
+	public void AddPartToShip(ShipPart part)    
+	{
+		if(part.isActive)
+		{
+			PlayerActiveParts.Add(part);
+		}
+		if(!part.isActive)
+		{
+			PlayerPassiveParts.Add(part);
+			part.changeStats(true); //adds the part's stats to the player's stats
+		}
+		PlayerCollectedParts.Remove(part);
+		//GD.Print($"Part moved!! moved {part} from collection to ship");//debug
+	}
 
-    public void RemovePartFromShip(ShipPart part)
-    {
-        if (part.isActive)
-        {
-            PlayerActiveParts.Remove(part);
-        }
-        if (!part.isActive)
-        {
-            PlayerPassiveParts.Remove(part);
-            part.changeStats(false); //subtracts the part's stats from the player stats
+	public void RemovePartFromShip(ShipPart part)
+	{
+		if (part.isActive)
+		{
+			PlayerActiveParts.Remove(part);
+		}
+		if (!part.isActive)
+		{
+			PlayerPassiveParts.Remove(part);
+			part.changeStats(false); //subtracts the part's stats from the player stats
         }
         PlayerCollectedParts.Add(part);
         //GD.Print($"Part moved!! moved {part} from ship to collection "); //debug
@@ -183,7 +183,7 @@ public partial class PlayerVariables : Node
         array = null;
     }
 
-    //if there's a DebugMultitool then I want it to test the other methods too just because I'm not making another testing scenario ^~^
+	//if there's a DebugMultitool then I want it to test the other methods too just because I'm not making another testing scenario ^~^
     private void CheckForDebugItem(ShipPart[] parts)
     {
         foreach(ShipPart part in parts)

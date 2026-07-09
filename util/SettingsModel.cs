@@ -9,6 +9,9 @@ public partial class SettingsModel : Node
 
 	public Dictionary<string, SettingsEntry> Settings { get; private set; }
 
+	[Signal]
+	public delegate void SettingChangedEventHandler(string key);
+
 	public override void _Ready()
 	{
 		Instance = this;
@@ -26,5 +29,6 @@ public partial class SettingsModel : Node
 	{
 		Settings[key] = value;
 		DB.UpdateSettingsEntry(key, value);
+		EmitSignal(SignalName.SettingChanged, key);
 	}
 }
