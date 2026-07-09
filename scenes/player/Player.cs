@@ -18,14 +18,12 @@ public partial class Player : CharacterBody2D
 	[Export] public float MaxAngularSpeed = 6.0f;
 	[Export] public float AngularStopEpsilon = 0.01f;
 
+	[Export] public BaseWeapon Weapon;
+
 	// Speed Variables
-	[Export] public float WeaponCooldown = 0.5f;
-	[Export] public float WeaponSpawnRadius = 10.0f;
 	private float _angularVelocity = 0.0f;
 	private float _throttleSpeed = 0.0f;
 	private float _strafeSpeed = 0.0f;
-	private float _weaponCooldownRemaining = 0.0f;
-	private PackedScene _projectileScene;
 
 	// Particles variables
 	[Export] public float ParticleMinThrust = 10.0f;
@@ -52,7 +50,6 @@ public partial class Player : CharacterBody2D
 	private ProgressBar _playerSpeedBar;
 	private ProgressBar _playerHealthBar;
 	private ProgressBar _playerShieldBar;
-
 
 	// Healthy variables
 	public bool IsAlive = true;
@@ -108,16 +105,12 @@ public partial class Player : CharacterBody2D
 
 		_explosionParticle.Emitting = false;
 
-		_projectileScene = ResourceLoader.Load<PackedScene>("res://scenes/projectiles/scenes/Plasma.tscn");
-
 		_soundManager = GetNode("/root/SoundManager");
 
 		//alternative ship textures loaded
 		// _texture1  = GD.Load<Texture2D>("") ;
 		// _texture2 = GD.Load<Texture2D>("") ;
 		// _texture3 = GD.Load<Texture2D>("") ;
-		
-
 	}
 
 	public override void _PhysicsProcess(double delta)
@@ -278,29 +271,19 @@ public partial class Player : CharacterBody2D
 
 	private void UpdateWeapon(float dt)
 	{
-		_weaponCooldownRemaining = Mathf.Max(0.0f, _weaponCooldownRemaining - dt);
-
 		if (Input.IsMouseButtonPressed(MouseButton.Left))
 			TryFireWeapon();
 	}
 
 	private void TryFireWeapon()
 	{
-		if (_weaponCooldownRemaining > 0.0f || _projectileScene == null)
-			return;
-
 		Vector2 direction = GetGlobalMousePosition() - GlobalPosition;
 		if (direction.LengthSquared() < 0.0001f)
 			return;
 
 		direction = direction.Normalized();
-		BaseProjectile projectile = _projectileScene.Instantiate<BaseProjectile>();
-		float damage = (projectile.Damage + PlayerVariables.Stats.DamageBase)
-			* PlayerVariables.Stats.DamageModif;
 
-		Vector2 spawnPosition = GlobalPosition + direction * WeaponSpawnRadius;
-		projectile.Launch(damage, projectile.Speed, direction, spawnPosition, false, this);
-		_weaponCooldownRemaining = WeaponCooldown;
+		Weapon.Fire(direction, PlayerVariables.Stats.DamageBase, PlayerVariables.Stats.DamageModif);
 	}
 
 	private static float UpdateAxisSpeed(float currentSpeed, float input, float maxSpeed, float accel, float delta)

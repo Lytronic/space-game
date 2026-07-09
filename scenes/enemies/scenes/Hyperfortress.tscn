@@ -2,6 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://lvlgmxl6u820" path="res://scenes/enemies/scenes/BaseEnemy.tscn" id="1_uof8h"]
 [ext_resource type="Texture2D" uid="uid://cqox3r0wip5kq" path="res://gfx/game/enemy/ship_fff.png" id="2_ns3ds"]
+[ext_resource type="Script" uid="uid://bfrt21xpdr02s" path="res://scenes/projectiles/scripts/ProjectileLauncher.cs" id="3_ns3ds"]
 
 [sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_2ocxe"]
 points = PackedVector2Array(-100, 40, -90, 10, -74, 2, -74, -19, -55, -19, -55, -11, -42, -22, -20, -52, -9, -78, 9, -78, 20, -52, 42, -22, 56, -8, 56, -19, 75, -19, 75, 5, 90, 10, 100, 40, 12, 40, 0, 80, -12, 40)
@@ -21,9 +22,27 @@ texture = ExtResource("2_ns3ds")
 scale = Vector2(0.375, 0.375)
 shape = SubResource("ConvexPolygonShape2D_2ocxe")
 
-[node name="BaseEnemyAi" parent="." index="4" unique_id=1676352923]
+[node name="MissileLauncherLeft" type="Node2D" parent="." index="4" unique_id=1060446281]
+position = Vector2(-24, -7)
+script = ExtResource("3_ns3ds")
+ProjectileScene = "uid://bjysrgtiie2t0"
+Count = 2
+Spread = 5.0
+Cooldown = 2.5
+metadata/_custom_type_script = "uid://bfrt21xpdr02s"
+
+[node name="MissileLauncherRight" type="Node2D" parent="." index="5" unique_id=1043992325]
+position = Vector2(24, -7)
+script = ExtResource("3_ns3ds")
+ProjectileScene = "uid://bjysrgtiie2t0"
+Count = 2
+Spread = 5.0
+Cooldown = 2.5
+metadata/_custom_type_script = "uid://bfrt21xpdr02s"
+
+[node name="BaseEnemyAi" parent="." index="6" unique_id=1676352923 node_paths=PackedStringArray("Primary")]
 PreferredRange = 360.0
 RetreatRange = 200.0
 FireRange = 500.0
 Acceleration = 100.0
-ProjectileScene = "uid://bjysrgtiie2t0"
+Primary = [NodePath("../MissileLauncherLeft"), NodePath("../MissileLauncherRight")]

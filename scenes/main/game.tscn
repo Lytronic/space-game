@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://dnje7c7ye2h8x"]
 
 [ext_resource type="Script" uid="uid://bhj8733dl4al1" path="res://scenes/main/Background.cs" id="1_e3dby"]
-[ext_resource type="PackedScene" uid="uid://doswvj43ed2ue" path="res://scenes/player/character_body_2d.tscn" id="1_e64el"]
+[ext_resource type="PackedScene" uid="uid://doswvj43ed2ue" path="res://scenes/player/Player.tscn" id="1_e64el"]
 [ext_resource type="Script" uid="uid://dui2stwl3ewu3" path="res://scenes/main/Game.cs" id="1_kjrfb"]
 [ext_resource type="Shader" uid="uid://40v316ef6xib" path="res://scenes/main/Background.gdshader" id="2_0rn35"]
 [ext_resource type="PackedScene" uid="uid://dbk6dtnrg4ubv" path="res://scenes/player/HUD.tscn" id="2_ma5rq"]

@@ -1,12 +1,13 @@
 [gd_scene format=3 uid="uid://doswvj43ed2ue"]
 
-[ext_resource type="Script" uid="uid://datpt1os2yqtd" path="res://scenes/player/PartsManager.cs" id="1_4bq1r"]
-[ext_resource type="Script" uid="uid://bw5ie1tyljuyd" path="res://scenes/player/Player.cs" id="1_lxlh8"]
-[ext_resource type="Texture2D" uid="uid://bspqn8j4pcve8" path="res://gfx/game/ship.png" id="2_lxlh8"]
-[ext_resource type="Texture2D" uid="uid://0psb83uwnd6a" path="res://gfx/game/particle/flame.png" id="4_yqqr5"]
-[ext_resource type="Material" uid="uid://b4oofdtxch87f" path="res://util/materials/explosion_canvas.tres" id="5_iux3d"]
-[ext_resource type="Texture2D" uid="uid://d2c3gkua0wlbx" path="res://gfx/game/particle/explosion_grid.png" id="6_adwln"]
-[ext_resource type="Material" uid="uid://gosildff47nc" path="res://util/materials/explosion_process.tres" id="7_o1d46"]
+[ext_resource type="Script" uid="uid://bw5ie1tyljuyd" path="res://scenes/player/Player.cs" id="1_v42im"]
+[ext_resource type="Texture2D" uid="uid://0psb83uwnd6a" path="res://gfx/game/particle/flame.png" id="2_pn6s4"]
+[ext_resource type="Texture2D" uid="uid://bspqn8j4pcve8" path="res://gfx/game/ship.png" id="3_7oing"]
+[ext_resource type="Script" uid="uid://datpt1os2yqtd" path="res://scenes/player/PartsManager.cs" id="4_5stf6"]
+[ext_resource type="Material" uid="uid://b4oofdtxch87f" path="res://util/materials/explosion_canvas.tres" id="5_180ig"]
+[ext_resource type="Texture2D" uid="uid://d2c3gkua0wlbx" path="res://gfx/game/particle/explosion_grid.png" id="6_20koh"]
+[ext_resource type="Material" uid="uid://gosildff47nc" path="res://util/materials/explosion_process.tres" id="7_ov1oi"]
+[ext_resource type="Script" uid="uid://bfrt21xpdr02s" path="res://scenes/projectiles/scripts/ProjectileLauncher.cs" id="8_rn7t0"]
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_uoqog"]
 particle_flag_disable_z = true
@@ -16,14 +17,15 @@ scale_max = 0.19999999
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ix64g"]
 
-[node name="Player" type="CharacterBody2D" unique_id=2075203121]
-script = ExtResource("1_lxlh8")
+[node name="Player" type="CharacterBody2D" unique_id=2075203121 node_paths=PackedStringArray("Weapon")]
+script = ExtResource("1_v42im")
+Weapon = NodePath("ProjectileLauncher")
 
 [node name="EngineParticles0" type="GPUParticles2D" parent="." unique_id=138909285]
 position = Vector2(3, 7)
 scale = Vector2(0.25, 0.25)
 amount = 6
-texture = ExtResource("4_yqqr5")
+texture = ExtResource("2_pn6s4")
 lifetime = 0.3
 local_coords = true
 process_material = SubResource("ParticleProcessMaterial_uoqog")
@@ -32,7 +34,7 @@ process_material = SubResource("ParticleProcessMaterial_uoqog")
 position = Vector2(0, 10)
 scale = Vector2(0.25, 0.25)
 amount = 6
-texture = ExtResource("4_yqqr5")
+texture = ExtResource("2_pn6s4")
 lifetime = 0.3
 local_coords = true
 process_material = SubResource("ParticleProcessMaterial_uoqog")
@@ -41,7 +43,7 @@ process_material = SubResource("ParticleProcessMaterial_uoqog")
 position = Vector2(-3, 7)
 scale = Vector2(0.25, 0.25)
 amount = 6
-texture = ExtResource("4_yqqr5")
+texture = ExtResource("2_pn6s4")
 lifetime = 0.3
 local_coords = true
 process_material = SubResource("ParticleProcessMaterial_uoqog")
@@ -49,26 +51,33 @@ process_material = SubResource("ParticleProcessMaterial_uoqog")
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=366547732]
 position = Vector2(-4.7683716e-07, 0)
 scale = Vector2(0.02, 0.02)
-texture = ExtResource("2_lxlh8")
+texture = ExtResource("3_7oing")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2010192033]
 shape = SubResource("CircleShape2D_ix64g")
 
 [node name="PartsManager" type="Node2D" parent="." unique_id=1752467098]
-script = ExtResource("1_4bq1r")
+script = ExtResource("4_5stf6")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1566197548]
 zoom = Vector2(3, 3)
 
 [node name="ExplosionParticle" type="GPUParticles2D" parent="." unique_id=386674573]
-material = ExtResource("5_iux3d")
+material = ExtResource("5_180ig")
 scale = Vector2(0.5, 0.5)
 emitting = false
 amount = 1
-texture = ExtResource("6_adwln")
+texture = ExtResource("6_20koh")
 lifetime = 2.0
 preprocess = 0.62
 speed_scale = 3.9
 explosiveness = 1.0
 local_coords = true
-process_material = ExtResource("7_o1d46")
+process_material = ExtResource("7_ov1oi")
+
+[node name="ProjectileLauncher" type="Node2D" parent="." unique_id=690533528]
+position = Vector2(0, -9)
+script = ExtResource("8_rn7t0")
+ProjectileScene = "uid://3gkk6vgooyrt"
+Cooldown = 0.1
+metadata/_custom_type_script = "uid://bfrt21xpdr02s"

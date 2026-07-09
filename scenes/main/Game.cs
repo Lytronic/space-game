@@ -119,30 +119,6 @@ public partial class Game : Node2D
 		}
 	}
 
-	private void ConfigureEnemy(BaseEnemy enemy, int index)
-	{
-		int archetype = index % 4;
-
-		// BaseEnemy applies the danger multiplier when it enters the tree.
-		enemy.Health = 28;
-		enemy.Damage = 7.0f;
-		enemy.Speed = 120.0f;
-		enemy.Resistance = 0.08f;
-
-
-		Sprite2D sprite = enemy.GetNodeOrNull<Sprite2D>("Sprite2D");
-
-		BaseEnemyAI ai = enemy.GetNodeOrNull<BaseEnemyAI>("BaseEnemyAi");
-		if (ai != null)
-		{
-			ai.PreferredRange = _rng.RandfRange(230.0f, 310.0f);
-			ai.RetreatRange = _rng.RandfRange(115.0f, 155.0f);
-			ai.FireRange = 430.0f;
-			ai.FireCooldown = _rng.RandfRange(1.0f, 1.7f);
-			ai.AimSpreadRadians = _rng.RandfRange(0.04f, 0.12f);
-		}
-	}
-
 	public async void OpenBuildMenuAfterDelay(float delay)
 	{
 		GD.Print("Changing scene...");
@@ -154,7 +130,7 @@ public partial class Game : Node2D
 	/// Get the minimum round an enemy spawns in without instantiating it.
 	/// It is stored in the respective scene file and can be edited in the Godot editor.
 	/// </summary>
-	private int GetMinimumRound(PackedScene scene)
+	private static int GetMinimumRound(PackedScene scene)
 	{
 		var state = scene.GetState();
 

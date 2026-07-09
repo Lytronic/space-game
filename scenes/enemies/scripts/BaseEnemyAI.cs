@@ -1,4 +1,5 @@
 using Godot;
+using Godot.Collections;
 
 /// <summary>
 /// Enemy AI that keeps range, strafes, and fires at the player.
@@ -14,28 +15,21 @@ public partial class BaseEnemyAI : Node
 	[Export] public float FireRange = 430.0f;
 	[Export] public float Acceleration = 520.0f;
 
-	[ExportCategory("Projectile")]
-	[Export(PropertyHint.File, "*.tscn")]
-	public string ProjectileScene;
-
-	[Export] public float FireCooldown = 1.25f;
-	[Export] public float ProjectileSpawnDistance = 30.0f;
-	[Export] public float AimSpreadRadians = 0.08f;
+	[ExportCategory("Weapons")]
+	[Export] public Array<BaseWeapon> Primary;
+	[Export] public Array<BaseWeapon> Secondary;
+	[Export] public Array<BaseWeapon> Tertiary;
 
 	private BaseEnemy _enemy;
 	private Player _target;
 	private PackedScene _projectileScene;
 	private readonly RandomNumberGenerator _rng = new();
-	private float _fireTimer;
-	private float _contactDamageTimer;
 	private int _strafeDirection = 1;
 
 	public override void _Ready()
 	{
 		_enemy = GetParent<BaseEnemy>();
-		_projectileScene = ResourceLoader.Load<PackedScene>(ProjectileScene);
 		_rng.Randomize();
-		_fireTimer = _rng.RandfRange(0.1f, Mathf.Max(0.1f, FireCooldown));
 		_strafeDirection = _rng.RandiRange(0, 1) == 0 ? -1 : 1;
 		AcquireTarget();
 	}
@@ -57,9 +51,6 @@ public partial class BaseEnemyAI : Node
 			return;
 		}
 
-		_fireTimer -= dt;
-		_contactDamageTimer -= dt;
-
 		Vector2 toTarget = _target.GlobalPosition - _enemy.GlobalPosition;
 		float distance = toTarget.Length();
 		if (distance * distance < MinDistanceSquared)
@@ -67,7 +58,7 @@ public partial class BaseEnemyAI : Node
 
 		Vector2 direction = toTarget / distance;
 		UpdateMovement(direction, distance, dt);
-		UpdateShooting(direction, distance);
+		FireWeapons(distance);
 	}
 
 	private void AcquireTarget()
@@ -110,16 +101,33 @@ public partial class BaseEnemyAI : Node
 		_enemy.Rotation = Mathf.LerpAngle(_enemy.Rotation, targetRotation, Mathf.Clamp(8.0f * dt, 0.0f, 1.0f));
 	}
 
-	private void UpdateShooting(Vector2 direction, float distance)
+	private void FireWeapons(float distance)
 	{
-		if (_fireTimer > 0.0f || distance > FireRange || _projectileScene == null)
-			return;
+		if (distance > FireRange) return;
 
-		Vector2 aimDirection = direction.Rotated(_rng.RandfRange(-AimSpreadRadians, AimSpreadRadians));
-		BaseProjectile projectile = _projectileScene.Instantiate<BaseProjectile>();
-		Vector2 spawnPosition = _enemy.GlobalPosition + aimDirection * ProjectileSpawnDistance;
-		projectile.Launch(aimDirection, spawnPosition, _enemy);
+		// try to fire a random weapon each time this is called
+		Array<BaseWeapon> currentWeapon = Primary;
+		
+		switch (_rng.RandiRange(0, 2))
+		{
+			case 0:
+				currentWeapon = Primary;
+				break;
+			case 1:
+				if (Secondary == null) break;
+				currentWeapon = Secondary;
+				break;
+			case 2:
+				if (Tertiary == null) break;
+				currentWeapon = Tertiary;
+				break;
+		}
+		
+		foreach (var weapon in currentWeapon)
+		{
+			if (weapon.CooldownTimer.TimeLeft > 0) continue;
 
-		_fireTimer = Mathf.Max(0.1f, FireCooldown) * _rng.RandfRange(0.75f, 1.25f);
+			weapon.Fire((_target.GlobalPosition - weapon.GlobalPosition).Normalized(), _enemy.Damage, 1.0f);
+		}
 	}
 }
