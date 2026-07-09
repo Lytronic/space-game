@@ -25,5 +25,5 @@ shape = SubResource("ConvexPolygonShape2D_2ocxe")
 PreferredRange = 360.0
 RetreatRange = 200.0
 FireRange = 500.0
-Acceleration = 150.0
+Acceleration = 100.0
 ProjectileScene = "uid://bjysrgtiie2t0"

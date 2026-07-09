@@ -101,7 +101,6 @@ public partial class Game : Node2D
 			do
 			{
 				index = _rng.RandiRange(0, _enemyScenes.Count - 1);
-				GD.Print($"INDEX: {index}");
 			}
 			// reroll if the chosen enemy cannot spawn yet
 			while (GetMinimumRound(_enemyScenes[index]) > PlayerVariables.Stats.Round);
@@ -112,7 +111,7 @@ public partial class Game : Node2D
 			enemy.Killed += () => _enemyCount--;
 
 			float angle = (Mathf.Pi * 2.0f * i / amount) + _rng.RandfRange(-0.35f, 0.35f);
-			float radius = _rng.RandfRange(420.0f, 650.0f + danger * 25.0f);
+			float radius = _rng.RandfRange(420.0f, 650.0f + danger * 5.0f);
 			enemy.Position = center + Vector2.Right.Rotated(angle) * radius;
 			PlayerVariables.Space.AddChild(enemy);
 
