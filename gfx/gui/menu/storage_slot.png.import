@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dm7yw5hceao5u"
-path="res://.godot/imported/turret_fff_1.png-4daf938e853f920e5a72772fb8fc584c.ctex"
+uid="uid://d2mac3xsf0kyb"
+path="res://.godot/imported/storage_slot.png-d2c62e0279dd7b9a86a74bc8df31a1ec.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://gfx/game/boss/turret_fff_1.png"
-dest_files=["res://.godot/imported/turret_fff_1.png-4daf938e853f920e5a72772fb8fc584c.ctex"]
+source_file="res://gfx/gui/menu/storage_slot.png"
+dest_files=["res://.godot/imported/storage_slot.png-d2c62e0279dd7b9a86a74bc8df31a1ec.ctex"]
 
 [params]
 

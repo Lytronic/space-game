@@ -53,7 +53,7 @@ theme_override_font_sizes/font_size = 32
 text = "M I C R O G R A V I T Y"
 horizontal_alignment = 1
 
-[node name="Control" type="Control" parent="VBoxContainerRight" unique_id=838362193]
+[node name="Spacer" type="Control" parent="VBoxContainerRight" unique_id=838362193]
 layout_mode = 2
 
 [node name="TextureRect" type="TextureRect" parent="VBoxContainerRight" unique_id=1111380132]
@@ -81,6 +81,24 @@ texture_hover = ExtResource("6_0p2xp")
 ignore_texture_size = true
 stretch_mode = 0
 
+[node name="Label" type="Label" parent="VBoxContainerRight/TextureRect/NewGame" unique_id=1562703580]
+visible = false
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -65.79047
+offset_top = -75.97601
+offset_right = 61.180054
+offset_bottom = -31.016052
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("3_cq80k")
+theme_override_font_sizes/font_size = 24
+text = "NEW GAME"
+
 [node name="LoadGame" type="TextureButton" parent="VBoxContainerRight/TextureRect" unique_id=865328198]
 layout_mode = 1
 anchors_preset = -1
@@ -97,6 +115,24 @@ texture_pressed = ExtResource("7_cq80k")
 texture_hover = ExtResource("8_7w1i5")
 ignore_texture_size = true
 stretch_mode = 0
+
+[node name="Label" type="Label" parent="VBoxContainerRight/TextureRect/LoadGame" unique_id=911758459]
+visible = false
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -66.84946
+offset_top = -74.96796
+offset_right = 66.15054
+offset_bottom = -30.007996
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("3_cq80k")
+theme_override_font_sizes/font_size = 24
+text = "LOAD GAME"
 
 [node name="HighScoresButton" type="TextureButton" parent="VBoxContainerRight/TextureRect" unique_id=1538461423]
 custom_minimum_size = Vector2(64, 64)

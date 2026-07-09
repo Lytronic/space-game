@@ -170,33 +170,33 @@ public partial class PlayerVariables : Node
 		{
 			PlayerPassiveParts.Remove(part);
 			part.changeStats(false); //subtracts the part's stats from the player stats
-        }
-        PlayerCollectedParts.Add(part);
-        //GD.Print($"Part moved!! moved {part} from ship to collection "); //debug
-    }
+		}
+		PlayerCollectedParts.Add(part);
+		//GD.Print($"Part moved!! moved {part} from ship to collection "); //debug
+	}
 
-    public void AddLootToCollection(ShipPart[] array)
-    {
-        PlayerCollectedParts.AddRange(array);
-        GD.Print($"added parts from loot {array} to collection");
-        CheckForDebugItem(array);
-        array = null;
-    }
+	public void AddLootToCollection(ShipPart[] array)
+	{
+		PlayerCollectedParts.AddRange(array);
+		GD.Print($"added parts from loot {array} to collection");
+		CheckForDebugItem(array);
+		array = null;
+	}
 
 	//if there's a DebugMultitool then I want it to test the other methods too just because I'm not making another testing scenario ^~^
-    private void CheckForDebugItem(ShipPart[] parts)
-    {
-        foreach(ShipPart part in parts)
-        {
-            if(part is DebugMultitool debugItem)
-            {
-                GD.Print("Debug Multitool detected, beginning testing ");
-                AddPartToShip(debugItem);
-                
-                RemovePartFromShip(debugItem);
-            }
-        }
-    }
+	private void CheckForDebugItem(ShipPart[] parts)
+	{
+		foreach(ShipPart part in parts)
+		{
+			if(part is DebugMultitool debugItem)
+			{
+				GD.Print("Debug Multitool detected, beginning testing ");
+				AddPartToShip(debugItem);
+				
+				RemovePartFromShip(debugItem);
+			}
+		}
+	}
 
 
 }

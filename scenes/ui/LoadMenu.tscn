@@ -1,0 +1,122 @@
+[gd_scene format=3 uid="uid://b0s2cbcl8v532"]
+
+[ext_resource type="Script" uid="uid://b3rdnh4q3hb5f" path="res://scenes/ui/LoadMenu.cs" id="1_5l8nf"]
+[ext_resource type="Texture2D" uid="uid://brehfrdmmlon1" path="res://gfx/gui/menu/back.png" id="1_rq5x1"]
+[ext_resource type="Texture2D" uid="uid://chomid451xw22" path="res://gfx/gui/menu/back_hover.png" id="2_u1uwq"]
+[ext_resource type="FontFile" uid="uid://tt7j6iuhu1kc" path="res://gfx/gui/Oxanium-Regular.ttf" id="3_u1uwq"]
+[ext_resource type="Texture2D" uid="uid://vqy6dmj1yju6" path="res://gfx/gui/menu/panel_basic.png" id="4_4p6m4"]
+[ext_resource type="Texture2D" uid="uid://c34wyifbyxdro" path="res://gfx/gui/menu/option_pause.png" id="6_30gmq"]
+[ext_resource type="Texture2D" uid="uid://fh4unt4slaa7" path="res://gfx/gui/menu/option_pause_hover.png" id="7_eutqs"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ccjhf"]
+
+[node name="LoadMenu" type="HBoxContainer" unique_id=374265641]
+offset_left = 13.683
+offset_top = 8.0
+offset_right = 1081.0
+offset_bottom = 642.0
+script = ExtResource("1_5l8nf")
+
+[node name="VBoxContainerLeft" type="VBoxContainer" parent="." unique_id=1705762875]
+layout_mode = 2
+
+[node name="BackButton" type="TextureButton" parent="VBoxContainerLeft" unique_id=244298836]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture_normal = ExtResource("1_rq5x1")
+texture_pressed = ExtResource("1_rq5x1")
+texture_hover = ExtResource("2_u1uwq")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="VBoxContainerRight" type="VBoxContainer" parent="." unique_id=860529686]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="VBoxContainerRight" unique_id=1111379247]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_u1uwq")
+theme_override_font_sizes/font_size = 32
+text = "LOAD GAME"
+horizontal_alignment = 1
+
+[node name="Spacer" type="Control" parent="VBoxContainerRight" unique_id=1692087176]
+layout_mode = 2
+
+[node name="SaveListBg" type="TextureRect" parent="VBoxContainerRight" unique_id=1975080587]
+clip_children = 2
+y_sort_enabled = true
+layout_mode = 2
+size_flags_vertical = 3
+texture = ExtResource("4_4p6m4")
+expand_mode = 2
+
+[node name="ItemList" type="ItemList" parent="VBoxContainerRight/SaveListBg" unique_id=666606256]
+layout_mode = 0
+offset_left = 23.317001
+offset_top = 93.0
+offset_right = 975.317
+offset_bottom = 567.0
+theme_override_styles/panel = SubResource("StyleBoxEmpty_ccjhf")
+
+[node name="LoadButton" type="TextureButton" parent="VBoxContainerRight/SaveListBg" unique_id=1627941735]
+layout_mode = 0
+offset_left = 92.0
+offset_top = 30.0
+offset_right = 465.0
+offset_bottom = 81.0
+texture_normal = ExtResource("6_30gmq")
+texture_pressed = ExtResource("6_30gmq")
+texture_hover = ExtResource("7_eutqs")
+ignore_texture_size = true
+stretch_mode = 4
+
+[node name="Label" type="Label" parent="VBoxContainerRight/SaveListBg/LoadButton" unique_id=203758991]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -146.65851
+offset_top = -17.5
+offset_right = 146.65851
+offset_bottom = 17.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("3_u1uwq")
+theme_override_font_sizes/font_size = 28
+text = "LOAD SAVE"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="DeleteButton" type="TextureButton" parent="VBoxContainerRight/SaveListBg" unique_id=37354056]
+layout_mode = 0
+offset_left = 545.0
+offset_top = 30.0
+offset_right = 918.0
+offset_bottom = 81.0
+texture_normal = ExtResource("6_30gmq")
+texture_pressed = ExtResource("6_30gmq")
+texture_hover = ExtResource("7_eutqs")
+ignore_texture_size = true
+stretch_mode = 4
+
+[node name="Label" type="Label" parent="VBoxContainerRight/SaveListBg/DeleteButton" unique_id=2087545644]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -146.65851
+offset_top = -17.5
+offset_right = 146.65851
+offset_bottom = 17.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("3_u1uwq")
+theme_override_font_sizes/font_size = 28
+text = "DELETE SAVE"
+horizontal_alignment = 1
+vertical_alignment = 1
