@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://brchdmsforia"]
 
-[ext_resource type="Script" uid="uid://cw3j4lco3ehxx" path="res://scenes/enemies/EnemyScripts/EntityManager.cs" id="1_1lf36"]
+[ext_resource type="Script" uid="uid://cw3j4lco3ehxx" path="res://scenes/enemies/scripts/EntityManager.cs" id="1_1lf36"]
 
 [node name="EntityManager" type="Node2D" unique_id=1311935605]
 script = ExtResource("1_1lf36")

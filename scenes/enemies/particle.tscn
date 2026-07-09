@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bppgg50siqm2s"]
 
 [ext_resource type="Script" uid="uid://cryt77cmkwj3v" path="res://scenes/enemies/Particle.cs" id="1_716y0"]
-[ext_resource type="Texture2D" uid="uid://ciw1ifrmvbvw7" path="res://gfx/game/particle/explosion_grid.png" id="1_bga2l"]
+[ext_resource type="Texture2D" uid="uid://d2c3gkua0wlbx" path="res://gfx/game/particle/explosion_grid.png" id="1_bga2l"]
 [ext_resource type="Material" uid="uid://b4oofdtxch87f" path="res://util/materials/explosion_canvas.tres" id="3_a7d24"]
 [ext_resource type="Material" uid="uid://gosildff47nc" path="res://util/materials/explosion_process.tres" id="4_uk4c8"]
 

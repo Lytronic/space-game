@@ -19,6 +19,7 @@ public partial class BaseEnemy : CharacterBody2D
 	[Export] public float Damage = 8.0f;
 	[Export] public float Resistance = 0.1f;
 	[Export] public int ScoreValue = 100;
+	[Export] public int MinimumRound = 0;
 
 	public bool IsDead { get; private set; } = false;
 

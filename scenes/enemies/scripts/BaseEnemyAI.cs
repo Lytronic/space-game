@@ -8,16 +8,19 @@ public partial class BaseEnemyAI : Node
 {
 	private const float MinDistanceSquared = 0.0001f;
 
+	[ExportCategory("Movement")]
 	[Export] public float PreferredRange = 260.0f;
 	[Export] public float RetreatRange = 145.0f;
 	[Export] public float FireRange = 430.0f;
 	[Export] public float Acceleration = 520.0f;
+
+	[ExportCategory("Projectile")]
+	[Export(PropertyHint.File, "*.tscn")]
+	public string ProjectileScene;
+
 	[Export] public float FireCooldown = 1.25f;
-	[Export] public float ProjectileSpeed = 330.0f;
 	[Export] public float ProjectileSpawnDistance = 30.0f;
 	[Export] public float AimSpreadRadians = 0.08f;
-	[Export] public float ContactDamageRange = 42.0f;
-	[Export] public float ContactDamageCooldown = 0.8f;
 
 	private BaseEnemy _enemy;
 	private Player _target;
@@ -30,7 +33,7 @@ public partial class BaseEnemyAI : Node
 	public override void _Ready()
 	{
 		_enemy = GetParent<BaseEnemy>();
-		_projectileScene = ResourceLoader.Load<PackedScene>("res://scenes/projectiles/scenes/BaseProjectile.tscn");
+		_projectileScene = ResourceLoader.Load<PackedScene>(ProjectileScene);
 		_rng.Randomize();
 		_fireTimer = _rng.RandfRange(0.1f, Mathf.Max(0.1f, FireCooldown));
 		_strafeDirection = _rng.RandiRange(0, 1) == 0 ? -1 : 1;

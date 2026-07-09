@@ -1,20 +1,29 @@
 [gd_scene format=3 uid="uid://dt3sbt3meih45"]
 
-[ext_resource type="PackedScene" uid="uid://lvlgmxl6u820" path="res://scenes/enemies/enemy bases/BaseEnemy.tscn" id="1_36b7u"]
-[ext_resource type="Texture2D" uid="uid://cqox3r0wip5kq" path="res://gfx/game/enemy/ship_fff.png" id="2_roqa8"]
+[ext_resource type="PackedScene" uid="uid://lvlgmxl6u820" path="res://scenes/enemies/scenes/BaseEnemy.tscn" id="1_uof8h"]
+[ext_resource type="Texture2D" uid="uid://cqox3r0wip5kq" path="res://gfx/game/enemy/ship_fff.png" id="2_ns3ds"]
 
 [sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_2ocxe"]
 points = PackedVector2Array(-100, 40, -90, 10, -74, 2, -74, -19, -55, -19, -55, -11, -42, -22, -20, -52, -9, -78, 9, -78, 20, -52, 42, -22, 56, -8, 56, -19, 75, -19, 75, 5, 90, 10, 100, 40, 12, 40, 0, 80, -12, 40)
 
-[node name="CharacterBody2D" unique_id=217211211 instance=ExtResource("1_36b7u")]
+[node name="CharacterBody2D" unique_id=217211211 instance=ExtResource("1_uof8h")]
 Speed = 250.0
 Health = 100
 ScoreValue = 50
+MinimumRound = 3
 metadata/_edit_horizontal_guides_ = [-11.0, -19.0, 5.0]
 
 [node name="Sprite2D" parent="." index="0" unique_id=1972208063]
-scale = Vector2(0.2, 0.2)
-texture = ExtResource("2_roqa8")
+scale = Vector2(0.075, 0.075)
+texture = ExtResource("2_ns3ds")
 
 [node name="CollisionShape2D" parent="." index="1" unique_id=318804551]
+scale = Vector2(0.375, 0.375)
 shape = SubResource("ConvexPolygonShape2D_2ocxe")
+
+[node name="BaseEnemyAi" parent="." index="4" unique_id=1676352923]
+PreferredRange = 360.0
+RetreatRange = 200.0
+FireRange = 500.0
+Acceleration = 150.0
+ProjectileScene = "uid://bjysrgtiie2t0"

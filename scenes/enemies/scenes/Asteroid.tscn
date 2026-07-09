@@ -1,13 +1,13 @@
 [gd_scene format=3 uid="uid://dwbqnlqgaat7s"]
 
-[ext_resource type="Script" uid="uid://b6tpq3xonkcjx" path="res://scenes/enemies/AsteroidEnemy.cs" id="1_kd0ca"]
+[ext_resource type="Script" uid="uid://c65bhungbac8o" path="res://scenes/enemies/scripts/Asteroid.cs" id="1_cqiqn"]
 [ext_resource type="Texture2D" uid="uid://xorxhbpvtjwp" path="res://gfx/game/asteroids/gold/asteroid_gold_1.png" id="2_5qbm0"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_kd0ca"]
 radius = 20.0
 
 [node name="AsteroidEnemy" type="RigidBody2D" unique_id=560550229]
-script = ExtResource("1_kd0ca")
+script = ExtResource("1_cqiqn")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=226471751]
 scale = Vector2(0.1, 0.1)

@@ -1,11 +1,11 @@
 [gd_scene format=3 uid="uid://lvlgmxl6u820"]
 
-[ext_resource type="Script" uid="uid://bb0ka28yv7y8k" path="res://scenes/enemies/EnemyScripts/EnemySalvage.cs" id="1_koma5"]
-[ext_resource type="Script" uid="uid://rh28g860bekh" path="res://scenes/enemies/EnemyScripts/BaseEnemy.cs" id="1_xyabd"]
+[ext_resource type="Script" uid="uid://bb0ka28yv7y8k" path="res://scenes/enemies/scripts/EnemySalvage.cs" id="1_koma5"]
+[ext_resource type="Script" uid="uid://rh28g860bekh" path="res://scenes/enemies/scripts/BaseEnemy.cs" id="1_xyabd"]
 [ext_resource type="Texture2D" uid="uid://tw30mygcuye6" path="res://scenes/enemies/BunniTest.png" id="2_ob6f1"]
-[ext_resource type="Script" uid="uid://crbskh2rywuhb" path="res://scenes/enemies/EnemyScripts/BaseEnemyAI.cs" id="4_kcbdb"]
+[ext_resource type="Script" uid="uid://crbskh2rywuhb" path="res://scenes/enemies/scripts/BaseEnemyAI.cs" id="4_kcbdb"]
 [ext_resource type="Material" uid="uid://b4oofdtxch87f" path="res://util/materials/explosion_canvas.tres" id="4_yvmku"]
-[ext_resource type="Texture2D" uid="uid://ciw1ifrmvbvw7" path="res://gfx/game/particle/explosion_grid.png" id="5_6n23a"]
+[ext_resource type="Texture2D" uid="uid://d2c3gkua0wlbx" path="res://gfx/game/particle/explosion_grid.png" id="5_6n23a"]
 [ext_resource type="Material" uid="uid://gosildff47nc" path="res://util/materials/explosion_process.tres" id="6_sj000"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_kcbdb"]
@@ -39,4 +39,5 @@ process_material = ExtResource("6_sj000")
 
 [node name="BaseEnemyAi" type="Node" parent="." unique_id=1676352923]
 script = ExtResource("4_kcbdb")
+ProjectileScene = "uid://c0nrrq16hsgke"
 metadata/_custom_type_script = "uid://crbskh2rywuhb"

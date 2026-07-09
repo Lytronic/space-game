@@ -113,9 +113,9 @@ public partial class Player : CharacterBody2D
 		_soundManager = GetNode("/root/SoundManager");
 
 		//alternative ship textures loaded
-		_texture1  = GD.Load<Texture2D>("") ;
-		_texture2 = GD.Load<Texture2D>("") ;
-		_texture3 = GD.Load<Texture2D>("") ;
+		// _texture1  = GD.Load<Texture2D>("") ;
+		// _texture2 = GD.Load<Texture2D>("") ;
+		// _texture3 = GD.Load<Texture2D>("") ;
 		
 
 	}

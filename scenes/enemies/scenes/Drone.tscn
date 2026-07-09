@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://lge1q2ow72pn"]
+
+[ext_resource type="PackedScene" uid="uid://lvlgmxl6u820" path="res://scenes/enemies/scenes/BaseEnemy.tscn" id="1_odoqa"]
+[ext_resource type="Texture2D" uid="uid://d01ljntakxh6l" path="res://gfx/game/enemy/drone.png" id="2_ter0w"]
+
+[sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_5b617"]
+points = PackedVector2Array(-50, 15, -10, -15, 0, -38, 10, -15, 50, 15, 15, 10, 22, 35, -22, 35, -15, 10)
+
+[node name="CharacterBody2D" unique_id=217211211 instance=ExtResource("1_odoqa")]
+Speed = 250.0
+Health = 15
+Damage = 5.0
+ScoreValue = 25
+
+[node name="Sprite2D" parent="." index="0" unique_id=1972208063]
+scale = Vector2(0.04, 0.04)
+texture = ExtResource("2_ter0w")
+
+[node name="CollisionShape2D" parent="." index="1" unique_id=318804551]
+scale = Vector2(0.4, 0.4)
+shape = SubResource("ConvexPolygonShape2D_5b617")
+
+[node name="BaseEnemyAi" parent="." index="4" unique_id=1676352923]
+ProjectileScene = "uid://bjysrgtiie2t0"

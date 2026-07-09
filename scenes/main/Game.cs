@@ -1,23 +1,24 @@
+using System.Collections.Generic;
+using System.Linq;
 using Godot;
+using Godot.Collections;
 
 public partial class Game : Node2D
 {
-	private const string AsteroidScenePath = "res://scenes/enemies/AsteroidEnemy.tscn";
-	private const string EnemyScenePath = "res://scenes/enemies/enemy bases/BaseEnemy.tscn";
+	private const string AsteroidScenePath = "res://scenes/enemies/scenes/Asteroid.tscn";
 
 	[Export] public int AsteroidCount = 55;
 
-	private static readonly string[] EnemyTexturePaths =
-	[
-		"res://gfx/game/enemy/drone.png",
-		"res://gfx/game/enemy/ship_ccc.png",
-		"res://gfx/game/enemy/ship_eee.png",
-		"res://gfx/game/enemy/ship_fff.png"
-	];
+	// This should show up as an array of selectable files in the editor
+	// but it doesn't, which is a bug outside our control:
+	// https://github.com/godotengine/godot-docs/issues/11655
+	//
+	// As long as this isn't fixed, we need to paste the paths manually like cave men.
+	[Export(PropertyHint.File, "*.tscn")]
+	public Array<string> Enemies;
 
 	private PackedScene _asteroidScene;
-	private PackedScene _enemyScene;
-	private Texture2D[] _enemyTextures = [];
+	private Array<PackedScene> _enemyScenes = [];
 
 	private int _enemiesSpawned = 0;
 	private int _enemyCount = 0;
@@ -36,9 +37,12 @@ public partial class Game : Node2D
 		_progressBar = GetNode<ProgressBar>("CanvasLayer/HUD/RoundIndicator/ProgressBar");
 
 		_asteroidScene = ResourceLoader.Load<PackedScene>(AsteroidScenePath);
-		_enemyScene = ResourceLoader.Load<PackedScene>(EnemyScenePath);
-		_enemyTextures = LoadEnemyTextures();
 
+		foreach (var enemy in Enemies)
+		{
+			_enemyScenes.Add(ResourceLoader.Load<PackedScene>(enemy));
+		}
+		
 		SpawnAsteroids();
 
 		SetupRound();
@@ -65,7 +69,7 @@ public partial class Game : Node2D
 
 		for (int i = 0; i < AsteroidCount; i++)
 		{
-			AsteroidEnemy asteroid = _asteroidScene.Instantiate<AsteroidEnemy>();
+			Asteroid asteroid = _asteroidScene.Instantiate<Asteroid>();
 			float angle = _rng.RandfRange(0.0f, Mathf.Pi * 2.0f);
 			float radius = _rng.RandfRange(260.0f, 1200.0f);
 			asteroid.Position = Vector2.Right.Rotated(angle) * radius;
@@ -86,17 +90,26 @@ public partial class Game : Node2D
 
 	private void SpawnEnemyWave(int amount)
 	{
-		if (_enemyScene == null)
-			return;
-
 		Node2D player = GetNodeOrNull<Node2D>("Player");
 		Vector2 center = player?.GlobalPosition ?? Vector2.Zero;
 		int danger = PlayerVariables.Stats.DangerLevel;
 
 		for (int i = 0; i < amount; i++)
 		{
-			BaseEnemy enemy = _enemyScene.Instantiate<BaseEnemy>();
-			ConfigureEnemy(enemy, i);
+			int index;
+			// choose a random enemy from the loaded scenes
+			do
+			{
+				index = _rng.RandiRange(0, _enemyScenes.Count - 1);
+				GD.Print($"INDEX: {index}");
+			}
+			// reroll if the chosen enemy cannot spawn yet
+			while (GetMinimumRound(_enemyScenes[index]) > PlayerVariables.Stats.Round);
+			
+			BaseEnemy enemy = _enemyScenes[index].Instantiate<BaseEnemy>();
+
+			// subscribe to death signal
+			enemy.Killed += () => _enemyCount--;
 
 			float angle = (Mathf.Pi * 2.0f * i / amount) + _rng.RandfRange(-0.35f, 0.35f);
 			float radius = _rng.RandfRange(420.0f, 650.0f + danger * 25.0f);
@@ -117,15 +130,8 @@ public partial class Game : Node2D
 		enemy.Speed = 120.0f;
 		enemy.Resistance = 0.08f;
 
-		// subscribe to death signal
-		enemy.Killed += () => _enemyCount--;
 
 		Sprite2D sprite = enemy.GetNodeOrNull<Sprite2D>("Sprite2D");
-		if (sprite != null && archetype < _enemyTextures.Length)
-		{
-			sprite.Texture = _enemyTextures[archetype];
-			sprite.Scale = Vector2.One * (archetype == 0 ? 0.045f : 0.052f);
-		}
 
 		BaseEnemyAI ai = enemy.GetNodeOrNull<BaseEnemyAI>("BaseEnemyAi");
 		if (ai != null)
@@ -134,26 +140,36 @@ public partial class Game : Node2D
 			ai.RetreatRange = _rng.RandfRange(115.0f, 155.0f);
 			ai.FireRange = 430.0f;
 			ai.FireCooldown = _rng.RandfRange(1.0f, 1.7f);
-			ai.ProjectileSpeed = _rng.RandfRange(300.0f, 370.0f);
 			ai.AimSpreadRadians = _rng.RandfRange(0.04f, 0.12f);
 		}
 	}
 
-	private static Texture2D[] LoadEnemyTextures()
-	{
-		Texture2D[] textures = new Texture2D[EnemyTexturePaths.Length];
-		for (int i = 0; i < EnemyTexturePaths.Length; i++)
-		{
-			textures[i] = ResourceLoader.Load<Texture2D>(EnemyTexturePaths[i]);
-		}
-
-		return textures;
-	}
-	
 	public async void OpenBuildMenuAfterDelay(float delay)
 	{
 		GD.Print("Changing scene...");
 		await ToSignal(GetTree().CreateTimer(delay), SceneTreeTimer.SignalName.Timeout);
 		GetTree().ChangeSceneToFile("res://scenes/player/BuildMenu.tscn");
+	}
+
+	/// <summary>
+	/// Get the minimum round an enemy spawns in without instantiating it.
+	/// It is stored in the respective scene file and can be edited in the Godot editor.
+	/// </summary>
+	private int GetMinimumRound(PackedScene scene)
+	{
+		var state = scene.GetState();
+
+		// unintuitively, you can only see properties which are overridden in a scene, not their default values
+		int propCount = state.GetNodePropertyCount(0);
+
+		// find the correct property (if it is amongst the overridden ones)
+		for (int i = 0; i < propCount; i++)
+		{
+			if (state.GetNodePropertyName(0, i) == "MinimumRound")
+				return (int)state.GetNodePropertyValue(0, i);
+		}
+
+		// otherwise it's zero
+		return 0;
 	}
 }

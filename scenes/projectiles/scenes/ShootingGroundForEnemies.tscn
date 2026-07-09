@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://lfwf3b7lsati"]
 
 [ext_resource type="Script" uid="uid://dq828d42imhnq" path="res://scenes/projectiles/scripts/ShootingGroundForEnemies.cs" id="1_gri7u"]
-[ext_resource type="PackedScene" uid="uid://lvlgmxl6u820" path="res://scenes/enemies/enemy bases/BaseEnemy.tscn" id="1_xeidp"]
-[ext_resource type="PackedScene" uid="uid://b87rrodgmxi86" path="res://scenes/projectiles/projectile scenes/LinearTestProjectile.tscn" id="2_r2x6u"]
+[ext_resource type="PackedScene" uid="uid://lvlgmxl6u820" path="res://scenes/enemies/scenes/BaseEnemy.tscn" id="1_xeidp"]
+[ext_resource type="PackedScene" uid="uid://b87rrodgmxi86" path="res://scenes/projectiles/scenes/LinearTestProjectile.tscn" id="2_r2x6u"]
 
 [node name="ShootingGroundForEnemies" type="Node2D" unique_id=1253480725]
 script = ExtResource("1_gri7u")
