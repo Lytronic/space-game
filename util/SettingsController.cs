@@ -18,6 +18,7 @@ public partial class SettingsController : Node
 
 		// initialise the model *before* we access settings data
 		SettingsModel.Instance.Init();
+		SettingsModel.Instance.SettingChanged += ChangedCallback;
 
 		// Register keybinds from Settings in Godot's keybind system
 		foreach (var entry in SettingsModel.Instance.Settings)
@@ -39,6 +40,8 @@ public partial class SettingsController : Node
 				InputMap.ActionAddEvent(name, inputEvent);
 			}
 		}
+
+		UpdateFullscreen();
 	}	
 
 	/// <summary>
@@ -63,5 +66,27 @@ public partial class SettingsController : Node
 		StringName name = settingsKey.Split(".")[1];
 		InputMap.ActionEraseEvents(name);
 		InputMap.ActionAddEvent(name, new InputEventKey { Keycode = keycode });
+	}
+
+	/// <summary>
+	/// Set the fullscreen state in the display server.
+	/// </summary>
+	private void UpdateFullscreen()
+	{
+		bool enabled = ((SettingsEntry.Bool)SettingsModel.Instance.Settings["video.fullscreen"]).Value;
+		DisplayServer.WindowSetMode(enabled ? DisplayServer.WindowMode.Fullscreen : DisplayServer.WindowMode.Windowed);
+	}
+
+	/// <summary>
+	/// Update state elsewhere when a setting changes.
+	/// </summary>
+	private void ChangedCallback(string key)
+	{
+		switch (key)
+		{
+			case "video.fullscreen":
+				UpdateFullscreen();
+				break;
+		}
 	}
 }
