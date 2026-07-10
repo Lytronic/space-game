@@ -5,8 +5,14 @@ namespace Microgravity.util;
 public partial class LoadMenu : HBoxContainer
 {
 	private Node _soundManager;
+
+	private ItemList _savesList;
+
+	private int[] _selectedItems;
+	private int _selectedItem;
 	public override void _Ready()
 	{
+		_savesList = GetNode<ItemList>("VBoxContainerRight/SaveListBg/SavesList");
 		_soundManager = GetNode("/root/SoundManager");
 		GetNode<TextureButton>("VBoxContainerLeft/BackButton").Pressed += () => {
 			_soundManager.Call("PlaySound", 0, 0);
@@ -14,21 +20,35 @@ public partial class LoadMenu : HBoxContainer
 		};
 		GetNode<TextureButton>("VBoxContainerRight/SaveListBg/LoadButton").Pressed += () => {
 				var saves = DB.GetSaves();
-				PlayerVariables.LoadFromSave(saves.Keys.Max());
+				PlayerVariables.LoadFromSave(saves.Keys.Max() - _selectedItem);
 
 				GetTree().ChangeSceneToFile("res://scenes/main/game.tscn");
 			};
+		_savesList.ItemSelected += OnItemSelected;
+		_savesList.SelectMode = ItemList.SelectModeEnum.Single;
 		UpdateSavesList();
 	}
 
 
 	public override void _Process(double delta)
 	{
+		
+	}
+
+	private void OnItemSelected(long index)
+	{
+		_selectedItems = _savesList.GetSelectedItems();
+		
+		if (_selectedItems.Length > 0)
+		{
+			_selectedItem = _selectedItems[0];
+			GD.Print($"Correct Index: {_selectedItem}");
+		}
 	}
 
 	private void UpdateSavesList()
 		{
-			var savesList = GetNode<ItemList>("VBoxContainerRight/SaveListBg/ItemList");
+			var savesList = GetNode<ItemList>("VBoxContainerRight/SaveListBg/SavesList");
 
 			int count = savesList.ItemCount;
 			for (int i = count - 1; i >= 0; i--)
@@ -40,5 +60,6 @@ public partial class LoadMenu : HBoxContainer
 			{
 				savesList.AddItem($"{save.Key}        {save.Value}");
 			}
+			_selectedItems = _savesList.GetSelectedItems();
 		}
 }

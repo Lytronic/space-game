@@ -51,12 +51,17 @@ size_flags_vertical = 3
 texture = ExtResource("4_4p6m4")
 expand_mode = 2
 
-[node name="ItemList" type="ItemList" parent="VBoxContainerRight/SaveListBg" unique_id=666606256]
-layout_mode = 0
-offset_left = 23.317001
-offset_top = 93.0
-offset_right = 975.317
-offset_bottom = 567.0
+[node name="SavesList" type="ItemList" parent="VBoxContainerRight/SaveListBg" unique_id=666606256]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.55600005
+anchor_right = 0.5
+anchor_bottom = 0.55600005
+offset_left = -476.18298
+offset_top = -236.70804
+offset_right = 475.81702
+offset_bottom = 237.29196
 theme_override_styles/panel = SubResource("StyleBoxEmpty_ccjhf")
 
 [node name="LoadButton" type="TextureButton" parent="VBoxContainerRight/SaveListBg" unique_id=1627941735]

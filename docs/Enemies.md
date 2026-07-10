@@ -85,11 +85,16 @@ The Empire does not waste resources fielding space stations merely for defensive
 
 ### The Dreadnought
 
+<img src="https://raw.githubusercontent.com/lytronic/space-game/main/gfx/game/boss/boss_eee.png" width="200">
+
 |SPEED  |HEALTH |SHIELD |PRIMARY WEAPON |SECONDARY WEAPON   |TERTIARY WEAPON    |
 |:-----:|:-----:|:-----:|:-------------:|:-----------------:|:-----------------:|
 |100    |3000    |1500      |Torpedo        |Shells (x3)             |/Laser                  |
 
 ### The Battlecruiser
+
+
+<img src="https://raw.githubusercontent.com/lytronic/space-game/main/gfx/game/boss/boss_ccc.png" width="200">
 
 |SPEED  |HEALTH |SHIELD |PRIMARY WEAPON |SECONDARY WEAPON   |TERTIARY WEAPON    |
 |:-----:|:-----:|:-----:|:-------------:|:-----------------:|:-----------------:|
