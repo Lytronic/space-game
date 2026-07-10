@@ -1,5 +1,11 @@
 [gd_scene format=3 uid="uid://c46crb68f34dn"]
 
+[ext_resource type="Texture2D" uid="uid://bmtcsnuv2cspq" path="res://gfx/gui/menu/storage_bg.png" id="1_7hako"]
+[ext_resource type="Texture2D" uid="uid://dupv2p2lbls25" path="res://gfx/gui/menu/storage_bg_top.png" id="1_5646b"]
+[ext_resource type="Texture2D" uid="uid://hg2677t25sam" path="res://gfx/gui/menu/storage arrow.png" id="2_umrgu"]
+[ext_resource type="Texture2D" uid="uid://d2mac3xsf0kyb" path="res://gfx/gui/menu/storage_slot.png" id="3_qq3wl"]
+[ext_resource type="Texture2D" uid="uid://baqxy25ajyece" path="res://gfx/gui/menu/currency.png" id="5_q3nqj"]
+
 [node name="MarginContainer" type="MarginContainer" unique_id=106846295]
 anchors_preset = 15
 anchor_right = 1.0
@@ -16,38 +22,9 @@ layout_mode = 2
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 4.0
+texture = ExtResource("1_5646b")
 
-[node name="StorageContainer" type="HBoxContainer" parent="VBoxContainer/StorageBackground" unique_id=1956016629]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-pivot_offset_ratio = Vector2(0.5, 0)
-size_flags_vertical = 3
-size_flags_stretch_ratio = 4.0
-
-[node name="ItemList" type="ItemList" parent="VBoxContainer/StorageBackground/StorageContainer" unique_id=1063451926]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 0
-size_flags_stretch_ratio = 100.0
-allow_search = false
-auto_height = true
-same_column_width = true
-
-[node name="StorageScrollBar" type="VScrollBar" parent="VBoxContainer/StorageBackground/StorageContainer" unique_id=1302327107]
-layout_mode = 2
-size_flags_horizontal = 3
-rounded = true
-
-[node name="MenuBackground" type="TextureRect" parent="VBoxContainer" unique_id=744547210]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="MenuContainer" type="HBoxContainer" parent="VBoxContainer/MenuBackground" unique_id=1828858837]
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/StorageBackground" unique_id=351376710]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -55,25 +32,58 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="SelectedItemList" type="ItemList" parent="VBoxContainer/MenuBackground/MenuContainer" unique_id=1371852463]
+[node name="ItemsInInventory" type="VBoxContainer" parent="VBoxContainer/StorageBackground/ScrollContainer" unique_id=702588992]
+custom_minimum_size = Vector2(1152, 0)
 layout_mode = 2
 size_flags_horizontal = 3
-allow_search = false
-same_column_width = true
+alignment = 1
 
-[node name="ConfirmButton" type="TextureButton" parent="VBoxContainer/MenuBackground/MenuContainer" unique_id=58985207]
+[node name="BottomBackground" type="TextureRect" parent="VBoxContainer" unique_id=744547210]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource("1_7hako")
+expand_mode = 1
+
+[node name="Bottom" type="HBoxContainer" parent="VBoxContainer/BottomBackground" unique_id=1828858837]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Selected Item" type="CenterContainer" parent="VBoxContainer/BottomBackground/Bottom" unique_id=2031065382]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="RewardContainer" type="HBoxContainer" parent="VBoxContainer/MenuBackground/MenuContainer" unique_id=1306736284]
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/BottomBackground/Bottom/Selected Item" unique_id=641367447]
+custom_minimum_size = Vector2(85, 85)
+layout_mode = 2
+texture = ExtResource("3_qq3wl")
+expand_mode = 1
+
+[node name="ConfirmButton" type="TextureButton" parent="VBoxContainer/BottomBackground/Bottom" unique_id=58985207]
+layout_mode = 2
+size_flags_horizontal = 3
+texture_normal = ExtResource("2_umrgu")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="RewardContainer" type="HBoxContainer" parent="VBoxContainer/BottomBackground/Bottom" unique_id=1306736284]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Amount" type="Label" parent="VBoxContainer/MenuBackground/MenuContainer/RewardContainer" unique_id=166868956]
+[node name="Amount" type="Label" parent="VBoxContainer/BottomBackground/Bottom/RewardContainer" unique_id=166868956]
 layout_mode = 2
-text = "eat my ass amount"
+theme_override_colors/font_color = Color(0.5803922, 1, 0.23137255, 1)
+text = "eat my ass amount with me"
 max_lines_visible = 1
 
-[node name="Delta" type="TextureRect" parent="VBoxContainer/MenuBackground/MenuContainer/RewardContainer" unique_id=408716201]
+[node name="Delta" type="TextureRect" parent="VBoxContainer/BottomBackground/Bottom/RewardContainer" unique_id=408716201]
+custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 size_flags_horizontal = 0
+size_flags_vertical = 4
+texture = ExtResource("5_q3nqj")
+expand_mode = 1
