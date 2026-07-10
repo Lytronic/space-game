@@ -19,7 +19,7 @@ The Cooperative's very own modular multi-purpose assault craft boasts a massive 
 
 |SPEED  |HEALTH |SHIELD |PRIMARY WEAPON |SECONDARY WEAPON   |TERTIARY WEAPON    |
 |:-----:|:-----:|:-----:|:-------------:|:-----------------:|:-----------------:|
-|300    |50     |300    |Plasma         |Laser              |/                  |
+|300    |100     |300    |Plasma         |Laser              |/                  |
 
 ### Hyperfortress
 The Federation's assault ship is a good all-rounder, sporting moderate amounts of shield and hull health, while having an acceptable amount of speed.
@@ -28,7 +28,7 @@ The Federation's assault ship is a good all-rounder, sporting moderate amounts o
 
 |SPEED  |HEALTH |SHIELD |PRIMARY WEAPON |SECONDARY WEAPON   |TERTIARY WEAPON    |
 |:-----:|:-----:|:-----:|:-------------:|:-----------------:|:-----------------:|
-|250    |100    |0      |Missiles       |Cannon             |/                  |
+|250    |200    |200      |Missiles       |Cannon             |/                  |
 
 ### MOAC
 The Empire's Modular Assault Craft is one the heaviest base enemy ship and also the one with the most hull health. Its shield is smaller, its slower, but it packs quite a punch to make up for its small amount of shield health.
@@ -37,7 +37,7 @@ The Empire's Modular Assault Craft is one the heaviest base enemy ship and also 
 
 |SPEED  |HEALTH |SHIELD |PRIMARY WEAPON |SECONDARY WEAPON   |TERTIARY WEAPON    |
 |:-----:|:-----:|:-----:|:-------------:|:-----------------:|:-----------------:|
-|200    |300    |0      |Torpedo        |Arc             |/                  |
+|200    |300    |100      |Torpedo        |Arc             |/                  |
 
 # Bosses
 
@@ -77,7 +77,7 @@ The Empire does not waste resources fielding space stations merely for defensive
 
 ### The Destroyer
 
-<img src="https://raw.githubusercontent.com/lytronic/space-game/main/gfx/game/boss/boss_fff.png" width="300">
+<img src="https://raw.githubusercontent.com/lytronic/space-game/main/gfx/game/boss/boss_fff.png" width="200">
 
 |SPEED  |HEALTH |SHIELD |PRIMARY WEAPON |SECONDARY WEAPON   |TERTIARY WEAPON    |
 |:-----:|:-----:|:-----:|:-------------:|:-----------------:|:-----------------:|
