@@ -1,3 +1,5 @@
+using System;
+using System.Linq;
 using Godot;
 using Godot.Collections;
 
@@ -16,6 +18,12 @@ public partial class BaseEnemyAI : Node
 	[Export] public float Acceleration = 520.0f;
 
 	[ExportCategory("Weapons")]
+	
+	/// <value>How long to hold a selected weapon before switching to another one.</value>
+	[Export] public float WeaponHoldTime = 0.0f;
+
+	// these are arrays so we can have multiple weapons of the same type fired concurrently
+	// (e.g. 1 rocket launcher on each side of the enemy ship)
 	[Export] public Array<BaseWeapon> Primary;
 	[Export] public Array<BaseWeapon> Secondary;
 	[Export] public Array<BaseWeapon> Tertiary;
@@ -26,12 +34,17 @@ public partial class BaseEnemyAI : Node
 	private readonly RandomNumberGenerator _rng = new();
 	private int _strafeDirection = 1;
 
+	private Array<BaseWeapon> _currentWeapon;
+	private SceneTreeTimer _weaponHoldTimer;
+
 	public override void _Ready()
 	{
 		_enemy = GetParent<BaseEnemy>();
 		_rng.Randomize();
 		_strafeDirection = _rng.RandiRange(0, 1) == 0 ? -1 : 1;
 		AcquireTarget();
+		_currentWeapon = Primary;
+		_weaponHoldTimer = GetTree().CreateTimer(0.0f);
 	}
 
 	public override void _PhysicsProcess(double delta)
@@ -105,29 +118,66 @@ public partial class BaseEnemyAI : Node
 	{
 		if (distance > FireRange) return;
 
-		// try to fire a random weapon each time this is called
-		Array<BaseWeapon> currentWeapon = Primary;
+		if (_weaponHoldTimer.TimeLeft == 0)
+		{
+			ForEachWeapon(_currentWeapon, weapon => weapon.Release());
+			SelectWeapon();
+		}
+
+		ForEachWeapon(_currentWeapon, weapon =>	weapon.Fire((_target.GlobalPosition - weapon.GlobalPosition).Normalized(), _enemy.Damage, 1.0f));
+	}
+
+	/// <summary>
+	/// Select whether to use the primary, secondary, or tertiary weapon until this method is called again.
+	/// Fall back to the primary if the selected one is still on cooldown.
+	/// By default, this is random. Override to add custom behaviour.
+	/// </summary>
+	protected virtual void SelectWeapon()
+	{
+		_currentWeapon = Primary;
 		
 		switch (_rng.RandiRange(0, 2))
 		{
 			case 0:
-				currentWeapon = Primary;
+				_currentWeapon = Primary;
 				break;
 			case 1:
-				if (Secondary == null) break;
-				currentWeapon = Secondary;
+				if (Secondary == null || ForEachWeapon(Secondary, weapon => weapon.CooldownTimer.TimeLeft).Min() > 0) break;
+				_currentWeapon = Secondary;
 				break;
 			case 2:
-				if (Tertiary == null) break;
-				currentWeapon = Tertiary;
+				if (Tertiary == null || ForEachWeapon(Tertiary, weapon => weapon.CooldownTimer.TimeLeft).Min() > 0) break;
+				_currentWeapon = Tertiary;
 				break;
 		}
-		
-		foreach (var weapon in currentWeapon)
-		{
-			if (weapon.CooldownTimer.TimeLeft > 0) continue;
 
-			weapon.Fire((_target.GlobalPosition - weapon.GlobalPosition).Normalized(), _enemy.Damage, 1.0f);
+		_weaponHoldTimer = GetTree().CreateTimer(WeaponHoldTime);
+	}
+
+	/// <summary>
+	/// Helper to map a void function to all weapons in an array.
+	/// For some reason, Godot arrays don't have this by default.
+	/// </summary>
+	protected static void ForEachWeapon(Array<BaseWeapon> weapons, Action<BaseWeapon> f)
+	{
+		foreach (var weapon in weapons)
+		{
+			f(weapon);
+		}	
+	}
+	
+	/// <summary>
+	/// Helper to map a function to all weapons in an array and return the resulting array.
+	/// For some reason, Godot arrays don't have this by default.
+	/// </summary>
+	protected static Array<T> ForEachWeapon<[MustBeVariant] T>(Array<BaseWeapon> weapons, Func<BaseWeapon, T> f)
+	{
+		Array<T> ret = [];
+		foreach (var weapon in weapons)
+		{
+			ret.Add(f(weapon));
 		}
+
+		return ret;
 	}
 }
