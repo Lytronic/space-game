@@ -30,6 +30,15 @@ public partial class BaseMissile : BaseProjectile
 		GetTree().CreateTimer(_explosion.Lifetime).Timeout += () => base.OnBodyEntered(body);
 	}
 
+	public override void TakeDamage(float damage)
+	{
+		if (damage > 0)
+		{
+			Explode();
+			GetTree().CreateTimer(_explosion.Lifetime).Timeout += QueueFree;
+		}
+	}
+
 	public virtual void Explode()
 	{
 		Speed = 0.0f;

@@ -114,6 +114,15 @@ public partial class BaseProjectile : Area2D
 		Rotation = Direction.Angle();
 	}
 
+	/// <summary>
+	/// Damage the projectile. Since BaseProjectiles have no health value, kill it instantly.
+	/// </summary>
+	public virtual void TakeDamage(float damage)
+	{
+		if (damage > 0)
+			QueueFree();
+	}
+
 	public virtual Vector2 MoveInPattern(double time)
 	{
 		return Direction;

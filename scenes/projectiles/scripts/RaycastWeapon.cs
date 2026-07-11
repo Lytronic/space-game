@@ -45,6 +45,7 @@ public partial class RaycastWeapon : BaseWeapon
 
 			var query = PhysicsRayQueryParameters2D.Create(GlobalPosition, rayEnd);
 			query.Exclude = [ GetParent<CollisionObject2D>().GetRid() ];
+			query.CollideWithAreas = true;
 		
 			var result = spaceState.IntersectRay(query);
 
