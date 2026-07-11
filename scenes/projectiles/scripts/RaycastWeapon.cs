@@ -14,8 +14,6 @@ public partial class RaycastWeapon : BaseWeapon
 
 	// whether the weapon is currently shooting
 	private bool _active = false;
-	// whether we need to process it this frame
-	private bool _process = false;
 	private Vector2 _targetPos;
 	private Vector2 _direction;
 
@@ -43,7 +41,7 @@ public partial class RaycastWeapon : BaseWeapon
 		{
 			var spaceState = GetWorld2D().DirectSpaceState;
 
-			Vector2 rayEnd = _direction * Range;
+			Vector2 rayEnd = GlobalPosition + (_direction * Range);
 
 			var query = PhysicsRayQueryParameters2D.Create(GlobalPosition, rayEnd);
 			query.Exclude = [ GetParent<CollisionObject2D>().GetRid() ];
