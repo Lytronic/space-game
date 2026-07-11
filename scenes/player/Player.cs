@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Specialized;
 using System.Linq.Expressions;
 using Godot;
 using Microgravity.util;
@@ -106,6 +107,10 @@ public partial class Player : CharacterBody2D
 		_explosionParticle.Emitting = false;
 
 		_soundManager = GetNode("/root/SoundManager");
+
+		// adding this as an action so we can check when it is released, too
+		InputMap.AddAction("fire");
+		InputMap.ActionAddEvent("fire", new InputEventMouseButton() { ButtonIndex = MouseButton.Left });
 
 		//alternative ship textures loaded
 		// _texture1  = GD.Load<Texture2D>("") ;
@@ -271,8 +276,14 @@ public partial class Player : CharacterBody2D
 
 	private void UpdateWeapon(float dt)
 	{
-		if (Input.IsMouseButtonPressed(MouseButton.Left))
+		if (Input.IsActionPressed("fire"))
+		{
 			TryFireWeapon();
+		}
+		else if (Input.IsActionJustReleased("fire"))
+		{
+			Weapon.Release();
+		}
 	}
 
 	private void TryFireWeapon()

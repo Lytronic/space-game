@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://pcsl5ytqef7r"]
+
+[ext_resource type="PackedScene" uid="uid://o3k7io30kyta" path="res://scenes/projectiles/scenes/BaseWeapon.tscn" id="1_r2ske"]
+[ext_resource type="Script" uid="uid://byr3jct33scav" path="res://scenes/projectiles/scripts/RaycastWeapon.cs" id="2_4w5id"]
+
+[node name="Node2D" unique_id=1420630968 instance=ExtResource("1_r2ske")]
+script = ExtResource("2_4w5id")
