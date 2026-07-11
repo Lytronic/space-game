@@ -23,7 +23,23 @@ public partial class LoadMenu : HBoxContainer
 				PlayerVariables.LoadFromSave(saves.Keys.Max() - _selectedItem);
 
 				GetTree().ChangeSceneToFile("res://scenes/main/game.tscn");
-			};
+		};
+		/*GetNode<TextureButton>("VBoxContainerRight/SaveListBg/DeleteButton").Pressed += () =>
+		{
+    	if (_selectedItems.Length > 0)
+   			{
+        	var saves = DB.GetSaves();
+        
+        	int saveIndex = _selectedItems[0];
+        	if (saveIndex < saves.Count)
+        	{
+            	int saveId = saves.Keys.ElementAt(saveIndex); // Get actual DB id
+            	DB.DeleteGame(saveId);
+            	UpdateSavesList();
+            	_soundManager.Call("PlaySound", 0, 0);
+        	}
+    	}
+		};*/
 		_savesList.ItemSelected += OnItemSelected;
 		_savesList.SelectMode = ItemList.SelectModeEnum.Single;
 		UpdateSavesList();

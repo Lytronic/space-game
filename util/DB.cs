@@ -284,6 +284,36 @@ namespace Microgravity.util
 			connection.Close();
 		}
 
+		public static void DeleteGame(int id)
+		{
+			SQLiteConnection connection = Connect();
+			if (connection == null)
+			{
+				return;
+			}
+
+			if (!CreateTable(connection, _savesLayout))
+			{
+				return;
+			}
+
+			try
+			{
+				string deleteSql = "DELETE FROM saves WHERE id = @id";
+
+				SQLiteCommand deleteCommand = new(deleteSql, connection);
+				deleteCommand.Parameters.AddWithValue("@id", id);
+
+				deleteCommand.ExecuteNonQuery();
+			}
+			catch (Exception ex)
+			{
+				GD.Print($"DB: Failed to delete game {id}: {ex.Message}");
+			}
+
+			connection.Close();
+		}
+
 		/// <summary>
 		/// Enumerate all saves in the database.
 		/// You can then use this information to load a game by its identifier using <c>LoadGame(int)</c>.
