@@ -26,6 +26,7 @@ public partial class PauseScreen : VBoxContainer
 			_soundManager.Call("PlaySound", 0, 0);
 			GetTree().Paused = false;
 			GetTree().ChangeSceneToFile("res://scenes/ui/TitleScreen.tscn");
+			PlayerVariables.Instance.ResetRun();
 		};
 
 		_hud = GetNode<Control>("../HUD");
