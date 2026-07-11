@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://lvlgmxl6u820" path="res://scenes/enemies/scenes/BaseEnemy.tscn" id="1_myra6"]
 [ext_resource type="Texture2D" uid="uid://dlile86wcssc" path="res://gfx/game/enemy/ship_ccc.png" id="2_oensv"]
 [ext_resource type="Script" uid="uid://bfrt21xpdr02s" path="res://scenes/projectiles/scripts/ProjectileLauncher.cs" id="3_idhvm"]
-[ext_resource type="Script" uid="uid://byr3jct33scav" path="res://scenes/projectiles/scripts/RaycastWeapon.cs" id="4_52xxd"]
+[ext_resource type="PackedScene" uid="uid://bfdfrcmegu5rb" path="res://scenes/projectiles/scenes/Laser.tscn" id="4_oensv"]
 
 [sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_t255x"]
 points = PackedVector2Array(-32, 5, -22, -26, -18, -40, -10, -47, 0, -49, 10, -47, 18, -40, 21, -26, 32, 5, 27, 1, 19, -2, 13, 10, 9, 26, 7, 16, 2, 21, 0, 49, -3, 21, -8, 16, -10, 26, -13, 10, -19, -3, -29, 0)
@@ -24,7 +24,7 @@ shape = SubResource("ConvexPolygonShape2D_t255x")
 [node name="BaseEnemyAi" parent="." index="4" unique_id=1676352923 node_paths=PackedStringArray("Primary", "Secondary", "Tertiary")]
 WeaponHoldTime = 3.0
 Primary = [NodePath("../ProjectileLauncher")]
-Secondary = [NodePath("../RaycastWeapon")]
+Secondary = [NodePath("../Laser")]
 Tertiary = []
 
 [node name="ProjectileLauncher" type="Node2D" parent="." index="5" unique_id=770046882]
@@ -34,10 +34,5 @@ ProjectileScene = "uid://3gkk6vgooyrt"
 Cooldown = 0.5
 metadata/_custom_type_script = "uid://bfrt21xpdr02s"
 
-[node name="RaycastWeapon" type="Node2D" parent="." index="6" unique_id=1499749456]
+[node name="Laser" parent="." index="6" unique_id=1420630968 instance=ExtResource("4_oensv")]
 position = Vector2(0, -40)
-script = ExtResource("4_52xxd")
-DamagePerSecond = 10.0
-Range = 10000.0
-Cooldown = 5.0
-metadata/_custom_type_script = "uid://byr3jct33scav"

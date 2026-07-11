@@ -1,7 +1,7 @@
 shader_type canvas_item;
 
 uniform float intensity;
-uniform vec3 colour;
+uniform vec3 colour : source_color;
 
 void fragment() {
 	vec2 center_offset = vec2(0.5) - SCREEN_UV;

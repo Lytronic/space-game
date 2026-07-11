@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://bfdfrcmegu5rb"]
+
+[ext_resource type="PackedScene" uid="uid://pcsl5ytqef7r" path="res://scenes/projectiles/scenes/RaycastWeapon.tscn" id="1_y5ww7"]
+[ext_resource type="Shader" uid="uid://brq6o17v7c060" path="res://gfx/shaders/Laser.gdshader" id="2_87hov"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ogy8d"]
+shader = ExtResource("2_87hov")
+shader_parameter/colour = Color(1, 0, 0, 1)
+
+[node name="Node2D" unique_id=1420630968 instance=ExtResource("1_y5ww7")]
+material = SubResource("ShaderMaterial_ogy8d")
+DamagePerSecond = 10.0
+EnergyPerSecond = 0.0
+Range = 100000.0
+RayWidth = 5.0
+Cooldown = 2.0

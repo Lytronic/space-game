@@ -11,6 +11,7 @@ public partial class RaycastWeapon : BaseWeapon
 	[Export] public float DamagePerSecond;
 	[Export] public float EnergyPerSecond;
 	[Export] public float Range;
+	[Export] public float RayWidth;
 
 	// whether the weapon is currently shooting
 	private bool _active = false;
@@ -30,8 +31,14 @@ public partial class RaycastWeapon : BaseWeapon
 			// using the inverse of the global transform matrix.
 			var transform = GetGlobalTransform().AffineInverse();
 
-			DrawSetTransformMatrix(transform);
-			DrawLine(GlobalPosition, _targetPos, Colors.Red, 1.0f, true);
+			// We could just draw a line using DrawLine(), but it wouldn't have UV coordinates for its shader.
+			// This means we need to draw an axis aligned rectangle and rotate it by the correct angle.
+			float sign = Mathf.Sign(_direction.Y);
+			DrawSetTransformMatrix(transform.Rotated(sign * Mathf.Acos(_direction.Dot(Vector2.Right))));
+				
+			var rect = new Rect2(GlobalPosition + new Vector2(0.0f, RayWidth / 2),
+				(Vector2.Right * (_targetPos - GlobalPosition).Length()) - new Vector2(0.0f, RayWidth));	
+			DrawRect(rect, Colors.Red);
 		}
 	}
 
