@@ -109,9 +109,12 @@ public partial class Player : CharacterBody2D
 		_soundManager = GetNode("/root/SoundManager");
 
 		// adding this as an action so we can check when it is released, too
-		InputMap.AddAction("fire");
-		InputMap.ActionAddEvent("fire", new InputEventMouseButton() { ButtonIndex = MouseButton.Left });
-
+		if (!InputMap.HasAction("fire"))
+		{
+			InputMap.AddAction("fire");
+			InputMap.ActionAddEvent("fire", new InputEventMouseButton() { ButtonIndex = MouseButton.Left });
+		}
+		
 		//alternative ship textures loaded
 		// _texture1  = GD.Load<Texture2D>("") ;
 		// _texture2 = GD.Load<Texture2D>("") ;
