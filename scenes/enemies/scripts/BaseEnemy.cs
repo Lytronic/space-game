@@ -28,13 +28,13 @@ public partial class BaseEnemy : CharacterBody2D
 
 	private GpuParticles2D _explosion;
 	private Sprite2D _sprite;
-	private CollisionShape2D _collisionShape;
+	private CollisionPolygon2D _collisionPolygon;
 
 	public override void _Ready()
 	{
 		_explosion = GetNode<GpuParticles2D>("ExplosionParticle");
 		_sprite = GetNode<Sprite2D>("Sprite2D");
-		_collisionShape = GetNode<CollisionShape2D>("CollisionShape2D");
+		_collisionPolygon = GetNode<CollisionPolygon2D>("CollisionPolygon2D");
 		
 		if (lootTable == null || lootTable.Length == 0)
 			CreateLootTable();
@@ -138,7 +138,7 @@ public partial class BaseEnemy : CharacterBody2D
 	public virtual void Explode()
 	{
 		_sprite.Hide();
-		_collisionShape.SetDeferred(CollisionShape2D.PropertyName.Disabled, true);
+		_collisionPolygon.SetDeferred(CollisionPolygon2D.PropertyName.Disabled, true);
 		_explosion.OneShot = true;
 		_explosion.Restart();
 		_explosion.Emitting = true;

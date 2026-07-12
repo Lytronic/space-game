@@ -5,9 +5,6 @@
 [ext_resource type="Script" uid="uid://bfrt21xpdr02s" path="res://scenes/projectiles/scripts/ProjectileLauncher.cs" id="3_idhvm"]
 [ext_resource type="PackedScene" uid="uid://bfdfrcmegu5rb" path="res://scenes/projectiles/scenes/Laser.tscn" id="4_oensv"]
 
-[sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_t255x"]
-points = PackedVector2Array(-32, 5, -22, -26, -18, -40, -10, -47, 0, -49, 10, -47, 18, -40, 21, -26, 32, 5, 27, 1, 19, -2, 13, 10, 9, 26, 7, 16, 2, 21, 0, 49, -3, 21, -8, 16, -10, 26, -13, 10, -19, -3, -29, 0)
-
 [node name="CharacterBody2D" unique_id=217211211 instance=ExtResource("1_myra6")]
 Speed = 300.0
 Health = 100
@@ -18,14 +15,14 @@ metadata/_edit_horizontal_guides_ = [-47.0, -40.0, -26.0, 21.0, 16.0, 10.0]
 scale = Vector2(0.1, 0.1)
 texture = ExtResource("2_oensv")
 
-[node name="CollisionShape2D" parent="." index="1" unique_id=318804551]
-shape = SubResource("ConvexPolygonShape2D_t255x")
+[node name="CollisionPolygon2D" parent="." index="1" unique_id=1745739799]
+scale = Vector2(1, 1)
+polygon = PackedVector2Array(-32, 5, -22, -26, -18, -40, -10, -47, 0, -49, 10, -47, 18, -40, 21, -26, 32, 5, 27, 1, 19, -2, 13, 10, 9, 26, 7, 16, 2, 21, 0, 49, -3, 21, -8, 16, -10, 26, -13, 10, -19, -3, -29, 0)
 
-[node name="BaseEnemyAi" parent="." index="4" unique_id=1676352923 node_paths=PackedStringArray("Primary", "Secondary", "Tertiary")]
+[node name="BaseEnemyAi" parent="." index="4" unique_id=1676352923 node_paths=PackedStringArray("Primary", "Secondary")]
 WeaponHoldTime = 3.0
 Primary = [NodePath("../ProjectileLauncher")]
 Secondary = [NodePath("../Laser")]
-Tertiary = []
 
 [node name="ProjectileLauncher" type="Node2D" parent="." index="5" unique_id=770046882]
 position = Vector2(0, -40)

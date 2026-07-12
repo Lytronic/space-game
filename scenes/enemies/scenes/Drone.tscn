@@ -4,9 +4,6 @@
 [ext_resource type="Texture2D" uid="uid://d01ljntakxh6l" path="res://gfx/game/enemy/drone.png" id="2_ter0w"]
 [ext_resource type="Script" uid="uid://bfrt21xpdr02s" path="res://scenes/projectiles/scripts/ProjectileLauncher.cs" id="3_ter0w"]
 
-[sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_5b617"]
-points = PackedVector2Array(-50, 15, -10, -15, 0, -38, 10, -15, 50, 15, 15, 10, 22, 35, -22, 35, -15, 10)
-
 [node name="CharacterBody2D" unique_id=217211211 instance=ExtResource("1_odoqa")]
 Speed = 250.0
 Health = 15
@@ -17,9 +14,9 @@ ScoreValue = 25
 scale = Vector2(0.04, 0.04)
 texture = ExtResource("2_ter0w")
 
-[node name="CollisionShape2D" parent="." index="1" unique_id=318804551]
+[node name="CollisionPolygon2D" parent="." index="1" unique_id=1745739799]
 scale = Vector2(0.4, 0.4)
-shape = SubResource("ConvexPolygonShape2D_5b617")
+polygon = PackedVector2Array(-50, 15, -10, -15, 0, -38, 10, -15, 50, 15, 15, 10, 22, 35, -22, 35, -15, 10)
 
 [node name="ProjectileLauncher" type="Node2D" parent="." index="4" unique_id=1873305327]
 position = Vector2(0, -15)

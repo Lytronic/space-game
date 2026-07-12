@@ -8,17 +8,17 @@
 [ext_resource type="Texture2D" uid="uid://d2c3gkua0wlbx" path="res://gfx/game/particle/explosion_grid.png" id="5_6n23a"]
 [ext_resource type="Material" uid="uid://gosildff47nc" path="res://util/materials/explosion_process.tres" id="6_sj000"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_kcbdb"]
-radius = 25.0
-
 [node name="CharacterBody2D" type="CharacterBody2D" unique_id=217211211]
 script = ExtResource("1_xyabd")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1972208063]
 texture = ExtResource("2_ob6f1")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=318804551]
-shape = SubResource("CircleShape2D_kcbdb")
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=1745739799]
+position = Vector2(-3.9339066e-06, -2.861023e-06)
+scale = Vector2(3.1249998, 3.046875)
+build_mode = 1
+polygon = PackedVector2Array(8, 8, -8, 8, -8, -8, 8, -8)
 
 [node name="EnemySalvage" type="Node2D" parent="." unique_id=2101032576]
 script = ExtResource("1_koma5")
@@ -37,7 +37,9 @@ explosiveness = 1.0
 local_coords = true
 process_material = ExtResource("6_sj000")
 
-[node name="BaseEnemyAi" type="Node" parent="." unique_id=1676352923]
+[node name="BaseEnemyAi" type="Node" parent="." unique_id=1676352923 node_paths=PackedStringArray("Primary", "Secondary", "Tertiary")]
 script = ExtResource("4_kcbdb")
-ProjectileScene = "uid://c0nrrq16hsgke"
+Primary = []
+Secondary = []
+Tertiary = []
 metadata/_custom_type_script = "uid://crbskh2rywuhb"
