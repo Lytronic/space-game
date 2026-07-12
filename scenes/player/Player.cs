@@ -40,6 +40,7 @@ public partial class Player : CharacterBody2D
 	private Control _deathScreen;
 	private ColorRect _damageOverlay;
 	private ShaderMaterial _damageOverlayMaterial;
+	private TextureRect _enemyLocator;
 
 	// Labels (not the queer kind.. probably...)
 	private Label _playerScoreLabel;
@@ -75,7 +76,8 @@ public partial class Player : CharacterBody2D
 		_deathScreen = GetNode<Control>("../CanvasLayer/DeathScreen");
 		_damageOverlay = GetNode<ColorRect>("../CanvasLayer/DamageOverlay");
 		_damageOverlayMaterial = _damageOverlay.Material as ShaderMaterial;
-
+		_enemyLocator = _hud.GetNode<TextureRect>("EnemyLocator");
+		
 		// Assign labels
 		_playerScoreLabel = _hud.GetNode<Label>("PlayerScoreLabel");
 		_roundLabel = _hud.GetNode<Label>("RoundIndicator/RoundLabel");
@@ -170,6 +172,7 @@ public partial class Player : CharacterBody2D
 		_roundLabel.Text = PlayerVariables.Stats.Round.ToString();
 
 		UpdateDamageOverlay();
+		UpdateEnemyLocator();
 		UpdateWeapon((float)delta);
 		ManageEngineParticles();
 		_soundManager.Call("ChangeFlightNoise", Velocity.Length());
@@ -199,6 +202,30 @@ public partial class Player : CharacterBody2D
 		}
 
 		_damageOverlayMaterial.SetShaderParameter("intensity", Mathf.Max(damageIntensity, healthIntensity) * intensityModifier);
+	}
+
+	public void UpdateEnemyLocator()
+	{
+		var entities = PlayerVariables.Space.GetChildren();
+
+		BaseEnemy nearest = null;
+
+		foreach (var entity in entities)
+		{
+			if (entity is BaseEnemy enemy)
+			{
+				nearest ??= enemy;
+				nearest = (enemy.GlobalPosition - GlobalPosition).Length()
+					< (nearest.GlobalPosition - GlobalPosition).Length() ? enemy : nearest;
+
+				GD.Print(nearest);
+			}
+		}
+
+		Vector2 toNearest = (nearest.GlobalPosition - GlobalPosition).Normalized();
+
+		// float sign = Mathf.Sign(toNearest.Y);
+		_enemyLocator.Rotation = toNearest.Angle();
 	}
 
 	// Now rotates to the CursorThrottle instead of the mouse

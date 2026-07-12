@@ -16,6 +16,7 @@
 [ext_resource type="Texture2D" uid="uid://doisvxl7ew8x7" path="res://gfx/gui/abilities/torpedo.png" id="8_7x8q2"]
 [ext_resource type="Texture2D" uid="uid://d250psuhmtdlj" path="res://gfx/gui/abilities/slug.png" id="9_7ntgm"]
 [ext_resource type="Texture2D" uid="uid://dijdj7c5lgii6" path="res://gfx/gui/abilities/switch.png" id="10_edggo"]
+[ext_resource type="Texture2D" uid="uid://bclvwmhqptjke" path="res://gfx/gui/game/enemy_locator.png" id="18_iourf"]
 [ext_resource type="Script" uid="uid://b6awv2ldv24qy" path="res://scenes/player/WeaponsCooldown.cs" id="19_tu160"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_rlky5"]
@@ -297,3 +298,19 @@ layout_mode = 2
 theme_override_fonts/font = ExtResource("1_kk26m")
 theme_override_font_sizes/font_size = 26
 text = "7"
+
+[node name="EnemyLocator" type="TextureRect" parent="." unique_id=242452645]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -180.0
+offset_top = -90.0
+offset_right = 180.0
+offset_bottom = 90.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = ExtResource("18_iourf")
