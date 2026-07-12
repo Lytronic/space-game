@@ -11,11 +11,16 @@ public partial class ShipPart : Resource
     [Export] public virtual bool isActive { get; set; }
     [Export] public virtual float partWeight { get; set; }
 
+    //variables needed to recreate the item from save
+    [Export] public virtual string itemType { get; set; }
+    [Export] public virtual float randomness { get; set; } = -1f;
+
     [Export] public virtual Texture2D SpriteTexture { get; set; }
 
     public void Initialize()
     {
         danger = PlayerVariables.Stats.DangerLevel;
+        
     }
     public virtual void activateEffect() { }
 
@@ -29,14 +34,31 @@ public partial class ShipPart : Resource
     {
         return b ? 1 : -1;
     }
-    public float statRandomness() //suppoer method to streamline scaling in subclasses
+    public void GenerateStatRandomness() //support method to streamline scaling in subclasses
     {
-        float dangerMultiplier = GD.RandRange(1, danger);
-        rarity *= dangerMultiplier;
-        return dangerMultiplier;
+        float dangerMultiplier;
+
+        if(randomness < 0f)
+        {
+            dangerMultiplier = GD.RandRange(1, danger);
+            rarity *= dangerMultiplier;
+            randomness = dangerMultiplier;
+        }
+        else
+        {
+            rarity *= randomness;
+        }
+        
     }
     public virtual void generateStats()
     {
-        float mult = statRandomness();
+        GenerateStatRandomness();
+        //randomness
     }
+
+    public (string type, float reandomness) GetDefiningValues()
+    {
+        return (itemType , randomness);
+    }
+
 }

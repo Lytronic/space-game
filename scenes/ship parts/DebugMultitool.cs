@@ -4,13 +4,12 @@ using System;
 public partial class DebugMultitool : ShipPart
 {
 	//non-optional stats
-	[Export]
-	public override string displayTooltip { get; set; }  = "Mayday! Mayday! ... is this fluffin' thing even working?!";
-	[Export]
-	public override float rarity { get; set; } = 0.1f;
-	[Export]
-	public override bool isActive { get; set; } = false;
-	[Export]
+	[Export] public override string displayTooltip { get; set; }  = "Mayday! Mayday! ... is this fluffin' thing even working?!";
+	[Export] public override float rarity { get; set; } = 0.1f;
+	[Export] public override bool isActive { get; set; } = false;
+
+	//type specific values
+	public override string itemType { get; set;  } = "DebugMultitool";
 	public override float partWeight { get; set; } = 9.11f;
 	private float thrustIncrease = 2;
 
@@ -32,7 +31,7 @@ public partial class DebugMultitool : ShipPart
 
 	public override void generateStats()
 	{
-		float mult = statRandomness();
+		float mult = randomness;
 		thrustIncrease *= mult;
 	}
 }
