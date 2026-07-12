@@ -57,6 +57,7 @@ public partial class Player : CharacterBody2D
 
 	// Cooldown timers
 	private SceneTreeTimer _damageTintCooldown;
+	private SceneTreeTimer _stunTimer;
 	
 	// Cursor Variables
 	private Sprite2D _cursorThrottle;
@@ -114,6 +115,10 @@ public partial class Player : CharacterBody2D
 			InputMap.AddAction("fire");
 			InputMap.ActionAddEvent("fire", new InputEventMouseButton() { ButtonIndex = MouseButton.Left });
 		}
+
+		// initialise timers
+		_damageTintCooldown = GetTree().CreateTimer(0.0f);
+		_stunTimer = GetTree().CreateTimer(0.0f);
 		
 		//alternative ship textures loaded
 		// _texture1  = GD.Load<Texture2D>("") ;
@@ -251,6 +256,8 @@ public partial class Player : CharacterBody2D
 
 	private void UpdateLinearMovement(float dt)
 	{
+		if (_stunTimer.TimeLeft > 0) return;
+		
 		float verticalInput = Input.GetAxis("backward", "forward");
 		float horizontalInput = Input.GetAxis("left", "right");
 
@@ -328,6 +335,14 @@ public partial class Player : CharacterBody2D
 		}
 		
 		PlayerVariables.Instance.ApplyDamage(amount);
+	}
+
+	/// <summary>
+	/// Revoke the player's ability to move for the given duration.
+	/// </summary>
+	public void Stun(float duration)
+	{
+		_stunTimer = GetTree().CreateTimer(duration);
 	}
 
 	private async void InitiateDeathSequence()

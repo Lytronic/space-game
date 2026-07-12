@@ -12,6 +12,7 @@ public partial class RaycastWeapon : BaseWeapon
 	[Export] public float EnergyPerSecond;
 	[Export] public float Range;
 	[Export] public float RayWidth;
+	[Export] public float StunTime = 0.0f;
 
 	// whether the weapon is currently shooting
 	private bool _active = false;
@@ -66,6 +67,11 @@ public partial class RaycastWeapon : BaseWeapon
 				if (target.HasMethod("TakeDamage"))
 				{
 					target.Call("TakeDamage", DamagePerSecond * delta);
+				}
+
+				if (StunTime > 0 && target.HasMethod("Stun"))
+				{
+					target.Call("Stun", StunTime);
 				}
 			}
 			else

@@ -28,16 +28,24 @@ public partial class GuidedMissile : BaseMissile
 	{
 		if (Target == null)
 		{
-			var entities = PlayerVariables.Space.GetChildren();
-
-			foreach(var entity in entities)
+			if (_owner is BaseEnemy)
 			{
-				// select the closest enemy among all entities
-				if (entity is BaseEnemy enemy)
+				Node scene = GetTree().CurrentScene;
+				Target = scene.GetNode<Player>("Player");
+			}
+			else
+			{
+				var entities = PlayerVariables.Space.GetChildren();
+
+				foreach(var entity in entities)
 				{
-					Target ??= enemy;
-					Target = (enemy.GlobalPosition - GlobalPosition).Length()
-						< (Target.GlobalPosition - GlobalPosition).Length() ? enemy : Target; 
+					// select the closest enemy among all entities
+					if (entity is BaseEnemy enemy)
+					{
+						Target ??= enemy;
+						Target = (enemy.GlobalPosition - GlobalPosition).Length()
+							< (Target.GlobalPosition - GlobalPosition).Length() ? enemy : Target; 
+					}
 				}
 			}
 		}

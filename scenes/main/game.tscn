@@ -18,11 +18,11 @@ shader = ExtResource("2_0rn35")
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ktwa8"]
 shader = ExtResource("5_se30j")
 shader_parameter/intensity = 1.0
-shader_parameter/colour = Vector3(1, 0, 0)
+shader_parameter/colour = Color(0, 0, 0, 1)
 
 [node name="game" type="Node2D" unique_id=777428364]
 script = ExtResource("1_kjrfb")
-Enemies = Array[String](["res://scenes/enemies/scenes/Drone.tscn", "res://scenes/enemies/scenes/Oculox.tscn", "res://scenes/enemies/scenes/Hyperfortress.tscn"])
+Enemies = Array[String](["res://scenes/enemies/scenes/Drone.tscn", "res://scenes/enemies/scenes/Oculox.tscn", "res://scenes/enemies/scenes/Hyperfortress.tscn", "res://scenes/enemies/scenes/MOAC.tscn"])
 
 [node name="Background" type="Node2D" parent="." unique_id=121379331]
 material = SubResource("ShaderMaterial_0rn35")

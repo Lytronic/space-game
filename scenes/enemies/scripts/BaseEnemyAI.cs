@@ -89,6 +89,8 @@ public partial class BaseEnemyAI : Node
 
 	private void UpdateMovement(Vector2 direction, float distance, float dt)
 	{
+		if (_enemy.StunTimer.TimeLeft > 0) return;
+		
 		if (_rng.Randf() < 0.01f)
 			_strafeDirection *= -1;
 
@@ -116,6 +118,8 @@ public partial class BaseEnemyAI : Node
 
 	private void FireWeapons(float distance)
 	{
+		if (_enemy.StunTimer.TimeLeft > 0) return;
+
 		if (distance > FireRange) return;
 
 		if (_weaponHoldTimer.TimeLeft == 0)

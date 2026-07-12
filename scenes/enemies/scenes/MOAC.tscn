@@ -1,0 +1,42 @@
+[gd_scene format=3 uid="uid://pvw5gd10ibv5"]
+
+[ext_resource type="PackedScene" uid="uid://lvlgmxl6u820" path="res://scenes/enemies/scenes/BaseEnemy.tscn" id="1_ggyiy"]
+[ext_resource type="Texture2D" uid="uid://ctn877mx35n1i" path="res://gfx/game/enemy/ship_eee.png" id="2_2tel1"]
+[ext_resource type="Script" uid="uid://bfrt21xpdr02s" path="res://scenes/projectiles/scripts/ProjectileLauncher.cs" id="3_ky0me"]
+[ext_resource type="PackedScene" uid="uid://chowccxwkplm3" path="res://scenes/projectiles/scenes/Arc.tscn" id="4_1yv4a"]
+
+[node name="CharacterBody2D" unique_id=217211211 instance=ExtResource("1_ggyiy")]
+Speed = 200.0
+Health = 300
+ScoreValue = 150
+MinimumRound = 5
+
+[node name="Sprite2D" parent="." index="0" unique_id=1972208063]
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("2_2tel1")
+
+[node name="CollisionPolygon2D" parent="." index="1" unique_id=1745739799]
+scale = Vector2(1.225, 1.225)
+polygon = PackedVector2Array(-32.320004, -7.548717, -22.4, -16.410257, -23.68, -22.97436, -9.28, -37.415386, -9.28, -34.789745, -5.759999, -38.4, 4.480002, -38.4, 8.320002, -34.789745, 8.320002, -37.415386, 22.720003, -22.646154, 21.760004, -16.738462, 30.080004, -8.205128, 30.720003, 11.815386, 25.600004, 13.784616, 22.400003, 23.302565, 4.8000016, 34.133335, 5.440002, 38.4, -5.439999, 38.4, -5.119999, 34.133335, -22.72, 23.958975, -25.92, 14.441027, -32.320004, 12.143591)
+
+[node name="BaseEnemyAi" parent="." index="4" unique_id=1676352923 node_paths=PackedStringArray("Primary", "Secondary")]
+Acceleration = 200.0
+Primary = [NodePath("../ProjectileLauncherLeft"), NodePath("../ProjectileLauncherRight")]
+Secondary = [NodePath("../Arc")]
+
+[node name="ProjectileLauncherLeft" type="Node2D" parent="." index="5" unique_id=1148120331]
+position = Vector2(-70, -50)
+script = ExtResource("3_ky0me")
+ProjectileScene = "uid://dmkuwkkxbymng"
+Cooldown = 4.0
+metadata/_custom_type_script = "uid://bfrt21xpdr02s"
+
+[node name="ProjectileLauncherRight" type="Node2D" parent="." index="6" unique_id=2085202841]
+position = Vector2(68, -51)
+script = ExtResource("3_ky0me")
+ProjectileScene = "uid://dmkuwkkxbymng"
+Cooldown = 4.0
+metadata/_custom_type_script = "uid://bfrt21xpdr02s"
+
+[node name="Arc" parent="." index="7" unique_id=1420630968 instance=ExtResource("4_1yv4a")]
+position = Vector2(0, -117)

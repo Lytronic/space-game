@@ -5,3 +5,7 @@
 
 [node name="Node2D" unique_id=1420630968 instance=ExtResource("1_r2ske")]
 script = ExtResource("2_4w5id")
+DamagePerSecond = 0.0
+EnergyPerSecond = 0.0
+Range = 0.0
+RayWidth = 0.0

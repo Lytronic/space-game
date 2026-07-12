@@ -21,6 +21,8 @@ public partial class BaseEnemy : CharacterBody2D
 	[Export] public int ScoreValue = 100;
 	[Export] public int MinimumRound = 0;
 
+	public SceneTreeTimer StunTimer;
+
 	public bool IsDead { get; private set; } = false;
 
 	[Signal]
@@ -35,6 +37,7 @@ public partial class BaseEnemy : CharacterBody2D
 		_explosion = GetNode<GpuParticles2D>("ExplosionParticle");
 		_sprite = GetNode<Sprite2D>("Sprite2D");
 		_collisionPolygon = GetNode<CollisionPolygon2D>("CollisionPolygon2D");
+		StunTimer = GetTree().CreateTimer(0.0f);
 		
 		if (lootTable == null || lootTable.Length == 0)
 			CreateLootTable();
@@ -84,6 +87,14 @@ public partial class BaseEnemy : CharacterBody2D
 
 		if (Health <= 0)
 			Die();
+	}
+
+	/// <summary>
+	/// Revoke the enemy's ability to move for the given duration.
+	/// </summary>
+	public void Stun(float duration)
+	{
+		StunTimer = GetTree().CreateTimer(duration);
 	}
 
 	public bool IsLastEnemy()
