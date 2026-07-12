@@ -37,9 +37,24 @@ Spread = 5.0
 Cooldown = 2.5
 metadata/_custom_type_script = "uid://bfrt21xpdr02s"
 
-[node name="BaseEnemyAi" parent="." index="6" unique_id=1676352923 node_paths=PackedStringArray("Primary")]
+[node name="CannonLeft" type="Node2D" parent="." index="6" unique_id=24059174]
+position = Vector2(-24, -7)
+script = ExtResource("3_ns3ds")
+ProjectileScene = "uid://bbjd5r28k1nnk"
+Cooldown = 5.0
+metadata/_custom_type_script = "uid://bfrt21xpdr02s"
+
+[node name="CannonRight" type="Node2D" parent="." index="7" unique_id=1192465794]
+position = Vector2(24, -7)
+script = ExtResource("3_ns3ds")
+ProjectileScene = "uid://bbjd5r28k1nnk"
+Cooldown = 5.0
+metadata/_custom_type_script = "uid://bfrt21xpdr02s"
+
+[node name="BaseEnemyAi" parent="." index="8" unique_id=1676352923 node_paths=PackedStringArray("Primary", "Secondary")]
 PreferredRange = 360.0
 RetreatRange = 200.0
 FireRange = 500.0
 Acceleration = 100.0
 Primary = [NodePath("../MissileLauncherLeft"), NodePath("../MissileLauncherRight")]
+Secondary = [NodePath("../CannonLeft"), NodePath("../CannonRight")]

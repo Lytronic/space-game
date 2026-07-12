@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://bbjd5r28k1nnk"]
+
+[ext_resource type="PackedScene" uid="uid://bjysrgtiie2t0" path="res://scenes/projectiles/scenes/BaseMissile.tscn" id="1_0p0tl"]
+[ext_resource type="Texture2D" uid="uid://cs2i4oy7mohiw" path="res://gfx/game/projectiles/shell.png" id="2_rqdxo"]
+
+[node name="BaseProjectile" unique_id=273606959 instance=ExtResource("1_0p0tl")]
+Damage = 40.0
+Speed = 175.0
+Lifetime = 50.0
+
+[node name="BaseProjectileSprite2D" parent="." index="1" unique_id=1899909286]
+texture = ExtResource("2_rqdxo")
