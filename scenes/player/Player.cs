@@ -286,7 +286,7 @@ public partial class Player : CharacterBody2D
 
 	private void UpdateWeapon(float dt)
 	{
-		if (Input.IsActionPressed("fire"))
+		if (IsAlive && Input.IsActionPressed("fire"))
 		{
 			TryFireWeapon();
 		}
