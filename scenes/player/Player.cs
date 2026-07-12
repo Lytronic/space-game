@@ -329,10 +329,7 @@ public partial class Player : CharacterBody2D
 
 	public void TakeDamage(float amount)
 	{
-		if (amount > 0.5f)
-		{
-			_damageTintCooldown = GetTree().CreateTimer(Mathf.Clamp(amount / 100.0f, 0.25f, 2.0f));
-		}
+		_damageTintCooldown = GetTree().CreateTimer(Mathf.Clamp(amount / 100.0f, 0.25f, 2.0f));
 		
 		PlayerVariables.Instance.ApplyDamage(amount);
 	}
@@ -402,7 +399,14 @@ public partial class Player : CharacterBody2D
 
 	private async void Explode()
 	{
-		_playerShip.Hide();
+		foreach (var child in GetChildren())
+		{
+			if (child.HasMethod(CanvasItem.MethodName.Hide))
+			{
+				child.Call(CanvasItem.MethodName.Hide);
+			}
+		}
+		_explosionParticle.Show();
 		_explosionParticle.OneShot = true;
 		_explosionParticle.Restart();
 		_explosionParticle.Emitting = true;

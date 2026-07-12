@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Linq;
 
 /// <summary>
 /// Core combat, loot, score, and wave-clear behavior for ship enemies.
@@ -148,7 +149,14 @@ public partial class BaseEnemy : CharacterBody2D
 
 	public virtual void Explode()
 	{
-		_sprite.Hide();
+		foreach (var child in GetChildren())
+		{
+			if (child.HasMethod(CanvasItem.MethodName.Hide))
+			{
+				child.Call(CanvasItem.MethodName.Hide);
+			}
+		}
+		_explosion.Show();
 		_collisionPolygon.SetDeferred(CollisionPolygon2D.PropertyName.Disabled, true);
 		_explosion.OneShot = true;
 		_explosion.Restart();
