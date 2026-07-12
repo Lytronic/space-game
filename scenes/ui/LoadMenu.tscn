@@ -62,6 +62,7 @@ offset_left = -476.18298
 offset_top = -236.70804
 offset_right = 475.81702
 offset_bottom = 237.29196
+theme_override_fonts/font = ExtResource("3_u1uwq")
 theme_override_styles/panel = SubResource("StyleBoxEmpty_ccjhf")
 
 [node name="LoadButton" type="TextureButton" parent="VBoxContainerRight/SaveListBg" unique_id=1627941735]
