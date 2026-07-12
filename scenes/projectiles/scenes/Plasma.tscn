@@ -1,8 +1,10 @@
 [gd_scene format=3 uid="uid://3gkk6vgooyrt"]
 
 [ext_resource type="PackedScene" uid="uid://c0nrrq16hsgke" path="res://scenes/projectiles/scenes/BaseProjectile.tscn" id="1_jsrs0"]
+[ext_resource type="Script" uid="uid://cap6d2v80l0ri" path="res://scenes/projectiles/scripts/Plasma.cs" id="2_7k0vg"]
 
 [node name="BaseProjectile" unique_id=273606959 instance=ExtResource("1_jsrs0")]
+script = ExtResource("2_7k0vg")
 Damage = 20.0
 Speed = 600.0
-Lifetime = 10.0
+Lifetime = 1.0
