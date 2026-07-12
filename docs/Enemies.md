@@ -44,9 +44,11 @@ The Empire's Modular Assault Craft is one the heaviest base enemy ship and also 
 The game's bosses can be divided into three categories: Stationary, Mobile, and The Swarm.
 
 ## Stationary
+
 These bosses do not move around of their own accord and instead drift through space aimlessly. But they can pack quite a punch, sporting all available weapons and having a massive health and shieldpool.
 
 ### The Station
+
 The Federation employs multiple large space stations inside and outside their territory to secure trade routes, valuable positions and ensure their presence is felt in even the darkest corners of the galaxy. Its weaponry is diverse and powerful to make up for its lack of mobility and size, making it an easy target to hit.
 
 <img src="https://raw.githubusercontent.com/lytronic/space-game/main/gfx/game/boss/station_fff.png" width="300">

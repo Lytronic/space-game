@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.IO;
 
 public partial class SoundManager : Node2D
 {
@@ -11,8 +12,11 @@ public partial class SoundManager : Node2D
 	string[] tracks; // Array for track filepaths
 	string[] sounds; // Array for sound filepaths
 
+	public float MusicVolume;
 	private AudioStreamPlayer _musicPlayer;
 	public AudioStreamPlayer[] SoundPlayerArray;
+
+	public bool FlightSound;
 
 	private bool _playingLoop;
 
@@ -70,8 +74,9 @@ public partial class SoundManager : Node2D
 	public void PlayTrack(int track) { // function to play the music
 
 		_musicPlayer.Stream = GD.Load<AudioStream>(tracks[track]);
-			
+		
 		_musicPlayer.Play();
+
 	}
 	// function to play the intro
 	public async void PlayIntro()
@@ -135,5 +140,40 @@ public partial class SoundManager : Node2D
 			await ToSignal(_musicPlayer, AudioStreamPlayer.SignalName.Finished);
 			PlayTrack(5);
 		}
+	}
+
+	public async void StartFlightNoise()
+	{
+		FlightSound = true;
+		PlaySound(3, 6);
+		while (FlightSound == true)
+		{
+			await ToSignal(SoundPlayerArray[3], AudioStreamPlayer.SignalName.Finished);
+			PlaySound(3, 6);
+		}
+		SoundPlayerArray[3].Stop();
+	}
+
+	public void ChangeFlightNoise(float volume)
+	{
+		SoundPlayerArray[3].VolumeLinear = volume / 100;
+	}
+	
+	public void EndFlightNoise()
+	{
+		FlightSound = false;
+		SoundPlayerArray[3].Stop();
+	}
+
+	// function to change the music volume
+	public void ChangeMusicVolume(float volume)
+	{
+		_musicPlayer.VolumeLinear = volume;
+	}
+
+	// function to change a specific sound players volume
+	public void ChangeSoundVolume(int idx, float volume)
+	{
+		SoundPlayerArray[idx].VolumeLinear = volume;
 	}
 }

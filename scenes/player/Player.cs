@@ -178,6 +178,7 @@ public partial class Player : CharacterBody2D
 		UpdateDamageOverlay();
 		UpdateWeapon((float)delta);
 		ManageEngineParticles();
+		_soundManager.Call("ChangeFlightNoise", Velocity.Length());
 	}
 
 	/// <summary>
@@ -410,7 +411,7 @@ public partial class Player : CharacterBody2D
 		_explosionParticle.OneShot = true;
 		_explosionParticle.Restart();
 		_explosionParticle.Emitting = true;
-		_soundManager.Call("PlaySound", 3, 7);
+		_soundManager.Call("PlaySound", 4, 7);
 		
 	}
 

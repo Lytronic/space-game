@@ -32,6 +32,7 @@ public partial class TitleScreen : VBoxContainer
 			GetTree().Quit();
 		};
 		_soundManager.Call("PlayIntro");
+		_soundManager.Call("EndFlightNoise");
 	}
 	
 	public override void _UnhandledInput(InputEvent @event)

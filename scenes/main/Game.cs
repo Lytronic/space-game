@@ -48,6 +48,8 @@ public partial class Game : Node2D
 		SpawnAsteroids();
 
 		SetupRound();
+
+		_soundManager.Call("StartFlightNoise");
 	}
 
 	public override void _Process(double delta)

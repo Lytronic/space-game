@@ -24,22 +24,23 @@ public partial class LoadMenu : HBoxContainer
 
 				GetTree().ChangeSceneToFile("res://scenes/main/game.tscn");
 		};
-		/*GetNode<TextureButton>("VBoxContainerRight/SaveListBg/DeleteButton").Pressed += () =>
+		GetNode<TextureButton>("VBoxContainerRight/SaveListBg/DeleteButton").Pressed += () =>
 		{
-		if (_selectedItems.Length > 0)
+			if (_selectedItems.Length > 0)
    			{
-			var saves = DB.GetSaves();
+				var saves = DB.GetSaves();
 		
-			int saveIndex = _selectedItems[0];
-			if (saveIndex < saves.Count)
-			{
-				int saveId = saves.Keys.ElementAt(saveIndex); // Get actual DB id
-				DB.DeleteGame(saveId);
-				UpdateSavesList();
-				_soundManager.Call("PlaySound", 0, 0);
+				int saveIndex = _selectedItems[0];
+				if (saveIndex < saves.Count)
+				{
+					int saveId = saves.Keys.ElementAt(saveIndex);
+					DB.DeleteGame(saveId);
+					UpdateSavesList();
+					_soundManager.Call("PlaySound", 0, 0);
+				}
 			}
-		}
-		};*/
+
+		};
 		_savesList.ItemSelected += OnItemSelected;
 		_savesList.SelectMode = ItemList.SelectModeEnum.Single;
 		UpdateSavesList();
@@ -66,16 +67,24 @@ public partial class LoadMenu : HBoxContainer
 		{
 			var savesList = GetNode<ItemList>("VBoxContainerRight/SaveListBg/SavesList");
 
-			int count = savesList.ItemCount;
+			/*int count = savesList.ItemCount;
 			for (int i = count - 1; i >= 0; i--)
 			{
 				savesList.RemoveItem(i);
-			}
+			}*/
+			savesList.Clear();
+
+			var saves = DB.GetSaves();
 			
-			foreach (var save in DB.GetSaves())
+			foreach (var save in saves)
 			{
-				savesList.AddItem($"{save.Key}        {save.Value}");
+				int itemId = save.Key; 
+				string itemText = $"{itemId}        {save.Value}";
+
+				int index = savesList.AddItem(itemText);
+				savesList.SetItemMetadata(index, itemId);				
+				//savesList.AddItem($"{save.Key}        {save.Value}");
 			}
-			_selectedItems = _savesList.GetSelectedItems();
+			//_selectedItems = _savesList.GetSelectedItems();
 		}
 }
