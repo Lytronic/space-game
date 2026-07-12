@@ -45,6 +45,8 @@ public partial class BaseEnemy : CharacterBody2D
 
 		GenerateDropStats();
 		ScaleStatsForCurrentDanger();
+
+		RescueFromAsteroid();
 	}
 
 	public virtual void CreateLootTable()
@@ -170,5 +172,35 @@ public partial class BaseEnemy : CharacterBody2D
 		Speed = ScaleStat(Speed);
 		Resistance = Mathf.Clamp(ScaleStat(Resistance), 0.0f, 0.85f);
 		ScoreValue = Mathf.Max(1, ScaleStat(ScoreValue));
+	}
+
+	/// <summary
+	/// Teleport the enemy if it spawns inside an asteroid.
+	/// </summary>
+	private void RescueFromAsteroid()
+	{
+		var spaceState = GetWorld2D().DirectSpaceState;
+
+		var segments = _collisionPolygon.Polygon;
+
+		// Godot throws an exception if given an odd length array for this
+		if ((segments.Length % 2) > 0)
+		{
+			Array.Resize<Vector2>(ref segments, segments.Length + 1);
+			segments[^1] = segments[^2];
+		}
+
+		var query = new PhysicsShapeQueryParameters2D()
+		{
+			Shape = new ConcavePolygonShape2D() { Segments = segments },
+		};
+
+		var result = spaceState.IntersectShape(query);
+
+		while (result.Count > 0)
+		{
+			GlobalPosition += GlobalPosition.Normalized() * 10.0f;
+			result = spaceState.IntersectShape(query);
+		}
 	}
 }

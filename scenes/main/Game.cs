@@ -7,7 +7,7 @@ public partial class Game : Node2D
 {
 	private const string AsteroidScenePath = "res://scenes/enemies/scenes/Asteroid.tscn";
 
-	[Export] public int AsteroidCount = 55;
+	[Export] public int AsteroidCount;
 
 	// This should show up as an array of selectable files in the editor
 	// but it doesn't, which is a bug outside our control:
@@ -89,7 +89,13 @@ public partial class Game : Node2D
 				asteroidSprite.Texture = ResourceLoader.Load<Texture2D>($"res://gfx/game/asteroids/{material}/asteroid_{material}_{_rng.RandiRange(1, 6)}.png");
 			}
 
-			asteroid.Scale *= _rng.RandfRange(0.5f, 1.5f);
+			float scaleFactor = _rng.RandfRange(0.5f, 2.5f);
+			foreach (var child in asteroid.GetChildren().Cast<Node2D>())
+			{
+				child.Scale *= scaleFactor;
+			}
+			asteroid.Mass *= scaleFactor;
+			
 			PlayerVariables.Space.AddChild(asteroid);
 		}
 	}

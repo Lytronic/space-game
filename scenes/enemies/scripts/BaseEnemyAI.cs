@@ -57,20 +57,24 @@ public partial class BaseEnemyAI : Node
 		if (!IsTargetValid())
 			AcquireTarget();
 
-		if (!IsTargetValid())
-		{
-			_enemy.Velocity = _enemy.Velocity.MoveToward(Vector2.Zero, Acceleration * dt);
-			_enemy.MoveAndSlide();
-			return;
-		}
-
 		Vector2 toTarget = _target.GlobalPosition - _enemy.GlobalPosition;
 		float distance = toTarget.Length();
 		if (distance * distance < MinDistanceSquared)
 			return;
 
 		Vector2 direction = toTarget / distance;
-		UpdateMovement(direction, distance, dt);
+
+		var collisionInfo = _enemy.MoveAndCollide(_enemy.Velocity * dt);
+
+		if (collisionInfo != null)
+		{
+			_enemy.Velocity = new Vector2(0.0f, 0.0f);
+		}
+		else
+		{
+			UpdateMovement(direction, distance, dt);
+		}
+
 		FireWeapons(distance);
 	}
 
@@ -93,7 +97,7 @@ public partial class BaseEnemyAI : Node
 		
 		if (_rng.Randf() < 0.01f)
 			_strafeDirection *= -1;
-
+		
 		Vector2 desiredVelocity;
 		if (distance > PreferredRange)
 		{
@@ -110,7 +114,7 @@ public partial class BaseEnemyAI : Node
 		}
 
 		_enemy.Velocity = _enemy.Velocity.MoveToward(desiredVelocity, Acceleration * dt);
-		_enemy.MoveAndSlide();
+		
 
 		float targetRotation = direction.Angle() + Mathf.Pi / 2.0f;
 		_enemy.Rotation = Mathf.LerpAngle(_enemy.Rotation, targetRotation, Mathf.Clamp(8.0f * dt, 0.0f, 1.0f));

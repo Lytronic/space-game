@@ -3,10 +3,18 @@
 [ext_resource type="Script" uid="uid://c65bhungbac8o" path="res://scenes/enemies/scripts/Asteroid.cs" id="1_cqiqn"]
 [ext_resource type="Texture2D" uid="uid://xorxhbpvtjwp" path="res://gfx/game/asteroids/gold/asteroid_gold_1.png" id="2_5qbm0"]
 
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_cqiqn"]
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_kd0ca"]
 radius = 20.0
 
-[node name="AsteroidEnemy" type="RigidBody2D" unique_id=560550229]
+[node name="Asteroid" type="RigidBody2D" unique_id=560550229]
+collision_layer = 3
+collision_mask = 2
+mass = 1000.0
+physics_material_override = SubResource("PhysicsMaterial_cqiqn")
+center_of_mass_mode = 1
+inertia = 1000000000.0
 script = ExtResource("1_cqiqn")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=226471751]
