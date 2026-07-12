@@ -21,8 +21,7 @@ public partial class BaseMissile : BaseProjectile
 
 	public override void OnBodyEntered(Node2D body)
 	{
-		if (body == _owner) return;
-		if (_exploding) return;
+		if (body == _owner || _exploding || IsQueuedForDeletion()) return;
 
 		_exploding = true;
 		Explode();
@@ -46,5 +45,6 @@ public partial class BaseMissile : BaseProjectile
 		_explosion.OneShot = true;
 		_explosion.Restart();
 		_explosion.Emitting = true;
+		_exploding = true;
 	}
 }

@@ -1,3 +1,4 @@
+using System;
 using Godot;
 
 /// <summary>
@@ -47,22 +48,27 @@ public partial class BaseProjectile : Area2D
 		if (body == _owner)
 			return;
 
-		bool hitDamageTarget = false;
-
 		if (Malicious && body is Player player)
 		{
 			player.TakeDamage(Damage);
-			hitDamageTarget = true;
 		}
 		else if (!Malicious && body is BaseEnemy enemy)
 		{
 			enemy.TakeDamage(Damage);
-			hitDamageTarget = true;
 		}
 
-		if (hitDamageTarget || body is RigidBody2D || body is StaticBody2D || body is CharacterBody2D)
+		try
 		{
-			QueueFree();
+			if (!IsQueuedForDeletion())
+			{
+				QueueFree();
+			}
+		}
+		catch (ObjectDisposedException)
+		{
+			// This exception means the object has already been deleted elsewhere.
+			// We can't synchronize the deletion processes so we just catch this.
+			return;
 		}
 	}
 
