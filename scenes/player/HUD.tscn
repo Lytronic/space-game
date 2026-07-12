@@ -38,9 +38,6 @@ texture = ExtResource("5_tu160")
 axis_stretch_horizontal = 2
 axis_stretch_vertical = 2
 
-[sub_resource type="LabelSettings" id="LabelSettings_j6s56"]
-font_size = 32
-
 [sub_resource type="LabelSettings" id="LabelSettings_kk26m"]
 font_size = 32
 font_color = Color(1, 1, 0, 1)
@@ -105,30 +102,7 @@ theme_override_styles/background = SubResource("StyleBoxTexture_rlky5")
 theme_override_styles/fill = SubResource("StyleBoxTexture_ghe3b")
 value = 50.0
 
-[node name="PlayerSpeedLabel" type="Label" parent="." unique_id=1643647378]
-visible = false
-layout_mode = 0
-offset_left = 18.0
-offset_top = 110.0
-offset_right = 111.0
-offset_bottom = 143.0
-theme_override_fonts/font = ExtResource("1_kk26m")
-theme_override_font_sizes/font_size = 8
-text = "Speed"
-label_settings = SubResource("LabelSettings_j6s56")
-
-[node name="PlayerHealthLabel" type="Label" parent="." unique_id=555668858]
-visible = false
-layout_mode = 0
-offset_left = 16.0
-offset_top = 56.0
-offset_right = 119.0
-offset_bottom = 101.0
-theme_override_fonts/font = ExtResource("1_kk26m")
-label_settings = SubResource("LabelSettings_j6s56")
-
 [node name="PlayerScoreLabel" type="Label" parent="." unique_id=737400542]
-visible = false
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5

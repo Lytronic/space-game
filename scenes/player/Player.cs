@@ -42,8 +42,6 @@ public partial class Player : CharacterBody2D
 	private ShaderMaterial _damageOverlayMaterial;
 
 	// Labels (not the queer kind.. probably...)
-	private Label _playerSpeedLabel;
-	private Label _playerHealthLabel;
 	private Label _playerScoreLabel;
 	private Label _roundLabel;
 
@@ -79,8 +77,6 @@ public partial class Player : CharacterBody2D
 		_damageOverlayMaterial = _damageOverlay.Material as ShaderMaterial;
 
 		// Assign labels
-		_playerSpeedLabel = _hud.GetNode<Label>("PlayerSpeedLabel");
-		_playerHealthLabel = _hud.GetNode<Label>("PlayerHealthLabel");
 		_playerScoreLabel = _hud.GetNode<Label>("PlayerScoreLabel");
 		_roundLabel = _hud.GetNode<Label>("RoundIndicator/RoundLabel");
 
@@ -163,11 +159,9 @@ public partial class Player : CharacterBody2D
 	public override void _Process(double delta)
 	{
 		// Update speed value on HUD
-		//_playerSpeedLabel.Text = $"Speed: {Velocity.Length():0}";
 		_playerHealthBar.Value = PlayerVariables.Stats.CurrentHealth;
 
 		// Update health value on HUD
-		//_playerHealthLabel.Text = $"Health: {PlayerVariables.Instance.CurrentHealth:0}";
 		_playerSpeedBar.Value = Velocity.Length();
 
 		_playerShieldBar.Value = PlayerVariables.Stats.CurrentShield;
