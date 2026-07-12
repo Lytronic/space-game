@@ -4,9 +4,6 @@
 [ext_resource type="Texture2D" uid="uid://cqox3r0wip5kq" path="res://gfx/game/enemy/ship_fff.png" id="2_ns3ds"]
 [ext_resource type="Script" uid="uid://bfrt21xpdr02s" path="res://scenes/projectiles/scripts/ProjectileLauncher.cs" id="3_ns3ds"]
 
-[sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_2ocxe"]
-points = PackedVector2Array(-100, 40, -90, 10, -74, 2, -74, -19, -55, -19, -55, -11, -42, -22, -20, -52, -9, -78, 9, -78, 20, -52, 42, -22, 56, -8, 56, -19, 75, -19, 75, 5, 90, 10, 100, 40, 12, 40, 0, 80, -12, 40)
-
 [node name="CharacterBody2D" unique_id=217211211 instance=ExtResource("1_uof8h")]
 Speed = 250.0
 Health = 100
@@ -18,9 +15,9 @@ metadata/_edit_horizontal_guides_ = [-11.0, -19.0, 5.0]
 scale = Vector2(0.075, 0.075)
 texture = ExtResource("2_ns3ds")
 
-[node name="CollisionShape2D" parent="." index="1" unique_id=318804551]
+[node name="CollisionPolygon2D" parent="." index="1" unique_id=1745739799]
 scale = Vector2(0.375, 0.375)
-shape = SubResource("ConvexPolygonShape2D_2ocxe")
+polygon = PackedVector2Array(-100, 40, -90, 10, -74, 2, -74, -19, -55, -19, -55, -11, -42, -22, -20, -52, -9, -78, 9, -78, 20, -52, 42, -22, 56, -8, 56, -19, 75, -19, 75, 5, 90, 10, 100, 40, 12, 40, 0, 80, -12, 40)
 
 [node name="MissileLauncherLeft" type="Node2D" parent="." index="4" unique_id=1060446281]
 position = Vector2(-24, -7)
