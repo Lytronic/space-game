@@ -60,6 +60,10 @@ public partial class Game : Node2D
 		PlayerVariables.Stats.Round++;
 
 		_enemiesSpawned = 2 + PlayerVariables.Stats.DangerLevel;
+
+		PlayerVariables.Stats.CurrentHealth = PlayerVariables.Stats.MaxHealth;
+		PlayerVariables.Stats.CurrentShield = PlayerVariables.Stats.MaxShield;
+
 		SpawnEnemyWave(_enemiesSpawned);
 		
 	}
