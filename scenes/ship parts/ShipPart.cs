@@ -13,6 +13,20 @@ public partial class ShipPart : Resource
 
     [Export] public Texture2D SpriteTexture { get; set; }
 
+    /*
+     * Jedes part hat eine Form.
+     * Diese wird durch ein zweidimensionales boolean array beschrieben.
+     * 'true' = besetzt
+     * 'false' = unbesetzt
+     * Die größte Form ist 3x3 (alles 'true')
+     * Die kleinste Form ist 1x1 (siehe unten)
+     */
+    public bool[,] Shape = {
+    { false, false, false },
+    { false, true, false },
+    { false, false, false }
+    };
+
     public void Initialize()
     {
         danger = PlayerVariables.Instance.DangerLevel;
