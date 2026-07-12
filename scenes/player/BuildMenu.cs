@@ -29,4 +29,31 @@ public partial class BuildMenu : Node2D
     {
         GetTree().ChangeSceneToFile("res://scenes/main/game.tscn");
     }
+
+    public struct GridSpace
+    {
+        public GridSpace()
+        {
+            PartInstance = null;
+            UID = 0;
+            IsActive = false;
+        }
+
+        public ShipPart PartInstance { get; private set; }
+        public int UID { get; private set; }
+        public bool IsActive { get; private set; }
+
+        public void Assign(ShipPart part, int uid)
+        {
+            PartInstance = part;
+            UID = uid;
+            IsActive = true;
+        }
+        public void Clear()
+        {
+            PartInstance = null;
+            UID = 0;
+            IsActive = false;
+        }
+    }
 }

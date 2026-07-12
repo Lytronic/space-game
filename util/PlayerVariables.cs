@@ -51,6 +51,10 @@ public partial class Stats
 	public float PhysicalDmgMod {  get; set; } = 1; // percentage increased physical damage
 	public float EnergyDamage { get; set; } = 1;
 	public float EnergyDmgMod { get; set; } = 1; // percentage increased energy damage 
+
+	// Inventory
+    public int maxInvWidth;
+    public int ActiveGridSpaces = 0;
 }
 
 /// <summary>
@@ -67,6 +71,8 @@ public partial class PlayerVariables : Node
 	public List<ShipPart> PlayerActiveParts { get; set; } = []; // active parts that get activate an effect every time their cooldown is down or under a condition
 	public List<ShipPart> PlayerPassiveParts { get; set; } = []; // passive parts that only apply an effect on the time they are added to the ship
 	public List<ShipPart> PlayerCollectedParts { get; set; } = []; // basically the stash that the game uses to store all the loot at the end of a round (this gets reset every new round)
+
+    public BuildMenu.GridSpace[,] Grid;
 
 	public override void _Ready()
 	{
@@ -179,24 +185,97 @@ public partial class PlayerVariables : Node
 	{
 		PlayerCollectedParts.AddRange(array);
 		GD.Print($"added parts from loot {array} to collection");
-		CheckForDebugItem(array);
+		// CheckForDebugItem(array);
 		array = null;
 	}
 
-	//if there's a DebugMultitool then I want it to test the other methods too just because I'm not making another testing scenario ^~^
-	private void CheckForDebugItem(ShipPart[] parts)
-	{
-		foreach(ShipPart part in parts)
-		{
-			if(part is DebugMultitool debugItem)
-			{
-				GD.Print("Debug Multitool detected, beginning testing ");
-				AddPartToShip(debugItem);
-				
-				RemovePartFromShip(debugItem);
-			}
-		}
-	}
+    // ------------------------------------------ Grid management ------------------------------------------
 
+    public bool TrySetGridSpace(ShipPart part, int x, int y)
+    {
+        if (Grid[x, y].UID != 0) return false;
+        else
+        {
+            Grid[x, y].Assign(part, ++Stats.ActiveGridSpaces);
+            return true;
+        }
+    }
 
+    // --------------------- managing the ship parts attatched and not attatched and activae and passive ---------------------
+
+    //adding a part to the ship
+    public void AddPartToShip(ShipPart part, int x, int y, bool[,] shape)    
+    {
+        // Tracking bit
+        bool failed = false;
+        // List of spaces this part is currently covering (useful to reverse action if it fails)
+        List<BuildMenu.GridSpace> partSpaces = new();
+        // Iterate shape slots
+        for (int shapeX = -1; shapeX < 2; shapeX++)
+        {
+            if (failed) break;
+
+            for (int shapeY = -1; shapeY < 2; shapeY++)
+            {
+                if (failed) break;
+
+                if (!shape[shapeX, shapeY]) continue;
+                else if (TrySetGridSpace(part, x + shapeX, y + shapeY))
+                {
+                    partSpaces.Add(Grid[x, y]);
+                }
+                else failed = true;
+            }
+        }
+        // Revert action if it failed
+        if (failed)
+        {
+            foreach (BuildMenu.GridSpace space in partSpaces) space.Clear();
+
+            return;
+        }
+
+        // Assign part to corresponding list
+        if(part.isActive)
+        {
+            PlayerActiveParts.Add(part);
+        }
+        if(!part.isActive)
+        {
+            PlayerPassiveParts.Add(part);
+            part.changeStats(true); //adds the part's stats to the player's stats
+        }
+        PlayerCollectedParts.Remove(part);
+        //GD.Print($"Part moved!! moved {part} from collection to ship");//debug
+    }
+
+    public void RemovePartFromShip(ShipPart part, int x, int y, bool[,] shape)
+    {
+        if (part.isActive)
+        {
+            PlayerActiveParts.Remove(part);
+        }
+        if (!part.isActive)
+        {
+            PlayerPassiveParts.Remove(part);
+            part.changeStats(false); //subtracts the part's stats from the player stats
+        }
+        PlayerCollectedParts.Add(part);
+        //GD.Print($"Part moved!! moved {part} from ship to collection "); //debug
+    }
+
+    //if there's a DebugMultitool then I want it to test the other methods too just because I'm not making another testing scenario ^~^
+    //private void CheckForDebugItem(ShipPart[] parts)
+    //{
+    //    foreach(ShipPart part in parts)
+    //    {
+    //        if(part is DebugMultitool debugItem)
+    //        {
+    //            GD.Print("Debug Multitool detected, beginning testing ");
+    //            AddPartToShip(debugItem);
+                
+    //            RemovePartFromShip(debugItem);
+    //        }
+    //    }
+    //}
 }
