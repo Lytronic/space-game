@@ -19,8 +19,16 @@
 [ext_resource type="Texture2D" uid="uid://cgs4g43kx81rj" path="res://gfx/gui/game/ammo_bar.png" id="8_kw2be"]
 [ext_resource type="Texture2D" uid="uid://d250psuhmtdlj" path="res://gfx/gui/abilities/slug.png" id="9_7ntgm"]
 [ext_resource type="Texture2D" uid="uid://dijdj7c5lgii6" path="res://gfx/gui/abilities/switch.png" id="10_edggo"]
+[ext_resource type="Texture2D" uid="uid://cmxkhly0l5x8d" path="res://gfx/gui/abilities/switch_off.png" id="13_c2quv"]
+[ext_resource type="Texture2D" uid="uid://bt0ersrij8oxf" path="res://gfx/gui/abilities/slug_off.png" id="15_oh27t"]
+[ext_resource type="Texture2D" uid="uid://b53ubaahk6exj" path="res://gfx/gui/abilities/missile_off.png" id="17_c5x17"]
 [ext_resource type="Texture2D" uid="uid://bclvwmhqptjke" path="res://gfx/gui/game/enemy_locator.png" id="18_iourf"]
+[ext_resource type="Texture2D" uid="uid://bfc2qy4gjwcb" path="res://gfx/gui/abilities/torpedo_off.png" id="19_cc1pd"]
 [ext_resource type="Script" uid="uid://b6awv2ldv24qy" path="res://scenes/player/WeaponsCooldown.cs" id="19_tu160"]
+[ext_resource type="Texture2D" uid="uid://c77k1nl7b82tb" path="res://gfx/gui/abilities/plasma_off.png" id="21_lp1ut"]
+[ext_resource type="Texture2D" uid="uid://cdag54ejjx8rb" path="res://gfx/gui/abilities/laser_off.png" id="23_4vqng"]
+[ext_resource type="Texture2D" uid="uid://do4ujxqm51u2o" path="res://gfx/gui/abilities/arc_off.png" id="25_aen0w"]
+[ext_resource type="Texture2D" uid="uid://d2f6xve221p64" path="res://gfx/gui/abilities/pulse_off.png" id="27_nbya4"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_rlky5"]
 texture = ExtResource("2_7x8q2")
@@ -283,6 +291,22 @@ offset_right = 757.0
 offset_bottom = 641.0
 theme_override_constants/separation = 24
 script = ExtResource("2_68dc6")
+TextureSwap = ExtResource("10_edggo")
+TextureSwapOff = ExtResource("13_c2quv")
+TextureSlug = ExtResource("9_7ntgm")
+TextureSlugOff = ExtResource("15_oh27t")
+TextureMissile = ExtResource("5_sto77")
+TextureMissileOff = ExtResource("17_c5x17")
+TextureTorpedo = ExtResource("8_7x8q2")
+TextureTorpedoOff = ExtResource("19_cc1pd")
+TexturePlasma = ExtResource("6_h35ih")
+TexturePlasmaOff = ExtResource("21_lp1ut")
+TextureLaser = ExtResource("4_edggo")
+TextureLaserOff = ExtResource("23_4vqng")
+TextureArc = ExtResource("3_fn62s")
+TextureArcOff = ExtResource("25_aen0w")
+TextureEMP = ExtResource("7_n1mye")
+TextureEMPOff = ExtResource("27_nbya4")
 
 [node name="WeaponSwap" type="TextureRect" parent="Weapons/WeaponAbilities" unique_id=2101956847]
 layout_mode = 2

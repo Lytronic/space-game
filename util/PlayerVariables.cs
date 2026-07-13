@@ -34,7 +34,7 @@ public partial class Stats
 	//ship resources 
 	public int Ammo { get; set; } = 1;
 	public float Energy { get; set; } = 1;
-	public float MaxEnergy { get; set; } = 1;
+	public float MaxEnergy { get; set; } = 100.0f;
 	public float Fuel { get; set; } = 1;
 	public float MaxFuel { get; set; } = 1;
 	public float EnergyGeneration {  get; set; } = 1;
@@ -53,8 +53,8 @@ public partial class Stats
 	public float EnergyDmgMod { get; set; } = 1; // percentage increased energy damage 
 
 	// Inventory
-    public int maxInvWidth;
-    public int ActiveGridSpaces = 0;
+	public int maxInvWidth;
+	public int ActiveGridSpaces = 0;
 }
 
 /// <summary>
@@ -72,7 +72,7 @@ public partial class PlayerVariables : Node
 	public List<ShipPart> PlayerPassiveParts { get; set; } = []; // passive parts that only apply an effect on the time they are added to the ship
 	public List<ShipPart> PlayerCollectedParts { get; set; } = []; // basically the stash that the game uses to store all the loot at the end of a round (this gets reset every new round)
 
-    public BuildMenu.GridSpace[,] Grid;
+	public BuildMenu.GridSpace[,] Grid;
 
 	public override void _Ready()
 	{
@@ -243,7 +243,7 @@ public partial class PlayerVariables : Node
         if(!part.isActive)
         {
             PlayerPassiveParts.Add(part);
-            part.changeStats(true); //adds the part's stats to the player's stats
+			part.changeStats(true); //adds the part's stats to the player's stats
         }
         PlayerCollectedParts.Remove(part);
         //GD.Print($"Part moved!! moved {part} from collection to ship");//debug
@@ -258,24 +258,24 @@ public partial class PlayerVariables : Node
         if (!part.isActive)
         {
             PlayerPassiveParts.Remove(part);
-            part.changeStats(false); //subtracts the part's stats from the player stats
-        }
-        PlayerCollectedParts.Add(part);
-        //GD.Print($"Part moved!! moved {part} from ship to collection "); //debug
-    }
+			part.changeStats(false); //subtracts the part's stats from the player stats
+		}
+		PlayerCollectedParts.Add(part);
+		//GD.Print($"Part moved!! moved {part} from ship to collection "); //debug
+	}
 
-    //if there's a DebugMultitool then I want it to test the other methods too just because I'm not making another testing scenario ^~^
-    //private void CheckForDebugItem(ShipPart[] parts)
-    //{
-    //    foreach(ShipPart part in parts)
-    //    {
-    //        if(part is DebugMultitool debugItem)
-    //        {
-    //            GD.Print("Debug Multitool detected, beginning testing ");
-    //            AddPartToShip(debugItem);
-                
-    //            RemovePartFromShip(debugItem);
-    //        }
-    //    }
-    //}
+	//if there's a DebugMultitool then I want it to test the other methods too just because I'm not making another testing scenario ^~^
+	//private void CheckForDebugItem(ShipPart[] parts)
+	//{
+	//    foreach(ShipPart part in parts)
+	//    {
+	//        if(part is DebugMultitool debugItem)
+	//        {
+	//            GD.Print("Debug Multitool detected, beginning testing ");
+	//            AddPartToShip(debugItem);
+				
+	//            RemovePartFromShip(debugItem);
+	//        }
+	//    }
+	//}
 }

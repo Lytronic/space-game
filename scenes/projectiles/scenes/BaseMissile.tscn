@@ -19,6 +19,7 @@ script = ExtResource("2_mdtsx")
 Damage = 2.0
 Speed = 250.0
 Lifetime = 2.0
+LaunchSound = "res://sfx/game/weapons/missile.mp3"
 
 [node name="EngineParticle" type="GPUParticles2D" parent="." index="0" unique_id=1557309858]
 position = Vector2(-5, 0)

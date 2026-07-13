@@ -8,3 +8,4 @@ script = ExtResource("2_7k0vg")
 Damage = 20.0
 Speed = 600.0
 Lifetime = 1.0
+LaunchSound = "res://sfx/game/weapons/plasma.mp3"

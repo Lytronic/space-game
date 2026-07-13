@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://dwvj88riye4ts"]
+
+[ext_resource type="Texture2D" uid="uid://tw30mygcuye6" path="res://scenes/enemies/BunniTest.png" id="1_fj7vt"]
+[ext_resource type="Script" uid="uid://dqj1l7wm1urhc" path="res://scenes/enemies/scripts/bosses/BaseStation.cs" id="1_rr40x"]
+
+[node name="BaseStation" type="CharacterBody2D" unique_id=617097928]
+script = ExtResource("1_rr40x")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=256132316]
+scale = Vector2(15, 15)
+texture = ExtResource("1_fj7vt")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=1816814888]
+build_mode = 1
+polygon = PackedVector2Array(-376, -371, 375, -372, 377, 369, -378, 366)

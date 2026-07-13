@@ -13,6 +13,9 @@ public partial class BaseProjectile : Area2D
 	[Export] public bool Malicious = true;
 	[Export] public float Lifetime = 3.0f;
 
+	[Export] public string LaunchSound;
+	[Export] public string ImpactSound;
+
 	protected Node2D _owner;
 	private float _remainingLifetime;
 
@@ -22,7 +25,7 @@ public partial class BaseProjectile : Area2D
 	{
 		_remainingLifetime = Lifetime;
 		BodyEntered += OnBodyEntered;
-		_shootSound = _shootSound = GetNode<AudioStreamPlayer2D>("ShootSound");
+		_shootSound = GetNode<AudioStreamPlayer2D>("ShootSound");
 	}
 
 	public override void _PhysicsProcess(double delta)
@@ -83,7 +86,6 @@ public partial class BaseProjectile : Area2D
 	public virtual void Launch(Vector2 direction, Vector2 startPosition, Node2D owner)
 	{
 		Launch(Damage, Speed, direction, startPosition, Malicious, owner);
-		_shootSound.Play();
 	}
 
 	/// <summary>
@@ -122,6 +124,8 @@ public partial class BaseProjectile : Area2D
 
 		GlobalPosition = startPosition;
 		Rotation = Direction.Angle();
+		_shootSound.Stream = GD.Load<AudioStream>(LaunchSound);
+		_shootSound.Play();
 	}
 
 	/// <summary>

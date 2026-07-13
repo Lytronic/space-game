@@ -8,6 +8,7 @@ size = Vector2(4, 16)
 
 [node name="BaseProjectile" type="Area2D" unique_id=273606959]
 script = ExtResource("1_n0yj1")
+LaunchSound = "res://sfx/game/weapons/rail_coil.mp3"
 
 [node name="BaseProjectileCollisionShape2D" type="CollisionShape2D" parent="." unique_id=1962684198]
 rotation = 1.5707964

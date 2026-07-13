@@ -21,6 +21,8 @@ public partial class WeaponAbilities : HBoxContainer
 	[Export] public Texture2D TextureEMP;
 	[Export] public Texture2D TextureEMPOff;
 
+	public int selectedAbility;
+
 	public TextureRect[] Abilities; // Array for the order of abilities
 
 
@@ -57,7 +59,7 @@ public partial class WeaponAbilities : HBoxContainer
 	{
 		if (Abilities[AbilityNr] != null)
 		{
-			
+			selectedAbility = AbilityNr;
 		}
 	}
 

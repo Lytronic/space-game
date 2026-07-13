@@ -7,6 +7,7 @@
 Damage = 40.0
 Speed = 175.0
 Lifetime = 50.0
+LaunchSound = "res://sfx/game/weapons/cannon.mp3"
 
 [node name="EngineParticle" parent="." index="0" unique_id=1557309858]
 visible = false
