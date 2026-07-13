@@ -215,17 +215,13 @@ public partial class PlayerVariables : Node
 		if(part.isActive)
 		{
 			PlayerActiveParts.Add(part);
-			SavedActiveParts.Add(part.SavePartVariables());
 		}
 		if(!part.isActive)
 		{
 			PlayerPassiveParts.Add(part);
-			SavedPassiveParts.Add(part.SavePartVariables());
 			part.changeStats(true); //adds the part's stats to the player's stats
 		}
 		PlayerCollectedParts.Remove(part);
-        SavedCollectedParts.RemoveAt(PlayerCollectedParts.IndexOf(part));
-        PlayerCollectedParts.Remove(part);
 		
 		//GD.Print($"Part moved!! moved {part} from collection to ship");//debug
 	}
@@ -235,19 +231,15 @@ public partial class PlayerVariables : Node
 		if (part.isActive)
 		{
 			PlayerActiveParts.Remove(part);
-            SavedActiveParts.RemoveAt(PlayerCollectedParts.IndexOf(part));
-            PlayerActiveParts.Remove(part);
 		}
 		if (!part.isActive)
 		{
-			PlayerPassiveParts.Remove(part);
-            SavedPassiveParts.RemoveAt(PlayerCollectedParts.IndexOf(part));
             PlayerPassiveParts.Remove(part);
 			part.changeStats(false); //subtracts the part's stats from the player stats
 		}
 		SavedCollectedParts.Add(part.SavePartVariables());
 		PlayerCollectedParts.Add(part);
-		//GD.Print($"Part moved!! moved {part} from ship to collection "); //debug
+		GD.Print($"Part moved!! moved {part} from ship to collection "); //debug
 	}
 
 	public void AddLootToCollection(ShipPart[] array)
@@ -261,7 +253,7 @@ public partial class PlayerVariables : Node
 
 
 		GD.Print($"added parts from loot {array} to collection");
-		// CheckForDebugItem(array);
+		//CheckForDebugItem(array);
 		array = null;
 	}
 
@@ -354,4 +346,36 @@ public partial class PlayerVariables : Node
 	        }
 	    }
 	}
+
+	public void SaveGame()
+	{
+		SaveData save = new SaveData();
+		save.Stats = Stats;
+
+		//deconstruct the lists of parts into serializable bits
+		List<SavedPart> activeParts = new List<SavedPart>();
+		foreach(ShipPart part in PlayerActiveParts)
+		{
+			activeParts.Add(part.SavePartVariables());
+		}
+
+		List<SavedPart> passiveParts = new List<SavedPart>();
+        foreach (ShipPart part in PlayerPassiveParts)
+        {
+            passiveParts.Add(part.SavePartVariables());
+        }
+
+        List<SavedPart> collectedParts = new List<SavedPart>();
+        foreach (ShipPart part in PlayerCollectedParts)
+        {
+            collectedParts.Add(part.SavePartVariables());
+        }
+
+		//put the serialized lists of shipParts into DB
+		save.ActiveParts.AddRange(activeParts);
+		save.PassiveParts.AddRange(passiveParts);
+		save.CollectedParts.AddRange(collectedParts);
+
+		DB.SaveGame("name of save" , save);
+    }
 }

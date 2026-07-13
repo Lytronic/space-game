@@ -47,9 +47,13 @@ public partial class ShipPart : Resource
         
         //here the weapon adds a child to the partsManager for actual shooting
     }
-    public int addOrSubtractInt(bool b) // support method to streamline applying stats in subclasses
+    public int addOrSubtractInt(bool add) // support method to streamline applying stats in subclasses
     {
-        return b ? 1 : -1;
+        if(add)
+        {
+            return 1;
+        }
+        else { return -1; }
     }
     public void GenerateStatRandomness() //support method to streamline scaling in subclasses
     {

@@ -17,7 +17,9 @@ public partial struct SaveData
 	public DateTime SavedTime;
 	
 	public Stats Stats;
-	public List<SavedPart> Parts;
+	public List<SavedPart> ActiveParts;
+    public List<SavedPart> PassiveParts;
+    public List<SavedPart> CollectedParts;
 }
 
 /// <summary>

@@ -26,7 +26,7 @@ namespace Microgravity.util
 				var data = new SaveData
 				{
 					Stats = vars,
-					Parts = [ new SavedPart("test_part", 1.0f) ]
+					ActiveParts = [ new SavedPart("test_part", 1.0f) ]
 				};
 
 				DB.SaveGame("test name", data);

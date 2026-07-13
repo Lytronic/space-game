@@ -34,7 +34,10 @@ public partial class DebugMultitool : ShipPart
 
 	public override void generateStats()
 	{
+        GenerateStatRandomness();
+        
 		float mult = randomness;
 		thrustIncrease *= mult;
+		GD.Print($"random: {mult}");
 	}
 }
