@@ -213,12 +213,10 @@ public partial class Player : CharacterBody2D
 		foreach (var entity in entities)
 		{
 			if (entity is BaseEnemy enemy)
-			{
+			{				
 				nearest ??= enemy;
 				nearest = (enemy.GlobalPosition - GlobalPosition).Length()
-					< (nearest.GlobalPosition - GlobalPosition).Length() ? enemy : nearest;
-
-				GD.Print(nearest);
+					< (nearest.GlobalPosition - GlobalPosition).Length() && !enemy.IsDead ? enemy : nearest;
 			}
 		}
 
