@@ -54,12 +54,18 @@ public partial class Game : Node2D
 
 	public override void _Process(double delta)
 	{
-		_progressBar.Value = (1 - ((float)_enemyCount / (float)_enemiesSpawned)) * 100.0f;
+		_progressBar.Value = (1 - (_enemyCount / (float)_enemiesSpawned)) * 100.0f;
+
+		if (_enemyCount == 0)
+		{
+			OpenBuildMenuAfterDelay(1.5f);
+		}
 	}
 
 	private void SetupRound()
 	{
 		PlayerVariables.Stats.Round++;
+		PlayerVariables.Stats.DangerLevel++;
 
 		_enemiesSpawned = 2 + PlayerVariables.Stats.DangerLevel;
 

@@ -19,7 +19,7 @@ public partial class Stats
 	public int Round = 0;
 
 	// difficulty level scales all enemy power exponentially
-	public int DangerLevel {  get; set; } = 1;
+	public int DangerLevel {  get; set; } = 0;
 	public float LuckStat { get; set; } = 1;
 
 	//durrability stats stuff: armor and shield toughness are scaling stats reducing percentual damage scaling in a power curve | Math.Pow

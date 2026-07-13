@@ -3,7 +3,8 @@ using System;
 using System.Linq;
 
 /// <summary>
-/// Core combat, loot, score, and wave-clear behavior for ship enemies.
+/// Enemy Node with stats, loot and accompanying methods.
+/// Behaviour is managed by BaseEnemyAI nodes.
 /// </summary>
 [GlobalClass]
 public partial class BaseEnemy : CharacterBody2D
@@ -102,28 +103,6 @@ public partial class BaseEnemy : CharacterBody2D
 		StunTimer = GetTree().CreateTimer(duration);
 	}
 
-	public bool IsLastEnemy()
-	{
-		var scene = GetTree().CurrentScene;
-		if (scene == null) return false;
-
-		return !HasOtherLivingEnemy(scene);
-	}
-
-	private bool HasOtherLivingEnemy(Node node)
-	{
-		foreach (Node child in node.GetChildren())
-		{
-			if (child != this && child is BaseEnemy enemy && !enemy.IsDead && !enemy.IsQueuedForDeletion())
-				return true;
-
-			if (HasOtherLivingEnemy(child))
-				return true;
-		}
-
-		return false;
-	}
-
 	public void Die()
 	{
 		EmitSignal(SignalName.Killed);
@@ -136,19 +115,8 @@ public partial class BaseEnemy : CharacterBody2D
 
 		GetNodeOrNull<EnemySalvage>(salvagePath)?.dropLoot();
 
-		bool levelCleared = IsLastEnemy();
-
 		Explode();
 		GetTree().CreateTimer(_explosion.Lifetime).Timeout += () => QueueFree();
-
-		if (levelCleared)
-		{
-			PlayerVariables.Instance.ChangeDifficulty(1);
-
-			Node currentScene = GetTree().CurrentScene;
-			if (currentScene?.HasMethod("OpenBuildMenuAfterDelay") == true)
-				currentScene.Call("OpenBuildMenuAfterDelay", 1.5f);
-		}
 	}
 
 	public virtual void Explode()
