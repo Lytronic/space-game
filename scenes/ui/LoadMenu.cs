@@ -21,7 +21,7 @@ public partial class LoadMenu : HBoxContainer
 		GetNode<TextureButton>("VBoxContainerRight/SaveListBg/LoadButton").Pressed += () => {
 				var saves = DB.GetSaves();
 				PlayerVariables.LoadFromSave(saves.Keys.Max() - _selectedItem);
-
+				_soundManager.Call("Fight");
 				GetTree().ChangeSceneToFile("res://scenes/main/game.tscn");
 		};
 		GetNode<TextureButton>("VBoxContainerRight/SaveListBg/DeleteButton").Pressed += () =>

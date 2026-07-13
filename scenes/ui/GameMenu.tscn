@@ -82,7 +82,6 @@ ignore_texture_size = true
 stretch_mode = 0
 
 [node name="Label" type="Label" parent="VBoxContainerRight/TextureRect/NewGame" unique_id=1562703580]
-visible = false
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -117,7 +116,6 @@ ignore_texture_size = true
 stretch_mode = 0
 
 [node name="Label" type="Label" parent="VBoxContainerRight/TextureRect/LoadGame" unique_id=911758459]
-visible = false
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5

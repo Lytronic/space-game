@@ -15,6 +15,7 @@ offset_left = 13.683
 offset_top = 8.0
 offset_right = 1081.0
 offset_bottom = 642.0
+size_flags_horizontal = 4
 script = ExtResource("1_5l8nf")
 
 [node name="VBoxContainerLeft" type="VBoxContainer" parent="." unique_id=1705762875]

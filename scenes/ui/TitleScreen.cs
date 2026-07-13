@@ -41,8 +41,8 @@ public partial class TitleScreen : VBoxContainer
 			&& (@event is InputEventKey || @event is InputEventMouseButton)
 			&& Visible)
 		{
-			_soundManager.Call("Fight");
-			GetTree().ChangeSceneToFile("res://scenes/main/game.tscn");
+			_soundManager.Call("Menu");
+			GetTree().ChangeSceneToFile("res://scenes/ui/GameMenu.tscn");
 		}
 	}
 }
