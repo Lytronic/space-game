@@ -69,6 +69,8 @@ public partial class Player : CharacterBody2D
 	private Texture2D _texture2;
 	private Texture2D _texture3;
 
+	// the parts manager holds on to the weapon nodes
+	private Node2D partsManager;
 	public override void _Ready()
 	{
 		// Assign user interfaces
@@ -117,14 +119,14 @@ public partial class Player : CharacterBody2D
 		// initialise timers
 		_damageTintCooldown = GetTree().CreateTimer(0.0f);
 		_stunTimer = GetTree().CreateTimer(0.0f);
-		
-		//alternative ship textures loaded
-		// _texture1  = GD.Load<Texture2D>("") ;
-		// _texture2 = GD.Load<Texture2D>("") ;
-		// _texture3 = GD.Load<Texture2D>("") ;
-	}
 
-	public override void _PhysicsProcess(double delta)
+        //alternative ship textures loaded
+        _texture1  = GD.Load<Texture2D>("res://gfx/game/ship.png") ;
+        _texture2 = GD.Load<Texture2D>("res://gfx/game/ship2.png") ;
+        _texture3 = GD.Load<Texture2D>("res://gfx/game/ship3.png") ;
+    }
+
+    public override void _PhysicsProcess(double delta)
 	{
 		float dt = (float)delta;
 
@@ -175,6 +177,7 @@ public partial class Player : CharacterBody2D
 		UpdateEnemyLocator();
 		UpdateWeapon((float)delta);
 		ManageEngineParticles();
+		UpdateSprite();
 		_soundManager.Call("ChangeFlightNoise", Velocity.Length());
 	}
 
@@ -434,18 +437,23 @@ public partial class Player : CharacterBody2D
 		
 	}
 
-	public void UpdateSprite(float sprite)
+	public void UpdateSprite()
 	{
-		switch(sprite)
+		float sprite = ((SettingsEntry.Float)SettingsModel.Instance.Settings["general.player_ship"]).Value;
+
+        switch (sprite)
 		{
 			case 1 :
 				_playerShip.Texture = _texture1;
+
 				break;
 			case 2 : 
 				_playerShip.Texture = _texture2;
+				
 				break;
 			case 3 :
 				_playerShip.Texture = _texture3;
+
 				break;
 		}
 	}

@@ -43,6 +43,8 @@ public partial class ShipPart : Resource
         //int addOrSubtract = add ? 1 : -1;
 
         //PlayerVariables.Instance.playerStat += (partStat * addOrSubtract)  <--- this is very important information but just a schema to show how to do it
+        
+        //here the weapon adds a child to the partsManager for actual shooting
     }
     public int addOrSubtractInt(bool b) // support method to streamline applying stats in subclasses
     {
@@ -67,7 +69,7 @@ public partial class ShipPart : Resource
     public virtual void generateStats()
     {
         GenerateStatRandomness();
-        //randomness
+        //randomness is then applied to all stats
     }
 
     public (string type, float reandomness) GetDefiningValues()

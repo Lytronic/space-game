@@ -13,6 +13,9 @@ public partial class DebugMultitool : ShipPart
 	public override float partWeight { get; set; } = 9.11f;
 	private float thrustIncrease = 2;
 
+    //type specific texture
+    //public override Texture2D SpriteTexture { get; set; } = 
+
 
 
 
