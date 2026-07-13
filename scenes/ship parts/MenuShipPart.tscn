@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://b0bjbcxjvin33"]
+
+[ext_resource type="Script" uid="uid://c6km8bxgm44wl" path="res://scenes/ship parts/MenuShipPart.cs" id="1_ybc83"]
+
+[node name="MenuShipPart" type="Control" unique_id=1186230260]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_ybc83")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=367204891]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Anchors" type="Control" parent="." unique_id=565020242]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0

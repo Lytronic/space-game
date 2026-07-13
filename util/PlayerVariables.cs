@@ -53,8 +53,9 @@ public partial class Stats
 	public float EnergyDmgMod { get; set; } = 1; // percentage increased energy damage 
 
 	// Inventory
-	public int maxInvWidth;
-	public int ActiveGridSpaces = 0;
+    public int InvWidth = 7;
+    public int InvHeight = 9;
+    public int ActiveGridSpaces = 0;
 }
 
 [MemoryPackable]
@@ -86,16 +87,13 @@ public partial class PlayerVariables : Node
 	public List<ShipPart> PlayerPassiveParts { get; set; } = []; // passive parts that only apply an effect on the time they are added to the ship
 	public List<ShipPart> PlayerCollectedParts { get; set; } = []; // basically the stash that the game uses to store all the loot at the end of a round (this gets reset every new round)
 
-<<<<<<< Updated upstream
 	public BuildMenu.GridSpace[,] Grid;
-=======
+
 	//saved versions of all the items in struct form ---> they need unpacking 
 	public List<SavedParts> SavedActiveParts { get; set; } = [];
 	public List<SavedParts> SavedPassiveParts { get; set; } = [];
 	public List<SavedParts> SavedCollectedParts { get; set; } = [];
 
-    public BuildMenu.GridSpace[,] Grid;
->>>>>>> Stashed changes
 
 	public override void _Ready()
 	{

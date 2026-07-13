@@ -1,13 +1,13 @@
 [gd_scene format=3 uid="uid://d41ak84s03mi"]
 
-[ext_resource type="Script" uid="uid://b055ua6clk4u4" path="res://scenes/ship parts/PlacedShipPart.cs" id="1_5lqhm"]
+[ext_resource type="Script" path="res://scenes/ship_parts/PlacedShipPart.cs" id="1_ugmom"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_emow2"]
 
 [node name="ShipPart" type="RigidBody2D" unique_id=1605555085]
 gravity_scale = 0.0
 lock_rotation = true
-script = ExtResource("1_5lqhm")
+script = ExtResource("1_ugmom")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=370944555]
 scale = Vector2(6.34, 6.34)
