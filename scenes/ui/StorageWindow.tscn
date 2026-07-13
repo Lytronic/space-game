@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://c46crb68f34dn"]
 
 [ext_resource type="Texture2D" uid="uid://bmtcsnuv2cspq" path="res://gfx/gui/menu/storage_bg.png" id="1_7hako"]
-[ext_resource type="Texture2D" uid="uid://dupv2p2lbls25" path="res://gfx/gui/menu/storage_bg_top.png" id="1_5646b"]
+[ext_resource type="PackedScene" uid="uid://cf204d4icd8si" path="res://scenes/ui/InventoryWindow.tscn" id="1_qq3wl"]
 [ext_resource type="Texture2D" uid="uid://hg2677t25sam" path="res://gfx/gui/menu/storage arrow.png" id="2_umrgu"]
 [ext_resource type="Texture2D" uid="uid://d2mac3xsf0kyb" path="res://gfx/gui/menu/storage_slot.png" id="3_qq3wl"]
 [ext_resource type="Texture2D" uid="uid://baqxy25ajyece" path="res://gfx/gui/menu/currency.png" id="5_q3nqj"]
@@ -18,25 +18,9 @@ size_flags_vertical = 3
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1506247723]
 layout_mode = 2
 
-[node name="StorageBackground" type="TextureRect" parent="VBoxContainer" unique_id=1782276140]
+[node name="InventoryWindow" parent="VBoxContainer" unique_id=1257013442 instance=ExtResource("1_qq3wl")]
 layout_mode = 2
-size_flags_vertical = 3
-size_flags_stretch_ratio = 4.0
-texture = ExtResource("1_5646b")
-
-[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/StorageBackground" unique_id=351376710]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="ItemsInInventory" type="VBoxContainer" parent="VBoxContainer/StorageBackground/ScrollContainer" unique_id=702588992]
-custom_minimum_size = Vector2(1152, 0)
-layout_mode = 2
-size_flags_horizontal = 3
-alignment = 1
+size_flags_stretch_ratio = 3.0
 
 [node name="BottomBackground" type="TextureRect" parent="VBoxContainer" unique_id=744547210]
 layout_mode = 2

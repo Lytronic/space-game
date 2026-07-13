@@ -1,0 +1,39 @@
+[gd_scene format=3 uid="uid://cf204d4icd8si"]
+
+[ext_resource type="Texture2D" uid="uid://dupv2p2lbls25" path="res://gfx/gui/menu/storage_bg_top.png" id="1_40qxa"]
+
+[node name="InventoryWindow" type="Control" unique_id=1257013442]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Storage" type="TextureRect" parent="." unique_id=1901188703]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 4.0
+texture = ExtResource("1_40qxa")
+expand_mode = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Storage" unique_id=83964993]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ItemsInInventory" type="VBoxContainer" parent="Storage/ScrollContainer" unique_id=1514398194]
+custom_minimum_size = Vector2(1152, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
