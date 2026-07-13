@@ -15,12 +15,17 @@ run/main_scene="uid://dw2tl0v70rq3f"
 config/features=PackedStringArray("4.6", "C#", "Forward Plus")
 config/icon="res://icon.svg"
 
+[audio]
+
+buses/default_bus_layout="uid://c1e588g5knel4"
+
 [autoload]
 
 SettingsModel="*uid://c3cbsftf0cnpn"
 SettingsController="*uid://cncw223usg3mw"
 PlayerVariables="*uid://ddp5iu7m0y2h2"
 SoundManager="*uid://c8fdclxn8vb4c"
+PartsDicktionaty="*uid://cb06nmvtb2jd6"
 
 [dotnet]
 
