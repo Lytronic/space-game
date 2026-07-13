@@ -253,7 +253,7 @@ namespace Microgravity.util
 		/// <summary>
 		/// Save a Stats object to disk by serialising it and putting that inside the DB as a binary blob.
 		/// </summary>
-		public static void SaveGame(string name, Stats playerStats)
+		public static void SaveGame(string name, SaveData data)
 		{
 			SQLiteConnection connection = Connect();
 			if (connection == null)
@@ -272,7 +272,7 @@ namespace Microgravity.util
 
 				SQLiteCommand insertCommand = new(insertSql, connection);
 				insertCommand.Parameters.AddWithValue("@name", name);
-				insertCommand.Parameters.Add("@data", DbType.Binary).Value = MemoryPackSerializer.Serialize(playerStats);
+				insertCommand.Parameters.Add("@data", DbType.Binary).Value = MemoryPackSerializer.Serialize(data);
 
 				insertCommand.ExecuteNonQuery();
 			}
@@ -284,6 +284,9 @@ namespace Microgravity.util
 			connection.Close();
 		}
 
+		/// <summary>
+		/// Delete the game save with the specified identifier.
+		/// </summary>
 		public static void DeleteGame(int id)
 		{
 			SQLiteConnection connection = Connect();
@@ -359,9 +362,9 @@ namespace Microgravity.util
 		/// Load the game from the row with the specified ID.
 		/// </summary>
 		/// <returns>Stats object to be used as a member of PlayerVariables</returns>
-		public static Stats LoadGame(int id)
+		public static SaveData LoadGame(int id)
 		{
-			Stats ret = new();
+			SaveData ret = new();
 			
 			SQLiteConnection connection = Connect();
 			if (connection == null)
@@ -399,7 +402,7 @@ namespace Microgravity.util
 				blob.Read(buf, blob.GetCount(), 0);
 				blob.Close();
 				
-				ret = MemoryPackSerializer.Deserialize<Stats>(buf);
+				ret = MemoryPackSerializer.Deserialize<SaveData>(buf);
 				GD.Print(ret);
 
 				reader.Close();

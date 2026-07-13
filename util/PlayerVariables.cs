@@ -4,7 +4,7 @@ using MemoryPack;
 using Microgravity.util;
 
 /// <summary>
-/// All serialisable data that describes the game state.
+/// Most of the serialisable data that describes the game state.
 /// This object must be kept serialisable, which is why it's its separate type.
 /// Godot classes such as Node cannot be serialised easily with MemoryPack.
 /// However, all primitive types and types declared [MemoryPackable] can be added as members.
@@ -60,20 +60,6 @@ public partial class Stats
     public int ActiveGridSpaces = 0;
 }
 
-[MemoryPackable]
-public partial class SavedParts
-{
-	public string partType { get; }
-	public float partRandomness { get; }
-
-    public SavedParts (string partType , float partRandomness)
-	{
-		partType = partType;
-		partRandomness = partRandomness;
-	}
-
-}
-
 /// <summary>
 /// The singleton to hold all kinds of player state that requires easy access from anywhere.
 /// </summary>
@@ -92,9 +78,9 @@ public partial class PlayerVariables : Node
 	public BuildMenu.GridSpace[,] Grid;
 
 	//saved versions of all the items in struct form ---> they need unpacking 
-	public List<SavedParts> SavedActiveParts { get; set; } = [];
-	public List<SavedParts> SavedPassiveParts { get; set; } = [];
-	public List<SavedParts> SavedCollectedParts { get; set; } = [];
+	public List<SavedPart> SavedActiveParts { get; set; } = [];
+	public List<SavedPart> SavedPassiveParts { get; set; } = [];
+	public List<SavedPart> SavedCollectedParts { get; set; } = [];
 
 
 	public override void _Ready()
@@ -121,11 +107,13 @@ public partial class PlayerVariables : Node
 	}
 
 	/// <summary>
-	/// Load a saved Stats object and replace the current one.
+	/// Load a saved SaveData object and replace the current state.
 	/// </summary>
 	public static void LoadFromSave(int id)
 	{
-		Stats = DB.LoadGame(id);
+		var data =  DB.LoadGame(id);
+
+		Stats = data.Stats;
 	}
 	
 	/// <summary>

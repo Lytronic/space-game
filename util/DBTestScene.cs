@@ -23,7 +23,13 @@ namespace Microgravity.util
 					Round = 123,
 				};
 
-				DB.SaveGame("test name", vars);
+				var data = new SaveData
+				{
+					Stats = vars,
+					Parts = [ new SavedPart("test_part", 1.0f) ]
+				};
+
+				DB.SaveGame("test name", data);
 
 				UpdateSavesList();
 			};

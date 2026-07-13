@@ -73,10 +73,10 @@ public partial class ShipPart : Resource
         //randomness is then applied to all stats
     }
 
-    public SavedParts SavePartVariables()
+    public SavedPart SavePartVariables()
     {
-        SavedParts saved = new SavedParts(type, randomness);
-        return new SavedParts(type, randomness);
+        SavedPart saved = new SavedPart(type, randomness);
+        return new SavedPart(type, randomness);
     }
 
 }
