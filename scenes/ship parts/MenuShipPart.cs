@@ -69,19 +69,19 @@ public partial class MenuShipPart : Control
 
 	public override void _Input(InputEvent @event)
 	{
-        if (@event is InputEventMouseButton mouseEvent &&
-            mouseEvent.ButtonIndex == MouseButton.Left &&
-            _hovered)
-        {
-        	if (mouseEvent.Pressed)
-        	{
-        		Grab();
-        	}
-        	else
-        	{
-        		Drop();
-        	}
-        }
+		if (@event is InputEventMouseButton mouseEvent &&
+			mouseEvent.ButtonIndex == MouseButton.Left &&
+			_hovered)
+		{
+			if (mouseEvent.Pressed)
+			{
+				Grab();
+			}
+			else
+			{
+				Drop();
+			}
+		}
 	}
 
 	public bool CanDrop()
@@ -117,6 +117,8 @@ public partial class MenuShipPart : Control
 					}
 				}
 			}
+
+			PlayerVariables.Instance.RemovePartFromShip(ShipPart);
 		}
 	}
 
@@ -140,6 +142,7 @@ public partial class MenuShipPart : Control
 					}
 				}
 			}
+
 			_inGrid = true;
 			PlayerVariables.Instance.AddPartToShip(ShipPart);
 		}
