@@ -1,8 +1,27 @@
 [gd_scene format=3 uid="uid://dt3sbt3meih45"]
 
 [ext_resource type="PackedScene" uid="uid://lvlgmxl6u820" path="res://scenes/enemies/scenes/BaseEnemy.tscn" id="1_uof8h"]
+[ext_resource type="Texture2D" uid="uid://0psb83uwnd6a" path="res://gfx/game/particle/flame.png" id="2_5agox"]
 [ext_resource type="Texture2D" uid="uid://cqox3r0wip5kq" path="res://gfx/game/enemy/ship_fff.png" id="2_ns3ds"]
 [ext_resource type="Script" uid="uid://bfrt21xpdr02s" path="res://scenes/projectiles/scripts/ProjectileLauncher.cs" id="3_ns3ds"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_nywja"]
+particle_flag_disable_z = true
+gravity = Vector3(0, 98, 0)
+scale_min = 0.7
+scale_max = 0.79999995
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_sisty"]
+particle_flag_disable_z = true
+gravity = Vector3(0, 98, 0)
+scale_min = 0.14999999
+scale_max = 0.19999999
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_esdt4"]
+particle_flag_disable_z = true
+gravity = Vector3(0, 98, 0)
+scale_min = 0.7
+scale_max = 0.79999995
 
 [node name="CharacterBody2D" unique_id=217211211 instance=ExtResource("1_uof8h")]
 Speed = 250.0
@@ -11,15 +30,69 @@ ScoreValue = 50
 MinimumRound = 3
 metadata/_edit_horizontal_guides_ = [-11.0, -19.0, 5.0]
 
-[node name="Sprite2D" parent="." index="0" unique_id=1972208063]
+[node name="EngineParticles0" type="GPUParticles2D" parent="." index="0" unique_id=1163414485]
+position = Vector2(-24, 17)
+scale = Vector2(0.25, 0.25)
+amount = 6
+texture = ExtResource("2_5agox")
+lifetime = 0.3
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_nywja")
+
+[node name="EngineParticles1" type="GPUParticles2D" parent="." index="1" unique_id=204103732]
+position = Vector2(-9, 18)
+scale = Vector2(0.25, 0.25)
+amount = 6
+texture = ExtResource("2_5agox")
+lifetime = 0.3
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_sisty")
+
+[node name="EngineParticles2" type="GPUParticles2D" parent="." index="2" unique_id=1553699453]
+position = Vector2(-6, 18)
+scale = Vector2(0.25, 0.25)
+amount = 6
+texture = ExtResource("2_5agox")
+lifetime = 0.3
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_sisty")
+
+[node name="EngineParticles3" type="GPUParticles2D" parent="." index="3" unique_id=1010586973]
+position = Vector2(6, 18)
+scale = Vector2(0.25, 0.25)
+amount = 6
+texture = ExtResource("2_5agox")
+lifetime = 0.3
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_sisty")
+
+[node name="EngineParticles4" type="GPUParticles2D" parent="." index="4" unique_id=256912164]
+position = Vector2(9, 18)
+scale = Vector2(0.25, 0.25)
+amount = 6
+texture = ExtResource("2_5agox")
+lifetime = 0.3
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_sisty")
+
+[node name="EngineParticles5" type="GPUParticles2D" parent="." index="5" unique_id=2029233087]
+position = Vector2(25, 17)
+scale = Vector2(0.25, 0.25)
+amount = 6
+texture = ExtResource("2_5agox")
+lifetime = 0.3
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_esdt4")
+
+[node name="Sprite2D" parent="." index="6" unique_id=1972208063]
 scale = Vector2(0.075, 0.075)
 texture = ExtResource("2_ns3ds")
 
-[node name="CollisionPolygon2D" parent="." index="1" unique_id=1745739799]
+[node name="CollisionPolygon2D" parent="." index="7" unique_id=1745739799]
 scale = Vector2(0.375, 0.375)
 polygon = PackedVector2Array(-100, 40, -90, 10, -74, 2, -74, -19, -55, -19, -55, -11, -42, -22, -20, -52, -9, -78, 9, -78, 20, -52, 42, -22, 56, -8, 56, -19, 75, -19, 75, 5, 90, 10, 100, 40, 12, 40, 0, 80, -12, 40)
 
-[node name="MissileLauncherLeft" type="Node2D" parent="." index="4" unique_id=1060446281]
+[node name="MissileLauncherLeft" type="Node2D" parent="." index="10" unique_id=1060446281]
 position = Vector2(-24, -7)
 script = ExtResource("3_ns3ds")
 ProjectileScene = "uid://bjysrgtiie2t0"
@@ -28,7 +101,7 @@ Spread = 5.0
 Cooldown = 2.5
 metadata/_custom_type_script = "uid://bfrt21xpdr02s"
 
-[node name="MissileLauncherRight" type="Node2D" parent="." index="5" unique_id=1043992325]
+[node name="MissileLauncherRight" type="Node2D" parent="." index="11" unique_id=1043992325]
 position = Vector2(24, -7)
 script = ExtResource("3_ns3ds")
 ProjectileScene = "uid://bjysrgtiie2t0"
@@ -37,21 +110,21 @@ Spread = 5.0
 Cooldown = 2.5
 metadata/_custom_type_script = "uid://bfrt21xpdr02s"
 
-[node name="CannonLeft" type="Node2D" parent="." index="6" unique_id=24059174]
+[node name="CannonLeft" type="Node2D" parent="." index="12" unique_id=24059174]
 position = Vector2(-24, -7)
 script = ExtResource("3_ns3ds")
 ProjectileScene = "uid://bbjd5r28k1nnk"
 Cooldown = 5.0
 metadata/_custom_type_script = "uid://bfrt21xpdr02s"
 
-[node name="CannonRight" type="Node2D" parent="." index="7" unique_id=1192465794]
+[node name="CannonRight" type="Node2D" parent="." index="13" unique_id=1192465794]
 position = Vector2(24, -7)
 script = ExtResource("3_ns3ds")
 ProjectileScene = "uid://bbjd5r28k1nnk"
 Cooldown = 5.0
 metadata/_custom_type_script = "uid://bfrt21xpdr02s"
 
-[node name="BaseEnemyAi" parent="." index="8" unique_id=1676352923 node_paths=PackedStringArray("Primary", "Secondary")]
+[node name="BaseEnemyAi" parent="." index="14" unique_id=1676352923 node_paths=PackedStringArray("Primary", "Secondary")]
 PreferredRange = 360.0
 RetreatRange = 200.0
 FireRange = 500.0

@@ -11,9 +11,12 @@
 [ext_resource type="Texture2D" uid="uid://b16ojvwkrq33b" path="res://gfx/gui/game/speed_bar.png" id="4_iourf"]
 [ext_resource type="Texture2D" uid="uid://bi1027eibushd" path="res://gfx/gui/abilities/missile.png" id="5_sto77"]
 [ext_resource type="Texture2D" uid="uid://qmffs52ft8c0" path="res://gfx/gui/game/shield_bar.png" id="5_tu160"]
+[ext_resource type="Texture2D" uid="uid://duyt2chc35rtg" path="res://gfx/gui/game/energy_bar.png" id="6_ghe3b"]
 [ext_resource type="Texture2D" uid="uid://u80eenogor4b" path="res://gfx/gui/abilities/plasma.png" id="6_h35ih"]
 [ext_resource type="Texture2D" uid="uid://dnu0s0fpohis1" path="res://gfx/gui/abilities/pulse.png" id="7_n1mye"]
+[ext_resource type="Texture2D" uid="uid://ds7qi7amejncg" path="res://gfx/gui/game/fuel_bar.png" id="7_umfr4"]
 [ext_resource type="Texture2D" uid="uid://doisvxl7ew8x7" path="res://gfx/gui/abilities/torpedo.png" id="8_7x8q2"]
+[ext_resource type="Texture2D" uid="uid://cgs4g43kx81rj" path="res://gfx/gui/game/ammo_bar.png" id="8_kw2be"]
 [ext_resource type="Texture2D" uid="uid://d250psuhmtdlj" path="res://gfx/gui/abilities/slug.png" id="9_7ntgm"]
 [ext_resource type="Texture2D" uid="uid://dijdj7c5lgii6" path="res://gfx/gui/abilities/switch.png" id="10_edggo"]
 [ext_resource type="Texture2D" uid="uid://bclvwmhqptjke" path="res://gfx/gui/game/enemy_locator.png" id="18_iourf"]
@@ -24,7 +27,7 @@ texture = ExtResource("2_7x8q2")
 axis_stretch_horizontal = 2
 axis_stretch_vertical = 2
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_i8lnp"]
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_pgc26"]
 texture = ExtResource("3_ohg30")
 axis_stretch_horizontal = 2
 axis_stretch_vertical = 2
@@ -36,6 +39,21 @@ axis_stretch_vertical = 2
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ghe3b"]
 texture = ExtResource("5_tu160")
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ytukf"]
+texture = ExtResource("6_ghe3b")
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_tfowc"]
+texture = ExtResource("7_umfr4")
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_i8lnp"]
+texture = ExtResource("8_kw2be")
 axis_stretch_horizontal = 2
 axis_stretch_vertical = 2
 
@@ -71,7 +89,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 4
 theme_override_fonts/font = ExtResource("1_kk26m")
 theme_override_styles/background = SubResource("StyleBoxTexture_rlky5")
-theme_override_styles/fill = SubResource("StyleBoxTexture_i8lnp")
+theme_override_styles/fill = SubResource("StyleBoxTexture_pgc26")
 value = 50.0
 
 [node name="SpeedBar" type="ProgressBar" parent="." unique_id=1309531127]
@@ -101,6 +119,69 @@ size_flags_vertical = 4
 theme_override_fonts/font = ExtResource("1_kk26m")
 theme_override_styles/background = SubResource("StyleBoxTexture_rlky5")
 theme_override_styles/fill = SubResource("StyleBoxTexture_ghe3b")
+value = 50.0
+
+[node name="EnergyBar" type="ProgressBar" parent="." unique_id=1015320730]
+custom_minimum_size = Vector2(300, 25)
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -325.0
+offset_top = -35.0
+offset_right = -25.0
+offset_bottom = -10.0
+grow_horizontal = 0
+grow_vertical = 0
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_fonts/font = ExtResource("1_kk26m")
+theme_override_styles/background = SubResource("StyleBoxTexture_rlky5")
+theme_override_styles/fill = SubResource("StyleBoxTexture_ytukf")
+value = 50.0
+
+[node name="FuelBar" type="ProgressBar" parent="." unique_id=631279981]
+custom_minimum_size = Vector2(300, 25)
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -320.0
+offset_top = -70.0
+offset_right = -20.0
+offset_bottom = -45.0
+grow_horizontal = 0
+grow_vertical = 0
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_fonts/font = ExtResource("1_kk26m")
+theme_override_styles/background = SubResource("StyleBoxTexture_rlky5")
+theme_override_styles/fill = SubResource("StyleBoxTexture_tfowc")
+value = 50.0
+
+[node name="AmmoBar" type="ProgressBar" parent="." unique_id=548506451]
+custom_minimum_size = Vector2(300, 25)
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -315.0
+offset_top = -105.0
+offset_right = -15.0
+offset_bottom = -80.0
+grow_horizontal = 0
+grow_vertical = 0
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_fonts/font = ExtResource("1_kk26m")
+theme_override_styles/background = SubResource("StyleBoxTexture_rlky5")
+theme_override_styles/fill = SubResource("StyleBoxTexture_i8lnp")
 value = 50.0
 
 [node name="PlayerScoreLabel" type="Label" parent="." unique_id=737400542]

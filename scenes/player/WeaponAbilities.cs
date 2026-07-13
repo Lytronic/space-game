@@ -53,7 +53,7 @@ public partial class WeaponAbilities : HBoxContainer
 			
 		}
 	}
-	private void UseAbility(int AbilityNr)
+	private void ChangeAbility(int AbilityNr)
 	{
 		if (Abilities[AbilityNr] != null)
 		{
@@ -67,35 +67,35 @@ public partial class WeaponAbilities : HBoxContainer
 		{
 			if (keyEvent.Keycode == Key.Q)
 			{
-				UseAbility(0);
+				ChangeAbility(0);
 			}
 			if (keyEvent.Keycode == Key.Key1)
 			{
-				UseAbility(1);
+				ChangeAbility(1);
 			}
 			if (keyEvent.Keycode == Key.Key2)
 			{
-				UseAbility(2);
+				ChangeAbility(2);
 			}
 			if (keyEvent.Keycode == Key.Key3)
 			{
-				UseAbility(3);
+				ChangeAbility(3);
 			}
 			if (keyEvent.Keycode == Key.Key4)
 			{
-				UseAbility(4);
+				ChangeAbility(4);
 			}
 			if (keyEvent.Keycode == Key.Key5)
 			{
-				UseAbility(5);
+				ChangeAbility(5);
 			}
 			if (keyEvent.Keycode == Key.Key6)
 			{
-				UseAbility(6);
+				ChangeAbility(6);
 			}
 			if (keyEvent.Keycode == Key.Key7)
 			{
-				UseAbility(7);
+				ChangeAbility(7);
 			}
 		}
 	}

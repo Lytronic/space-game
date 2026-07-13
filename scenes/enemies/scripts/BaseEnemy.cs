@@ -24,6 +24,7 @@ public partial class BaseEnemy : CharacterBody2D
 
 	public SceneTreeTimer StunTimer;
 
+	private AudioStreamPlayer2D _explosionSound;
 	public bool IsDead { get; private set; } = false;
 
 	[Signal]
@@ -35,6 +36,7 @@ public partial class BaseEnemy : CharacterBody2D
 
 	public override void _Ready()
 	{
+		_explosionSound = GetNode<AudioStreamPlayer2D>("ExplosionSound2D");
 		_explosion = GetNode<GpuParticles2D>("ExplosionParticle");
 		_sprite = GetNode<Sprite2D>("Sprite2D");
 		_collisionPolygon = GetNode<CollisionPolygon2D>("CollisionPolygon2D");
@@ -159,6 +161,8 @@ public partial class BaseEnemy : CharacterBody2D
 			}
 		}
 		_explosion.Show();
+		_explosionSound.Stream = GD.Load<AudioStream>("res://sfx/game/enemy/explosion_distant.mp3");
+		_explosionSound.Play();
 		_collisionPolygon.SetDeferred(CollisionPolygon2D.PropertyName.Disabled, true);
 		_explosion.OneShot = true;
 		_explosion.Restart();

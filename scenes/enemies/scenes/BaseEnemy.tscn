@@ -45,3 +45,5 @@ Primary = []
 Secondary = []
 Tertiary = []
 metadata/_custom_type_script = "uid://crbskh2rywuhb"
+
+[node name="ExplosionSound2D" type="AudioStreamPlayer2D" parent="." unique_id=1910777241]

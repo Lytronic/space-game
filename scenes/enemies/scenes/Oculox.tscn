@@ -1,9 +1,16 @@
 [gd_scene format=3 uid="uid://bgqom2idml5yv"]
 
 [ext_resource type="PackedScene" uid="uid://lvlgmxl6u820" path="res://scenes/enemies/scenes/BaseEnemy.tscn" id="1_myra6"]
+[ext_resource type="Texture2D" uid="uid://yo7x5c1dann" path="res://gfx/game/particle/arc.png" id="2_idhvm"]
 [ext_resource type="Texture2D" uid="uid://dlile86wcssc" path="res://gfx/game/enemy/ship_ccc.png" id="2_oensv"]
 [ext_resource type="Script" uid="uid://bfrt21xpdr02s" path="res://scenes/projectiles/scripts/ProjectileLauncher.cs" id="3_idhvm"]
 [ext_resource type="PackedScene" uid="uid://bfdfrcmegu5rb" path="res://scenes/projectiles/scenes/Laser.tscn" id="4_oensv"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_52xxd"]
+particle_flag_disable_z = true
+gravity = Vector3(0, 98, 0)
+scale_min = 0.04
+scale_max = 0.04
 
 [node name="CharacterBody2D" unique_id=217211211 instance=ExtResource("1_myra6")]
 Speed = 300.0
@@ -33,3 +40,36 @@ metadata/_custom_type_script = "uid://bfrt21xpdr02s"
 
 [node name="Laser" parent="." index="6" unique_id=1420630968 instance=ExtResource("4_oensv")]
 position = Vector2(0, -40)
+StunTime = 0.0
+
+[node name="EngineParticles0" type="GPUParticles2D" parent="." index="8" unique_id=1781899836]
+position = Vector2(-16, 26)
+amount = 2
+texture = ExtResource("2_idhvm")
+lifetime = 0.05
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_52xxd")
+
+[node name="EngineParticles1" type="GPUParticles2D" parent="." index="9" unique_id=1572753111]
+position = Vector2(-5, 34)
+amount = 3
+texture = ExtResource("2_idhvm")
+lifetime = 0.05
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_52xxd")
+
+[node name="EngineParticles2" type="GPUParticles2D" parent="." index="10" unique_id=1064236275]
+position = Vector2(5, 34)
+amount = 3
+texture = ExtResource("2_idhvm")
+lifetime = 0.05
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_52xxd")
+
+[node name="EngineParticles3" type="GPUParticles2D" parent="." index="11" unique_id=366266598]
+position = Vector2(16, 26)
+amount = 2
+texture = ExtResource("2_idhvm")
+lifetime = 0.05
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_52xxd")

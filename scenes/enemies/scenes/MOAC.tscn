@@ -2,8 +2,20 @@
 
 [ext_resource type="PackedScene" uid="uid://lvlgmxl6u820" path="res://scenes/enemies/scenes/BaseEnemy.tscn" id="1_ggyiy"]
 [ext_resource type="Texture2D" uid="uid://ctn877mx35n1i" path="res://gfx/game/enemy/ship_eee.png" id="2_2tel1"]
+[ext_resource type="Texture2D" uid="uid://0psb83uwnd6a" path="res://gfx/game/particle/flame.png" id="2_ky0me"]
 [ext_resource type="Script" uid="uid://bfrt21xpdr02s" path="res://scenes/projectiles/scripts/ProjectileLauncher.cs" id="3_ky0me"]
 [ext_resource type="PackedScene" uid="uid://chowccxwkplm3" path="res://scenes/projectiles/scenes/Arc.tscn" id="4_1yv4a"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_1yv4a"]
+particle_flag_disable_z = true
+gravity = Vector3(0, 98, 0)
+scale_min = 0.29999998
+scale_max = 0.29999998
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_gw481"]
+particle_flag_disable_z = true
+gravity = Vector3(0, 98, 0)
+scale_max = 1.1999999
 
 [node name="CharacterBody2D" unique_id=217211211 instance=ExtResource("1_ggyiy")]
 Speed = 200.0
@@ -11,32 +23,95 @@ Health = 300
 ScoreValue = 150
 MinimumRound = 5
 
-[node name="Sprite2D" parent="." index="0" unique_id=1972208063]
+[node name="EngineParticles0" type="GPUParticles2D" parent="." index="0" unique_id=1796067230]
+position = Vector2(-24, 36)
+scale = Vector2(0.25, 0.25)
+amount = 6
+texture = ExtResource("2_ky0me")
+lifetime = 0.3
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_1yv4a")
+
+[node name="EngineParticles1" type="GPUParticles2D" parent="." index="1" unique_id=1795959168]
+position = Vector2(-18, 39)
+scale = Vector2(0.25, 0.25)
+amount = 6
+texture = ExtResource("2_ky0me")
+lifetime = 0.3
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_1yv4a")
+
+[node name="EngineParticles2" type="GPUParticles2D" parent="." index="2" unique_id=292105779]
+position = Vector2(-12, 42)
+scale = Vector2(0.25, 0.25)
+amount = 6
+texture = ExtResource("2_ky0me")
+lifetime = 0.3
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_1yv4a")
+
+[node name="EngineParticles3" type="GPUParticles2D" parent="." index="3" unique_id=1833055250]
+position = Vector2(0, 46)
+scale = Vector2(0.25, 0.25)
+amount = 6
+texture = ExtResource("2_ky0me")
+lifetime = 0.3
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_gw481")
+
+[node name="EngineParticles4" type="GPUParticles2D" parent="." index="4" unique_id=1758887236]
+position = Vector2(11, 42)
+scale = Vector2(0.25, 0.25)
+amount = 6
+texture = ExtResource("2_ky0me")
+lifetime = 0.3
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_1yv4a")
+
+[node name="EngineParticles5" type="GPUParticles2D" parent="." index="5" unique_id=1712177040]
+position = Vector2(17, 39)
+scale = Vector2(0.25, 0.25)
+amount = 6
+texture = ExtResource("2_ky0me")
+lifetime = 0.3
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_1yv4a")
+
+[node name="EngineParticles6" type="GPUParticles2D" parent="." index="6" unique_id=316928214]
+position = Vector2(23, 36)
+scale = Vector2(0.25, 0.25)
+amount = 6
+texture = ExtResource("2_ky0me")
+lifetime = 0.3
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_1yv4a")
+
+[node name="Sprite2D" parent="." index="7" unique_id=1972208063]
 scale = Vector2(0.1, 0.1)
 texture = ExtResource("2_2tel1")
 
-[node name="CollisionPolygon2D" parent="." index="1" unique_id=1745739799]
+[node name="CollisionPolygon2D" parent="." index="8" unique_id=1745739799]
 scale = Vector2(1.225, 1.225)
 polygon = PackedVector2Array(-32.320004, -7.548717, -22.4, -16.410257, -23.68, -22.97436, -9.28, -37.415386, -9.28, -34.789745, -5.759999, -38.4, 4.480002, -38.4, 8.320002, -34.789745, 8.320002, -37.415386, 22.720003, -22.646154, 21.760004, -16.738462, 30.080004, -8.205128, 30.720003, 11.815386, 25.600004, 13.784616, 22.400003, 23.302565, 4.8000016, 34.133335, 5.440002, 38.4, -5.439999, 38.4, -5.119999, 34.133335, -22.72, 23.958975, -25.92, 14.441027, -32.320004, 12.143591)
 
-[node name="BaseEnemyAi" parent="." index="4" unique_id=1676352923 node_paths=PackedStringArray("Primary", "Secondary")]
+[node name="BaseEnemyAi" parent="." index="11" unique_id=1676352923 node_paths=PackedStringArray("Primary", "Secondary")]
 Acceleration = 200.0
 Primary = [NodePath("../ProjectileLauncherLeft"), NodePath("../ProjectileLauncherRight")]
 Secondary = [NodePath("../Arc")]
 
-[node name="ProjectileLauncherLeft" type="Node2D" parent="." index="5" unique_id=1148120331]
+[node name="ProjectileLauncherLeft" type="Node2D" parent="." index="12" unique_id=1148120331]
 position = Vector2(-70, -50)
 script = ExtResource("3_ky0me")
 ProjectileScene = "uid://dmkuwkkxbymng"
 Cooldown = 4.0
 metadata/_custom_type_script = "uid://bfrt21xpdr02s"
 
-[node name="ProjectileLauncherRight" type="Node2D" parent="." index="6" unique_id=2085202841]
+[node name="ProjectileLauncherRight" type="Node2D" parent="." index="13" unique_id=2085202841]
 position = Vector2(68, -51)
 script = ExtResource("3_ky0me")
 ProjectileScene = "uid://dmkuwkkxbymng"
 Cooldown = 4.0
 metadata/_custom_type_script = "uid://bfrt21xpdr02s"
 
-[node name="Arc" parent="." index="7" unique_id=1420630968 instance=ExtResource("4_1yv4a")]
+[node name="Arc" parent="." index="14" unique_id=1420630968 instance=ExtResource("4_1yv4a")]
 position = Vector2(0, -117)

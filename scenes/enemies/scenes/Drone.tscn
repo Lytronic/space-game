@@ -2,7 +2,14 @@
 
 [ext_resource type="PackedScene" uid="uid://lvlgmxl6u820" path="res://scenes/enemies/scenes/BaseEnemy.tscn" id="1_odoqa"]
 [ext_resource type="Texture2D" uid="uid://d01ljntakxh6l" path="res://gfx/game/enemy/drone.png" id="2_ter0w"]
+[ext_resource type="Texture2D" uid="uid://0psb83uwnd6a" path="res://gfx/game/particle/flame.png" id="2_tkni4"]
 [ext_resource type="Script" uid="uid://bfrt21xpdr02s" path="res://scenes/projectiles/scripts/ProjectileLauncher.cs" id="3_ter0w"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_if8si"]
+particle_flag_disable_z = true
+gravity = Vector3(0, 98, 0)
+scale_min = 0.5
+scale_max = 0.59999996
 
 [node name="CharacterBody2D" unique_id=217211211 instance=ExtResource("1_odoqa")]
 Speed = 250.0
@@ -10,20 +17,29 @@ Health = 15
 Damage = 5.0
 ScoreValue = 25
 
-[node name="Sprite2D" parent="." index="0" unique_id=1972208063]
+[node name="EngineParticles0" type="GPUParticles2D" parent="." index="0" unique_id=1436505542]
+position = Vector2(0, 14)
+scale = Vector2(0.25, 0.25)
+amount = 6
+texture = ExtResource("2_tkni4")
+lifetime = 0.3
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_if8si")
+
+[node name="Sprite2D" parent="." index="1" unique_id=1972208063]
 scale = Vector2(0.04, 0.04)
 texture = ExtResource("2_ter0w")
 
-[node name="CollisionPolygon2D" parent="." index="1" unique_id=1745739799]
+[node name="CollisionPolygon2D" parent="." index="2" unique_id=1745739799]
 scale = Vector2(0.4, 0.4)
 polygon = PackedVector2Array(-50, 15, -10, -15, 0, -38, 10, -15, 50, 15, 15, 10, 22, 35, -22, 35, -15, 10)
 
-[node name="ProjectileLauncher" type="Node2D" parent="." index="4" unique_id=1873305327]
+[node name="ProjectileLauncher" type="Node2D" parent="." index="5" unique_id=1873305327]
 position = Vector2(0, -15)
 script = ExtResource("3_ter0w")
 ProjectileScene = "uid://bjysrgtiie2t0"
 Cooldown = 1.0
 metadata/_custom_type_script = "uid://bfrt21xpdr02s"
 
-[node name="BaseEnemyAi" parent="." index="5" unique_id=1676352923 node_paths=PackedStringArray("Primary")]
+[node name="BaseEnemyAi" parent="." index="6" unique_id=1676352923 node_paths=PackedStringArray("Primary")]
 Primary = [NodePath("../ProjectileLauncher")]
