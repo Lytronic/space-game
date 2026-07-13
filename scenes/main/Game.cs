@@ -23,6 +23,7 @@ public partial class Game : Node2D
 	private Node _soundManager;
 	private int _enemiesSpawned = 0;
 	private int _enemyCount = 0;
+	private bool _switchingScene = false;
 
 	private RandomNumberGenerator _rng;
 
@@ -56,8 +57,9 @@ public partial class Game : Node2D
 	{
 		_progressBar.Value = (1 - (_enemyCount / (float)_enemiesSpawned)) * 100.0f;
 
-		if (_enemyCount == 0)
+		if (_enemyCount == 0 && !_switchingScene)
 		{
+			_switchingScene = true;
 			OpenBuildMenuAfterDelay(1.5f);
 		}
 	}
