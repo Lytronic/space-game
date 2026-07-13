@@ -303,17 +303,17 @@ public partial class PlayerVariables : Node
 	}
 
 	//if there's a DebugMultitool then I want it to test the other methods too just because I'm not making another testing scenario ^~^
-	//private void CheckForDebugItem(ShipPart[] parts)
-	//{
-	//    foreach(ShipPart part in parts)
-	//    {
-	//        if(part is DebugMultitool debugItem)
-	//        {
-	//            GD.Print("Debug Multitool detected, beginning testing ");
-	//            AddPartToShip(debugItem);
+	private void CheckForDebugItem(ShipPart[] parts)
+	{
+	    foreach(ShipPart part in parts)
+	    {
+	        if(part is DebugMultitool debugItem)
+	        {
+	            GD.Print("Debug Multitool detected, beginning testing ");
+	            AddPartToShip(debugItem);
 				
-	//            RemovePartFromShip(debugItem);
-	//        }
-	//    }
-	//}
+	            RemovePartFromShip(debugItem);
+	        }
+	    }
+	}
 }
