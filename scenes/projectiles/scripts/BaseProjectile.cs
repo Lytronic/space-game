@@ -16,10 +16,13 @@ public partial class BaseProjectile : Area2D
 	protected Node2D _owner;
 	private float _remainingLifetime;
 
+	private AudioStreamPlayer2D _shootSound;
+
 	public override void _Ready()
 	{
 		_remainingLifetime = Lifetime;
 		BodyEntered += OnBodyEntered;
+		_shootSound = _shootSound = GetNode<AudioStreamPlayer2D>("ShootSound");
 	}
 
 	public override void _PhysicsProcess(double delta)
@@ -80,6 +83,7 @@ public partial class BaseProjectile : Area2D
 	public virtual void Launch(Vector2 direction, Vector2 startPosition, Node2D owner)
 	{
 		Launch(Damage, Speed, direction, startPosition, Malicious, owner);
+		_shootSound.Play();
 	}
 
 	/// <summary>

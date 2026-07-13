@@ -3,7 +3,7 @@
 This document will introduce different enemy types and how they differ from each other.
 
 ### Drone
-The Drone is the most basic enemy and can show up in every level in the game. They are prone to hijacking, so they will always hostile and will attempt to get close to the player and fire missiles at their ship while keeping a distane from the player ship. Despite its aggressive behaviour it has no shield and sports only little health.
+The Drone is the most basic enemy and can show up in every level in the game. They are unmanned and as such prone to hijacking, so they will always hostile and will attempt to get close to the player and fire missiles at their ship while keeping a distane from the player ship. Despite its aggressive behaviour it has no shield and sports only little health. They are equipped with only a basic missile and are supposed to be cheap and 
 
 
 <img src="https://raw.githubusercontent.com/lytronic/space-game/main/gfx/game/enemy/drone.png" width="200">
@@ -13,7 +13,7 @@ The Drone is the most basic enemy and can show up in every level in the game. Th
 |250    |15     |0      |Missile (x1)   |/                  |/                  |
 
 ### Oculox
-The Cooperative's very own modular multi-purpose assault craft boasts a massive shield while having a lighter hull, trading off health for a strong amount of speed.
+The Cooperative's very own modular multi-purpose assault craft boasts a massive shield while having a lighter hull, trading off health for a strong amount of speed. It also packs quite a punch with its laser being one of the strongest weapons in the game, if it weren't for mirrors.
 
 <img src="https://raw.githubusercontent.com/lytronic/space-game/main/gfx/game/enemy/ship_ccc.png" width="200">
 
@@ -69,6 +69,8 @@ Not much is known about the inner workings of the Cooperative's space stations, 
 
 ### The Stronghold
 
+<img src="https://raw.githubusercontent.com/lytronic/space-game/main/gfx/game/boss/station_eee.png" width="300">
+
 The Empire does not waste resources fielding space stations merely for defensive purposes. As such their asteroid mining colonies double as a forward operating base to secure their interests in the area and serve as a space dock. They are heavily armed and armored, while also sporting a relatively strong shield generator to ensure combat capability even when most of the base has been destroyed.
 
 |SPEED  |HEALTH |SHIELD |PRIMARY WEAPON |SECONDARY WEAPON   |TERTIARY WEAPON    |
@@ -103,3 +105,10 @@ The Empire does not waste resources fielding space stations merely for defensive
 |200    |1500    |3000      |Plasma (x2)        |Missiles (x2)             |Laser                  |
 
 ## The Swarm
+The Swarm is a special kind of boss encounter, in that it is not one singular spacecraft or -station, but rather a large mass of corrupted drones flying in formation as one hivemind. Alone they are weak, but in such high numbers, they can be lethal.
+
+<img src="https://raw.githubusercontent.com/lytronic/space-game/main/gfx/game/enemy/drone.png" width="200">
+
+|AMOUNT|SPEED (per Drone)  |HEALTH (per Drone) |SHIELD |PRIMARY WEAPON |SECONDARY WEAPON   |TERTIARY WEAPON    |
+|:-:|:-----:|:-----:|:-----:|:-------------:|:-----------------:|:-----------------:|
+|50-100|250    |15    |0      |Missile        |/             |/                  |

@@ -17,3 +17,7 @@ shape = SubResource("RectangleShape2D_ty5s1")
 rotation = 1.5707964
 scale = Vector2(0.12, 0.12)
 texture = ExtResource("2_n0hfv")
+
+[node name="ShootSound" type="AudioStreamPlayer2D" parent="." unique_id=777780919]
+
+[node name="ImpactSound" type="AudioStreamPlayer2D" parent="." unique_id=1399995200]

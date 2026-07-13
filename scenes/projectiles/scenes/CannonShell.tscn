@@ -8,5 +8,8 @@ Damage = 40.0
 Speed = 175.0
 Lifetime = 50.0
 
-[node name="BaseProjectileSprite2D" parent="." index="1" unique_id=1899909286]
+[node name="EngineParticle" parent="." index="0" unique_id=1557309858]
+visible = false
+
+[node name="BaseProjectileSprite2D" parent="." index="2" unique_id=1899909286]
 texture = ExtResource("2_rqdxo")
