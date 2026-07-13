@@ -3,38 +3,150 @@ using System;
 
 public partial class BaseWarship : CharacterBody2D
 {
-	public const float Speed = 300.0f;
-	public const float JumpVelocity = -400.0f;
+	[Export] public NodePath salvagePath = "EnemySalvage";
+	[Export] public ShipPart[] lootTable { get; set; }
+	private AudioStreamPlayer2D _explosionSound;
+	[Export] public float Speed = 125.0f;
+	[Export] public int Health = 3000;
+	[Export] public int Shield = 2000;
+	[Export] public float Damage = 8.0f;
+	[Export] public float Resistance = 0.1f;
+	[Export] public int ScoreValue = 100;
+	private GpuParticles2D _explosion;
+	public const float ScalingPerDangerLevel = 1.1f;
+	
+	private Sprite2D _sprite;
+	private CollisionPolygon2D _collisionPolygon;
 
+	[Signal]
+	public delegate void KilledEventHandler();
+	public bool IsDead { get; private set; } = false;
+
+    public override void _Ready()
+    {
+        _explosionSound = GetNode<AudioStreamPlayer2D>("ExplosionSound");
+		_explosion = GetNode<GpuParticles2D>("ExplosionParticle");
+		_sprite = GetNode<Sprite2D>("Sprite2D");
+		_collisionPolygon = GetNode<CollisionPolygon2D>("CollisionPolygon2D");
+		
+		if (lootTable == null || lootTable.Length == 0)
+			CreateLootTable();
+
+		GenerateDropStats();
+		ScaleStatsForCurrentDanger();
+
+		RescueFromAsteroid();
+    }
 	public override void _PhysicsProcess(double delta)
 	{
-		Vector2 velocity = Velocity;
+	
+	}
+	public virtual void CreateLootTable()
+	{
+		// if you don't order these by smallest rarity first, I'm murdering you; the first one must be 'null' unlesss the enemy has guaranteed drops
+		lootTable = new[] { null, new DebugMultitool(), new DebugMultitool(), new DebugMultitool(), new DebugMultitool() };
+	}
 
-		// Add the gravity.
-		if (!IsOnFloor())
+	public void GenerateDropStats()
+	{
+		foreach (ShipPart part in lootTable)
 		{
-			velocity += GetGravity() * (float)delta;
+			if (part != null)
+			{
+				part.Initialize();
+				part.generateStats();
+			}
+		}
+	}
+
+	public int ScaleStat(int stat)
+	{
+		int danger = Mathf.Max(1, PlayerVariables.Stats.DangerLevel);
+		return Mathf.RoundToInt(stat * (float)Math.Pow(ScalingPerDangerLevel, danger - 1));
+	}
+
+	public float ScaleStat(float stat)
+	{
+		int danger = Mathf.Max(1, PlayerVariables.Stats.DangerLevel);
+		return stat * (float)Math.Pow(ScalingPerDangerLevel, danger - 1);
+	}
+	public void TakeDamage(float damage)
+	{
+		if (IsDead || damage <= 0.0f)
+			return;
+
+		float mitigatedDamage = damage * (1.0f - Mathf.Clamp(Resistance, 0.0f, 0.95f));
+		int finalDamage = Mathf.Max(1, Mathf.CeilToInt(mitigatedDamage));
+		Health -= finalDamage;
+
+		if (Health <= 0)
+			Die();
+	}
+	public virtual void Explode()
+	{
+		foreach (var child in GetChildren())
+		{
+			if (child.HasMethod(CanvasItem.MethodName.Hide))
+			{
+				child.Call(CanvasItem.MethodName.Hide);
+			}
+		}
+		_explosion.Show();
+		_explosionSound.Stream = GD.Load<AudioStream>("res://sfx/game/enemy/explosion_distant.mp3");
+		_explosionSound.Play();
+		_collisionPolygon.SetDeferred(CollisionPolygon2D.PropertyName.Disabled, true);
+		_explosion.OneShot = true;
+		_explosion.Restart();
+		_explosion.Emitting = true;
+	}
+	public void Die()
+	{
+		EmitSignal(SignalName.Killed);
+		
+		if (IsDead)
+			return;
+
+		IsDead = true;
+		PlayerVariables.Stats.Score += ScoreValue;
+
+		GetNodeOrNull<EnemySalvage>(salvagePath)?.dropLoot();
+
+		Explode();
+		GetTree().CreateTimer(_explosion.Lifetime).Timeout += () => QueueFree();
+	}
+
+	private void ScaleStatsForCurrentDanger()
+	{
+		Health = Mathf.Max(1, ScaleStat(Health));
+		Damage = ScaleStat(Damage);
+		Speed = ScaleStat(Speed);
+		Resistance = Mathf.Clamp(ScaleStat(Resistance), 0.0f, 0.85f);
+		ScoreValue = Mathf.Max(1, ScaleStat(ScoreValue));
+	}	
+	private void RescueFromAsteroid()
+	{
+		var spaceState = GetWorld2D().DirectSpaceState;
+
+		var segments = _collisionPolygon.Polygon;
+
+		// Godot throws an exception if given an odd length array for this
+		if ((segments.Length % 2) > 0)
+		{
+			Array.Resize<Vector2>(ref segments, segments.Length + 1);
+			segments[^1] = segments[^2];
 		}
 
-		// Handle Jump.
-		if (Input.IsActionJustPressed("ui_accept") && IsOnFloor())
+		var query = new PhysicsShapeQueryParameters2D()
 		{
-			velocity.Y = JumpVelocity;
-		}
+			Shape = new ConcavePolygonShape2D() { Segments = segments },
+		};
 
-		// Get the input direction and handle the movement/deceleration.
-		// As good practice, you should replace UI actions with custom gameplay actions.
-		Vector2 direction = Input.GetVector("ui_left", "ui_right", "ui_up", "ui_down");
-		if (direction != Vector2.Zero)
-		{
-			velocity.X = direction.X * Speed;
-		}
-		else
-		{
-			velocity.X = Mathf.MoveToward(Velocity.X, 0, Speed);
-		}
+		var result = spaceState.IntersectShape(query);
 
-		Velocity = velocity;
-		MoveAndSlide();
+		while (result.Count > 0)
+		{
+			GlobalPosition += GlobalPosition.Normalized() * 10.0f;
+			result = spaceState.IntersectShape(query);
+		}
 	}
 }

@@ -63,12 +63,24 @@ public partial class WeaponAbilities : HBoxContainer
 		if(true)
 		{
 			ChildSprites[0].Show();
+			ChildSprites[1].Show();
+			//Abilities[_updater] = 
+			_updater += 2;
+		}
+		else
+		{
+			ChildSprites[0].Hide();
+			ChildSprites[1].Hide();
+		}
+		if(true)
+		{
+			ChildSprites[2].Show();
 			//Abilities[_updater] = 
 			_updater += 1;
 		}
 		else
 		{
-			ChildSprites[0].Hide();
+			ChildSprites[2].Hide();
 		}
 	}
 	private void ChangeAbility(int AbilityNr)

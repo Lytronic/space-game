@@ -13,3 +13,5 @@ texture = ExtResource("2_buyb2")
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=2145430058]
 build_mode = 1
 polygon = PackedVector2Array(-149, -524, 149, -524, 149, 524, -149, 524)
+
+[node name="ExplosionSound" type="AudioStreamPlayer2D" parent="." unique_id=1121721969]

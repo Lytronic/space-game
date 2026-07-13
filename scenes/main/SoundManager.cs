@@ -1,6 +1,7 @@
 using Godot;
 using System;
 using System.IO;
+using Microgravity.util;
 
 public partial class SoundManager : Node2D
 {
@@ -19,6 +20,10 @@ public partial class SoundManager : Node2D
 	public bool FlightSound;
 
 	private bool _playingLoop;
+
+	private float _masterVolume;
+
+	private float _musicVolume;
 
 	public override void _Ready()
 	{
@@ -59,6 +64,13 @@ public partial class SoundManager : Node2D
 		sounds[16] = "res://sfx/game/weapons/plasma.mp3";
 		sounds[17] = "res://sfx/game/weapons/rail_coil.mp3";
 		sounds[18] = "res://sfx/game/weapons/torpedo.mp3";
+
+		SettingsModel.Instance.SettingChanged += ChangedCallback;
+		for(int i = 0; i < SoundPlayerArray.Length; i ++)
+		{
+			SoundPlayerArray[i].VolumeDb = 0.0f;
+		}
+		_musicPlayer.VolumeDb = 0.0f;
 	}
 
 	public override void _Process(double delta)
@@ -156,7 +168,7 @@ public partial class SoundManager : Node2D
 
 	public void ChangeFlightNoise(float volume)
 	{
-		SoundPlayerArray[3].VolumeLinear = volume / 100;
+		SoundPlayerArray[3].VolumeDb = volume;
 	}
 	
 	public void EndFlightNoise()
@@ -168,7 +180,7 @@ public partial class SoundManager : Node2D
 	// function to change the music volume
 	public void ChangeMusicVolume(float volume)
 	{
-		_musicPlayer.VolumeLinear = volume;
+		_musicPlayer.VolumeLinear = volume / 10;
 	}
 
 	// function to change a specific sound players volume
@@ -176,4 +188,26 @@ public partial class SoundManager : Node2D
 	{
 		SoundPlayerArray[idx].VolumeLinear = volume;
 	}
+	public void ChangeMasterVolume(float volume)
+	{
+		for(int i = 0; i < SoundPlayerArray.Length; i ++)
+		{
+			SoundPlayerArray[i].VolumeDb = volume;
+		}
+	}
+	private void ChangedCallback(string key)
+	{
+		switch (key)
+		{
+			case "audio.music_volume":
+				_musicVolume = ((SettingsEntry.Float)SettingsModel.Instance.Settings["audio.master_volume"]).Value;
+				ChangeMusicVolume(_musicVolume);
+				break;
+			case "audio.master_volume":
+				_masterVolume = ((SettingsEntry.Float)SettingsModel.Instance.Settings["audio.music_volume"]).Value;
+				ChangeMasterVolume(_masterVolume);
+				break;
+		}
+	}
+	
 }

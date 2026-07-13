@@ -234,13 +234,23 @@ label_settings = SubResource("LabelSettings_iourf")
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="Weapons" type="Node" parent="." unique_id=1098498495]
+[node name="Weapons" type="Control" parent="." unique_id=1468381079]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+grow_vertical = 0
 
 [node name="WeaponsControls" type="HBoxContainer" parent="Weapons" unique_id=1885828609]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
 offset_left = 39.0
-offset_top = 544.0
+offset_top = -104.0
 offset_right = 716.0
-offset_bottom = 561.0
+offset_bottom = -87.0
+grow_vertical = 0
 theme_override_constants/separation = 85
 script = ExtResource("2_h35ih")
 
@@ -285,10 +295,15 @@ theme_override_fonts/font = ExtResource("1_kk26m")
 text = "7"
 
 [node name="WeaponAbilities" type="HBoxContainer" parent="Weapons" unique_id=99223588]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
 offset_left = 8.0
-offset_top = 570.0
+offset_top = -78.0
 offset_right = 757.0
-offset_bottom = 641.0
+offset_bottom = -7.0
+grow_vertical = 0
 theme_override_constants/separation = 24
 script = ExtResource("2_68dc6")
 TextureSwap = ExtResource("10_edggo")
@@ -349,10 +364,15 @@ texture = ExtResource("7_n1mye")
 expand_mode = 2
 
 [node name="WeaponsCooldown" type="HBoxContainer" parent="Weapons" unique_id=1949189840]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
 offset_left = 36.0
-offset_top = 592.0
+offset_top = -56.0
 offset_right = 719.0
-offset_bottom = 619.0
+offset_bottom = -29.0
+grow_vertical = 0
 theme_override_constants/separation = 80
 script = ExtResource("19_tu160")
 

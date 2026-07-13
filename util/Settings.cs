@@ -35,9 +35,11 @@ namespace Microgravity.util
 			["controls.backward"] = new Keybind("S", "Move backward"),
 			["controls.left"] = new Keybind("A", "Strafe left"),
 			["controls.right"] = new Keybind("D", "Strafe right"),
-			["controls.test_value"] = new Bool(false, "Test Value"),
-			["controls.test_slider"] = new Float(1.0f, -5.0f, 10.0f, "Example Slider"),
-			["general.player_ship"] = new Float (1.0f, 1f, 3f, "Ship Variant")
+			//["controls.test_value"] = new Bool(false, "Test Value"),
+			//["controls.test_slider"] = new Float(1.0f, -5.0f, 10.0f, "Example Slider"),
+			["general.player_ship"] = new Float (1.0f, 1f, 3f, "Ship Variant"),
+			["audio.master_volume"] = new Float (0.0f, 0.0f, 72.0f, "Master Volume"),
+			["audio.music_volume"] = new Float (0.0f, 0.0f, 72.0f, "Music Volume")
 		};
 	}
 }
