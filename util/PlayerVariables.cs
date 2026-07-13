@@ -31,6 +31,8 @@ public partial class Stats
 	public float ShieldToughness { get; set; } = 1;
 	public int ShieldRegen {  get; set; } = 1; // regen is a flat increase in current shield that gets applied AT THE END OF EVERY FULL SECOND 
 
+	public int RegenCooldown {  get; set; } = 1;
+	
 	//ship resources 
 	public int Ammo { get; set; } = 1;
 	public float Energy { get; set; } = 1;
@@ -148,6 +150,54 @@ public partial class PlayerVariables : Node
 
 		if (remainingDamage > 0.0f)
 			Stats.CurrentHealth = Mathf.Clamp(Stats.CurrentHealth - remainingDamage / armorToughness, 0.0f, Stats.MaxHealth);
+	}
+
+	public void RegenShield()
+	{
+		if(Stats.RegenCooldown > 0)
+		{
+			Stats.RegenCooldown -= 1;
+		}
+		else if(Stats.CurrentShield < Stats.MaxShield && Stats.Energy > 0)
+		{
+			Stats.CurrentShield += Stats.ShieldRegen;
+			Stats.Energy -= Stats.ShieldRegen;
+			GD.Print("Regening Shield");
+			if(Stats.CurrentShield > Stats.MaxShield)
+			{
+				Stats.CurrentShield = Stats.MaxShield;
+			}
+			if(Stats.Energy < 0)
+			{
+				Stats.Energy = 0;
+			}
+		}
+	}
+
+	public void RegenEnergy()
+	{
+		if(Stats.Energy < Stats.MaxEnergy)
+		{
+			Stats.Energy += Stats.EnergyGeneration;
+			if(Stats.Energy > Stats.MaxEnergy)
+			{
+				Stats.Energy = Stats.MaxEnergy;
+			}
+		}
+	}
+
+
+	// IMPORTANT! This function only calculates how much energy an action uses, check if Energy != 0 before calling it!
+	public void UseEnergy(float usage)
+	{
+		if(Stats.Energy > 0)
+		{
+			Stats.Energy -= usage;
+		}
+		if(Stats.Energy < 0)
+		{
+			Stats.Energy = 0;
+		}
 	}
 
 	//changing difficulty or setting difficult easily (for settings and items)

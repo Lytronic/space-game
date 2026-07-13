@@ -27,6 +27,7 @@ public partial class WeaponsControls : HBoxContainer
 	public override void _Process(double delta)
 	{
 	}
+	
 	/*public void updateControls() {
 		for (int i = 0; i < ControlKeys.Length; i++)
 		{

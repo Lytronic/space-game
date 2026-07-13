@@ -21,9 +21,11 @@ public partial class WeaponAbilities : HBoxContainer
 	[Export] public Texture2D TextureEMP;
 	[Export] public Texture2D TextureEMPOff;
 
-	public int selectedAbility;
+	public int selectedAbilityNr;
+	public ShipPart selectedAbilityName;
 
-	public TextureRect[] Abilities; // Array for the order of abilities
+	public ShipPart[] Abilities; // Array for the order of abilities
+	public TextureRect[] ChildSprites;
 
 
 	public override void _Ready()
@@ -36,7 +38,13 @@ public partial class WeaponAbilities : HBoxContainer
 				control.Hide();
 			}
 		}	
-		Abilities = new TextureRect[8];
+		Abilities = new ShipPart[8];
+		ChildSprites = new TextureRect[8];
+		for (int i = 0; i < ChildSprites.Length; i++)
+		{
+			ChildSprites[i] = GetChild<TextureRect>(i);
+		}
+		GD.Print(ChildSprites);
 		UpdateAbilities();
 		
 	}
@@ -50,16 +58,25 @@ public partial class WeaponAbilities : HBoxContainer
 	// Function to update the ability hud
 	private void UpdateAbilities()
 	{
-		for (int i = 0; i < Abilities.Length; i++)
+		var _updater = 0;
+		Array.Clear(Abilities, 0, Abilities.Length);
+		if(true)
 		{
-			
+			ChildSprites[0].Show();
+			//Abilities[_updater] = 
+			_updater += 1;
+		}
+		else
+		{
+			ChildSprites[0].Hide();
 		}
 	}
 	private void ChangeAbility(int AbilityNr)
 	{
 		if (Abilities[AbilityNr] != null)
 		{
-			selectedAbility = AbilityNr;
+			selectedAbilityNr = AbilityNr;
+			selectedAbilityName = Abilities[AbilityNr];
 		}
 	}
 

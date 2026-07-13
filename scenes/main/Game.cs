@@ -17,6 +17,9 @@ public partial class Game : Node2D
 	[Export(PropertyHint.File, "*.tscn")]
 	public Array<string> Enemies;
 
+	private const float Interval = 1.0f;
+    private float _timer = 0.0f;
+
 	private PackedScene _asteroidScene;
 	private Array<PackedScene> _enemyScenes = [];
 
@@ -62,6 +65,14 @@ public partial class Game : Node2D
 			_switchingScene = true;
 			OpenBuildMenuAfterDelay(1.5f);
 		}
+		_timer += (float)delta;
+
+        if (_timer >= Interval)
+        {
+            _timer -= Interval;
+           	PlayerVariables.Instance.RegenShield();
+			PlayerVariables.Instance.RegenEnergy();
+        }
 	}
 
 	private void SetupRound()
@@ -73,6 +84,7 @@ public partial class Game : Node2D
 
 		PlayerVariables.Stats.CurrentHealth = PlayerVariables.Stats.MaxHealth;
 		PlayerVariables.Stats.CurrentShield = PlayerVariables.Stats.MaxShield;
+		PlayerVariables.Stats.Energy = PlayerVariables.Stats.MaxEnergy;
 
 		SpawnEnemyWave(_enemiesSpawned);
 		

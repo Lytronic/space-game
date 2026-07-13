@@ -50,6 +50,10 @@ public partial class Player : CharacterBody2D
 	private ProgressBar _playerSpeedBar;
 	private ProgressBar _playerHealthBar;
 	private ProgressBar _playerShieldBar;
+	private ProgressBar _playerEnergyBar;
+	private ProgressBar _playerAmmoBar;
+	private ProgressBar _playerFuelBar;
+
 
 	// Healthy variables
 	public bool IsAlive = true;
@@ -88,6 +92,9 @@ public partial class Player : CharacterBody2D
 		_playerSpeedBar = _hud.GetNode<ProgressBar>("SpeedBar");
 		_playerHealthBar = _hud.GetNode<ProgressBar>("HealthBar");
 		_playerShieldBar = _hud.GetNode<ProgressBar>("ShieldBar");
+		_playerEnergyBar = _hud.GetNode<ProgressBar>("EnergyBar");
+        _playerAmmoBar = _hud.GetNode<ProgressBar>("AmmoBar");
+        _playerFuelBar = _hud.GetNode<ProgressBar>("FuelBar");
 
 		// You get the point
 		_hud.Show();
@@ -168,6 +175,11 @@ public partial class Player : CharacterBody2D
 		// Update health value on HUD
 		_playerSpeedBar.Value = Velocity.Length();
 
+
+		_playerEnergyBar.Value = PlayerVariables.Stats.Energy;
+        _playerAmmoBar.Value = PlayerVariables.Stats.Ammo;
+        _playerFuelBar.Value = PlayerVariables.Stats.Fuel;
+
 		_playerShieldBar.Value = PlayerVariables.Stats.CurrentShield;
 
 		_playerScoreLabel.Text = PlayerVariables.Stats.Score.ToString();
@@ -179,6 +191,7 @@ public partial class Player : CharacterBody2D
 		ManageEngineParticles();
 		UpdateSprite();
 		_soundManager.Call("ChangeFlightNoise", Velocity.Length());
+		
 	}
 
 	/// <summary>
