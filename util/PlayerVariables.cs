@@ -57,6 +57,20 @@ public partial class Stats
 	public int ActiveGridSpaces = 0;
 }
 
+[MemoryPackable]
+public partial class SavedParts
+{
+	public string partType { get; }
+	public float partRandomness { get; }
+
+    public SavedParts (string partType , float partRandomness)
+	{
+		partType = partType;
+		partRandomness = partRandomness;
+	}
+
+}
+
 /// <summary>
 /// The singleton to hold all kinds of player state that requires easy access from anywhere.
 /// </summary>
@@ -72,7 +86,16 @@ public partial class PlayerVariables : Node
 	public List<ShipPart> PlayerPassiveParts { get; set; } = []; // passive parts that only apply an effect on the time they are added to the ship
 	public List<ShipPart> PlayerCollectedParts { get; set; } = []; // basically the stash that the game uses to store all the loot at the end of a round (this gets reset every new round)
 
+<<<<<<< Updated upstream
 	public BuildMenu.GridSpace[,] Grid;
+=======
+	//saved versions of all the items in struct form ---> they need unpacking 
+	public List<SavedParts> SavedActiveParts { get; set; } = [];
+	public List<SavedParts> SavedPassiveParts { get; set; } = [];
+	public List<SavedParts> SavedCollectedParts { get; set; } = [];
+
+    public BuildMenu.GridSpace[,] Grid;
+>>>>>>> Stashed changes
 
 	public override void _Ready()
 	{
@@ -156,13 +179,18 @@ public partial class PlayerVariables : Node
 		if(part.isActive)
 		{
 			PlayerActiveParts.Add(part);
+			SavedActiveParts.Add(part.SavePartVariables());
 		}
 		if(!part.isActive)
 		{
 			PlayerPassiveParts.Add(part);
+			SavedPassiveParts.Add(part.SavePartVariables());
 			part.changeStats(true); //adds the part's stats to the player's stats
 		}
 		PlayerCollectedParts.Remove(part);
+        SavedCollectedParts.RemoveAt(PlayerCollectedParts.IndexOf(part));
+        PlayerCollectedParts.Remove(part);
+		
 		//GD.Print($"Part moved!! moved {part} from collection to ship");//debug
 	}
 
@@ -171,12 +199,17 @@ public partial class PlayerVariables : Node
 		if (part.isActive)
 		{
 			PlayerActiveParts.Remove(part);
+            SavedActiveParts.RemoveAt(PlayerCollectedParts.IndexOf(part));
+            PlayerActiveParts.Remove(part);
 		}
 		if (!part.isActive)
 		{
 			PlayerPassiveParts.Remove(part);
+            SavedPassiveParts.RemoveAt(PlayerCollectedParts.IndexOf(part));
+            PlayerPassiveParts.Remove(part);
 			part.changeStats(false); //subtracts the part's stats from the player stats
 		}
+		SavedCollectedParts.Add(part.SavePartVariables());
 		PlayerCollectedParts.Add(part);
 		//GD.Print($"Part moved!! moved {part} from ship to collection "); //debug
 	}
@@ -184,6 +217,13 @@ public partial class PlayerVariables : Node
 	public void AddLootToCollection(ShipPart[] array)
 	{
 		PlayerCollectedParts.AddRange(array);
+
+		foreach(ShipPart arrayPart in array)
+		{
+			SavedCollectedParts.Add(arrayPart.SavePartVariables());
+		}
+
+
 		GD.Print($"added parts from loot {array} to collection");
 		// CheckForDebugItem(array);
 		array = null;

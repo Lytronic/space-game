@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Reflection.Metadata.Ecma335;
 
 [GlobalClass]
 public partial class ShipPart : Resource
@@ -12,7 +13,7 @@ public partial class ShipPart : Resource
     [Export] public virtual float partWeight { get; set; }
 
     //variables needed to recreate the item from save
-    [Export] public virtual string itemType { get; set; }
+    [Export] public virtual string type { get; set; }
     [Export] public virtual float randomness { get; set; } = -1f;
 
     [Export] public virtual Texture2D SpriteTexture { get; set; }
@@ -72,9 +73,10 @@ public partial class ShipPart : Resource
         //randomness is then applied to all stats
     }
 
-    public (string type, float reandomness) GetDefiningValues()
+    public SavedParts SavePartVariables()
     {
-        return (itemType , randomness);
+        SavedParts saved = new SavedParts(type, randomness);
+        return new SavedParts(type, randomness);
     }
 
 }

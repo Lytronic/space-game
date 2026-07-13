@@ -9,7 +9,7 @@ public partial class DebugMultitool : ShipPart
 	[Export] public override bool isActive { get; set; } = false;
 
 	//type specific values
-	public override string itemType { get; set;  } = "DebugMultitool";
+	public override string type { get; set;  } = "DebugMultitool";
 	public override float partWeight { get; set; } = 9.11f;
 	private float thrustIncrease = 2;
 
