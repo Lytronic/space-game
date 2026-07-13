@@ -96,6 +96,7 @@ polygon = PackedVector2Array(-32.320004, -7.548717, -22.4, -16.410257, -23.68, -
 
 [node name="BaseEnemyAi" parent="." index="11" unique_id=1676352923 node_paths=PackedStringArray("Primary", "Secondary")]
 Acceleration = 200.0
+WeaponHoldTime = 1.0
 Primary = [NodePath("../ProjectileLauncherLeft"), NodePath("../ProjectileLauncherRight")]
 Secondary = [NodePath("../Arc")]
 
