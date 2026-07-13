@@ -77,11 +77,6 @@ public partial class PlayerVariables : Node
 
 	public BuildMenu.GridSpace[,] Grid;
 
-	//saved versions of all the items in struct form ---> they need unpacking 
-	public List<SavedPart> SavedActiveParts { get; set; } = [];
-	public List<SavedPart> SavedPassiveParts { get; set; } = [];
-	public List<SavedPart> SavedCollectedParts { get; set; } = [];
-
 
 	public override void _Ready()
 	{
@@ -237,7 +232,6 @@ public partial class PlayerVariables : Node
             PlayerPassiveParts.Remove(part);
 			part.changeStats(false); //subtracts the part's stats from the player stats
 		}
-		SavedCollectedParts.Add(part.SavePartVariables());
 		PlayerCollectedParts.Add(part);
 		GD.Print($"Part moved!! moved {part} from ship to collection "); //debug
 	}
@@ -245,12 +239,6 @@ public partial class PlayerVariables : Node
 	public void AddLootToCollection(ShipPart[] array)
 	{
 		PlayerCollectedParts.AddRange(array);
-
-		foreach(ShipPart arrayPart in array)
-		{
-			SavedCollectedParts.Add(arrayPart.SavePartVariables());
-		}
-
 
 		GD.Print($"added parts from loot {array} to collection");
 		//CheckForDebugItem(array);
