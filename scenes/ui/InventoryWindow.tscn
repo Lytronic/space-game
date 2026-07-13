@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://cf204d4icd8si"]
 
+[ext_resource type="Script" uid="uid://dnlptjqqecmei" path="res://scenes/ui/InventoryWindow.cs" id="1_3k82d"]
 [ext_resource type="Texture2D" uid="uid://dupv2p2lbls25" path="res://gfx/gui/menu/storage_bg_top.png" id="1_40qxa"]
 
 [node name="InventoryWindow" type="Control" unique_id=1257013442]
@@ -11,6 +12,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+script = ExtResource("1_3k82d")
 
 [node name="Storage" type="TextureRect" parent="." unique_id=1901188703]
 layout_mode = 1
@@ -32,8 +34,8 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="ItemsInInventory" type="VBoxContainer" parent="Storage/ScrollContainer" unique_id=1514398194]
+[node name="ItemGrid" type="GridContainer" parent="Storage/ScrollContainer" unique_id=1135501900]
 custom_minimum_size = Vector2(1152, 0)
 layout_mode = 2
 size_flags_horizontal = 3
-alignment = 1
+columns = 7

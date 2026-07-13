@@ -17,6 +17,7 @@ public partial class ShipPart : Resource
     [Export] public virtual float randomness { get; set; } = -1f;
 
     [Export] public virtual Texture2D SpriteTexture { get; set; }
+    [Export] public virtual Texture2D MenuTexture { get; set; }
 
     /*
      * Jedes part hat eine Form.

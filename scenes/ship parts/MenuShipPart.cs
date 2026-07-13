@@ -9,15 +9,20 @@ public partial class MenuShipPart : Control
 	private bool _hovered = false;
 	private bool _grabbed = false;
 	private bool _inGrid = false;
-	private TextureRect _texture;
+	private TextureRect _gridTexture;
+	private TextureRect _menuTexture;
 	private Control _areas;
 	private Vector2 _spawnPos;
+	private Node _formerParent;
 
 	public override void _Ready()
 	{
-		_texture = GetNode<TextureRect>("TextureRect");
+		_gridTexture = GetNode<TextureRect>("GridTexture");
+		_menuTexture = GetNode<TextureRect>("MenuTexture");
 		_areas = GetNode<Control>("Anchors");
-		_texture.Texture = ShipPart.SpriteTexture;
+		_gridTexture.Texture = ShipPart.SpriteTexture;
+		_gridTexture.Hide();
+		_menuTexture.Texture = ShipPart.MenuTexture;
 
 		_spawnPos = new Vector2(1200.0f, 500.0f);
 
@@ -47,12 +52,12 @@ public partial class MenuShipPart : Control
 		}
 		
 		MouseEntered += () => {
-			_texture.Scale *= 1.125f;
+			_gridTexture.Scale *= 1.125f;
 			_hovered = true;
 		};
 		
 		MouseExited += () => {
-			_texture.Scale /= 1.125f;
+			_gridTexture.Scale /= 1.125f;
 			_hovered = false;
 		};
 	}
@@ -61,7 +66,7 @@ public partial class MenuShipPart : Control
 	{
 		if (_grabbed)
 		{
-			GlobalPosition = GetGlobalMousePosition() - _texture.Size / 2;
+			GlobalPosition = GetGlobalMousePosition() - _gridTexture.Size / 2;
 		}
 
 		
@@ -103,6 +108,8 @@ public partial class MenuShipPart : Control
 	public void Grab()
 	{
 		_grabbed = true;
+		_gridTexture.Show();
+		_menuTexture.Hide();
 
 		if (_inGrid)
 		{
@@ -118,7 +125,14 @@ public partial class MenuShipPart : Control
 				}
 			}
 
+			_inGrid = false;
 			PlayerVariables.Instance.RemovePartFromShip(ShipPart);
+		}
+		else
+		{
+			// free the node from its parent so it can be dragged out of it
+			_formerParent = GetParent();
+			Reparent(GetNode("/root"));
 		}
 	}
 
@@ -127,7 +141,9 @@ public partial class MenuShipPart : Control
 		_grabbed = false;
 		if (!CanDrop())
 		{
-			GlobalPosition = _spawnPos;
+			_gridTexture.Hide();
+			_menuTexture.Show();
+			Reparent(_formerParent);
 		}
 		else
 		{

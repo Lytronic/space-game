@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://co510b6qqr2gw" path="res://scenes/player/BuildMenu.cs" id="1_p6oaq"]
 [ext_resource type="Script" uid="uid://d0dn7fdqdcffw" path="res://scenes/player/BuildUi.cs" id="2_qg2rf"]
+[ext_resource type="PackedScene" uid="uid://cf204d4icd8si" path="res://scenes/ui/InventoryWindow.tscn" id="3_otjgv"]
 
 [sub_resource type="InputEventKey" id="InputEventKey_p6oaq"]
 device = -1
@@ -54,5 +55,15 @@ offset_bottom = 11.0
 action_mode = 0
 shortcut = SubResource("Shortcut_qg2rf")
 text = "Complete"
+
+[node name="InventoryWindow" parent="." unique_id=1257013442 instance=ExtResource("3_otjgv")]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.55
+anchor_top = 0.1
+anchor_right = 0.95
+anchor_bottom = 0.9
+grow_horizontal = 1
+grow_vertical = 1
 
 [connection signal="pressed" from="BuildUI/Button" to="BuildUI" method="_on_button_pressed"]
