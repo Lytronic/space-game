@@ -1,6 +1,0 @@
-[gd_scene format=3 uid="uid://cvm1ak858koxa"]
-
-[ext_resource type="Script" uid="uid://ch6y4g8je2k4o" path="res://scenes/ship parts/weapons/scripts/LauncherTorpedo.cs" id="1_2sjbk"]
-
-[node name="LauncherTorpedo" type="Node2D" unique_id=968375594]
-script = ExtResource("1_2sjbk")

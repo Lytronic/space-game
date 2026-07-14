@@ -1,6 +1,0 @@
-[gd_scene format=3 uid="uid://c3x3p8j0dy65l"]
-
-[ext_resource type="Script" uid="uid://baxmboxvecrsp" path="res://scenes/ship parts/weapons/scripts/LauncherCannon.cs" id="1_cp33u"]
-
-[node name="LauncherCannon" type="Node2D" unique_id=1129320132]
-script = ExtResource("1_cp33u")

@@ -1,6 +1,0 @@
-[gd_scene format=3 uid="uid://bp5u13dosajv8"]
-
-[ext_resource type="Script" uid="uid://k8hvgbaruga1" path="res://scenes/ship parts/weapons/scripts/LauncherEmp.cs" id="1_xuriw"]
-
-[node name="LauncherEmp" type="Node2D" unique_id=1827710859]
-script = ExtResource("1_xuriw")

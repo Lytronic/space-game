@@ -1,6 +1,0 @@
-[gd_scene format=3 uid="uid://w1x4yqusclfo"]
-
-[ext_resource type="Script" uid="uid://dit685hvygdec" path="res://scenes/ship parts/weapons/scripts/LauncherPlasma.cs" id="1_gmtti"]
-
-[node name="LauncherPlasma" type="Node2D" unique_id=94139918]
-script = ExtResource("1_gmtti")

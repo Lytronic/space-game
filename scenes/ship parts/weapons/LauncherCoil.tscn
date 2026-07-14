@@ -1,6 +1,0 @@
-[gd_scene format=3 uid="uid://bkgdvfywviefd"]
-
-[ext_resource type="Script" uid="uid://d0l5qdofm8vne" path="res://scenes/ship parts/weapons/scripts/LauncherCoil.cs" id="1_xaapb"]
-
-[node name="LauncherCoil" type="Node2D" unique_id=758022661]
-script = ExtResource("1_xaapb")

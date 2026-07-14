@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://bw2gwxxvquh6l"]
+
+[ext_resource type="PackedScene" uid="uid://o3k7io30kyta" path="res://scenes/weapons/scenes/BaseWeapon.tscn" id="1_r3ynh"]
+[ext_resource type="Script" uid="uid://bfrt21xpdr02s" path="res://scenes/weapons/scripts/ProjectileLauncher.cs" id="2_wmn5y"]
+
+[node name="Node2D" unique_id=1420630968 instance=ExtResource("1_r3ynh")]
+script = ExtResource("2_wmn5y")
+ProjectileScene = ""
+Count = 1
+Spread = 0.0

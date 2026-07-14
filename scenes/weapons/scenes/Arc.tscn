@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://chowccxwkplm3"]
 
-[ext_resource type="PackedScene" uid="uid://pcsl5ytqef7r" path="res://scenes/projectiles/scenes/RaycastWeapon.tscn" id="1_i306d"]
+[ext_resource type="PackedScene" uid="uid://pcsl5ytqef7r" path="res://scenes/weapons/scenes/RaycastWeapon.tscn" id="1_i306d"]
 [ext_resource type="Shader" uid="uid://brq6o17v7c060" path="res://gfx/shaders/Laser.gdshader" id="2_jblh4"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ftnt0"]

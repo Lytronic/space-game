@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://o3k7io30kyta"]
 
-[ext_resource type="Script" uid="uid://bfvs0suwlrvwb" path="res://scenes/projectiles/scripts/BaseWeapon.cs" id="1_8djew"]
+[ext_resource type="Script" uid="uid://bfvs0suwlrvwb" path="res://scenes/weapons/scripts/BaseWeapon.cs" id="1_8djew"]
 
 [node name="Node2D" type="Node2D" unique_id=1420630968]
 script = ExtResource("1_8djew")

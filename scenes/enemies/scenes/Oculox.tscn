@@ -3,8 +3,8 @@
 [ext_resource type="PackedScene" uid="uid://lvlgmxl6u820" path="res://scenes/enemies/scenes/BaseEnemy.tscn" id="1_myra6"]
 [ext_resource type="Texture2D" uid="uid://yo7x5c1dann" path="res://gfx/game/particle/arc.png" id="2_idhvm"]
 [ext_resource type="Texture2D" uid="uid://dlile86wcssc" path="res://gfx/game/enemy/ship_ccc.png" id="2_oensv"]
-[ext_resource type="Script" uid="uid://bfrt21xpdr02s" path="res://scenes/ship parts/weapons/scripts/ProjectileLauncher.cs" id="3_idhvm"]
-[ext_resource type="PackedScene" uid="uid://bfdfrcmegu5rb" path="res://scenes/projectiles/scenes/Laser.tscn" id="4_oensv"]
+[ext_resource type="Script" uid="uid://bfrt21xpdr02s" path="res://scenes/weapons/scripts/ProjectileLauncher.cs" id="3_idhvm"]
+[ext_resource type="PackedScene" uid="uid://bfdfrcmegu5rb" path="res://scenes/weapons/scenes/Laser.tscn" id="4_oensv"]
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_52xxd"]
 particle_flag_disable_z = true
@@ -31,11 +31,10 @@ WeaponHoldTime = 3.0
 Primary = [NodePath("../ProjectileLauncher")]
 Secondary = [NodePath("../Laser")]
 
-[node name="ProjectileLauncher" type="Node2D" parent="." index="5" unique_id=770046882]
-position = Vector2(0, -40)
+[node name="ProjectileLauncher" type="Node2D" parent="." index="5" unique_id=1304935700]
 script = ExtResource("3_idhvm")
 ProjectileScene = "uid://3gkk6vgooyrt"
-Cooldown = 0.5
+Cooldown = 2.0
 metadata/_custom_type_script = "uid://bfrt21xpdr02s"
 
 [node name="Laser" parent="." index="6" unique_id=1420630968 instance=ExtResource("4_oensv")]
