@@ -21,8 +21,11 @@ public partial class BaseProjectile : Area2D
 
 	private AudioStreamPlayer2D _shootSound;
 
+	private SoundManager _soundManager;
+
 	public override void _Ready()
 	{
+		_soundManager = GetNode<SoundManager>("/root/SoundManager");
 		_remainingLifetime = Lifetime;
 		BodyEntered += OnBodyEntered;
 		_shootSound = GetNode<AudioStreamPlayer2D>("ShootSound");
@@ -125,6 +128,8 @@ public partial class BaseProjectile : Area2D
 		GlobalPosition = startPosition;
 		Rotation = Direction.Angle();
 		_shootSound.Stream = GD.Load<AudioStream>(LaunchSound);
+		_shootSound.VolumeDb = 0;
+		_shootSound.VolumeLinear *= _soundManager.masterVolume / 100;
 		_shootSound.Play();
 	}
 

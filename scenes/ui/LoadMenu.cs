@@ -4,7 +4,7 @@ using Godot;
 namespace Microgravity.util;
 public partial class LoadMenu : HBoxContainer
 {
-	private Node _soundManager;
+	private SoundManager _soundManager;
 
 	private ItemList _savesList;
 
@@ -13,15 +13,15 @@ public partial class LoadMenu : HBoxContainer
 	public override void _Ready()
 	{
 		_savesList = GetNode<ItemList>("VBoxContainerRight/SaveListBg/SavesList");
-		_soundManager = GetNode("/root/SoundManager");
+		_soundManager = GetNode<SoundManager>("/root/SoundManager");
 		GetNode<TextureButton>("VBoxContainerLeft/BackButton").Pressed += () => {
-			_soundManager.Call("PlaySound", 0, 0);
+			_soundManager.PlaySound(0,0);
 			GetTree().ChangeSceneToFile("res://scenes/ui/GameMenu.tscn");
 		};
 		GetNode<TextureButton>("VBoxContainerRight/SaveListBg/LoadButton").Pressed += () => {
 				var saves = DB.GetSaves();
 				PlayerVariables.LoadFromSave(saves.Keys.Max() - _selectedItem);
-				_soundManager.Call("Fight");
+				_soundManager.Fight();
 				GetTree().ChangeSceneToFile("res://scenes/main/game.tscn");
 		};
 		GetNode<TextureButton>("VBoxContainerRight/SaveListBg/DeleteButton").Pressed += () =>
@@ -36,7 +36,7 @@ public partial class LoadMenu : HBoxContainer
 					int saveId = saves.Keys.ElementAt(saveIndex);
 					DB.DeleteGame(saveId);
 					UpdateSavesList();
-					_soundManager.Call("PlaySound", 0, 0);
+					_soundManager.PlaySound(0,0);
 				}
 			}
 

@@ -50,6 +50,8 @@ public partial class BaseMissile : BaseProjectile
 	public virtual void Explode()
 	{
 		_impactSound.Stream = GD.Load<AudioStream>("res://sfx/game/enemy/explosion_distant.mp3");
+		_impactSound.VolumeDb = 0;
+		_impactSound.VolumeLinear *= _soundManager.masterVolume / 100;
 		Speed = 0.0f;
 		_sprite.Hide();
 		_explosion.OneShot = true;

@@ -21,7 +21,7 @@ public partial class SoundManager : Node2D
 
 	private bool _playingLoop;
 
-	private float _masterVolume;
+	public float masterVolume;
 
 	private float _musicVolume;
 
@@ -33,7 +33,7 @@ public partial class SoundManager : Node2D
 		{
 			SoundPlayerArray[i] = GetChild<AudioStreamPlayer>(i + 1);
 		}
-		GD.Print(SoundPlayerArray);
+		//GD.Print(SoundPlayerArray);
 		// Add music here by adding it to the next index of the array "tracks" with the string: "res://sfx/music/YOUR_TRACK_HERE" and then updating the array size
 		tracks = new string[6];
 		tracks[0] = "res://sfx/music/2 End Fight.mp3";
@@ -69,9 +69,9 @@ public partial class SoundManager : Node2D
 		SettingsModel.Instance.SettingChanged += ChangedCallback;
 		for(int i = 0; i < SoundPlayerArray.Length; i++)
 		{
-			SoundPlayerArray[i].VolumeLinear = 0.5f;
+			SoundPlayerArray[i].VolumeLinear = ((SettingsEntry.Float)SettingsModel.Instance.Settings["audio.master_volume"]).Value / 100;
 		}
-		_musicPlayer.VolumeLinear = 0.5f;
+		_musicVolume = ((SettingsEntry.Float)SettingsModel.Instance.Settings["audio.music_volume"]).Value / 100;
 	}
 
 	public override void _Process(double delta)
@@ -94,6 +94,7 @@ public partial class SoundManager : Node2D
 	// function to play the intro
 	public async void PlayIntro()
 	{
+		_musicVolume = ((SettingsEntry.Float)SettingsModel.Instance.Settings["audio.music_volume"]).Value / 100;
 		_playingLoop = true;
 		PlayTrack(2);
 		while (_playingLoop == true)
@@ -157,6 +158,8 @@ public partial class SoundManager : Node2D
 
 	public async void StartFlightNoise()
 	{
+		SoundPlayerArray[3].VolumeLinear = 0;
+		GD.Print("SoundPlayerArray[3].VolumeLinear");
 		FlightSound = true;
 		PlaySound(3, 6);
 		while (FlightSound == true)
@@ -169,7 +172,9 @@ public partial class SoundManager : Node2D
 
 	public void ChangeFlightNoise(float volume)
 	{
-		SoundPlayerArray[3].VolumeLinear = volume;
+		GD.Print("Master Volume" + masterVolume);
+		SoundPlayerArray[3].VolumeLinear = masterVolume / 2500 * volume;
+		GD.Print("Adjusted Volume / 100 " + SoundPlayerArray[3].VolumeLinear);
 	}
 	
 	public void EndFlightNoise()
@@ -182,7 +187,7 @@ public partial class SoundManager : Node2D
 	public void ChangeMusicVolume(float volume)
 	{
 		_musicPlayer.VolumeLinear = volume / 100;
-		GD.Print("Changed Music volume to " + _musicPlayer.VolumeLinear);
+		//GD.Print("Changed Music volume to " + _musicPlayer.VolumeLinear);
 	}
 
 	// function to change a specific sound players volume
@@ -194,24 +199,33 @@ public partial class SoundManager : Node2D
 	{
 		for(int i = 0; i < SoundPlayerArray.Length; i ++)
 		{
+			if(i != 3)
+			{
 			SoundPlayerArray[i].VolumeLinear = volume / 100;
-			GD.Print("Changed Master volume to " + SoundPlayerArray[i].VolumeLinear);
+			//GD.Print("Changed Master volume to " + SoundPlayerArray[i].VolumeLinear);
+			}
 		}
 	}
+
+	public float GetMastervolume()
+	{
+		return masterVolume;
+	}
+
 	private void ChangedCallback(string key)
 	{
-		GD.Print("ChangedCallback()" + key);
+		//GD.Print("ChangedCallback()" + key);
 		switch (key)
 		{
 			case "audio.music_volume":
 				_musicVolume = ((SettingsEntry.Float)SettingsModel.Instance.Settings["audio.music_volume"]).Value;
-				GD.Print(_musicVolume);
+				//GD.Print(_musicVolume);
 				ChangeMusicVolume(_musicVolume);
 				break;
 			case "audio.master_volume":
-				_masterVolume = ((SettingsEntry.Float)SettingsModel.Instance.Settings["audio.master_volume"]).Value;
-				ChangeMasterVolume(_masterVolume);
-				GD.Print(_masterVolume);
+				masterVolume = ((SettingsEntry.Float)SettingsModel.Instance.Settings["audio.master_volume"]).Value;
+				ChangeMasterVolume(masterVolume);
+				//GD.Print(masterVolume);
 				break;
 		}
 	}

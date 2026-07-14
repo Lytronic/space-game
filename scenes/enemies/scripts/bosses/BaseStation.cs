@@ -9,12 +9,7 @@ public partial class BaseStation : CharacterBody2D
 
 	public override void _Ready()
 	{
-		Rotation = 0;
 		_explosionSound = GetNode<AudioStreamPlayer2D>("ExplosionSound");
 	}
 
-	public override void _PhysicsProcess(double delta)
-	{
-		Rotation = Rotation + 0.0001f;
-	}
 }

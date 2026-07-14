@@ -66,7 +66,7 @@ public partial class Player : CharacterBody2D
 	private Sprite2D _cursorThrottle;
 
 	// Sound
-	private Node _soundManager;
+	private SoundManager _soundManager;
 
 	// alternative textures
 	private Texture2D _texture1;
@@ -114,7 +114,7 @@ public partial class Player : CharacterBody2D
 
 		_explosionParticle.Emitting = false;
 
-		_soundManager = GetNode("/root/SoundManager");
+		_soundManager = GetNode<SoundManager>("/root/SoundManager");
 
 		// adding this as an action so we can check when it is released, too
 		if (!InputMap.HasAction("fire"))
@@ -193,7 +193,7 @@ public partial class Player : CharacterBody2D
 		UpdateWeapon((float)delta);
 		ManageEngineParticles();
 		UpdateSprite();
-		_soundManager.Call("ChangeFlightNoise", Velocity.Length());
+		_soundManager.ChangeFlightNoise(Velocity.Length());
 		
 	}
 
@@ -449,7 +449,7 @@ public partial class Player : CharacterBody2D
 		_explosionParticle.OneShot = true;
 		_explosionParticle.Restart();
 		_explosionParticle.Emitting = true;
-		_soundManager.Call("PlaySound", 4, 7);
+		_soundManager.PlaySound(4,7);
 		
 	}
 

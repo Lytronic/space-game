@@ -3,14 +3,14 @@ using System;
 
 public partial class TitleScreen : VBoxContainer
 {
-	private Node _soundManager;
+	private SoundManager _soundManager;
 
 	public override async void _Ready()
 	{
-		_soundManager = GetNode("/root/SoundManager");
+		_soundManager = GetNode<SoundManager>("/root/SoundManager");
 
 		GetNode<TextureButton>("./HBoxContainer/SettingsButton").Pressed += () => {
-			_soundManager.Call("PlaySound", 0, 0);
+			_soundManager.PlaySound(0,0);
 
 			SettingsScreen settings = (SettingsScreen)ResourceLoader.Load<PackedScene>("res://scenes/ui/SettingsScreen.tscn").Instantiate();
 			settings.Close += () => Visible = true; // restore visibility when settings close
@@ -19,7 +19,7 @@ public partial class TitleScreen : VBoxContainer
 		};
 
 		GetNode<TextureButton>("./HBoxContainer/HighScoresButton").Pressed += () => {
-			_soundManager.Call("PlaySound", 0, 0);
+			_soundManager.PlaySound(0,0);
 
 			HighScoresScreen settings = (HighScoresScreen)ResourceLoader.Load<PackedScene>("res://scenes/ui/HighScoresScreen.tscn").Instantiate();
 			settings.Close += () => Visible = true;
@@ -28,11 +28,11 @@ public partial class TitleScreen : VBoxContainer
 		};
 		
 		GetNode<TextureButton>("./HBoxContainer/QuitButton").Pressed += () => {
-			_soundManager.Call("PlaySound", 0, 0);
+			_soundManager.PlaySound(0,0);
 			GetTree().Quit();
 		};
-		_soundManager.Call("PlayIntro");
-		_soundManager.Call("EndFlightNoise");
+		_soundManager.PlayIntro();
+		_soundManager.EndFlightNoise();
 	}
 	
 	public override void _UnhandledInput(InputEvent @event)
@@ -41,7 +41,7 @@ public partial class TitleScreen : VBoxContainer
 			&& (@event is InputEventKey || @event is InputEventMouseButton)
 			&& Visible)
 		{
-			_soundManager.Call("Menu");
+			_soundManager.Menu();
 			GetTree().ChangeSceneToFile("res://scenes/ui/GameMenu.tscn");
 		}
 	}

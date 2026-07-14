@@ -23,7 +23,7 @@ public partial class Game : Node2D
 	private PackedScene _asteroidScene;
 	private Array<PackedScene> _enemyScenes = [];
 
-	private Node _soundManager;
+	private SoundManager _soundManager;
 	private int _enemiesSpawned = 0;
 	private int _enemyCount = 0;
 	private bool _switchingScene = false;
@@ -34,7 +34,7 @@ public partial class Game : Node2D
 
 	public override void _Ready()
 	{
-		_soundManager = GetNode("/root/SoundManager");
+		_soundManager = GetNode<SoundManager>("/root/SoundManager");
 		_rng = new();
 		_rng.Randomize();
 
@@ -53,7 +53,7 @@ public partial class Game : Node2D
 
 		SetupRound();
 
-		_soundManager.Call("StartFlightNoise");
+		_soundManager.StartFlightNoise();
 	}
 
 	public override void _Process(double delta)
@@ -152,11 +152,21 @@ public partial class Game : Node2D
 			_enemyCount++;
 		}
 	}
+	private void SpawnBossStation(BaseStation Sboss)
+	{
+		Node2D player = GetNodeOrNull<Node2D>("Player");
+		//enemy.Killed += () => _enemyCount--;
+	}
+
+	private void SpawnBossWarship(BaseWarship Wboss)
+	{
+		Node2D player = GetNodeOrNull<Node2D>("Player");
+	}
 
 	public async void OpenBuildMenuAfterDelay(float delay)
 	{
 		GD.Print("Changing scene...");
-		_soundManager.Call("Menu");
+		_soundManager.Menu();
 		await ToSignal(GetTree().CreateTimer(delay), SceneTreeTimer.SignalName.Timeout);
 		GetTree().ChangeSceneToFile("res://scenes/player/BuildMenu.tscn");
 	}
