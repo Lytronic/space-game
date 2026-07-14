@@ -117,6 +117,7 @@ public partial class Game : Node2D
 				child.Scale *= scaleFactor;
 			}
 			asteroid.Mass *= scaleFactor;
+			asteroid.Health *= Mathf.Pow(scaleFactor, 2.0f);
 			
 			PlayerVariables.Space.AddChild(asteroid);
 		}

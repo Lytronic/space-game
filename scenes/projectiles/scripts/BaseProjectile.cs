@@ -65,6 +65,10 @@ public partial class BaseProjectile : Area2D
 		{
 			enemy.TakeDamage(Damage);
 		}
+		else if (body is Asteroid asteroid)
+		{
+			asteroid.TakeDamage(Damage);
+		}
 
 		try
 		{
