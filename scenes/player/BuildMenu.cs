@@ -38,8 +38,6 @@ public partial class BuildMenu : Control
 		foreach (var part in PlayerVariables.Instance.PlayerPassiveParts)
 		{
 			var menuPart = _menuShipPartScene.Instantiate<MenuShipPart>();
-			part.SpriteTexture = GD.Load<Texture2D>("res://gfx/gui/parts/weapon_emp.png");
-			part.MenuTexture = GD.Load<Texture2D>("res://gfx/gui/construction/icon/weaponry/weapon_arc.png");
 			menuPart.ShipPart = part;
 
 			menuPart.Position = _grid.GlobalPosition + (new Vector2(part.GridPosition.X, part.GridPosition.Y) * GridSpacing);
