@@ -53,7 +53,7 @@ namespace Microgravity.util
 			}
 			catch (Exception ex)
 			{
-				GD.Print($"DB: Could not connect to database: {ex.Message}");
+				GD.PrintErr($"DB: Could not connect to database: {ex.Message}");
 				return null;
 			}
 		}
@@ -93,7 +93,7 @@ namespace Microgravity.util
 			}
 			catch (Exception ex)
 			{
-				GD.Print($"DB: Failed to write to table: {ex.Message}");
+				GD.PrintErr($"DB: Failed to write to table: {ex.Message}");
 				connection.Close();
 				return false;
 			}
@@ -151,7 +151,7 @@ namespace Microgravity.util
 			}
 			catch (Exception ex)
 			{
-				GD.Print($"DB: Failed to query database: {ex.Message}");
+				GD.PrintErr($"DB: Failed to query database: {ex.Message}");
 			}
 
 			connection.Close();
@@ -205,7 +205,7 @@ namespace Microgravity.util
 				}
 				catch (FormatException ex)
 				{
-					GD.Print($"DB: Bad settings format, using the default value for {entryKey}: {ex.Message}");
+					GD.PrintErr($"DB: Bad settings format, using the default value for {entryKey}: {ex.Message}");
 				}
 			}
 
@@ -244,7 +244,7 @@ namespace Microgravity.util
 			}
 			catch (Exception ex)
 			{
-				GD.Print($"DB: Failed to write settings entry {key}: {ex.Message}");
+				GD.PrintErr($"DB: Failed to write settings entry {key}: {ex.Message}");
 			}
 
 			connection.Close();
@@ -278,7 +278,7 @@ namespace Microgravity.util
 			}
 			catch (Exception ex)
 			{
-				GD.Print($"DB: Failed to save game {name}: {ex.Message}");
+				GD.PrintErr($"DB: Failed to save game {name}: {ex.Message}");
 			}
 
 			connection.Close();
@@ -311,7 +311,7 @@ namespace Microgravity.util
 			}
 			catch (Exception ex)
 			{
-				GD.Print($"DB: Failed to delete game {id}: {ex.Message}");
+				GD.PrintErr($"DB: Failed to delete game {id}: {ex.Message}");
 			}
 
 			connection.Close();
@@ -351,7 +351,7 @@ namespace Microgravity.util
 			}
 			catch (Exception ex)
 			{
-				GD.Print($"DB: Failed to query saves table: {ex.Message}");
+				GD.PrintErr($"DB: Failed to query saves table: {ex.Message}");
 			}
 			
 			connection.Close();
@@ -391,7 +391,7 @@ namespace Microgravity.util
 
 				if (!reader.HasRows)
 				{
-					GD.Print($"DB: Attempting to load nonexistent game save #{id}");
+					GD.PrintErr($"DB: Attempting to load nonexistent game save #{id}");
 
 					reader.Close();
 					return ret;	
@@ -403,13 +403,12 @@ namespace Microgravity.util
 				blob.Close();
 				
 				ret = MemoryPackSerializer.Deserialize<SaveData>(buf);
-				GD.Print(ret);
 
 				reader.Close();
 			}
 			catch (Exception ex)
 			{
-				GD.Print($"DB: Failed to load save #{id}: {ex.Message}");
+				GD.PrintErr($"DB: Failed to load save #{id}: {ex.Message}");
 			}
 
 			connection.Close();
@@ -430,7 +429,7 @@ namespace Microgravity.util
 			}
 			catch (Exception ex)
 			{
-				GD.Print($"DB: Failed to create table: {ex.Message}");
+				GD.PrintErr($"DB: Failed to create table: {ex.Message}");
 				connection.Close();
 				return false;
 			}
