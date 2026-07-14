@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dao5apx7gdykj" path="res://scenes/ui/GameMenu.cs" id="1_7w1i5"]
 [ext_resource type="Texture2D" uid="uid://brehfrdmmlon1" path="res://gfx/gui/menu/back.png" id="1_hcv51"]
+[ext_resource type="Shader" uid="uid://40v316ef6xib" path="res://gfx/shaders/Background.gdshader" id="1_te1xk"]
 [ext_resource type="Texture2D" uid="uid://chomid451xw22" path="res://gfx/gui/menu/back_hover.png" id="2_02n1o"]
 [ext_resource type="FontFile" uid="uid://tt7j6iuhu1kc" path="res://gfx/gui/Oxanium-Regular.ttf" id="3_cq80k"]
 [ext_resource type="Texture2D" uid="uid://vqy6dmj1yju6" path="res://gfx/gui/menu/panel_basic.png" id="4_7w1i5"]
@@ -16,7 +17,19 @@
 [ext_resource type="Texture2D" uid="uid://cbpokk7dntah0" path="res://gfx/gui/menu/quit.png" id="11_6kdyd"]
 [ext_resource type="Texture2D" uid="uid://duo3f5os7le7w" path="res://gfx/gui/menu/quit_hover.png" id="12_g0iai"]
 
-[node name="HBoxContainer" type="HBoxContainer" unique_id=2054712006]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0p2xp"]
+shader = ExtResource("1_te1xk")
+
+[node name="ColorRect" type="ColorRect" unique_id=639403570]
+material = SubResource("ShaderMaterial_0p2xp")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=2054712006]
+layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -30,10 +43,10 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource("1_7w1i5")
 
-[node name="VBoxContainerLeft" type="VBoxContainer" parent="." unique_id=1619888183]
+[node name="VBoxContainerLeft" type="VBoxContainer" parent="HBoxContainer" unique_id=1619888183]
 layout_mode = 2
 
-[node name="BackButton" type="TextureButton" parent="VBoxContainerLeft" unique_id=1947868298]
+[node name="BackButton" type="TextureButton" parent="HBoxContainer/VBoxContainerLeft" unique_id=1947868298]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 texture_normal = ExtResource("1_hcv51")
@@ -42,21 +55,21 @@ texture_hover = ExtResource("2_02n1o")
 ignore_texture_size = true
 stretch_mode = 0
 
-[node name="VBoxContainerRight" type="VBoxContainer" parent="." unique_id=1335754863]
+[node name="VBoxContainerRight" type="VBoxContainer" parent="HBoxContainer" unique_id=1335754863]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Label" type="Label" parent="VBoxContainerRight" unique_id=572168732]
+[node name="Label" type="Label" parent="HBoxContainer/VBoxContainerRight" unique_id=572168732]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_cq80k")
 theme_override_font_sizes/font_size = 32
 text = "M I C R O G R A V I T Y"
 horizontal_alignment = 1
 
-[node name="Spacer" type="Control" parent="VBoxContainerRight" unique_id=838362193]
+[node name="Spacer" type="Control" parent="HBoxContainer/VBoxContainerRight" unique_id=838362193]
 layout_mode = 2
 
-[node name="TextureRect" type="TextureRect" parent="VBoxContainerRight" unique_id=1111380132]
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer/VBoxContainerRight" unique_id=1111380132]
 clip_children = 2
 y_sort_enabled = true
 layout_mode = 2
@@ -64,7 +77,7 @@ size_flags_vertical = 3
 texture = ExtResource("4_7w1i5")
 expand_mode = 2
 
-[node name="NewGame" type="TextureButton" parent="VBoxContainerRight/TextureRect" unique_id=647831315]
+[node name="NewGame" type="TextureButton" parent="HBoxContainer/VBoxContainerRight/TextureRect" unique_id=647831315]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.261
@@ -81,7 +94,7 @@ texture_hover = ExtResource("6_0p2xp")
 ignore_texture_size = true
 stretch_mode = 0
 
-[node name="Label" type="Label" parent="VBoxContainerRight/TextureRect/NewGame" unique_id=1562703580]
+[node name="Label" type="Label" parent="HBoxContainer/VBoxContainerRight/TextureRect/NewGame" unique_id=1562703580]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -98,7 +111,7 @@ theme_override_fonts/font = ExtResource("3_cq80k")
 theme_override_font_sizes/font_size = 24
 text = "NEW GAME"
 
-[node name="LoadGame" type="TextureButton" parent="VBoxContainerRight/TextureRect" unique_id=865328198]
+[node name="LoadGame" type="TextureButton" parent="HBoxContainer/VBoxContainerRight/TextureRect" unique_id=865328198]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.54200006
@@ -115,7 +128,7 @@ texture_hover = ExtResource("8_7w1i5")
 ignore_texture_size = true
 stretch_mode = 0
 
-[node name="Label" type="Label" parent="VBoxContainerRight/TextureRect/LoadGame" unique_id=911758459]
+[node name="Label" type="Label" parent="HBoxContainer/VBoxContainerRight/TextureRect/LoadGame" unique_id=911758459]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -132,7 +145,7 @@ theme_override_fonts/font = ExtResource("3_cq80k")
 theme_override_font_sizes/font_size = 24
 text = "LOAD GAME"
 
-[node name="HighScoresButton" type="TextureButton" parent="VBoxContainerRight/TextureRect" unique_id=1538461423]
+[node name="HighScoresButton" type="TextureButton" parent="HBoxContainer/VBoxContainerRight/TextureRect" unique_id=1538461423]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 1
 anchors_preset = -1
@@ -150,7 +163,7 @@ texture_hover = ExtResource("8_5ulor")
 ignore_texture_size = true
 stretch_mode = 0
 
-[node name="SettingsButton" type="TextureButton" parent="VBoxContainerRight/TextureRect" unique_id=703038177]
+[node name="SettingsButton" type="TextureButton" parent="HBoxContainer/VBoxContainerRight/TextureRect" unique_id=703038177]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 1
 anchors_preset = -1
@@ -168,7 +181,7 @@ texture_hover = ExtResource("10_mhgig")
 ignore_texture_size = true
 stretch_mode = 0
 
-[node name="QuitButton" type="TextureButton" parent="VBoxContainerRight/TextureRect" unique_id=519813611]
+[node name="QuitButton" type="TextureButton" parent="HBoxContainer/VBoxContainerRight/TextureRect" unique_id=519813611]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 1
 anchors_preset = -1
