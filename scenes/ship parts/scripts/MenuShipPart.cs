@@ -23,6 +23,7 @@ public partial class MenuShipPart : Control
         _areas = GetNode<Control>("Anchors");
         _gridTexture.Texture = ShipPart.SpriteTexture;
         _menuTexture.Texture = ShipPart.MenuTexture;
+        TooltipText = ShipPart.displayTooltip;
 
         if (InGrid)
         {

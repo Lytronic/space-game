@@ -23,18 +23,9 @@ public partial class InventoryWindow : Control
 		foreach (var part in PlayerVariables.Instance.PlayerCollectedParts)
 		{
 			var menuPart = _menuShipPartScene.Instantiate<MenuShipPart>();
-			part.SpriteTexture = GD.Load<Texture2D>("res://gfx/gui/parts/weapon_emp.png");
-			part.MenuTexture = GD.Load<Texture2D>("res://gfx/gui/construction/icon/weaponry/weapon_arc.png");
 			menuPart.ShipPart = part;
 			
 			_grid.AddChild(menuPart);
 		}
-		var testPart = new ShipPart();
-		var testMenuPart = _menuShipPartScene.Instantiate<MenuShipPart>();
-		testPart.SpriteTexture = GD.Load<Texture2D>("res://gfx/gui/parts/weapon_emp.png");
-		testPart.MenuTexture = GD.Load<Texture2D>("res://gfx/gui/construction/icon/weaponry/weapon_arc.png");
-		testMenuPart.ShipPart = testPart;
-		
-		_grid.AddChild(testMenuPart);
 	}
 }

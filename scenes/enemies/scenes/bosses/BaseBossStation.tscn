@@ -1,0 +1,46 @@
+[gd_scene format=3 uid="uid://32h5rt6eycev"]
+
+[ext_resource type="PackedScene" uid="uid://lvlgmxl6u820" path="res://scenes/enemies/scenes/BaseEnemy.tscn" id="1_s5yh0"]
+[ext_resource type="Script" uid="uid://bfrt21xpdr02s" path="res://scenes/weapons/scripts/ProjectileLauncher.cs" id="2_sxqvn"]
+[ext_resource type="PackedScene" uid="uid://chowccxwkplm3" path="res://scenes/weapons/scenes/Arc.tscn" id="4_j7y82"]
+[ext_resource type="PackedScene" uid="uid://bfdfrcmegu5rb" path="res://scenes/weapons/scenes/Laser.tscn" id="4_p1rw0"]
+
+[node name="CharacterBody2D" unique_id=217211211 instance=ExtResource("1_s5yh0")]
+Speed = 0.0
+Health = 6000
+Damage = 15.0
+
+[node name="Sprite2D" parent="." index="0" unique_id=1972208063]
+scale = Vector2(15, 15)
+
+[node name="CollisionPolygon2D" parent="." index="1" unique_id=1745739799]
+scale = Vector2(47, 45.828)
+
+[node name="BaseEnemyAi" parent="." index="4" unique_id=1676352923 node_paths=PackedStringArray("Primary", "Secondary")]
+Primary = [NodePath("../Missile"), NodePath("../Shell"), NodePath("../Plasma")]
+Secondary = [NodePath("../Torpedo")]
+
+[node name="Missile" type="Node2D" parent="." index="6" unique_id=1592467381]
+script = ExtResource("2_sxqvn")
+ProjectileScene = "uid://bjysrgtiie2t0"
+metadata/_custom_type_script = "uid://bfrt21xpdr02s"
+
+[node name="Shell" type="Node2D" parent="." index="7" unique_id=1806595477]
+script = ExtResource("2_sxqvn")
+ProjectileScene = "uid://bbjd5r28k1nnk"
+metadata/_custom_type_script = "uid://bfrt21xpdr02s"
+
+[node name="Plasma" type="Node2D" parent="." index="8" unique_id=1952806479]
+script = ExtResource("2_sxqvn")
+ProjectileScene = "uid://3gkk6vgooyrt"
+metadata/_custom_type_script = "uid://bfrt21xpdr02s"
+
+[node name="Torpedo" type="Node2D" parent="." index="9" unique_id=1296181710]
+script = ExtResource("2_sxqvn")
+ProjectileScene = "uid://dmkuwkkxbymng"
+metadata/_custom_type_script = "uid://bfrt21xpdr02s"
+
+[node name="Laser" parent="." index="10" unique_id=1420630968 instance=ExtResource("4_p1rw0")]
+StunTime = 0.0
+
+[node name="Arc" parent="." index="11" unique_id=1478470228 instance=ExtResource("4_j7y82")]

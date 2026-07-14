@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://dlam7men3hv8h"]
+
+[ext_resource type="PackedScene" uid="uid://32h5rt6eycev" path="res://scenes/enemies/scenes/bosses/BaseBossStation.tscn" id="1_8ut6h"]
+[ext_resource type="Texture2D" uid="uid://ux3ld4gkrcpx" path="res://gfx/game/boss/station_ccc.png" id="2_bkwok"]
+
+[node name="CharacterBody2D" unique_id=217211211 instance=ExtResource("1_8ut6h")]
+
+[node name="Sprite2D" parent="." index="0" unique_id=1972208063]
+scale = Vector2(1, 1)
+texture = ExtResource("2_bkwok")
+
+[node name="CollisionPolygon2D" parent="." index="1" unique_id=1745739799]
+polygon = PackedVector2Array(-8.808511, 5.5861044, -10.212766, 0.08728294, -8.914893, -5.236973, -5.8936167, -9.09924, -0.12765948, -11.019464, 5.234042, -9.557475, 9.127659, -5.869774, 10.6595745, -0.19638643, 9.170213, 5.324256, 5.297872, 9.09924, 8.370014e-08, 10.3866625, -5.0851064, 9.033778)
+
+[node name="BaseEnemyAi" parent="." index="4" unique_id=1676352923 node_paths=PackedStringArray("Tertiary")]
+Tertiary = [NodePath("../Laser"), NodePath("../Arc")]
+
+[node name="Laser" parent="." index="10" unique_id=1420630968]
+position = Vector2(-483, -1)
+
+[node name="Arc" parent="." index="11" unique_id=1478470228]
+position = Vector2(-2, -496)

@@ -1,0 +1,7 @@
+[gd_resource type="Theme" format=3 uid="uid://di6eoqe6ruimp"]
+
+[ext_resource type="FontFile" uid="uid://tt7j6iuhu1kc" path="res://gfx/gui/Oxanium-Regular.ttf" id="1_il5ng"]
+
+[resource]
+default_font = ExtResource("1_il5ng")
+default_font_size = 18
