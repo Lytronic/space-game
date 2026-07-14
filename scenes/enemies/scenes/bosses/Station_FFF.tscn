@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://dd84xcu08df8e"]
+
+[ext_resource type="PackedScene" uid="uid://dlam7men3hv8h" path="res://scenes/enemies/scenes/bosses/Station_CCC.tscn" id="1_68m1t"]
+[ext_resource type="Texture2D" uid="uid://bcy3h3ss7iku3" path="res://gfx/game/boss/station_fff.png" id="2_mqbij"]
+
+[node name="CharacterBody2D" unique_id=217211211 instance=ExtResource("1_68m1t")]
+
+[node name="Sprite2D" parent="." index="0" unique_id=1972208063]
+texture = ExtResource("2_mqbij")
+
+[node name="CollisionPolygon2D" parent="." index="1" unique_id=1745739799]
+polygon = PackedVector2Array(-9.787233, 8.837392, -10.531915, 0.06546222, -9.574468, -8.990137, 9.851064, -8.968316, 10.787233, 6.242958e-08, 9.93617, 8.924675)
+
+[node name="Missile" parent="." index="6" unique_id=1592467381]
+position = Vector2(-409, -3)
+
+[node name="Shell" parent="." index="7" unique_id=1806595477]
+position = Vector2(503, -1)
+
+[node name="Plasma" parent="." index="8" unique_id=1952806479]
+position = Vector2(-491, -4)
+
+[node name="Torpedo" parent="." index="9" unique_id=1296181710]
+position = Vector2(417, -1)
+
+[node name="Laser" parent="." index="10" unique_id=1420630968]
+position = Vector2(4, 410)
+
+[node name="Arc" parent="." index="11" unique_id=1478470228]
+position = Vector2(9, -407)

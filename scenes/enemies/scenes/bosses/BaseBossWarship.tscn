@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://k8vclm7csaxb"]
+
+[ext_resource type="PackedScene" uid="uid://lvlgmxl6u820" path="res://scenes/enemies/scenes/BaseEnemy.tscn" id="1_hv6ra"]
+[ext_resource type="Texture2D" uid="uid://8pke55o18vj6" path="res://gfx/game/boss/boss_fff.png" id="2_kbgdl"]
+
+[node name="CharacterBody2D" unique_id=217211211 instance=ExtResource("1_hv6ra")]
+
+[node name="Sprite2D" parent="." index="0" unique_id=1972208063]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_kbgdl")
