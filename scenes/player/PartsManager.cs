@@ -7,11 +7,10 @@ public partial class PartsManager : Node2D
 {
 	//player parent to set the script's Weapon reference to the selected launcher
 	Player player;
-
-
-
+	
 	// these are the child nodes of PartsManager that will be referenced in the PLayer script in order to execute each Weapon's shooting method
 	public BaseWeapon[] Weapons;
+
 	public override void _Ready()
 	{
 		player = GetParent<Player>();

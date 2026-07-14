@@ -105,7 +105,36 @@ public partial class PlayerVariables : Node
 		var data =  DB.LoadGame(id);
 
 		Stats = data.Stats;
-	}
+		Instance = new PlayerVariables();
+
+		foreach(var savedPart in data.ActiveParts)
+		{
+			ShipPart part = PartsDicktionaty.ReconstructParts[savedPart.PartType];
+			part.randomness = savedPart.PartRandomness;
+			part.generateStats();
+
+            Instance.PlayerActiveParts.Add(part);
+
+        }
+        foreach (var savedPart in data.PassiveParts)
+        {
+            ShipPart part = PartsDicktionaty.ReconstructParts[savedPart.PartType];
+            part.randomness = savedPart.PartRandomness;
+            part.generateStats();
+
+            Instance.PlayerPassiveParts.Add(part);
+
+        }
+        foreach (var savedPart in data.CollectedParts)
+        {
+            ShipPart part = PartsDicktionaty.ReconstructParts[savedPart.PartType];
+            part.randomness = savedPart.PartRandomness;
+            part.generateStats();
+
+            Instance.PlayerCollectedParts.Add(part);
+
+        }
+    }
 	
 	/// <summary>
 	/// Applies shield mitigation first, then armor mitigation to remaining hull damage.
@@ -259,7 +288,7 @@ public partial class PlayerVariables : Node
     public int[] WeaponList = new int[10]
     {
         0,  // this index (0) represents the amount of start weapon the player has equipped
-		0,  // Arc
+		0,  // Arc 
 		0,  // Cannon
 		0,  // Coil
 		0,  // EMP

@@ -18,12 +18,14 @@ public partial class PartsDicktionaty : Node
         ["DebugMultitool"] = new DebugMultitool(),
         ["WeaponPartArc"] = new WeaponPartArc(),
         ["WeaponPartCannon"] = new WeaponPartCannon(),
-        ["WeaponPartCannon"] = new WeaponPartCannon(),
-        ["WeaponPartCannon"] = new WeaponPartCannon(),
-        ["WeaponPartCannon"] = new WeaponPartCannon(),
-        ["WeaponPartCannon"] = new WeaponPartCannon(),
-        ["WeaponPartCannon"] = new WeaponPartCannon(),
-        ["WeaponPartCannon"] = new WeaponPartCannon(),
+        ["WeaponCoil"] = new WeaponCoil(),
+        ["WeaponPartEmp"] = new WeaponPartEmp(),
+        ["WeaponPartLaser"] = new WeaponPartLaser(),
+        ["WeaponPartMissile"] = new WeaponPartMissile(),
+        ["WeaponPartPlasma"] = new WeaponPartPlasma(),
+        ["WeaponPartRail"] = new WeaponPartRail(),
+        ["WeaponPartTorpedo"] = new WeaponPartTorpedo()
+
 
     };
 

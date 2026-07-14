@@ -1,8 +1,9 @@
-using System;
-using System.Collections.Specialized;
-using System.Linq.Expressions;
 using Godot;
 using Microgravity.util;
+using System;
+using System.Collections.Specialized;
+using System.Linq;
+using System.Linq.Expressions;
 
 public partial class Player : CharacterBody2D
 {
@@ -74,7 +75,7 @@ public partial class Player : CharacterBody2D
 	private Texture2D _texture3;
 
 	// the parts manager holds on to the weapon nodes
-	private Node2D partsManager;
+	private PartsManager partsManager;
 	public override void _Ready()
 	{
 		// Assign user interfaces
@@ -132,8 +133,9 @@ public partial class Player : CharacterBody2D
         _texture2 = GD.Load<Texture2D>("res://gfx/game/ship2.png") ;
         _texture3 = GD.Load<Texture2D>("res://gfx/game/ship3.png") ;
 
-		//Parts Manager
-		//partsManager = GetChild<PartsManager>(1);
+        //Parts Manager
+        partsManager = GetChildren().OfType<PartsManager>().First();
+		
     }
 
     public override void _PhysicsProcess(double delta)
