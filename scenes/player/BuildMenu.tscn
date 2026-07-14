@@ -19,6 +19,10 @@ keycode = 4194309
 [sub_resource type="Shortcut" id="Shortcut_qg2rf"]
 events = [SubResource("InputEventKey_p6oaq")]
 
+[sub_resource type="Theme" id="Theme_c0rdv"]
+default_font = ExtResource("4_c0rdv")
+default_font_size = 32
+
 [node name="BuildMenu" type="Control" unique_id=1964035601 node_paths=PackedStringArray("InventoryRef")]
 layout_mode = 3
 anchors_preset = 15
@@ -70,12 +74,27 @@ anchor_right = 0.5
 anchor_bottom = 0.975
 offset_left = -41.5
 offset_top = -31.0
-offset_right = 41.5
+offset_right = 24.5
+offset_bottom = -14.200012
 grow_horizontal = 2
 grow_vertical = 0
 theme = SubResource("Theme_ryxgj")
 action_mode = 0
 shortcut = SubResource("Shortcut_qg2rf")
 text = "Done"
+
+[node name="Label" type="Label" parent="." unique_id=1755564033]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.025
+anchor_right = 0.5
+anchor_bottom = 0.05
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 23.0
+grow_horizontal = 2
+theme = SubResource("Theme_c0rdv")
+text = "BUILD YOUR SHIP"
 
 [editable path="InventoryWindow"]
