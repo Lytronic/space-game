@@ -8,6 +8,8 @@ using System;
 public partial class BaseWeapon : Node2D
 {
 	[Export] public float Cooldown;
+	[Export] public float EnergyOnUse = 0.0f;
+	[Export] public float FuelOnUse = 0.0f;
 
 	public SceneTreeTimer CooldownTimer { get; protected set; }
 	

@@ -30,6 +30,20 @@ public partial class ProjectileLauncher : BaseWeapon
 
 		var parent = GetParent<Node2D>();
 
+		if (parent is Player)
+		{
+			if (EnergyOnUse > PlayerVariables.Stats.Energy
+				|| FuelOnUse > PlayerVariables.Stats.Fuel)
+			{
+				return;
+			}
+			else
+			{
+				PlayerVariables.Instance.UseEnergy(EnergyOnUse);
+				PlayerVariables.Instance.UseFuel(FuelOnUse);
+			}
+		}
+
 		for (int i = 1; i <= Count; i++)
 		{
 			BaseProjectile projectile = _projectileScene.Instantiate<BaseProjectile>();

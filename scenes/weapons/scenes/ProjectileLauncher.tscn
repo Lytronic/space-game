@@ -8,3 +8,4 @@ script = ExtResource("2_wmn5y")
 ProjectileScene = ""
 Count = 1
 Spread = 0.0
+EnergyOnUse = 10.0

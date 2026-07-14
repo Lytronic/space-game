@@ -9,6 +9,7 @@ shader_parameter/colour = Color(0, 0, 1, 1)
 
 [node name="Node2D" unique_id=1420630968 instance=ExtResource("1_i306d")]
 material = SubResource("ShaderMaterial_ftnt0")
+EnergyPerSecond = 15.0
 Range = 200.0
 RayWidth = 5.0
 StunTime = 5.0

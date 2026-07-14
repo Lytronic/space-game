@@ -208,6 +208,18 @@ public partial class PlayerVariables : Node
 		}
 	}
 
+	public void UseFuel(float usage)
+	{
+		if(Stats.Fuel > 0)
+		{
+			Stats.Fuel -= usage;
+		}
+		if(Stats.Fuel < 0)
+		{
+			Stats.Fuel = 0;
+		}
+	}
+
 	//changing difficulty or setting difficult easily (for settings and items)
 	public void ChangeDifficulty(int change, bool setToValue)
 	{
