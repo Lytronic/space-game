@@ -12,6 +12,7 @@ public partial class BaseProjectile : Area2D
 	[Export] public Vector2 Direction = Vector2.Right;
 	[Export] public bool Malicious = true;
 	[Export] public float Lifetime = 3.0f;
+	[Export] public float Acceleration = 0.0f;
 
 	[Export] public string LaunchSound;
 	[Export] public string ImpactSound;
@@ -49,6 +50,7 @@ public partial class BaseProjectile : Area2D
 			Rotation = movement.Angle();
 		}
 
+		Speed += Acceleration * dt;
 		GlobalPosition += movement * Speed * dt;
 	}
 
