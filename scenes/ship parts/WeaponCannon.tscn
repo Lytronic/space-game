@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://b2j623pxl54nm"]
+
+[ext_resource type="Script" uid="uid://cfka28mxhrwwo" path="res://scenes/ship parts/scripts/WeaponCannon.cs" id="1_thgqa"]
+
+[node name="WeaponCannon" type="Node2D" unique_id=1390185329]
+script = ExtResource("1_thgqa")

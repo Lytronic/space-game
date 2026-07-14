@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dbqn3elu7gooc"]
 
-[ext_resource type="Script" uid="uid://djeemuma42cfk" path="res://scenes/ship parts/DebugMultitool.cs" id="1_0pjce"]
+[ext_resource type="Script" uid="uid://djeemuma42cfk" path="res://scenes/ship parts/scripts/DebugMultitool.cs" id="1_0pjce"]
 
 [node name="DebugMultitool" type="Node2D" unique_id=1940312831]
 script = ExtResource("1_0pjce")

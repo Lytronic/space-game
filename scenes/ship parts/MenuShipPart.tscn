@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://b0bjbcxjvin33"]
 
-[ext_resource type="Script" uid="uid://c6km8bxgm44wl" path="res://scenes/ship parts/MenuShipPart.cs" id="1_ybc83"]
+[ext_resource type="Script" uid="uid://c6km8bxgm44wl" path="res://scenes/ship parts/scripts/MenuShipPart.cs" id="1_ybc83"]
 
 [node name="MenuShipPart" type="Control" unique_id=1186230260]
 custom_minimum_size = Vector2(90, 90)

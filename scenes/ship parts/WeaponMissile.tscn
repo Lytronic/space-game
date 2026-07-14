@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://cf7ddrlixncmu"]
+
+[ext_resource type="Script" uid="uid://baajbqvghlqqh" path="res://scenes/ship parts/scripts/WeaponMissile.cs" id="1_ck6k1"]
+
+[node name="WeaponMissile" type="Node2D" unique_id=651613041]
+script = ExtResource("1_ck6k1")

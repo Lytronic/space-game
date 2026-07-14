@@ -9,9 +9,12 @@ public partial class PartsManager : Node2D
     Player player;
 
     // each integer represents the amopunt of weapons equipped for that type of weapon, this will be changed by the equipped ShipParts of type Weapon
-    public int[] WeaponList = new int[7] 
+    public int[] WeaponList = new int[10] 
     {   
         0,  // this index (0) represents the amount of start weapon the player has equipped
+        0,  //
+        0,  //
+        0,  //
         0,  //
         0,  //
         0,  //
@@ -21,9 +24,12 @@ public partial class PartsManager : Node2D
     };
 
     // these are the child nodes of PartsManager that will be referenced in the PLayer script in order to execute each Weapon's shooting method
-    public BaseWeapon[] Launchers = new BaseWeapon[7]
+    public BaseWeapon[] Launchers = new BaseWeapon[10]
     {
         new ProjectileLauncher(),
+        new BaseWeapon(),
+        new BaseWeapon(),
+        new BaseWeapon(),
         new BaseWeapon(),
         new BaseWeapon(),
         new BaseWeapon(),
@@ -36,6 +42,7 @@ public partial class PartsManager : Node2D
     {
         player = GetParent<Player>();
     }
+
     public void SwitchToWeapon(int weaponType)
     {
         player.Weapon = Launchers[weaponType];
@@ -49,7 +56,9 @@ public partial class PartsManager : Node2D
         else { return -1; }
     }
 
-    public void AddWeapon(int index , bool addOrSubtract) //increases the weapon count for a weapon type if true ----> decreases if false
+    //increases the weapon count for a weapon type if true ----> decreases if false
+    //the index indicates the type of weapon which's amount 's being changed (the index of the weapon type should be the same for each list)
+    public void AddWeapon(int index , bool addOrSubtract) 
     {
 
         WeaponList[index] += addOrSubtractInt(addOrSubtract);
