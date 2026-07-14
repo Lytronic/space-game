@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://duccq32mbmdcb"]
 
-[ext_resource type="Script" uid="uid://sn3mkn7o7osl" path="res://scenes/ship parts/scripts/WeaponPlasma.cs" id="1_4qier"]
+[ext_resource type="Script" uid="uid://sn3mkn7o7osl" path="res://scenes/ship parts/scripts/WeaponPartPlasma.cs" id="1_4qier"]
 
 [node name="WeaponPlasma" type="Node2D" unique_id=810288129]
 script = ExtResource("1_4qier")

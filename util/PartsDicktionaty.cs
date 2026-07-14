@@ -15,7 +15,17 @@ public partial class PartsDicktionaty : Node
 
     public static readonly Dictionary<string, ShipPart> ReconstructParts = new()
     {
-        
+        ["DebugMultitool"] = new DebugMultitool(),
+        ["WeaponPartArc"] = new WeaponPartArc(),
+        ["WeaponPartCannon"] = new WeaponPartCannon(),
+        ["WeaponPartCannon"] = new WeaponPartCannon(),
+        ["WeaponPartCannon"] = new WeaponPartCannon(),
+        ["WeaponPartCannon"] = new WeaponPartCannon(),
+        ["WeaponPartCannon"] = new WeaponPartCannon(),
+        ["WeaponPartCannon"] = new WeaponPartCannon(),
+        ["WeaponPartCannon"] = new WeaponPartCannon(),
+
     };
+
 }
 

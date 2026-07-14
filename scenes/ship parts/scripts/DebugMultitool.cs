@@ -11,6 +11,12 @@ public partial class DebugMultitool : ShipPart
 	[Export] public override string type { get; set; } = "DebugMultitool";
 	[Export] public override float partWeight { get; set; } = 9.11f;
 
+    [Export] public override Texture2D SpriteTexture { get; set; }
+    [Export] public override Texture2D MenuTexture { get; set; }
+
+    [Export] public override string SpriteTexturePath { get; set; } = "res://gfx/gui/parts/weapon_torpedo.png";
+    [Export] public override string MenuTexturePath { get; set; } = "res://gfx/gui/construction/icon/weaponry/weapon_torpedo.png";
+
     //type specific values
     private float thrustIncrease = 2;
 
@@ -36,6 +42,7 @@ public partial class DebugMultitool : ShipPart
 		GD.Print($"increased thrust to : {PlayerVariables.Stats.Thrust}");
 
 		PlayerVariables.Stats.Weight += (partWeight * addOrSubtract);
+		GD.Print(PlayerVariables.Instance.WeaponList[0]);
 	}
 
 	public override void generateStats()

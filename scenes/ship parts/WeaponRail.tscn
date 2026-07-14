@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://2fw8r4qgmufc"]
 
-[ext_resource type="Script" uid="uid://cbtqllcxq4hg3" path="res://scenes/ship parts/scripts/WeaponRail.cs" id="1_g4d2y"]
+[ext_resource type="Script" uid="uid://cbtqllcxq4hg3" path="res://scenes/ship parts/scripts/WeaponPartRail.cs" id="1_g4d2y"]
 
 [node name="WeaponRail" type="Node2D" unique_id=1217651401]
 script = ExtResource("1_g4d2y")

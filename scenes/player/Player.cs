@@ -133,7 +133,7 @@ public partial class Player : CharacterBody2D
         _texture3 = GD.Load<Texture2D>("res://gfx/game/ship3.png") ;
 
 		//Parts Manager
-		partsManager = GetChild<PartsManager>(1);
+		//partsManager = GetChild<PartsManager>(1);
     }
 
     public override void _PhysicsProcess(double delta)

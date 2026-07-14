@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://rcsflq2mppp8"]
 
-[ext_resource type="Script" uid="uid://cnnki38qjxfa5" path="res://scenes/ship parts/scripts/WeaponTorpedo.cs" id="1_616hq"]
+[ext_resource type="Script" uid="uid://cnnki38qjxfa5" path="res://scenes/ship parts/scripts/WeaponPartTorpedo.cs" id="1_616hq"]
 
 [node name="WeaponTorpedo" type="Node2D" unique_id=75003153]
 script = ExtResource("1_616hq")
