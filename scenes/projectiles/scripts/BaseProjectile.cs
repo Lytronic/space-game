@@ -108,9 +108,16 @@ public partial class BaseProjectile : Area2D
 		Damage = damage;
 		Direction = direction.LengthSquared() > 0.0001f ? direction.Normalized() : Vector2.Right;
 		Malicious = isMalicious;
-		_owner = owner;
 
-		Node projectileParent = PlayerVariables.Space;
+		if(owner is PartsManager partsManager)
+		{
+			owner = partsManager.player;
+		}
+        _owner = owner;
+		
+
+
+        Node projectileParent = PlayerVariables.Space;
 		if (projectileParent == null && owner != null)
 			projectileParent = owner.GetTree()?.CurrentScene;
 
