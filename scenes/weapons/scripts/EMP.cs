@@ -34,10 +34,12 @@ public partial class EMP : BaseWeapon
 			if (parent is BaseEnemy && entity is Player player)
 			{
 				player.Stun(StunTime);
+				GD.Print("stunnedPplayer");
 			}
-			else if (parent is Player && entity is BaseEnemy enemy)
+			else if (parent is PartsManager && entity is BaseEnemy enemy)
 			{
 				enemy.Stun(StunTime);
+
 			}
 		}
 	}
