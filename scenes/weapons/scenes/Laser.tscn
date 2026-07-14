@@ -10,7 +10,8 @@ shader_parameter/colour = Color(1, 0, 0, 1)
 [node name="Node2D" unique_id=1420630968 instance=ExtResource("1_y5ww7")]
 material = SubResource("ShaderMaterial_ogy8d")
 DamagePerSecond = 10.0
-EnergyPerSecond = 0.0
+EnergyPerSecond = 20.0
 Range = 100000.0
 RayWidth = 5.0
+StunTime = 0.0
 Cooldown = 2.0

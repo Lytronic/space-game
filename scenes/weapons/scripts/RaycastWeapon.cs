@@ -16,12 +16,17 @@ public partial class RaycastWeapon : BaseWeapon
 
 	// whether the weapon is currently shooting
 	private bool _active = false;
+	private bool _parentIsPlayer = false;
 	private Vector2 _targetPos;
 	private Vector2 _direction;
 
 	public override void _Ready()
 	{
 		CooldownTimer = GetTree().CreateTimer(0.0f);
+		if (GetParent() is Player)
+		{
+			_parentIsPlayer = true;
+		}
 	}
 
 	public override void _Draw()
@@ -47,6 +52,20 @@ public partial class RaycastWeapon : BaseWeapon
 	{
 		if (_active)
 		{
+			if (_parentIsPlayer)
+			{
+				float energyUse = EnergyPerSecond * (float)delta;
+				if (energyUse > PlayerVariables.Stats.Energy)
+				{
+					Release();
+					return;
+				}
+				else
+				{
+					PlayerVariables.Instance.UseEnergy(energyUse);
+				}
+			}
+			
 			var spaceState = GetWorld2D().DirectSpaceState;
 
 			Vector2 rayEnd = GlobalPosition + (_direction * Range);

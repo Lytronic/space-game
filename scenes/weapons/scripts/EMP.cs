@@ -14,6 +14,20 @@ public partial class EMP : BaseWeapon
 	public override void Fire(Vector2 direction, float baseDamage, float modifier)
 	{
 		var parent = GetParent();
+
+		if (parent is Player)
+		{
+			if (EnergyOnUse > PlayerVariables.Stats.Energy
+				|| FuelOnUse > PlayerVariables.Stats.Fuel)
+			{
+				return;
+			}
+			else
+			{
+				PlayerVariables.Instance.UseEnergy(EnergyOnUse);
+				PlayerVariables.Instance.UseFuel(FuelOnUse);
+			}
+		}
 		
 		foreach (var entity in PlayerVariables.Space.GetChildren())
 		{
