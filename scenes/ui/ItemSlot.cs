@@ -4,6 +4,7 @@ using System;
 public partial class ItemSlot : Control
 {
 	public bool HasItem = false;
+	public Vector2I GridPosition;
 	
 	private Texture2D _textureFree;
 	private Texture2D _textureOccupied;
@@ -14,6 +15,9 @@ public partial class ItemSlot : Control
 		_texture = GetNode<TextureRect>("TextureRect");
 		_textureFree = ResourceLoader.Load<Texture2D>("res://gfx/gui/menu/storage_slot.png");
 		_textureOccupied = ResourceLoader.Load<Texture2D>("res://gfx/gui/menu/storage_slot_occupied.png");
+		_texture.Texture = _textureFree;
+
+		GetNode<Label>("Label").Text = GridPosition.ToString();
 	}
 
 	public override void _Process(double delta)

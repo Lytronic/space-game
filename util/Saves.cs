@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Godot;
 using MemoryPack;
 
 /// <summary>
@@ -30,6 +31,7 @@ public partial class SavedPart
 {
 	public string PartType { get; }
 	public float PartRandomness { get; }
+	public Vector2I GridPosition;
 
     public SavedPart (string partType , float partRandomness)
 	{
