@@ -153,33 +153,31 @@ public partial class Game : Node2D
 			_enemyCount++;
 		}
 	}
-<<<<<<< HEAD
+
 	/*
 	private void SpawnBossStation(BaseStation Sboss)
 	{
 		Node2D player = GetNodeOrNull<Node2D>("Player");
-=======
+
 	// private void SpawnBossStation(BaseStation Sboss)
 	// {
 		// Node2D player = GetNodeOrNull<Node2D>("Player");
->>>>>>> b28db355e16f8bf9c3419c4e233c4dbbbda00f84
 		//enemy.Killed += () => _enemyCount--;
 	}
 	// }
 
-<<<<<<< HEAD
+
 	private void SpawnBossWarship(BaseWarship Wboss)
 	{
 		Node2D player = GetNodeOrNull<Node2D>("Player");
 	}
 	*/
-=======
+
 	// private void SpawnBossWarship(BaseWarship Wboss)
 	// {
 		// Node2D player = GetNodeOrNull<Node2D>("Player");
 	// }
 
->>>>>>> b28db355e16f8bf9c3419c4e233c4dbbbda00f84
 	public async void OpenBuildMenuAfterDelay(float delay)
 	{
 		GD.Print("Changing scene...");
