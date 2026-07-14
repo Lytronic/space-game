@@ -17,6 +17,6 @@ public partial class WeaponPartRail : ShipPart
 
     public override void changeStats(bool add)
     {
-        PlayerVariables.Instance.WeaponList[7] += addOrSubtractInt(add);
+        //PlayerVariables.Instance.WeaponList[7] += addOrSubtractInt(add);
     }
 }

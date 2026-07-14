@@ -17,6 +17,6 @@ public partial class WeaponPartTorpedo : ShipPart
 
     public override void changeStats(bool add)
     {
-        PlayerVariables.Instance.WeaponList[8] += addOrSubtractInt(add);
+        PlayerVariables.Instance.WeaponList[6] += addOrSubtractInt(add);
     }
 }

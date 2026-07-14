@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://dajs1xq6yqtii"]
+
+[ext_resource type="Script" uid="uid://2oo5gtlq0kv1" path="res://scenes/weapons/scripts/MissileGun.cs" id="1_pnnwl"]
+
+[node name="MissileGun" type="Node2D" unique_id=1656580372]
+script = ExtResource("1_pnnwl")
+ProjectileScene = "uid://bjysrgtiie2t0"

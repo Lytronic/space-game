@@ -17,6 +17,6 @@ public partial class WeaponPartLaser : ShipPart
 
     public override void changeStats(bool add)
     {
-        PlayerVariables.Instance.WeaponList[5] += addOrSubtractInt(add);
+        PlayerVariables.Instance.WeaponList[4] += addOrSubtractInt(add);
     }
 }

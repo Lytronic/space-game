@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://d26145t1vdws1"]
+
+[ext_resource type="Script" uid="uid://cjcahfewtdm1j" path="res://scenes/weapons/scripts/PlasmaGun.cs" id="1_1l8l3"]
+
+[node name="PlasmaGun" type="Node2D" unique_id=1341697191]
+script = ExtResource("1_1l8l3")
+ProjectileScene = "uid://3gkk6vgooyrt"
+Spread = 0.1
+Cooldown = 0.5

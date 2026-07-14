@@ -317,16 +317,14 @@ public partial class PlayerVariables : Node
 	}
 	
     // each integer represents the amount of weapons equipped for that type of weapon, this will be changed by the equipped ShipParts of type Weapon
-    public int[] WeaponList = new int[9]
+    public int[] WeaponList = new int[7]
     {
         0,  // this index (0) represents the amount of start weapon the player has equipped (Plasma)
 		0,  // Arc 
 		0,  // Cannon
-		0,  // Coil
 		0,  // EMP
 		0,  // Laser
 		0,  // Missile
-		0,  // Rail
 		0   // Torpedo
 	};
     public void SaveGame()

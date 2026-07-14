@@ -39,7 +39,7 @@ public partial class DebugMultitool : ShipPart
 		int addOrSubtract = addOrSubtractInt(add);
 
 		PlayerVariables.Stats.Thrust += (thrustIncrease * addOrSubtract);
-		GD.Print($"increased thrust to : {PlayerVariables.Stats.Thrust}");
+		//GD.Print($"increased thrust to : {PlayerVariables.Stats.Thrust}");
 
 		PlayerVariables.Stats.Weight += (partWeight * addOrSubtract);
 		GD.Print(PlayerVariables.Instance.WeaponList[0]);
@@ -51,6 +51,6 @@ public partial class DebugMultitool : ShipPart
 		
 		float mult = randomness;
 		thrustIncrease *= mult;
-		GD.Print($"random: {mult}");
+		//GD.Print($"random: {mult}");
 	}
 }

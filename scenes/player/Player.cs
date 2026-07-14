@@ -517,10 +517,7 @@ public partial class Player : CharacterBody2D
 			{
 				partsManager.SwitchToWeapon(6);
 			}
-			if (keyEvent.Keycode == Key.Key7)
-			{
-				partsManager.SwitchToWeapon(7);
-			}
+
 		}
 	}
 }

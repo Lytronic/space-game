@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://1i626csjjd0v"]
+
+[ext_resource type="Script" uid="uid://x63fc4vd4hde" path="res://scenes/weapons/scripts/CannonGun.cs" id="1_v7tf0"]
+
+[node name="CannonGun" type="Node2D" unique_id=1380495590]
+script = ExtResource("1_v7tf0")
+ProjectileScene = "uid://bbjd5r28k1nnk"

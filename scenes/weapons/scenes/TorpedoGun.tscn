@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://dl4dqsdlcdmfd"]
+
+[ext_resource type="Script" uid="uid://dq0207mfcvqqt" path="res://scenes/weapons/scripts/TorpedoGun.cs" id="1_y15fq"]
+
+[node name="TorpedoGun" type="Node2D" unique_id=1224624282]
+script = ExtResource("1_y15fq")
+ProjectileScene = "uid://dmkuwkkxbymng"
