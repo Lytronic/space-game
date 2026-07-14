@@ -16,16 +16,16 @@ public partial class RaycastWeapon : BaseWeapon
 
 	// whether the weapon is currently shooting
 	private bool _active = false;
-	private bool _parentIsPlayer = false;
+	private bool _parentIsPartsManager = false;
 	private Vector2 _targetPos;
 	private Vector2 _direction;
 
 	public override void _Ready()
 	{
 		CooldownTimer = GetTree().CreateTimer(0.0f);
-		if (GetParent() is Player)
+		if (GetParent() is PartsManager)
 		{
-			_parentIsPlayer = true;
+			_parentIsPartsManager = true;
 		}
 	}
 
@@ -52,7 +52,7 @@ public partial class RaycastWeapon : BaseWeapon
 	{
 		if (_active)
 		{
-			if (_parentIsPlayer)
+			if (_parentIsPartsManager)
 			{
 				float energyUse = EnergyPerSecond * (float)delta;
 				if (energyUse > PlayerVariables.Stats.Energy)
@@ -71,7 +71,7 @@ public partial class RaycastWeapon : BaseWeapon
 			Vector2 rayEnd = GlobalPosition + (_direction * Range);
 
 			var query = PhysicsRayQueryParameters2D.Create(GlobalPosition, rayEnd);
-			query.Exclude = [ GetParent<CollisionObject2D>().GetRid() ];
+			query.Exclude = [ GetParent<PartsManager>().player.GetRid() ];
 			query.CollideWithAreas = true;
 		
 			var result = spaceState.IntersectRay(query);

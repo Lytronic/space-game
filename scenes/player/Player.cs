@@ -75,7 +75,7 @@ public partial class Player : CharacterBody2D
 	private Texture2D _texture3;
 
 	// the parts manager holds on to the weapon nodes
-	private PartsManager partsManager;
+	public PartsManager partsManager;
 	public override void _Ready()
 	{
 		// Assign user interfaces
