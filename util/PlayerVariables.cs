@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using Godot;
 using MemoryPack;
 using Microgravity.util;
@@ -296,6 +297,25 @@ public partial class PlayerVariables : Node
 	        }
 	    }
 	}
+
+	/// <summary>
+	/// Check whether the player has got a ShipPart of type T.
+	/// </summary>
+	public bool HasPart<T>()
+	{
+		foreach (ShipPart part in PlayerActiveParts)
+		{
+			if (part is T) return true;			
+		}
+
+		foreach (ShipPart part in PlayerPassiveParts)
+		{
+			if (part is T) return true;			
+		}
+
+		return false;
+	}
+	
     // each integer represents the amount of weapons equipped for that type of weapon, this will be changed by the equipped ShipParts of type Weapon
     public int[] WeaponList = new int[9]
     {

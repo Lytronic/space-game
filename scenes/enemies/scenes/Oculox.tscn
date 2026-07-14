@@ -13,6 +13,7 @@ scale_min = 0.04
 scale_max = 0.04
 
 [node name="CharacterBody2D" unique_id=217211211 instance=ExtResource("1_myra6")]
+lootTable = Array[Object]([])
 Speed = 300.0
 Health = 100
 MinimumRound = 2
@@ -39,7 +40,6 @@ metadata/_custom_type_script = "uid://bfrt21xpdr02s"
 
 [node name="Laser" parent="." index="6" unique_id=1420630968 instance=ExtResource("4_oensv")]
 position = Vector2(0, -40)
-StunTime = 0.0
 
 [node name="EngineParticles0" type="GPUParticles2D" parent="." index="8" unique_id=1781899836]
 position = Vector2(-16, 26)

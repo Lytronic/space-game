@@ -24,7 +24,8 @@ public partial class PartsDicktionaty : Node
         ["WeaponPartMissile"] = new WeaponPartMissile(),
         ["WeaponPartPlasma"] = new WeaponPartPlasma(),
         ["WeaponPartRail"] = new WeaponPartRail(),
-        ["WeaponPartTorpedo"] = new WeaponPartTorpedo()
+        ["WeaponPartTorpedo"] = new WeaponPartTorpedo(),
+        ["Mirror"] = new Mirror()
 
 
     };

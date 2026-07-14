@@ -55,7 +55,7 @@ public partial class BaseEnemy : CharacterBody2D
 	public virtual void CreateLootTable()
 	{
 		// if you don't order these by smallest rarity first, I'm murdering you; the first one must be 'null' unlesss the enemy has guaranteed drops
-		lootTable = new[] { null, new DebugMultitool(), new DebugMultitool(), new DebugMultitool(), new DebugMultitool() };
+		lootTable = [null, new DebugMultitool(), new DebugMultitool(), new DebugMultitool(), new DebugMultitool(), new Mirror()];
 	}
 
 	public void GenerateDropStats()

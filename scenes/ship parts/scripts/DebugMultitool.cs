@@ -11,28 +11,28 @@ public partial class DebugMultitool : ShipPart
 	[Export] public override string type { get; set; } = "DebugMultitool";
 	[Export] public override float partWeight { get; set; } = 9.11f;
 
-    [Export] public override Texture2D SpriteTexture { get; set; }
-    [Export] public override Texture2D MenuTexture { get; set; }
+	[Export] public override Texture2D SpriteTexture { get; set; }
+	[Export] public override Texture2D MenuTexture { get; set; }
 
-    [Export] public override string SpriteTexturePath { get; set; } = "res://gfx/gui/parts/weapon_torpedo.png";
-    [Export] public override string MenuTexturePath { get; set; } = "res://gfx/gui/construction/icon/weaponry/weapon_torpedo.png";
+	[Export] public override string SpriteTexturePath { get; set; } = "res://gfx/gui/parts/weapon_torpedo.png";
+	[Export] public override string MenuTexturePath { get; set; } = "res://gfx/gui/construction/icon/weaponry/weapon_torpedo.png";
 
-    //type specific values
-    private float thrustIncrease = 2;
+	//type specific values
+	private float thrustIncrease = 2;
 
-    //type specific texture
-    //public override Texture2D SpriteTexture { get; set; } = 
+	//type specific texture
+	//public override Texture2D SpriteTexture { get; set; } = 
 
-    /// <value>Part form in the BuildMenu grid as a 3x3 BitArray.</value>
-    public BitArray Shape = new(new bool[]{
-        true, true, true,
-        true, true, true,
-        true, true, true
-    });
+	/// <value>Part form in the BuildMenu grid as a 3x3 BitArray.</value>
+	public BitArray Shape = new(new bool[]{
+		true, true, true,
+		true, true, true,
+		true, true, true
+	});
 
 
 
-    public override void activateEffect() { }
+	public override void activateEffect() { }
 
 	public override void changeStats(bool add) //changes the player's stats: if add = false --> player stats are decreased | if add = true --> player stats are increased
 	{
@@ -47,8 +47,8 @@ public partial class DebugMultitool : ShipPart
 
 	public override void generateStats()
 	{
-        GenerateStatRandomness();
-        
+		GenerateStatRandomness();
+		
 		float mult = randomness;
 		thrustIncrease *= mult;
 		GD.Print($"random: {mult}");
