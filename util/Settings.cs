@@ -38,8 +38,8 @@ namespace Microgravity.util
 			//["controls.test_value"] = new Bool(false, "Test Value"),
 			//["controls.test_slider"] = new Float(1.0f, -5.0f, 10.0f, "Example Slider"),
 			["general.player_ship"] = new Float (1.0f, 1f, 3f, "Ship Variant"),
-			["audio.master_volume"] = new Float (0.0f, 0.0f, 72.0f, "Master Volume"),
-			["audio.music_volume"] = new Float (0.0f, 0.0f, 72.0f, "Music Volume")
+			["audio.master_volume"] = new Float (50.0f, 0.0f, 100.0f, "Master Volume"),
+			["audio.music_volume"] = new Float (5.0f, 0.0f, 100.0f, "Music Volume")
 		};
 	}
 }
