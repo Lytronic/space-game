@@ -68,6 +68,7 @@ public partial class PartsManager : Node2D
         //spawn all the projectile Launchers in the scene
         //_projectileScene = ResourceLoader.Load<PackedScene>(ProjectileScene);
         _projectileLauncher = ResourceLoader.Load<PackedScene>(_projectileLauncherPath);
+        
     }
 
     public void SwitchToWeapon(int weaponType)

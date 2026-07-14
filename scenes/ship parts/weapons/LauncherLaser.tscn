@@ -1,3 +1,6 @@
 [gd_scene format=3 uid="uid://be86iixegsaw"]
 
+[ext_resource type="Script" uid="uid://bdk42fikx1o7r" path="res://scenes/ship parts/weapons/scripts/LauncherLaser.cs" id="1_hvkwt"]
+
 [node name="LauncherLaser" type="Node2D" unique_id=72754956]
+script = ExtResource("1_hvkwt")
