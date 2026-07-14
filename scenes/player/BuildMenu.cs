@@ -45,6 +45,18 @@ public partial class BuildMenu : Control
 			menuPart.Inventory = InventoryRef;
 
 			AddChild(menuPart);
+
+			for (int i = 0; i < 3; i++)
+			{
+				for (int j = 0; j < 3; j++)
+				{
+					if (part.Shape[3 * j + i])
+					{
+						Vector2I position = part.GridPosition + new Vector2I(i, j);
+						((ItemSlot)_grid.GetChild(PlayerVariables.Stats.InvWidth * position.Y + position.X)).HasItem = true;
+					}
+				}
+			}
 		}
 	}
 	
