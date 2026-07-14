@@ -22,6 +22,7 @@ Speed = 200.0
 Health = 300
 ScoreValue = 150
 MinimumRound = 5
+metadata/_edit_horizontal_guides_ = [-18.0]
 
 [node name="EngineParticles0" type="GPUParticles2D" parent="." index="0" unique_id=1796067230]
 position = Vector2(-24, 36)
@@ -101,18 +102,18 @@ Primary = [NodePath("../ProjectileLauncherLeft"), NodePath("../ProjectileLaunche
 Secondary = [NodePath("../Arc")]
 
 [node name="ProjectileLauncherLeft" type="Node2D" parent="." index="12" unique_id=1148120331]
-position = Vector2(-70, -50)
+position = Vector2(-30, -18)
 script = ExtResource("3_ky0me")
 ProjectileScene = "uid://dmkuwkkxbymng"
 Cooldown = 4.0
 metadata/_custom_type_script = "uid://bfrt21xpdr02s"
 
 [node name="ProjectileLauncherRight" type="Node2D" parent="." index="13" unique_id=2085202841]
-position = Vector2(68, -51)
+position = Vector2(29, -18)
 script = ExtResource("3_ky0me")
 ProjectileScene = "uid://dmkuwkkxbymng"
 Cooldown = 4.0
 metadata/_custom_type_script = "uid://bfrt21xpdr02s"
 
 [node name="Arc" parent="." index="14" unique_id=1420630968 instance=ExtResource("4_1yv4a")]
-position = Vector2(0, -117)
+position = Vector2(0, -47)
