@@ -19,7 +19,9 @@ public partial class PartsManager : Node2D
 
 	public void SwitchToWeapon(int weaponType)
 	{
-		player.Weapon = Weapons[weaponType];
+        GD.Print($"switched weapoon to: {weaponType}");
+        //player.Weapon = Weapons[weaponType];
+		
 	}
 	private int addOrSubtractInt(bool add) // support method to streamline applying stats in subclasses
 	{

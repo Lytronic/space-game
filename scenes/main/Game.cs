@@ -153,6 +153,7 @@ public partial class Game : Node2D
 			_enemyCount++;
 		}
 	}
+	/*
 	private void SpawnBossStation(BaseStation Sboss)
 	{
 		Node2D player = GetNodeOrNull<Node2D>("Player");
@@ -163,7 +164,7 @@ public partial class Game : Node2D
 	{
 		Node2D player = GetNodeOrNull<Node2D>("Player");
 	}
-
+	*/
 	public async void OpenBuildMenuAfterDelay(float delay)
 	{
 		GD.Print("Changing scene...");

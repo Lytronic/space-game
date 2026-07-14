@@ -135,6 +135,9 @@ public partial class Player : CharacterBody2D
 
         //Parts Manager
         partsManager = GetChildren().OfType<PartsManager>().First();
+
+		//for player to be able to shoot
+		StartWithPlasmaWeapon();
 		
     }
 
@@ -324,6 +327,12 @@ public partial class Player : CharacterBody2D
 
 		Velocity = forward * _throttleSpeed + right * _strafeSpeed;
 	}
+	private void StartWithPlasmaWeapon()
+	{
+		WeaponPartPlasma startWeapon = new();
+		PlayerVariables.Instance.PlayerActiveParts.Add(startWeapon);
+		startWeapon.changeStats(true);
+	}
 
 	private void UpdateWeapon(float dt)
 	{
@@ -476,5 +485,42 @@ public partial class Player : CharacterBody2D
 		}
 	}
 
-	
+	public override void _Input(InputEvent @event)
+	{
+		if (@event is InputEventKey keyEvent && keyEvent.Pressed && !keyEvent.Echo)
+		{
+			if (keyEvent.Keycode == Key.Q)
+			{
+				partsManager.SwitchToWeapon(0);
+			}
+			if (keyEvent.Keycode == Key.Key1)
+			{
+				partsManager.SwitchToWeapon(1);
+			}
+			if (keyEvent.Keycode == Key.Key2)
+			{
+				partsManager.SwitchToWeapon(2);
+			}
+			if (keyEvent.Keycode == Key.Key3)
+			{
+				partsManager.SwitchToWeapon(3);
+			}
+			if (keyEvent.Keycode == Key.Key4)
+			{
+				partsManager.SwitchToWeapon(4);
+			}
+			if (keyEvent.Keycode == Key.Key5)
+			{
+				partsManager.SwitchToWeapon(5);
+			}
+			if (keyEvent.Keycode == Key.Key6)
+			{
+				partsManager.SwitchToWeapon(6);
+			}
+			if (keyEvent.Keycode == Key.Key7)
+			{
+				partsManager.SwitchToWeapon(7);
+			}
+		}
+	}
 }

@@ -17,6 +17,6 @@ public partial class WeaponPartPlasma : ShipPart
 
     public override void changeStats(bool add)
     {
-        PlayerVariables.Instance.WeaponList[7] += addOrSubtractInt(add);
+        PlayerVariables.Instance.WeaponList[0] += addOrSubtractInt(add);
     }
 }
