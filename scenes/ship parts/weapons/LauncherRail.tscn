@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://q1b8sdmla55q"]
+
+[ext_resource type="Script" uid="uid://xu1prwbik1b2" path="res://scenes/ship parts/weapons/scripts/LauncherRail.cs" id="1_18568"]
+
+[node name="LauncherRail" type="Node2D" unique_id=1173613821]
+script = ExtResource("1_18568")

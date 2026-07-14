@@ -12,13 +12,14 @@ public partial class ShipPart : Resource
     [Export] public virtual float rarity { get; set; }
     [Export] public virtual bool isActive { get; set; }
     [Export] public virtual float partWeight { get; set; }
+    [Export] public virtual Texture2D SpriteTexture { get; set; }
+    [Export] public virtual Texture2D MenuTexture { get; set; }
 
     //variables needed to recreate the item from save
     [Export] public virtual string type { get; set; }
     [Export] public virtual float randomness { get; set; } = -1f;
 
-    [Export] public virtual Texture2D SpriteTexture { get; set; }
-    [Export] public virtual Texture2D MenuTexture { get; set; }
+
 
     /// <value>The coordinates in the BuildMenu grid (if applicable)</value>
     public Vector2I GridPosition;

@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://o03wyjk2m403"]
+
+[ext_resource type="Script" uid="uid://c80p5np0rnsur" path="res://scenes/ship parts/weapons/scripts/LauncherArc.cs" id="1_oawjt"]
+
+[node name="LauncherArc" type="Node2D" unique_id=788027537]
+script = ExtResource("1_oawjt")

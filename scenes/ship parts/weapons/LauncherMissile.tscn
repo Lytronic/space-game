@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://d02froqb85pdp"]
+
+[ext_resource type="Script" uid="uid://bvn7o3ut3iodr" path="res://scenes/ship parts/weapons/scripts/LauncherMissile.cs" id="1_piyml"]
+
+[node name="LauncherMissile" type="Node2D" unique_id=277241320]
+script = ExtResource("1_piyml")

@@ -12,6 +12,7 @@ public partial class PartsDicktionaty : Node
         Instance = this;
     }
 
+
     public static readonly Dictionary<string, ShipPart> ReconstructParts = new()
     {
         

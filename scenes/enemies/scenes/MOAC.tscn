@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://lvlgmxl6u820" path="res://scenes/enemies/scenes/BaseEnemy.tscn" id="1_ggyiy"]
 [ext_resource type="Texture2D" uid="uid://ctn877mx35n1i" path="res://gfx/game/enemy/ship_eee.png" id="2_2tel1"]
 [ext_resource type="Texture2D" uid="uid://0psb83uwnd6a" path="res://gfx/game/particle/flame.png" id="2_ky0me"]
-[ext_resource type="Script" uid="uid://bfrt21xpdr02s" path="res://scenes/projectiles/scripts/ProjectileLauncher.cs" id="3_ky0me"]
+[ext_resource type="Script" uid="uid://bfrt21xpdr02s" path="res://scenes/ship parts/weapons/scripts/ProjectileLauncher.cs" id="3_ky0me"]
 [ext_resource type="PackedScene" uid="uid://chowccxwkplm3" path="res://scenes/projectiles/scenes/Arc.tscn" id="4_1yv4a"]
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_1yv4a"]
