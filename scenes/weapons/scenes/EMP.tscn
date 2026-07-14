@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://dgh6yj5rbpwcm"]
+
+[ext_resource type="PackedScene" uid="uid://o3k7io30kyta" path="res://scenes/weapons/scenes/BaseWeapon.tscn" id="1_hq2w4"]
+[ext_resource type="Script" uid="uid://cxvllblaglo42" path="res://scenes/weapons/scripts/EMP.cs" id="2_j7wup"]
+
+[node name="Node2D" unique_id=1420630968 instance=ExtResource("1_hq2w4")]
+script = ExtResource("2_j7wup")
