@@ -153,16 +153,16 @@ public partial class Game : Node2D
 			_enemyCount++;
 		}
 	}
-	private void SpawnBossStation(BaseStation Sboss)
-	{
-		Node2D player = GetNodeOrNull<Node2D>("Player");
+	// private void SpawnBossStation(BaseStation Sboss)
+	// {
+		// Node2D player = GetNodeOrNull<Node2D>("Player");
 		//enemy.Killed += () => _enemyCount--;
-	}
+	// }
 
-	private void SpawnBossWarship(BaseWarship Wboss)
-	{
-		Node2D player = GetNodeOrNull<Node2D>("Player");
-	}
+	// private void SpawnBossWarship(BaseWarship Wboss)
+	// {
+		// Node2D player = GetNodeOrNull<Node2D>("Player");
+	// }
 
 	public async void OpenBuildMenuAfterDelay(float delay)
 	{
