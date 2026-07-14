@@ -19,7 +19,7 @@ keycode = 4194309
 [sub_resource type="Shortcut" id="Shortcut_qg2rf"]
 events = [SubResource("InputEventKey_p6oaq")]
 
-[node name="BuildMenu" type="Control" unique_id=1964035601]
+[node name="BuildMenu" type="Control" unique_id=1964035601 node_paths=PackedStringArray("InventoryRef")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -27,6 +27,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_p6oaq")
+InventoryRef = NodePath("InventoryWindow/Storage/ScrollContainer/ItemGrid")
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=520008650]
 material = SubResource("ShaderMaterial_c0rdv")
@@ -76,3 +77,5 @@ theme = SubResource("Theme_ryxgj")
 action_mode = 0
 shortcut = SubResource("Shortcut_qg2rf")
 text = "Done"
+
+[editable path="InventoryWindow"]

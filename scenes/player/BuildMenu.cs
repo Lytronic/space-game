@@ -6,8 +6,10 @@ public partial class BuildMenu : Control
 	PlayerVariables vars = PlayerVariables.Instance;
 
 	public static readonly float GridSpacing = 90.0f;
+	/// <value>Reference for items to know where to go when they're pulled out of the grid.</value>
+	[Export] public GridContainer InventoryRef;
 
-	/// <summary>Maximum width/height a ship part can have (See ShipPart.cs)</value>
+	/// <value>Maximum width/height a ship part can have (See ShipPart.cs)</value>
 	public static readonly int PartGridSize = 3;
 
 	private PackedScene _menuShipPartScene = ResourceLoader.Load<PackedScene>("res://scenes/ship parts/MenuShipPart.tscn");
@@ -42,6 +44,7 @@ public partial class BuildMenu : Control
 
 			menuPart.Position = _grid.GlobalPosition + (new Vector2(part.GridPosition.X, part.GridPosition.Y) * GridSpacing);
 			menuPart.InGrid  = true;
+			menuPart.Inventory = InventoryRef;
 
 			AddChild(menuPart);
 		}

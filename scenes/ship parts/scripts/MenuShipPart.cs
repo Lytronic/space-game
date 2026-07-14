@@ -8,13 +8,13 @@ public partial class MenuShipPart : Control
 	[Export]
 	public ShipPart ShipPart;
 	public bool InGrid = false;
+	public Node Inventory;
 
 	private bool _hovered = false;
 	private bool _grabbed = false;
 	private TextureRect _gridTexture;
 	private TextureRect _menuTexture;
 	private Control _areas;
-	private Node _formerParent;
 
 	public override void _Ready()
     {
@@ -199,8 +199,8 @@ public partial class MenuShipPart : Control
 		else
 		{
 			// free the node from its parent so it can be dragged out of it
-			_formerParent = GetParent();
-			Reparent(GetNode("/root"));
+			Inventory = GetParent();
+			Reparent(GetNode("/root/BuildMenu"));
 		}
 	}
 
@@ -211,7 +211,7 @@ public partial class MenuShipPart : Control
 		{
 			_gridTexture.Hide();
 			_menuTexture.Show();
-			Reparent(_formerParent);
+			Reparent(Inventory);
 		}
 		else
 		{
