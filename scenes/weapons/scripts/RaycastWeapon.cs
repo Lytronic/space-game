@@ -105,7 +105,7 @@ public partial class RaycastWeapon : BaseWeapon
 				var target = (GodotObject)result["collider"];
 
 				// render a reflected ray if the player has a mirror
-				if (target is Player player && PlayerVariables.Instance.HasPart<Mirror>())
+				if (target is Player player && PlayerVariables.Instance.HasPart<Mirror>() && Reflectable)
 				{
 					_reflecting = true;
 					_reflectingDirection = (-_direction).Reflect((Vector2)result["normal"]); 
