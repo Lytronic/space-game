@@ -24,7 +24,8 @@ public partial class DebugMultitool : ShipPart
 	//public override Texture2D SpriteTexture { get; set; } = 
 
 	/// <value>Part form in the BuildMenu grid as a 3x3 BitArray.</value>
-	public override BitArray Shape { get; set; } = new(new bool[]{
+	public override BitArray Shape { get; set; } = new(new bool[]
+	{
 		true, true, false,
 		true, true, false,
 		true, true, false
