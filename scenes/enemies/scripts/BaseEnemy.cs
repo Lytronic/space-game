@@ -12,7 +12,7 @@ public partial class BaseEnemy : CharacterBody2D
 	//here is the public loot table that EnemySalvage uses to choose a drop from; any object in here is gonna be unique
 	[Export] public NodePath salvagePath = "EnemySalvage";
 	[Export] public String enemyType;
-	public ShipPart[] lootTable { get; set; }
+	[Export] public ShipPart[] lootTable { get; set; }
 
 	public const float ScalingPerDangerLevel = 1.1f;
 

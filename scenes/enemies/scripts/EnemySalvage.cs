@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Collections.Generic;
 
 [GlobalClass]
 public partial class EnemySalvage : Node
@@ -8,6 +9,7 @@ public partial class EnemySalvage : Node
 
 	public ShipPart[] droppedParts;
 	private ShipPart[] possibleLoot;
+	private List<ShipPart> notNullDroppedParts;
 
 	private float wholeRarity;
 	private float playerLuck;
@@ -74,7 +76,15 @@ public partial class EnemySalvage : Node
 			}
 			//GD.Print($"compleded dropping process, dropped parts: {droppedParts}");   //debug
 		}
-		PlayerVariables.Instance.AddLootToCollection(droppedParts);
+		notNullDroppedParts = new List<ShipPart>();
+		foreach (ShipPart part in droppedParts)
+		{ 
+			if(part != null) 
+			{
+			notNullDroppedParts.Add(part); 
+			}
+		}
+		PlayerVariables.Instance.AddLootToCollection(notNullDroppedParts.ToArray());
 	}
 
 	private float getPlayerLuckLevel()

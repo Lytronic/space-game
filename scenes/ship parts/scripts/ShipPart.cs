@@ -43,7 +43,12 @@ public partial class ShipPart : Resource
 	public virtual void loadSprite()
 	{
 		SpriteTexture = GD.Load<Texture2D>(SpriteTexturePath);
+		if(SpriteTexture == null)
+		{
+			GD.Print("texture is null");
+		}
 		MenuTexture = GD.Load<Texture2D>(MenuTexturePath);
+
 	}
 	public virtual void activateEffect() { }
 

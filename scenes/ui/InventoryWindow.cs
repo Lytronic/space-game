@@ -26,6 +26,7 @@ public partial class InventoryWindow : Control
 			menuPart.ShipPart = part;
 			
 			_grid.AddChild(menuPart);
+			GD.Print("part in collected parts");
 		}
 	}
 }

@@ -279,6 +279,7 @@ public partial class PlayerVariables : Node
 	public void AddLootToCollection(ShipPart[] array)
 	{
 		PlayerCollectedParts.AddRange(array);
+		
 
 		GD.Print($"added parts from loot {array} to collection");
 		//CheckForDebugItem(array);

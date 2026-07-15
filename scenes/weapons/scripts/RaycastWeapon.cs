@@ -73,7 +73,7 @@ public partial class RaycastWeapon : BaseWeapon
 
 	public override void _Process(double delta)
 	{
-		GD.Print(_active);
+		
 		if (_active)
 		{
 			if (_parent is PartsManager)
