@@ -25,7 +25,7 @@ public partial class WeaponAbilities : HBoxContainer
 	public int selectedAbilityNr;
 	public BaseWeapon selectedAbilityName;
 
-	public BaseWeapon[] Abilities; // Array for the order of abilities
+	public int[] Abilities; // Array for the order of abilities
 	public TextureRect[] ChildSprites;
 
 	private Player _player;
@@ -42,18 +42,17 @@ public partial class WeaponAbilities : HBoxContainer
 		{
 			if (child is Control control)
 			{
-				control.Hide();
+				//control.Hide();
 			}
 		}	
-		Abilities = new BaseWeapon[8];
-		ChildSprites = new TextureRect[8];
+		Abilities = new int[7];
+		ChildSprites = new TextureRect[7];
 		for (int i = 0; i < ChildSprites.Length; i++)
 		{
 			ChildSprites[i] = GetChild<TextureRect>(i);
 		}
-		UpdateAbilities();
-		_weaponsControls.updateControls();
-		ChangeAbility(1);
+		//_weaponsControls.updateControls();
+		ChangeAbility(0);
 	}
 
 	
@@ -65,217 +64,102 @@ public partial class WeaponAbilities : HBoxContainer
 	// Function to update the ability hud
 	public void UpdateAbilities()
 	{
-		var _updater = 1;
-		Array.Clear(Abilities, 0, Abilities.Length);
-		if(PlayerVariables.Instance.WeaponList[0] != 0)
-		{
-			//ChildSprites[0].Show();
-			ChildSprites[1].Show();
-			Abilities[_updater] = _partsManager.Weapons[0];
-			_updater += 1;
-		}
-		else
-		{
-			ChildSprites[0].Hide();
-			ChildSprites[1].Hide();
-		}
-		if(PlayerVariables.Instance.WeaponList[1] != 0)
-		{
-			ChildSprites[2].Show();
-			Abilities[_updater] = _partsManager.Weapons[1];
-			_updater += 1;
-		}
-		else
-		{
-			ChildSprites[2].Hide();
-		}
-		if(PlayerVariables.Instance.WeaponList[2] != 0)
-		{
-			ChildSprites[3].Show();
-			Abilities[_updater] = _partsManager.Weapons[2];
-			_updater += 1;
-		}
-		else
-		{
-			ChildSprites[3].Hide();
-		}
-		if(PlayerVariables.Instance.WeaponList[3] != 0)
-		{
-			ChildSprites[4].Show();
-			Abilities[_updater] = _partsManager.Weapons[3];
-			_updater += 1;
-		}
-		else
-		{
-			ChildSprites[4].Hide();
-		}
-		if(PlayerVariables.Instance.WeaponList[4] != 0)
-		{
-			ChildSprites[5].Show();
-			Abilities[_updater] = _partsManager.Weapons[4];
-			_updater += 1;
-		}
-		else
-		{
-			ChildSprites[5].Hide();
-		}
-		if(PlayerVariables.Instance.WeaponList[5] != 0)
-		{
-			ChildSprites[6].Show();
-			Abilities[_updater] = _partsManager.Weapons[5];
-			_updater += 1;
-		}
-		else
-		{
-			ChildSprites[6].Hide();
-		}
-		if(PlayerVariables.Instance.WeaponList[6] != 0)
-		{
-			ChildSprites[7].Show();
-			Abilities[_updater] = _partsManager.Weapons[6];
-			_updater += 1;
-		}
-		else
-		{
-			ChildSprites[7].Hide();
-		}
 
-		ChildSprites[0].Texture = TextureSwapOff;
-		
-		ChildSprites[3].Texture = TextureSlugOff;
-
-		ChildSprites[6].Texture = TextureMissileOff;
-
-		ChildSprites[7].Texture = TextureTorpedoOff;
-			
-		ChildSprites[1].Texture = TexturePlasmaOff;
-		
-		ChildSprites[5].Texture = TextureLaserOff;
-			
-		ChildSprites[2].Texture = TextureArcOff;
-			
-		ChildSprites[4].Texture = TextureEMPOff;
-
+		ChildSprites[0].Texture = TexturePlasmaOff;
 
 	}
 	public void ChangeAbility(int AbilityNr)
 	{
-		GD.Print("Changing Ability!" + AbilityNr);
-		if (Abilities[AbilityNr] != null)
+		if(PlayerVariables.Instance.WeaponList[AbilityNr] != 0)
 		{
-			selectedAbilityNr = AbilityNr;
-			selectedAbilityName = Abilities[AbilityNr];
-			for (int i = 0; i < ChildSprites.Length; i++)
-			{
-				if(i == AbilityNr)
-				{
-					if(ChildSprites[i].Texture == TexturePlasma || ChildSprites[i].Texture == TexturePlasmaOff)
-					{
-						ChildSprites[i].Texture = TexturePlasma;
-					}
-					if(ChildSprites[i].Texture == TextureArc || ChildSprites[i].Texture == TextureArcOff)
-					{
-						ChildSprites[i].Texture = TextureArc;
-					}
-					if(ChildSprites[i].Texture == TextureSwap || ChildSprites[i].Texture == TextureSwapOff)
-					{
-						ChildSprites[i].Texture = TextureSwap;
-					}
-					if(ChildSprites[i].Texture == TextureSlug || ChildSprites[i].Texture == TextureSlugOff)
-					{
-						ChildSprites[i].Texture = TextureSlug;
-					}
-					if(ChildSprites[i].Texture == TextureMissile || ChildSprites[i].Texture == TextureMissileOff)
-					{
-						ChildSprites[i].Texture = TextureMissile;
-					}
-					if(ChildSprites[i].Texture == TextureTorpedo || ChildSprites[i].Texture == TextureTorpedoOff)
-					{
-						ChildSprites[i].Texture = TextureTorpedo;
-					}
-					if(ChildSprites[i].Texture == TextureLaser || ChildSprites[i].Texture == TextureLaserOff)
-					{
-						ChildSprites[i].Texture = TextureLaser;
-					}
-					if(ChildSprites[i].Texture == TextureEMP || ChildSprites[i].Texture == TextureEMPOff)
-					{
-						ChildSprites[i].Texture = TextureEMP;
-					}
-				}
-				else
-				{
-					if(ChildSprites[i].Texture == TexturePlasma || ChildSprites[i].Texture == TexturePlasmaOff)
-					{
-						ChildSprites[i].Texture = TexturePlasmaOff;
-					}
-					if(ChildSprites[i].Texture == TextureArc || ChildSprites[i].Texture == TextureArcOff)
-					{
-						ChildSprites[i].Texture = TextureArcOff;
-					}
-					if(ChildSprites[i].Texture == TextureSwap || ChildSprites[i].Texture == TextureSwapOff)
-					{
-						ChildSprites[i].Texture = TextureSwapOff;
-					}
-					if(ChildSprites[i].Texture == TextureSlug || ChildSprites[i].Texture == TextureSlugOff)
-					{
-						ChildSprites[i].Texture = TextureSlugOff;
-					}
-					if(ChildSprites[i].Texture == TextureMissile || ChildSprites[i].Texture == TextureMissileOff)
-					{
-						ChildSprites[i].Texture = TextureMissileOff;
-					}
-					if(ChildSprites[i].Texture == TextureTorpedo || ChildSprites[i].Texture == TextureTorpedoOff)
-					{
-						ChildSprites[i].Texture = TextureTorpedoOff;
-					}
-					if(ChildSprites[i].Texture == TextureLaser || ChildSprites[i].Texture == TextureLaserOff)
-					{
-						ChildSprites[i].Texture = TextureLaserOff;
-					}
-					if(ChildSprites[i].Texture == TextureEMP || ChildSprites[i].Texture == TextureEMPOff)
-					{
-						ChildSprites[i].Texture = TextureEMPOff;
-				}			
-			}
+		switch (AbilityNr)
+		{
+			case 0:
+				ChildSprites[0].Texture = TexturePlasma;
+				break;
+			case 1:
+				ChildSprites[0].Texture = TextureArc;
+				break;
+			case 2:
+				ChildSprites[0].Texture = TextureSlug;
+				break;
+			case 3:
+				ChildSprites[0].Texture = TextureEMP;
+				break;
+			case 4:
+				ChildSprites[0].Texture = TextureLaser;
+				break;
+			case 5:
+				ChildSprites[0].Texture = TextureMissile;
+				break;
+			case 6:
+				ChildSprites[0].Texture = TextureTorpedo;
+				break;
 		}
-	}
+		}
+		else
+			{
+				switch (AbilityNr)
+		{
+			case 0:
+				ChildSprites[0].Texture = TexturePlasmaOff;
+				break;
+			case 1:
+				ChildSprites[0].Texture = TextureArcOff;
+				break;
+			case 2:
+				ChildSprites[0].Texture = TextureSlugOff;
+				break;
+			case 3:
+				ChildSprites[0].Texture = TextureEMPOff;
+				break;
+			case 4:
+				ChildSprites[0].Texture = TextureLaserOff;
+				break;
+			case 5:
+				ChildSprites[0].Texture = TextureMissileOff;
+				break;
+			case 6:
+				ChildSprites[0].Texture = TextureTorpedoOff;
+				break;
+		}
+			}
+
+		
+		
 	}
 
 	public override void _Input(InputEvent @event)
 	{
 		if (@event is InputEventKey keyEvent && keyEvent.Pressed && !keyEvent.Echo)
 		{
-			if (keyEvent.Keycode == Key.Q)
+			if (keyEvent.Keycode == Key.Key1)
 			{
 				ChangeAbility(0);
 			}
-			if (keyEvent.Keycode == Key.Key1)
+			if (keyEvent.Keycode == Key.Key2)
 			{
 				ChangeAbility(1);
 			}
-			if (keyEvent.Keycode == Key.Key2)
+			if (keyEvent.Keycode == Key.Key3)
 			{
 				ChangeAbility(2);
 			}
-			if (keyEvent.Keycode == Key.Key3)
+			if (keyEvent.Keycode == Key.Key4)
 			{
 				ChangeAbility(3);
 			}
-			if (keyEvent.Keycode == Key.Key4)
+			if (keyEvent.Keycode == Key.Key5)
 			{
 				ChangeAbility(4);
 			}
-			if (keyEvent.Keycode == Key.Key5)
+			if (keyEvent.Keycode == Key.Key6)
 			{
 				ChangeAbility(5);
 			}
-			if (keyEvent.Keycode == Key.Key6)
-			{
-				ChangeAbility(6);
-			}
 			if (keyEvent.Keycode == Key.Key7)
 			{
-				ChangeAbility(7);
+				ChangeAbility(6);
 			}
 		}
 	}

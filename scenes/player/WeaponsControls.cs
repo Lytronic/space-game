@@ -33,7 +33,7 @@ public partial class WeaponsControls : HBoxContainer
 		{
 			if(_weaponAbilities.Abilities[i] != null)
 			{
-				ControlKeys[i].Show();
+				ControlKeys[i].Visible = _weaponAbilities.ChildSprites[i].Visible;
 			}
 			else
 			{

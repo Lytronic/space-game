@@ -254,42 +254,44 @@ grow_vertical = 0
 theme_override_constants/separation = 85
 script = ExtResource("2_h35ih")
 
-[node name="ControlQ" type="Label" parent="Weapons/WeaponsControls" unique_id=410174340]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("1_kk26m")
-text = "Q"
-
 [node name="Control1" type="Label" parent="Weapons/WeaponsControls" unique_id=2146996601]
+visible = false
 layout_mode = 2
 theme_override_fonts/font = ExtResource("1_kk26m")
 text = "1"
 
 [node name="Control2" type="Label" parent="Weapons/WeaponsControls" unique_id=303701542]
+visible = false
 layout_mode = 2
 theme_override_fonts/font = ExtResource("1_kk26m")
 text = "2"
 
 [node name="Control3" type="Label" parent="Weapons/WeaponsControls" unique_id=354093618]
+visible = false
 layout_mode = 2
 theme_override_fonts/font = ExtResource("1_kk26m")
 text = "3"
 
 [node name="Control4" type="Label" parent="Weapons/WeaponsControls" unique_id=75834248]
+visible = false
 layout_mode = 2
 theme_override_fonts/font = ExtResource("1_kk26m")
 text = "4"
 
 [node name="Control5" type="Label" parent="Weapons/WeaponsControls" unique_id=1059058324]
+visible = false
 layout_mode = 2
 theme_override_fonts/font = ExtResource("1_kk26m")
 text = "5"
 
 [node name="Control6" type="Label" parent="Weapons/WeaponsControls" unique_id=1560563598]
+visible = false
 layout_mode = 2
 theme_override_fonts/font = ExtResource("1_kk26m")
 text = "6"
 
 [node name="Control7" type="Label" parent="Weapons/WeaponsControls" unique_id=1964416058]
+visible = false
 layout_mode = 2
 theme_override_fonts/font = ExtResource("1_kk26m")
 text = "7"
@@ -301,7 +303,7 @@ anchor_top = 1.0
 anchor_bottom = 1.0
 offset_left = 8.0
 offset_top = -78.0
-offset_right = 757.0
+offset_right = 649.0
 offset_bottom = -7.0
 grow_vertical = 0
 theme_override_constants/separation = 24
@@ -323,54 +325,56 @@ TextureArcOff = ExtResource("25_aen0w")
 TextureEMP = ExtResource("7_n1mye")
 TextureEMPOff = ExtResource("27_nbya4")
 
-[node name="WeaponSwap" type="TextureRect" parent="Weapons/WeaponAbilities" unique_id=2101956847]
-layout_mode = 2
-texture = ExtResource("10_edggo")
-expand_mode = 2
-
 [node name="WeaponPlasma" type="TextureRect" parent="Weapons/WeaponAbilities" unique_id=1448792254]
 layout_mode = 2
 texture = ExtResource("6_h35ih")
 expand_mode = 2
 
 [node name="WeaponArc" type="TextureRect" parent="Weapons/WeaponAbilities" unique_id=1257636955]
+visible = false
 layout_mode = 2
 texture = ExtResource("3_fn62s")
 expand_mode = 2
 
 [node name="WeaponCannon" type="TextureRect" parent="Weapons/WeaponAbilities" unique_id=145832826]
+visible = false
 layout_mode = 2
 texture = ExtResource("9_7ntgm")
 expand_mode = 2
 
 [node name="WeaponPulse" type="TextureRect" parent="Weapons/WeaponAbilities" unique_id=2027330446]
+visible = false
 layout_mode = 2
 texture = ExtResource("7_n1mye")
 expand_mode = 2
 
 [node name="WeaponLaser" type="TextureRect" parent="Weapons/WeaponAbilities" unique_id=1878213473]
+visible = false
 layout_mode = 2
 texture = ExtResource("4_edggo")
 expand_mode = 2
 
 [node name="WeaponMissile" type="TextureRect" parent="Weapons/WeaponAbilities" unique_id=855626043]
+visible = false
 layout_mode = 2
 texture = ExtResource("5_sto77")
 expand_mode = 2
 
 [node name="WeaponTorpedo" type="TextureRect" parent="Weapons/WeaponAbilities" unique_id=1715061441]
+visible = false
 layout_mode = 2
 texture = ExtResource("8_7x8q2")
 expand_mode = 2
 
 [node name="WeaponsCooldown" type="HBoxContainer" parent="Weapons" unique_id=1949189840]
+visible = false
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
 offset_left = 36.0
 offset_top = -56.0
-offset_right = 719.0
+offset_right = 621.0
 offset_bottom = -29.0
 grow_vertical = 0
 theme_override_constants/separation = 80
@@ -417,12 +421,6 @@ layout_mode = 2
 theme_override_fonts/font = ExtResource("1_kk26m")
 theme_override_font_sizes/font_size = 26
 text = "6"
-
-[node name="Cooldown7" type="Label" parent="Weapons/WeaponsCooldown" unique_id=1990634336]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("1_kk26m")
-theme_override_font_sizes/font_size = 26
-text = "7"
 
 [node name="EnemyLocator" type="TextureRect" parent="." unique_id=242452645]
 layout_mode = 1
