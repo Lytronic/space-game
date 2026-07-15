@@ -15,11 +15,11 @@ public partial class ShipPart : Resource
 	[Export] public virtual Texture2D SpriteTexture { get; set; }
 	[Export] public virtual Texture2D MenuTexture { get; set; }
 
-	[Export] public virtual string SpriteTexturePath { get; set; }
-	[Export] public virtual string MenuTexturePath { get; set; }
+    [Export] public virtual string SpriteTexturePath { get; set; } = "res://gfx/gui/parts/weapon_torpedo.png";
+    [Export] public virtual string MenuTexturePath { get; set; } = "res://gfx/gui/construction/icon/weaponry/weapon_torpedo.png";
 
-	//variables needed to recreate the item from save
-	[Export] public virtual string type { get; set; }
+    //variables needed to recreate the item from save
+    [Export] public virtual string type { get; set; }
 	[Export] public virtual float randomness { get; set; } = -1f;
 
 
