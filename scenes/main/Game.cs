@@ -77,8 +77,6 @@ public partial class Game : Node2D
 		   	PlayerVariables.Instance.RegenShield();
 			PlayerVariables.Instance.RegenEnergy();
 		}
-
-		GD.Print($"FROM GAME: {PlayerVariables.Instance.PlayerPassiveParts[0].GridPosition}");
 	}
 
 	private void SetupRound()

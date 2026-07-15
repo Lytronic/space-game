@@ -121,6 +121,7 @@ public partial class PlayerVariables : Node
 				part.GridPosition = new(savedPart.GridX, savedPart.GridY);
 				part.Initialize();
 				part.generateStats();
+				part.changeStats(true);
 
 				Instance.PlayerActiveParts.Add(part);
 
@@ -134,14 +135,11 @@ public partial class PlayerVariables : Node
 				ShipPart part = PartsDictionary.ReconstructParts[savedPart.PartType].Duplicate() as ShipPart;
 				part.randomness = savedPart.PartRandomness;
 				part.GridPosition = new(savedPart.GridX, savedPart.GridY);
-				GD.Print(part.GridPosition);
 				part.Initialize();
 				part.generateStats();
-				GD.Print(part.GridPosition);
+				part.changeStats(true);
 
 				Instance.PlayerPassiveParts.Add(part);
-				GD.Print(part.GridPosition);
-
 			}
 		}
 
@@ -154,6 +152,7 @@ public partial class PlayerVariables : Node
 				part.GridPosition = new(savedPart.GridX, savedPart.GridY);
 				part.Initialize();
 				part.generateStats();
+				part.changeStats(true);
 
 				Instance.PlayerCollectedParts.Add(part);
 
