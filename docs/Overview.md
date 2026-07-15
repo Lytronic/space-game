@@ -8,7 +8,7 @@ The actual structure of the game is described in scenes, which are the `.tscn` f
 
 ## Scenes
 
-A scene is a collection of nodes arranged in a tree structure. When the game runs, the `TitleScreen` scene is loaded first, which upon pressing a key leads to the `game` scene. All other scenes are instantiated inside these two (e. g. in [SettingsScreen.cs](../scenes/ui/SettingsScreen.cs) where using scenes allows for reusing code since every scene with a script corresponds to a C# class).
+A scene is a collection of nodes arranged in a tree structure. When the game runs, the `TitleScreen` scene is loaded first, which upon pressing a key leads to the load menu and eventually the `game` scene. From there, you regularly enter the `BuildMenu` screen which sends you back to the game. Other scenes may also be instantiated inside these two (e. g. in [SettingsScreen.cs](../scenes/ui/SettingsScreen.cs) where using scenes allows for reusing code since every scene with a script corresponds to a C# class).
 
 ## Other code
 
