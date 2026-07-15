@@ -15,6 +15,7 @@ public partial class MenuShipPart : Control
 	private TextureRect _gridTexture;
 	private TextureRect _menuTexture;
 	private Control _areas;
+	private Control _grid;
 
 	public override void _Ready()
 	{
@@ -24,6 +25,7 @@ public partial class MenuShipPart : Control
 		_gridTexture.Texture = ShipPart.SpriteTexture;
 		_menuTexture.Texture = ShipPart.MenuTexture;
 		TooltipText = ShipPart.displayTooltip;
+		_grid = GetNode<GridContainer>("/root/BuildMenu/Grid");
 
 		if (InGrid)
 		{
@@ -136,8 +138,10 @@ public partial class MenuShipPart : Control
 		{
 			GlobalPosition = GetGlobalMousePosition() - _gridTexture.Size / 2;
 		}
-
-		
+		else if (InGrid)
+		{
+			Position = _grid.GlobalPosition + (new Vector2(ShipPart.GridPosition.X, ShipPart.GridPosition.Y) * BuildMenu.GridSpacing);
+		}
 	}
 
 	public override void _Input(InputEvent @event)
