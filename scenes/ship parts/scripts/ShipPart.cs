@@ -66,7 +66,7 @@ public partial class ShipPart : Resource
 		}
 		else { return -1; }
 	}
-	public void GenerateStatRandomness() //support method to streamline scaling in subclasses
+	public void GenerateStatRandomness() //support method to streamline scaling in subclasses; this method adds a randomness to possible stats
 	{
 		float dangerMultiplier;
 
@@ -88,6 +88,7 @@ public partial class ShipPart : Resource
 		//randomness is then applied to all stats
 	}
 
+	//this method gets called when a ship part gets put into the DB since it can't process the type --> this method boils down the ShipPart to it's essence
 	public SavedPart SavePartVariables()
 	{
 		return new SavedPart(type, randomness, GridPosition.X, GridPosition.Y);

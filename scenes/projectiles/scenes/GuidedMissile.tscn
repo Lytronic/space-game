@@ -7,7 +7,7 @@
 [node name="BaseProjectile" unique_id=273606959 instance=ExtResource("1_hwj8y")]
 script = ExtResource("2_06fqa")
 Agileness = 100.0
-Damage = 1.0
+Damage = 40.0
 Lifetime = 3.0
 LaunchSound = "res://sfx/game/weapons/torpedo.mp3"
 

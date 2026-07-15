@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://cs2i4oy7mohiw" path="res://gfx/game/projectiles/shell.png" id="2_rqdxo"]
 
 [node name="BaseProjectile" unique_id=273606959 instance=ExtResource("1_0p0tl")]
-Damage = 40.0
+Damage = 80.0
 Speed = 175.0
 Lifetime = 50.0
 Acceleration = 0.0

@@ -23,6 +23,9 @@ public partial class WeaponPartMissile : ShipPart
 
     public override void changeStats(bool add)
     {
+        //GD.Print($"missile changing stat : {PlayerVariables.Instance.WeaponList[5]}");
         PlayerVariables.Instance.WeaponList[5] += addOrSubtractInt(add);
+        //GD.Print($"missile done with stat : {PlayerVariables.Instance.WeaponList[5]}");
+
     }
 }

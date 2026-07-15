@@ -16,7 +16,7 @@ scale_max = 0.049999997
 
 [node name="BaseProjectile" unique_id=273606959 instance=ExtResource("1_7qwx8")]
 script = ExtResource("2_mdtsx")
-Damage = 2.0
+Damage = 60.0
 Speed = 250.0
 Lifetime = 2.0
 Acceleration = 50.0

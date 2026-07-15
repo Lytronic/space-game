@@ -5,3 +5,4 @@
 [node name="MissileGun" type="Node2D" unique_id=1656580372]
 script = ExtResource("1_pnnwl")
 ProjectileScene = "uid://bjysrgtiie2t0"
+Cooldown = 0.5

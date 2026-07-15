@@ -5,3 +5,4 @@
 [node name="TorpedoGun" type="Node2D" unique_id=1224624282]
 script = ExtResource("1_y15fq")
 ProjectileScene = "uid://dmkuwkkxbymng"
+Cooldown = 0.75

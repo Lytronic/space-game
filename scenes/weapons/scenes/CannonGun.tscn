@@ -5,4 +5,4 @@
 [node name="CannonGun" type="Node2D" unique_id=1380495590]
 script = ExtResource("1_v7tf0")
 ProjectileScene = "uid://bbjd5r28k1nnk"
-Cooldown = 1.0
+Cooldown = 0.5

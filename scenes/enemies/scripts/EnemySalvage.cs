@@ -7,9 +7,11 @@ public partial class EnemySalvage : Node
 {
 	BaseEnemy parent;
 
-	public ShipPart[] droppedParts;
-	private ShipPart[] possibleLoot;
-	private List<ShipPart> notNullDroppedParts;
+	//these are the lists through which a drop wanders before getting to the player
+
+	public ShipPart[] droppedParts;				
+	private ShipPart[] possibleLoot;			//the original loot pool from the defeated enemy
+	private List<ShipPart> notNullDroppedParts;	//an emergency list to filter out the null entries
 
 	private float wholeRarity;
 	private float playerLuck;
@@ -18,6 +20,12 @@ public partial class EnemySalvage : Node
 		parent = GetParent<BaseEnemy>();
 	
 	}
+	
+	/// <summary>
+	/// this method tcalculates which members of the loot pool the player recieves as drops
+	/// at the end of this method the dropped parts get filtered to prevent NullRefExceptions 
+	/// after that the drops get added to the player's inventory --> now the Enemy resumes his dying sequence in the parent object and deletes the object
+	/// </summary>
 
 	public void dropLoot()
 	{
@@ -87,12 +95,15 @@ public partial class EnemySalvage : Node
 		PlayerVariables.Instance.AddLootToCollection(notNullDroppedParts.ToArray());
 	}
 
+	//this method just reads the Player's Luck stat and makes it usable for this class
 	private float getPlayerLuckLevel()
 	{
 		float luck = PlayerVariables.Stats.LuckStat;
 		return luck;
 	}
 
+
+	//this method is there to see the value required to drop all the items in the array
 	private float getWholeRarity()
 	{
 		float wholeRar = 0;
@@ -109,6 +120,8 @@ public partial class EnemySalvage : Node
 		return wholeRar;
 	}
 
+
+	//in this method the already dropped items's references will be taken out of this class's drop pool --> no double positions
 	private void removeFromPossibleLoot(int indexToRemove)
 	{
 		ShipPart[] newLoot = new ShipPart[possibleLoot.Length - 1];

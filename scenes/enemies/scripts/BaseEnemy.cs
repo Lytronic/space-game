@@ -66,6 +66,7 @@ public partial class BaseEnemy : CharacterBody2D
 	}
 	public virtual void CreateLootTable()
 	{
+		//for each enemy type there has to be a hard-coded array put into the lootTable array
 
 		if(enemyType == null)
 		{
