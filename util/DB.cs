@@ -253,17 +253,18 @@ namespace Microgravity.util
 		/// <summary>
 		/// Save a Stats object to disk by serialising it and putting that inside the DB as a binary blob.
 		/// </summary>
-		public static void SaveGame(string name, SaveData data)
+		/// <returns>Id of the saved game used for updating the entry later on.</returns>
+		public static long CreateSave(string name, SaveData data)
 		{
 			SQLiteConnection connection = Connect();
 			if (connection == null)
 			{
-				return;
+				return -1;
 			}
 
 			if (!CreateTable(connection, _savesLayout))
 			{
-				return;
+				return -1;
 			}
 
 			try
@@ -278,7 +279,45 @@ namespace Microgravity.util
 			}
 			catch (Exception ex)
 			{
-				GD.PrintErr($"DB: Failed to save game {name}: {ex.Message}");
+				GD.PrintErr($"DB: Failed to create save {name}: {ex.Message}");
+			}
+
+			var ret = connection.LastInsertRowId;
+			connection.Close();
+
+			return ret;
+		}
+
+		/// <summary>
+		/// Update a game save after having created one to obtain an ID (see above).
+		/// </summary>
+		public static void UpdateSave(long id, SaveData data)
+		{
+			SQLiteConnection connection = Connect();
+			if (connection == null)
+			{
+				return;
+			}
+
+			if (!CreateTable(connection, _savesLayout))
+			{
+				return;
+			}
+
+			try
+			{
+				string updateSql = "UPDATE saves SET data = @data WHERE id IS @id";
+
+				SQLiteCommand updateCommand = new(updateSql, connection);
+				updateCommand.Parameters.AddWithValue("@id", id);
+				updateCommand.Parameters.Add("@data", DbType.Binary).Value = MemoryPackSerializer.Serialize(data);
+
+				updateCommand.ExecuteNonQuery();
+			}
+			catch (Exception ex)
+			{
+				GD.PrintErr($"DB: Failed to update save #{id}: {ex.Message}");
+				GD.PrintErr("DB: Progress will be lost!");
 			}
 
 			connection.Close();

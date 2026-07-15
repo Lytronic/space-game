@@ -48,6 +48,9 @@ public partial class Game : Node2D
 		{
 			_enemyScenes.Add(ResourceLoader.Load<PackedScene>(enemy));
 		}
+
+		// We save the game before the new round begins, but after the player has been to the build menu
+		PlayerVariables.Instance.SaveGame();	
 		
 		SpawnAsteroids();
 

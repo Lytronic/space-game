@@ -22,10 +22,8 @@ public partial class ShipPart : Resource
     [Export] public virtual string type { get; set; }
 	[Export] public virtual float randomness { get; set; } = -1f;
 
-
-
 	/// <value>The coordinates in the BuildMenu grid (if applicable)</value>
-	public Vector2I GridPosition;
+	public Vector2I GridPosition { get; set; }
 
 	/// <value>Part form in the BuildMenu grid as a 3x3 BitArray.</value>
 	public virtual BitArray Shape { get; set; } = new(new bool[]{
@@ -92,8 +90,7 @@ public partial class ShipPart : Resource
 
 	public SavedPart SavePartVariables()
 	{
-		SavedPart saved = new SavedPart(type, randomness);
-		return new SavedPart(type, randomness);
+		return new SavedPart(type, randomness, GridPosition.X, GridPosition.Y);
 	}
 
 }

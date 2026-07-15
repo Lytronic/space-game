@@ -20,7 +20,7 @@ public partial class Stats
 	public int Round = 0;
 
 	// difficulty level scales all enemy power exponentially
-	public int DangerLevel {  get; set; } = 0;
+	public int DangerLevel { get; set; } = 0;
 	public float LuckStat { get; set; } = 1;
 
 	//durrability stats stuff: armor and shield toughness are scaling stats reducing percentual damage scaling in a power curve | Math.Pow
@@ -28,19 +28,19 @@ public partial class Stats
 	public float CurrentHealth { get; set; } = 100.0f;
 	public float MaxShield { get; set; } = 100.0f;
 	public float CurrentShield { get; set; } = 100.0f;
-	public float ArmorToughness {  get; set; } = 1;
+	public float ArmorToughness { get; set; } = 1;
 	public float ShieldToughness { get; set; } = 1;
-	public int ShieldRegen {  get; set; } = 1; // regen is a flat increase in current shield that gets applied AT THE END OF EVERY FULL SECOND 
+	public int ShieldRegen { get; set; } = 1; // regen is a flat increase in current shield that gets applied AT THE END OF EVERY FULL SECOND 
 
-	public int RegenCooldown {  get; set; } = 1;
-	
+	public int RegenCooldown { get; set; } = 1;
+
 	//ship resources 
 	public int Ammo { get; set; } = 1;
 	public float Energy { get; set; } = 1;
 	public float MaxEnergy { get; set; } = 100.0f;
 	public float Fuel { get; set; } = 1;
 	public float MaxFuel { get; set; } = 1;
-	public float EnergyGeneration {  get; set; } = 1;
+	public float EnergyGeneration { get; set; } = 1;
 
 	//this should set max speed and acceleration (thrust against weight)
 	public float Thrust { get; set; } = 1; //max speed and (acceleration hindered by weight)
@@ -48,16 +48,16 @@ public partial class Stats
 	public float Control { get; set; } = 1;// how much the weight influences the acceleration, deceleraton and steering (0.0f - 1.0f)
 
 	//damage will be calculated through percentual damage increase and flat damage multiplication (modifier are being multiplied, mod > 1 --> increase; mod < 1 --> decrease)
-	public float DamageModif {  get; set; } = 1;
+	public float DamageModif { get; set; } = 1;
 	public float DamageBase { get; set; } = 1; //universial damage buff flat 
 	public float PhysDamage { get; set; } = 1;
-	public float PhysicalDmgMod {  get; set; } = 1; // percentage increased physical damage
+	public float PhysicalDmgMod { get; set; } = 1; // percentage increased physical damage
 	public float EnergyDamage { get; set; } = 1;
 	public float EnergyDmgMod { get; set; } = 1; // percentage increased energy damage 
 
 	// Inventory
-    public int InvWidth = 7;
-    public int InvHeight = 9;
+	public int InvWidth = 7;
+	public int InvHeight = 9;
 }
 
 /// <summary>
@@ -68,7 +68,10 @@ public partial class PlayerVariables : Node
 	public static PlayerVariables Instance { get; private set; }
 	public static Node Space { get; set; }
 	public static Stats Stats;
-   
+
+	// this mustn't be serialised, it is the currently seleted game id
+	public long CurrentSaveId;
+
 	// TODO: Serialise ShipParts, probably by storing IDs about them in Stats 
 	//this will store all the items the player has in their inventory
 	public List<ShipPart> PlayerActiveParts { get; set; } = []; // active parts that get activate an effect every time their cooldown is down or under a condition
@@ -91,9 +94,9 @@ public partial class PlayerVariables : Node
 	{
 		// make sure the name isn't PlayerVariables so there's no conflict with the new one
 		Instance.Name = "TO_BE_DELETED";
-	
+
 		// Add the new object to the tree, Instance will be set in _Ready()
-		GetNode("/root").AddChild(new PlayerVariables(){ Name = "PlayerVariables" });
+		GetNode("/root").AddChild(new PlayerVariables() { Name = "PlayerVariables" });
 
 		this.QueueFree();
 	}
@@ -103,40 +106,62 @@ public partial class PlayerVariables : Node
 	/// </summary>
 	public static void LoadFromSave(int id)
 	{
-		var data =  DB.LoadGame(id);
+		var data = DB.LoadGame(id);
 
 		Stats = data.Stats;
 		Instance = new PlayerVariables();
+		Instance.CurrentSaveId = id;
 
-		foreach(var savedPart in data.ActiveParts)
+		if (data.ActiveParts != null)
 		{
-			ShipPart part = PartsDicktionaty.ReconstructParts[savedPart.PartType];
-			part.randomness = savedPart.PartRandomness;
-			part.generateStats();
+			foreach (var savedPart in data.ActiveParts)
+			{
+				ShipPart part = PartsDicktionaty.ReconstructParts[savedPart.PartType].Duplicate() as ShipPart;
+				part.randomness = savedPart.PartRandomness;
+				part.GridPosition = new(savedPart.GridX, savedPart.GridY);
+				part.Initialize();
+				part.generateStats();
 
-            Instance.PlayerActiveParts.Add(part);
+				Instance.PlayerActiveParts.Add(part);
 
-        }
-        foreach (var savedPart in data.PassiveParts)
-        {
-            ShipPart part = PartsDicktionaty.ReconstructParts[savedPart.PartType];
-            part.randomness = savedPart.PartRandomness;
-            part.generateStats();
+			}
+		}
 
-            Instance.PlayerPassiveParts.Add(part);
+		if (data.PassiveParts != null)
+		{
+			foreach (var savedPart in data.PassiveParts)
+			{
+				ShipPart part = PartsDicktionaty.ReconstructParts[savedPart.PartType].Duplicate() as ShipPart;
+				part.randomness = savedPart.PartRandomness;
+				part.GridPosition = new(savedPart.GridX, savedPart.GridY);
+				GD.Print(part.GridPosition);
+				part.Initialize();
+				part.generateStats();
+				GD.Print(part.GridPosition);
 
-        }
-        foreach (var savedPart in data.CollectedParts)
-        {
-            ShipPart part = PartsDicktionaty.ReconstructParts[savedPart.PartType];
-            part.randomness = savedPart.PartRandomness;
-            part.generateStats();
+				Instance.PlayerPassiveParts.Add(part);
+				GD.Print(part.GridPosition);
 
-            Instance.PlayerCollectedParts.Add(part);
+			}
+		}
 
-        }
-    }
-	
+		if (data.CollectedParts != null)
+		{
+			foreach (var savedPart in data.CollectedParts)
+			{
+				ShipPart part = PartsDicktionaty.ReconstructParts[savedPart.PartType].Duplicate() as ShipPart;
+				part.randomness = savedPart.PartRandomness;
+				part.GridPosition = new(savedPart.GridX, savedPart.GridY);
+				part.Initialize();
+				part.generateStats();
+
+				Instance.PlayerCollectedParts.Add(part);
+
+			}
+		}
+
+	}
+
 	/// <summary>
 	/// Applies shield mitigation first, then armor mitigation to remaining hull damage.
 	/// </summary>
@@ -164,19 +189,20 @@ public partial class PlayerVariables : Node
 
 	public void RegenShield()
 	{
-		if(Stats.RegenCooldown > 0)
+		if (Stats.RegenCooldown > 0)
 		{
 			Stats.RegenCooldown -= 1;
 		}
-		else if(Stats.CurrentShield < Stats.MaxShield && Stats.Energy > 0)
+		else if (Stats.CurrentShield < Stats.MaxShield && Stats.Energy > 0)
 		{
 			Stats.CurrentShield += Stats.ShieldRegen;
 			Stats.Energy -= Stats.ShieldRegen;
-			if(Stats.CurrentShield > Stats.MaxShield)
+
+			if (Stats.CurrentShield > Stats.MaxShield)
 			{
 				Stats.CurrentShield = Stats.MaxShield;
 			}
-			if(Stats.Energy < 0)
+			if (Stats.Energy < 0)
 			{
 				Stats.Energy = 0;
 			}
@@ -185,10 +211,10 @@ public partial class PlayerVariables : Node
 
 	public void RegenEnergy()
 	{
-		if(Stats.Energy < Stats.MaxEnergy)
+		if (Stats.Energy < Stats.MaxEnergy)
 		{
 			Stats.Energy += Stats.EnergyGeneration;
-			if(Stats.Energy > Stats.MaxEnergy)
+			if (Stats.Energy > Stats.MaxEnergy)
 			{
 				Stats.Energy = Stats.MaxEnergy;
 			}
@@ -201,11 +227,11 @@ public partial class PlayerVariables : Node
 	/// </summary>
 	public void UseEnergy(float usage)
 	{
-		if(Stats.Energy > 0)
+		if (Stats.Energy > 0)
 		{
 			Stats.Energy -= usage;
 		}
-		if(Stats.Energy < 0)
+		if (Stats.Energy < 0)
 		{
 			Stats.Energy = 0;
 		}
@@ -213,11 +239,11 @@ public partial class PlayerVariables : Node
 
 	public void UseFuel(float usage)
 	{
-		if(Stats.Fuel > 0)
+		if (Stats.Fuel > 0)
 		{
 			Stats.Fuel -= usage;
 		}
-		if(Stats.Fuel < 0)
+		if (Stats.Fuel < 0)
 		{
 			Stats.Fuel = 0;
 		}
@@ -245,19 +271,19 @@ public partial class PlayerVariables : Node
 	// --------------------- managing the ship parts attatched and not attatched and activae and passive ---------------------
 
 	//adding a part to the ship
-	public void AddPartToShip(ShipPart part)    
+	public void AddPartToShip(ShipPart part)
 	{
-		if(part.isActive)
+		if (part.isActive)
 		{
 			PlayerActiveParts.Add(part);
 		}
-		if(!part.isActive)
+		if (!part.isActive)
 		{
 			PlayerPassiveParts.Add(part);
 			part.changeStats(true); //adds the part's stats to the player's stats
 		}
 		PlayerCollectedParts.Remove(part);
-		
+
 		//GD.Print($"Part moved!! moved {part} from collection to ship");//debug
 	}
 
@@ -269,7 +295,7 @@ public partial class PlayerVariables : Node
 		}
 		if (!part.isActive)
 		{
-            PlayerPassiveParts.Remove(part);
+			PlayerPassiveParts.Remove(part);
 			part.changeStats(false); //subtracts the part's stats from the player stats
 		}
 		PlayerCollectedParts.Add(part);
@@ -279,7 +305,7 @@ public partial class PlayerVariables : Node
 	public void AddLootToCollection(ShipPart[] array)
 	{
 		PlayerCollectedParts.AddRange(array);
-		
+
 
 		GD.Print($"added parts from loot {array} to collection");
 		//CheckForDebugItem(array);
@@ -289,16 +315,16 @@ public partial class PlayerVariables : Node
 	//if there's a DebugMultitool then I want it to test the other methods too just because I'm not making another testing scenario ^~^
 	private void CheckForDebugItem(ShipPart[] parts)
 	{
-	    foreach(ShipPart part in parts)
-	    {
-	        if(part is DebugMultitool debugItem)
-	        {
-	            GD.Print("Debug Multitool detected, beginning testing ");
-	            AddPartToShip(debugItem);
-				
-	            RemovePartFromShip(debugItem);
-	        }
-	    }
+		foreach (ShipPart part in parts)
+		{
+			if (part is DebugMultitool debugItem)
+			{
+				GD.Print("Debug Multitool detected, beginning testing ");
+				AddPartToShip(debugItem);
+
+				RemovePartFromShip(debugItem);
+			}
+		}
 	}
 
 	/// <summary>
@@ -308,21 +334,21 @@ public partial class PlayerVariables : Node
 	{
 		foreach (ShipPart part in PlayerActiveParts)
 		{
-			if (part is T) return true;			
+			if (part is T) return true;
 		}
 
 		foreach (ShipPart part in PlayerPassiveParts)
 		{
-			if (part is T) return true;			
+			if (part is T) return true;
 		}
 
 		return false;
 	}
-	
-    // each integer represents the amount of weapons equipped for that type of weapon, this will be changed by the equipped ShipParts of type Weapon
-    public int[] WeaponList = new int[7]
-    {
-        0,  // this index (0) represents the amount of start weapon the player has equipped (Plasma)
+
+	// each integer represents the amount of weapons equipped for that type of weapon, this will be changed by the equipped ShipParts of type Weapon
+	public int[] WeaponList = new int[7]
+	{
+		0,  // this index (0) represents the amount of start weapon the player has equipped (Plasma)
 		0,  // Arc 
 		0,  // Cannon
 		0,  // EMP
@@ -330,35 +356,44 @@ public partial class PlayerVariables : Node
 		0,  // Missile
 		0   // Torpedo
 	};
-    public void SaveGame()
-	{
-		SaveData save = new SaveData();
-		save.Stats = Stats;
 
-		//deconstruct the lists of parts into serializable bits
-		List<SavedPart> activeParts = new List<SavedPart>();
-		foreach(ShipPart part in PlayerActiveParts)
+	/// <summary>
+	/// Save the current game to the database.
+	/// </summary>
+	public void SaveGame()
+	{
+        SaveData save = new()
+        {
+            Stats = Stats,
+            ActiveParts = [],
+            PassiveParts = [],
+            CollectedParts = []
+        };
+
+        //deconstruct the lists of parts into serializable bits
+        List<SavedPart> activeParts = [];
+		foreach (ShipPart part in PlayerActiveParts)
 		{
 			activeParts.Add(part.SavePartVariables());
 		}
 
-		List<SavedPart> passiveParts = new List<SavedPart>();
-        foreach (ShipPart part in PlayerPassiveParts)
-        {
-            passiveParts.Add(part.SavePartVariables());
-        }
+		List<SavedPart> passiveParts = [];
+		foreach (ShipPart part in PlayerPassiveParts)
+		{
+			passiveParts.Add(part.SavePartVariables());
+		}
 
-        List<SavedPart> collectedParts = new List<SavedPart>();
-        foreach (ShipPart part in PlayerCollectedParts)
-        {
-            collectedParts.Add(part.SavePartVariables());
-        }
+		List<SavedPart> collectedParts = [];
+		foreach (ShipPart part in PlayerCollectedParts)
+		{
+			collectedParts.Add(part.SavePartVariables());
+		}
 
 		//put the serialized lists of shipParts into DB
 		save.ActiveParts.AddRange(activeParts);
 		save.PassiveParts.AddRange(passiveParts);
 		save.CollectedParts.AddRange(collectedParts);
 
-		DB.SaveGame("name of save" , save);
-    }
+		DB.UpdateSave(CurrentSaveId, save);
+	}
 }
