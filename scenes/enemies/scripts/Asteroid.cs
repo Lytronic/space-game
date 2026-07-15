@@ -25,11 +25,11 @@ public partial class Asteroid : RigidBody2D
 
 	public override void _Process(double delta)
 	{
-		if (Health <= 0.0f)
+		if (Health <= 0.0f) 
 		{
 		if(_alive)
 			{
-				Die();
+				Die(); // if health drops below 0 and the asteroid is still alive, die
 			}
 		}
 	}
@@ -39,14 +39,14 @@ public partial class Asteroid : RigidBody2D
 		Health -= amount;
 	}
 
-	private void Die()
+	private void Die() // function to initiate the asteroid's death sequence
 	{
 		GD.Print("Dying!");
 		_alive = false;
 		Explode();
 	}
 	
-	private async void Explode()
+	private async void Explode() // Explosion sequence initiation
 	{
 		GD.Print("Exploding!");
 		_asteroidSprite.Hide();
@@ -59,7 +59,7 @@ public partial class Asteroid : RigidBody2D
 		await ToSignal(_explosionSound, AudioStreamPlayer.SignalName.Finished);
 		Remove();
 	}
-	private void PlayExplosionSound()
+	private void PlayExplosionSound() // self explanatory
 	{
 		_explosionSound.Stream = GD.Load<AudioStream>("res://sfx/game/enemy/explosion_distant.mp3");
 		GD.Print(_explosionSound.Stream);

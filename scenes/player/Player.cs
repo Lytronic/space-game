@@ -55,6 +55,8 @@ public partial class Player : CharacterBody2D
 	private ProgressBar _playerAmmoBar;
 	private ProgressBar _playerFuelBar;
 
+	private bool _god;
+
 
 	// Healthy variables
 	public bool IsAlive = true;
@@ -139,6 +141,7 @@ public partial class Player : CharacterBody2D
 		//for player to be able to shoot
 		StartWithPlasmaWeapon();
 		
+		_god = false;
     }
 
     public override void _PhysicsProcess(double delta)
@@ -381,7 +384,10 @@ public partial class Player : CharacterBody2D
 	{
 		_damageTintCooldown = GetTree().CreateTimer(Mathf.Clamp(amount / 100.0f, 0.25f, 2.0f));
 		
-		//PlayerVariables.Instance.ApplyDamage(amount);
+		if(_god == false)
+		{
+			PlayerVariables.Instance.ApplyDamage(amount);
+		}
 	}
 
 	/// <summary>
@@ -514,6 +520,17 @@ public partial class Player : CharacterBody2D
 				partsManager.SwitchToWeapon(6);
 			}
 
+			if (keyEvent.Keycode == Key.O)
+			{
+				ToggleGodMode();
+			}
+			
 		}
+	}
+
+	private void ToggleGodMode()
+	{
+		_god = !_god;
+		GD.Print("Toggled Gode Mode! God Mode = " + _god);
 	}
 }
