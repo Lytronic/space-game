@@ -15,7 +15,7 @@ public partial class Mirror : ShipPart
     [Export] public override string SpriteTexturePath { get; set; } = "res://gfx/gui/construction/icon/armor/armor_mirror.png";
     [Export] public override string MenuTexturePath { get; set; } = "res://gfx/gui/construction/icon/armor/armor_mirror.png";
 
-	public new BitArray Shape = new(new bool[]{
+	public override BitArray Shape { get; set; } = new(new bool[]{
 		true, true, false,
 		true, true, false,
 		false, false, false

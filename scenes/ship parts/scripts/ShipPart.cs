@@ -28,7 +28,7 @@ public partial class ShipPart : Resource
 	public Vector2I GridPosition;
 
 	/// <value>Part form in the BuildMenu grid as a 3x3 BitArray.</value>
-	public BitArray Shape = new(new bool[]{
+	public virtual BitArray Shape { get; set; } = new(new bool[]{
 		true, true, true,
 		true, true, true,
 		true, true, true

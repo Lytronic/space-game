@@ -7,14 +7,16 @@ public partial class ItemSlot : Control
 	public Vector2I GridPosition;
 	
 	private Texture2D _textureFree;
-	private Texture2D _textureOccupied;
+	private Texture2D _textureCovered;
+	private Texture2D _textureHasItem;
 	private TextureRect _texture;
 
 	public override void _Ready()
 	{
 		_texture = GetNode<TextureRect>("TextureRect");
 		_textureFree = ResourceLoader.Load<Texture2D>("res://gfx/gui/menu/storage_slot.png");
-		_textureOccupied = ResourceLoader.Load<Texture2D>("res://gfx/gui/menu/storage_slot_occupied.png");
+		_textureCovered = ResourceLoader.Load<Texture2D>("res://gfx/gui/menu/storage_slot_occupied.png");
+		_textureHasItem = ResourceLoader.Load<Texture2D>("res://gfx/gui/menu/storage_slot_blocked.png");
 		_texture.Texture = _textureFree;
 
 		GetNode<Label>("Label").Text = GridPosition.ToString();
@@ -22,7 +24,18 @@ public partial class ItemSlot : Control
 
 	public override void _Process(double delta)
 	{
-		_texture.Texture = Covered() ? _textureOccupied : _textureFree;
+		if (HasItem)
+		{
+			_texture.Texture = _textureHasItem;
+		}
+		else if (Covered())
+		{
+			_texture.Texture = _textureCovered;
+		}
+		else
+		{
+			_texture.Texture = _textureFree;
+		}
 	}
 
 	/// <summary>
@@ -40,7 +53,8 @@ public partial class ItemSlot : Control
 			var overlaps = area.GetOverlappingAreas();
 			foreach (var o in overlaps)
 			{
-				if (o.GetParent() is not ItemSlot) return true;
+				if (o.GetParent() is not ItemSlot && o.GetNode<MenuShipPart>("../..").Grabbed)
+				 return true;
 			}
 		}
 

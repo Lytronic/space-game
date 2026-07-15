@@ -8,10 +8,10 @@ public partial class MenuShipPart : Control
 	[Export]
 	public ShipPart ShipPart;
 	public bool InGrid = false;
+	public bool Grabbed = false;
 	public Node Inventory;
 
 	private bool _hovered = false;
-	private bool _grabbed = false;
 	private TextureRect _gridTexture;
 	private TextureRect _menuTexture;
 	private Control _areas;
@@ -83,56 +83,56 @@ public partial class MenuShipPart : Control
 		
 		// Adjusting Area2D positions for parts that aren't centred (e.g. 2x3)
 
-		int n = 3;
-		bool[] rowHasTrue = new bool[n];
-		bool[] colHasTrue = new bool[n];
+		// int n = 3;
+		// bool[] rowHasTrue = new bool[n];
+		// bool[] colHasTrue = new bool[n];
 
-		for (int i = 0; i < n; i++)
-		{
-			// row i
-			bool rowAny = false;
-			for (int j = 0; j < n; j++)
-				rowAny |= ShipPart.Shape[i * n + j];
-			rowHasTrue[i] = rowAny;
+		// for (int i = 0; i < n; i++)
+		// {
+		// 	// row i
+		// 	bool rowAny = false;
+		// 	for (int j = 0; j < n; j++)
+		// 		rowAny |= ShipPart.Shape[i * n + j];
+		// 	rowHasTrue[i] = rowAny;
 
-			// column i
-			bool colAny = false;
-			for (int j = 0; j < n; j++)
-				colAny |= ShipPart.Shape[j * n + i];
-			colHasTrue[i] = colAny;
-		}
+		// 	// column i
+		// 	bool colAny = false;
+		// 	for (int j = 0; j < n; j++)
+		// 		colAny |= ShipPart.Shape[j * n + i];
+		// 	colHasTrue[i] = colAny;
+		// }
 
-		// check for empty rows/columns
-		if (!rowHasTrue[0])
-		{
-			offset.Y -= BuildMenu.GridSpacing / 2;
-		}
+		// // check for empty rows/columns
+		// if (!rowHasTrue[0])
+		// {
+		// 	offset.Y -= BuildMenu.GridSpacing;
+		// }
 
-		if (!rowHasTrue[2])
-		{
-			offset.Y += BuildMenu.GridSpacing / 2;
-		}
+		// if (!rowHasTrue[2])
+		// {
+		// 	offset.Y += BuildMenu.GridSpacing;
+		// }
 
-		if (!colHasTrue[0])
-		{
-			offset.X -= BuildMenu.GridSpacing / 2;
-		}
+		// if (!colHasTrue[0])
+		// {
+		// 	offset.X -= BuildMenu.GridSpacing;
+		// }
 
-		if (!colHasTrue[2])
-		{
-			offset.X += BuildMenu.GridSpacing / 2;
-		}
+		// if (!colHasTrue[2])
+		// {
+		// 	offset.X += BuildMenu.GridSpacing;
+		// }
 
-		// apply final offset
-		foreach (Area2D area in _areas.GetChildren().Cast<Area2D>())
-		{
-			area.Position += offset;
-		}
+		// // apply final offset
+		// foreach (Area2D area in _areas.GetChildren().Cast<Area2D>())
+		// {
+		// 	// area.Position += offset;
+		// }
 	}
 
 	public override void _Process(double delta)
 	{
-		if (_grabbed)
+		if (Grabbed)
 		{
 			GlobalPosition = GetGlobalMousePosition() - _gridTexture.Size / 2;
 		}
@@ -175,7 +175,7 @@ public partial class MenuShipPart : Control
 
 	public void Grab()
 	{
-		_grabbed = true;
+		Grabbed = true;
 		_gridTexture.Show();
 		_menuTexture.Hide();
 
@@ -207,7 +207,7 @@ public partial class MenuShipPart : Control
 
 	public void Drop()
 	{
-		_grabbed = false;
+		Grabbed = false;
 		if (!CanDrop())
 		{
 			_gridTexture.Hide();
