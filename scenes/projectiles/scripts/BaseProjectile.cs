@@ -113,11 +113,11 @@ public partial class BaseProjectile : Area2D
 		{
 			owner = partsManager.player;
 		}
-        _owner = owner;
+		_owner = owner;
 		
 
 
-        Node projectileParent = PlayerVariables.Space;
+		Node projectileParent = PlayerVariables.Space;
 		if (projectileParent == null && owner != null)
 			projectileParent = owner.GetTree()?.CurrentScene;
 

@@ -8,6 +8,7 @@ public partial class Asteroid : RigidBody2D
 	private AudioStreamPlayer2D _explosionSound;
 	private Sprite2D _asteroidSprite;
 	private GpuParticles2D _explosionParticles;
+	private bool _alive;
 	public float Health = 1000;
 
     public override void _Ready()
@@ -17,13 +18,20 @@ public partial class Asteroid : RigidBody2D
 		_explosionSound = GetNode<AudioStreamPlayer2D>("AudioStreamPlayer2D");
         _asteroidSprite = GetChild<Sprite2D>(0);
 		_explosionParticles.Hide();
+		_alive = true;
 		
 
     }
 
 	public override void _Process(double delta)
 	{
-		if (Health <= 0.0f) Die();
+		if (Health <= 0.0f)
+		{
+		if(_alive)
+			{
+				Die();
+			}
+		}
 	}
 
 	public void TakeDamage(float amount)
@@ -34,11 +42,11 @@ public partial class Asteroid : RigidBody2D
 	private void Die()
 	{
 		GD.Print("Dying!");
+		_alive = false;
 		Explode();
-		//GetTree().CreateTimer(5.91f).Timeout = Remove();
 	}
 	
-	private void Explode()
+	private async void Explode()
 	{
 		GD.Print("Exploding!");
 		_asteroidSprite.Hide();
@@ -48,6 +56,8 @@ public partial class Asteroid : RigidBody2D
 		_explosionParticles.Restart();
 		_explosionParticles.Emitting = true;
 		PlayExplosionSound();
+		await ToSignal(_explosionSound, AudioStreamPlayer.SignalName.Finished);
+		Remove();
 	}
 	private void PlayExplosionSound()
 	{
