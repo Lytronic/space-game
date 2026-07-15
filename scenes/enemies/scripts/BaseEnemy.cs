@@ -35,8 +35,11 @@ public partial class BaseEnemy : CharacterBody2D
 	private Sprite2D _sprite;
 	private CollisionPolygon2D _collisionPolygon;
 
+	private SoundManager _soundManager;
+
 	public override void _Ready()
 	{
+		_soundManager = GetNode<SoundManager>("/root/SoundManager");
 		_explosionSound = GetNode<AudioStreamPlayer2D>("ExplosionSound2D");
 		_explosion = GetNode<GpuParticles2D>("ExplosionParticle");
 		_sprite = GetNode<Sprite2D>("Sprite2D");
@@ -129,6 +132,8 @@ public partial class BaseEnemy : CharacterBody2D
 			}
 		}
 		_explosion.Show();
+		_explosionSound.VolumeDb = 0;
+		_explosionSound.VolumeLinear *= _soundManager.masterVolume / 100;
 		_explosionSound.Stream = GD.Load<AudioStream>("res://sfx/game/enemy/explosion_distant.mp3");
 		_explosionSound.Play();
 		_collisionPolygon.SetDeferred(CollisionPolygon2D.PropertyName.Disabled, true);
