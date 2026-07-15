@@ -80,6 +80,7 @@ The Empire does not waste resources fielding space stations merely for defensive
 ## Mobile
 
 ### The Destroyer
+The Federations warships are the first line of defense against threats the Factions might face. Its strong armor and shield make for a strong opponent for any hostile ships or bases. They are equipped with Missiles, Shells and a powerful arc beam that can immobilize enemy ships.
 
 <img src="https://raw.githubusercontent.com/lytronic/space-game/main/gfx/game/boss/boss_fff.png" width="200">
 
@@ -88,15 +89,16 @@ The Empire does not waste resources fielding space stations merely for defensive
 |150    |2500    |2000      |Missiles (x4)        |Shells             |Arc                  |
 
 ### The Dreadnought
+The Empire's Warship, like its station is a flying fortress, capable of delivering heavy firepower to even the most remote areas of the galaxy. A force to be reckoned with, the Dreadnought sports torpedos, shells and a powerful Laser.
 
 <img src="https://raw.githubusercontent.com/lytronic/space-game/main/gfx/game/boss/boss_eee.png" width="200">
 
 |SPEED  |HEALTH |SHIELD |PRIMARY WEAPON |SECONDARY WEAPON   |TERTIARY WEAPON    |
 |:-----:|:-----:|:-----:|:-------------:|:-----------------:|:-----------------:|
-|100    |3000    |1500      |Torpedo        |Shells (x3)             |/Laser                  |
+|100    |3000    |1500      |Torpedo        |Shells (x3)             |Laser                  |
 
 ### The Battlecruiser
-
+The Cooperative fields mutliple retrofitted Superyachts, armed with some of the best weapons and shield technology the galaxy can provide. It has access to Plasma weaponry, missiles and a powerful laser.
 
 <img src="https://raw.githubusercontent.com/lytronic/space-game/main/gfx/game/boss/boss_ccc.png" width="200">
 
