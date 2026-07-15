@@ -18,7 +18,7 @@ public partial class Game : Node2D
 	public Array<string> Enemies;
 
 	private const float Interval = 1.0f;
-    private float _timer = 0.0f;
+	private float _timer = 0.0f;
 
 	private PackedScene _asteroidScene;
 	private Array<PackedScene> _enemyScenes = [];
@@ -67,12 +67,12 @@ public partial class Game : Node2D
 		}
 		_timer += (float)delta;
 
-        if (_timer >= Interval)
-        {
-            _timer -= Interval;
-           	PlayerVariables.Instance.RegenShield();
+		if (_timer >= Interval)
+		{
+			_timer -= Interval;
+		   	PlayerVariables.Instance.RegenShield();
 			PlayerVariables.Instance.RegenEnergy();
-        }
+		}
 	}
 
 	private void SetupRound()
@@ -87,7 +87,7 @@ public partial class Game : Node2D
 		PlayerVariables.Stats.Energy = PlayerVariables.Stats.MaxEnergy;
 
 		SpawnEnemyWave(_enemiesSpawned);
-		
+		_soundManager.Fight();
 	}
 
 	private void SpawnAsteroids()
@@ -153,30 +153,6 @@ public partial class Game : Node2D
 			_enemyCount++;
 		}
 	}
-
-	/*
-	private void SpawnBossStation(BaseStation Sboss)
-	{
-		Node2D player = GetNodeOrNull<Node2D>("Player");
-
-	// private void SpawnBossStation(BaseStation Sboss)
-	// {
-		// Node2D player = GetNodeOrNull<Node2D>("Player");
-		//enemy.Killed += () => _enemyCount--;
-	}
-	// }
-
-
-	private void SpawnBossWarship(BaseWarship Wboss)
-	{
-		Node2D player = GetNodeOrNull<Node2D>("Player");
-	}
-	*/
-
-	// private void SpawnBossWarship(BaseWarship Wboss)
-	// {
-		// Node2D player = GetNodeOrNull<Node2D>("Player");
-	// }
 
 	public async void OpenBuildMenuAfterDelay(float delay)
 	{

@@ -196,7 +196,9 @@ public partial class PlayerVariables : Node
 	}
 
 
-	// IMPORTANT! This function only calculates how much energy an action uses, check if Energy != 0 before calling it!
+	/// <summary>
+	/// IMPORTANT! This function only calculates how much energy an action uses, check if Energy != 0 before calling it!
+	/// </summary>
 	public void UseEnergy(float usage)
 	{
 		if(Stats.Energy > 0)

@@ -9,3 +9,6 @@ DamagePerSecond = 0.0
 EnergyPerSecond = 0.0
 Range = 0.0
 RayWidth = 0.0
+StunTime = 0.0
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." index="0" unique_id=626918186]

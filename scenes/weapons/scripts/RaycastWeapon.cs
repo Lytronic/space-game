@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Xml.Serialization;
 
 /// <summary>
 /// Weapon that casts a ray to where it's aimed and applies continuous damage there.
@@ -13,12 +14,16 @@ public partial class RaycastWeapon : BaseWeapon
 	[Export] public float Range;
 	[Export] public float RayWidth;
 	[Export] public float StunTime = 0.0f;
+	[Export] public string FiringSoundPath;
+	public AudioStreamPlayer2D FiringSoundPlayer;
 
 	// whether the weapon is currently shooting
 	private bool _active = false;
 	private bool _parentIsPartsManager = false;
 	private Vector2 _targetPos;
 	private Vector2 _direction;
+
+	private SoundManager _soundManager;
 
 	public override void _Ready()
 	{
@@ -27,6 +32,8 @@ public partial class RaycastWeapon : BaseWeapon
 		{
 			_parentIsPartsManager = true;
 		}
+		FiringSoundPlayer = GetNode<AudioStreamPlayer2D>("AudioStreamPlayer2D");
+		_soundManager = GetNode<SoundManager>("/root/SoundManager");
 	}
 
 	public override void _Draw()
@@ -117,5 +124,28 @@ public partial class RaycastWeapon : BaseWeapon
 		_active = false;
 
 		QueueRedraw();
+	}
+
+	public async void FireSound()
+	{
+		if(_active)
+		{
+			if(FiringSoundPlayer.Playing)
+			{
+				await ToSignal(FiringSoundPlayer, AudioStreamPlayer.SignalName.Finished);
+				_playFiringSound();
+			}
+			else
+			{
+				_playFiringSound();
+			}
+		}
+	}
+
+	private void _playFiringSound()
+	{
+		FiringSoundPlayer.Stream = GD.Load<AudioStream>(FiringSoundPath);
+
+		FiringSoundPlayer.Play();
 	}
 }

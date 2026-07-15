@@ -7,8 +7,8 @@ public partial class SoundManager : Node2D
 {
 
 /// <summary> EXPLANATION FOR ADDING SOUNDS TO STUFF:
-///	NON-2D: Create a private variable called _soundManager in whatever script you want to make the sound. In the script's _Ready write "_soundManager = GetNode("/root/SoundManager");"
-/// and then call the sound you want to use by finding out the index of it in the array below and write this line of code: "_soundManager.Call("PlaySound", 0, 1);" with 0 being the index of the soundManager and 1 being the sound being played </summary>
+///	NON-2D: Create a private variable called _soundManager in whatever script you want to make the sound. In the script's _Ready write "_soundManager = GetNode<SoundManager>("/root/SoundManager");"
+/// and then call the sound you want to use by finding out the index of it in the array below and write this line of code: "_soundManager.PlaySound(0, 1);" with 0 being the index of the soundManager and 1 being the sound being played </summary>
 
 	string[] tracks; // Array for track filepaths
 	string[] sounds; // Array for sound filepaths
@@ -72,6 +72,7 @@ public partial class SoundManager : Node2D
 			SoundPlayerArray[i].VolumeLinear = ((SettingsEntry.Float)SettingsModel.Instance.Settings["audio.master_volume"]).Value / 100;
 		}
 		_musicVolume = ((SettingsEntry.Float)SettingsModel.Instance.Settings["audio.music_volume"]).Value / 100;
+		_musicPlayer.VolumeLinear = _musicVolume;
 	}
 
 	public override void _Process(double delta)
@@ -87,7 +88,9 @@ public partial class SoundManager : Node2D
 	public void PlayTrack(int track) { // function to play the music
 
 		_musicPlayer.Stream = GD.Load<AudioStream>(tracks[track]);
-		
+
+		_musicVolume = ((SettingsEntry.Float)SettingsModel.Instance.Settings["audio.music_volume"]).Value / 100;
+
 		_musicPlayer.Play();
 
 	}

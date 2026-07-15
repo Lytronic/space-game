@@ -13,4 +13,5 @@ EnergyPerSecond = 15.0
 Range = 200.0
 RayWidth = 5.0
 StunTime = 5.0
+FiringSoundPath = "res://sfx/game/weapons/arc.mp3"
 Cooldown = 10.0

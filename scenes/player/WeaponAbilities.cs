@@ -62,7 +62,7 @@ public partial class WeaponAbilities : HBoxContainer
 		Array.Clear(Abilities, 0, Abilities.Length);
 		if(true)
 		{
-			ChildSprites[0].Show();
+			//ChildSprites[0].Show();
 			ChildSprites[1].Show();
 			//Abilities[_updater] = 
 			_updater += 2;
