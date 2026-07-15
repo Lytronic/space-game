@@ -18,11 +18,16 @@ public partial class BaseEnemy : CharacterBody2D
 
 	//the most basic and necessary enemy stats
 	[Export] public float Speed = 125.0f;
-	[Export] public int Health = 30;
+	[Export] public float Health = 30;
+	[Export] public float MaxShield = 0;
+	[Export] public float ShieldRegen = 0;
 	[Export] public float Damage = 8.0f;
 	[Export] public float Resistance = 0.1f;
 	[Export] public int ScoreValue = 100;
 	[Export] public int MinimumRound = 0;
+
+	private float CurrentShield;
+	private int RegenCooldown;
 
 	public SceneTreeTimer StunTimer;
 
@@ -55,7 +60,10 @@ public partial class BaseEnemy : CharacterBody2D
 
 		RescueFromAsteroid();
 	}
-
+	public override void _PhysicsProcess(double delta)
+	{
+		RegenShield();
+	}
 	public virtual void CreateLootTable()
 	{
 
@@ -112,8 +120,13 @@ public partial class BaseEnemy : CharacterBody2D
 
 		float mitigatedDamage = damage * (1.0f - Mathf.Clamp(Resistance, 0.0f, 0.95f));
 		int finalDamage = Mathf.Max(1, Mathf.CeilToInt(mitigatedDamage));
-		Health -= finalDamage;
-
+		CurrentShield -= finalDamage;
+		if(CurrentShield < 0)
+		{
+			Health += CurrentShield;
+			CurrentShield = 0;
+		}
+		RegenCooldown = 10;
 		if (Health <= 0)
 			Die();
 	}
@@ -198,6 +211,21 @@ public partial class BaseEnemy : CharacterBody2D
 		{
 			GlobalPosition += GlobalPosition.Normalized() * 10.0f;
 			result = spaceState.IntersectShape(query);
+		}
+	}
+	public void RegenShield()
+	{
+		if(RegenCooldown > 0)
+		{
+			RegenCooldown -= 1;
+		}
+		else if(CurrentShield < MaxShield)
+		{
+			CurrentShield += ShieldRegen;
+			if(CurrentShield > MaxShield)
+			{
+				CurrentShield = MaxShield;
+			}
 		}
 	}
 }

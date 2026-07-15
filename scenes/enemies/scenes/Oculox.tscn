@@ -16,6 +16,8 @@ scale_max = 0.04
 enemyType = "Oculox"
 Speed = 300.0
 Health = 100
+MaxShield = 300.0
+ShieldRegen = 10.0
 MinimumRound = 2
 metadata/_edit_horizontal_guides_ = [-47.0, -40.0, -26.0, 21.0, 16.0, 10.0]
 

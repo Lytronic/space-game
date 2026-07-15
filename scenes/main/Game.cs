@@ -54,6 +54,7 @@ public partial class Game : Node2D
 		SetupRound();
 
 		_soundManager.StartFlightNoise();
+		PlayerVariables.Stats.RegenCooldown = 0;
 	}
 
 	public override void _Process(double delta)

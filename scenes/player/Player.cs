@@ -78,6 +78,8 @@ public partial class Player : CharacterBody2D
 
 	// the parts manager holds on to the weapon nodes
 	public PartsManager partsManager;
+
+	private CollisionShape2D _collider;
 	public override void _Ready()
 	{
 		// Assign user interfaces

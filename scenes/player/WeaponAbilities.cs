@@ -53,6 +53,7 @@ public partial class WeaponAbilities : HBoxContainer
 		}
 		UpdateAbilities();
 		_weaponsControls.updateControls();
+		ChangeAbility(1);
 	}
 
 	

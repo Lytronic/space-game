@@ -159,6 +159,7 @@ public partial class PlayerVariables : Node
 
 		if (remainingDamage > 0.0f)
 			Stats.CurrentHealth = Mathf.Clamp(Stats.CurrentHealth - remainingDamage / armorToughness, 0.0f, Stats.MaxHealth);
+		Stats.RegenCooldown = 10;
 	}
 
 	public void RegenShield()
@@ -171,7 +172,6 @@ public partial class PlayerVariables : Node
 		{
 			Stats.CurrentShield += Stats.ShieldRegen;
 			Stats.Energy -= Stats.ShieldRegen;
-			GD.Print("Regening Shield");
 			if(Stats.CurrentShield > Stats.MaxShield)
 			{
 				Stats.CurrentShield = Stats.MaxShield;

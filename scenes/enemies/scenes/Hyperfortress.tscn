@@ -25,7 +25,9 @@ scale_max = 0.79999995
 
 [node name="CharacterBody2D" unique_id=217211211 instance=ExtResource("1_uof8h")]
 Speed = 250.0
-Health = 100
+Health = 200.0
+MaxShield = 200.0
+ShieldRegen = 7.0
 ScoreValue = 50
 MinimumRound = 3
 metadata/_edit_horizontal_guides_ = [-11.0, -19.0, 5.0]

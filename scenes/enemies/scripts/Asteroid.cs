@@ -10,6 +10,7 @@ public partial class Asteroid : RigidBody2D
 	private GpuParticles2D _explosionParticles;
 	private bool _alive;
 	public float Health = 1000;
+	private CollisionShape2D _collider;
 
     public override void _Ready()
     {
@@ -19,8 +20,8 @@ public partial class Asteroid : RigidBody2D
         _asteroidSprite = GetChild<Sprite2D>(0);
 		_explosionParticles.Hide();
 		_alive = true;
-		
-
+		_collider = GetNode<CollisionShape2D>("CollisionShape2D");
+		_collider.Disabled = false;
     }
 
 	public override void _Process(double delta)
@@ -41,15 +42,14 @@ public partial class Asteroid : RigidBody2D
 
 	private void Die() // function to initiate the asteroid's death sequence
 	{
-		GD.Print("Dying!");
 		_alive = false;
 		Explode();
 	}
 	
 	private async void Explode() // Explosion sequence initiation
 	{
-		GD.Print("Exploding!");
 		_asteroidSprite.Hide();
+		_collider.Disabled = true;
 		_explosionParticles.Texture = _asteroidSprite.Texture;
 		_explosionParticles.Show();
 		_explosionParticles.OneShot = true;
