@@ -140,6 +140,7 @@ public partial class MenuShipPart : Control
 		}
 		else if (InGrid)
 		{
+			GD.Print(ShipPart.GridPosition);
 			Position = _grid.GlobalPosition + (new Vector2(ShipPart.GridPosition.X, ShipPart.GridPosition.Y) * BuildMenu.GridSpacing);
 		}
 	}

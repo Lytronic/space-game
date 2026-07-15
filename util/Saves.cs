@@ -27,17 +27,11 @@ public partial struct SaveData
 /// Ship parts are serialised separately into this object
 /// </summary>
 [MemoryPackable]
-public partial class SavedPart
+public partial class SavedPart(string partType, float partRandomness, int gridX, int gridY)
 {
-	public string PartType { get; }
-	public float PartRandomness { get; }
-	public Vector2I GridPosition;
-
-    public SavedPart (string partType , float partRandomness)
-	{
-		PartType = partType;
-		PartRandomness = partRandomness;
-	}
-
+    public string PartType { get; } = partType;
+    public float PartRandomness { get; } = partRandomness;
+    public int GridX { get; } = gridX;
+    public int GridY { get; } = gridY;
 }
 
