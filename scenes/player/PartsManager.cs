@@ -30,9 +30,27 @@ public partial class PartsManager : Node2D
 	public void SwitchToWeapon(int weaponType)
 	{
 		int amount = PlayerVariables.Instance.WeaponList[weaponType];
-        GD.Print($"switched weapoon to: {weaponType}");
-        player.Weapon = Weapons[weaponType];
+		if (amount > 0)
+		{
+            GD.Print($"switched weapoon to: {weaponType}");
+            player.Weapon = Weapons[weaponType];
+			
+			if(Weapons[weaponType] is ProjectileLauncher weapon)
+			{
+				//GD.Print($"weapon : {weapon} | Weapons : {Weapons[weaponType]}");
+				weapon.Count = amount;
+				weapon.Spread = GD.Randf();
+			}
+			if(Weapons[weaponType] is RaycastWeapon ray)
+			{
+				ray.DamagePerSecond *= amount;
+				ray.EnergyPerSecond *= amount;
+			}
+		}
+		else { GD.Print("no weaponj of that type"); }
+
 		
+
 	}
 
 	//instantiates all the weapons
