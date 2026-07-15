@@ -19,7 +19,7 @@ public partial class RaycastWeapon : BaseWeapon
 
 	// whether the weapon is currently shooting
 	private bool _active = false;
-	private bool _parentIsPartsManager = false;
+	private Node _parent;
 	private Vector2 _targetPos;
 	private Vector2 _direction;
 
@@ -28,12 +28,9 @@ public partial class RaycastWeapon : BaseWeapon
 	public override void _Ready()
 	{
 		CooldownTimer = GetTree().CreateTimer(0.0f);
-		if (GetParent() is PartsManager)
-		{
-			_parentIsPartsManager = true;
-		}
 		FiringSoundPlayer = GetNode<AudioStreamPlayer2D>("AudioStreamPlayer2D");
 		_soundManager = GetNode<SoundManager>("/root/SoundManager");
+		_parent = GetParent();
 	}
 
 	public override void _Draw()
@@ -59,7 +56,7 @@ public partial class RaycastWeapon : BaseWeapon
 	{
 		if (_active)
 		{
-			if (_parentIsPartsManager)
+			if (_parent is PartsManager)
 			{
 				float energyUse = EnergyPerSecond * (float)delta;
 				if (energyUse > PlayerVariables.Stats.Energy)
@@ -71,14 +68,14 @@ public partial class RaycastWeapon : BaseWeapon
 				{
 					PlayerVariables.Instance.UseEnergy(energyUse);
 				}
-			}
+		}
 			
 			var spaceState = GetWorld2D().DirectSpaceState;
 
 			Vector2 rayEnd = GlobalPosition + (_direction * Range);
 
 			var query = PhysicsRayQueryParameters2D.Create(GlobalPosition, rayEnd);
-			query.Exclude = [ GetParent<PartsManager>().player.GetRid() ];
+			query.Exclude = [ _parent is PartsManager pm ? pm.player.GetRid() : ((CollisionObject2D)_parent).GetRid() ];
 			query.CollideWithAreas = true;
 		
 			var result = spaceState.IntersectRay(query);
