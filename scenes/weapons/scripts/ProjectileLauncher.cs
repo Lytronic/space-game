@@ -47,7 +47,7 @@ public partial class ProjectileLauncher : BaseWeapon
 		for (int i = 1; i <= Count; i++)
 		{
 			BaseProjectile projectile = _projectileScene.Instantiate<BaseProjectile>();
-			projectile.Launch((projectile.Damage + baseDamage) * modifier, projectile.Speed, direction.Rotated((-(Spread / Count) + i * (Spread / Count)) / Mathf.Tau), GlobalPosition, parent is not Player, parent);
+			projectile.Launch((projectile.Damage + baseDamage) * modifier, projectile.Speed, direction.Rotated((-(Spread / Count) + i * (Spread / Count)) / Mathf.Tau), GlobalPosition, parent is not PartsManager, parent);
 		}
 		
 		CooldownTimer = GetTree().CreateTimer(Cooldown);

@@ -335,6 +335,7 @@ public partial class Player : CharacterBody2D
 		WeaponPartPlasma startWeapon = new();
 		PlayerVariables.Instance.PlayerActiveParts.Add(startWeapon);
 		startWeapon.changeStats(true);
+		partsManager.SwitchToWeapon(0);
 	}
 
 	private void UpdateWeapon(float dt)

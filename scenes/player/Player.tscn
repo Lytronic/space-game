@@ -7,7 +7,6 @@
 [ext_resource type="Material" uid="uid://b4oofdtxch87f" path="res://gfx/materials/explosion_canvas.tres" id="5_180ig"]
 [ext_resource type="Texture2D" uid="uid://d2c3gkua0wlbx" path="res://gfx/game/particle/explosion_grid.png" id="6_20koh"]
 [ext_resource type="Material" uid="uid://gosildff47nc" path="res://gfx/materials/explosion_process.tres" id="7_ov1oi"]
-[ext_resource type="Script" uid="uid://bfrt21xpdr02s" path="res://scenes/weapons/scripts/ProjectileLauncher.cs" id="8_v42im"]
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_uoqog"]
 particle_flag_disable_z = true
@@ -19,7 +18,7 @@ scale_max = 0.19999999
 
 [node name="Player" type="CharacterBody2D" unique_id=2075203121 node_paths=PackedStringArray("Weapon")]
 script = ExtResource("1_v42im")
-Weapon = NodePath("ProjectileLauncher")
+Weapon = NodePath("")
 
 [node name="EngineParticles0" type="GPUParticles2D" parent="." unique_id=138909285]
 position = Vector2(3, 7)
@@ -75,9 +74,3 @@ speed_scale = 3.9
 explosiveness = 1.0
 local_coords = true
 process_material = ExtResource("7_ov1oi")
-
-[node name="ProjectileLauncher" type="Node2D" parent="." unique_id=1979817217]
-script = ExtResource("8_v42im")
-ProjectileScene = "uid://3gkk6vgooyrt"
-Cooldown = 0.1
-metadata/_custom_type_script = "uid://bfrt21xpdr02s"
