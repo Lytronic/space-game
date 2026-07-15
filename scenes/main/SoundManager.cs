@@ -73,6 +73,7 @@ public partial class SoundManager : Node2D
 		}
 		_musicVolume = ((SettingsEntry.Float)SettingsModel.Instance.Settings["audio.music_volume"]).Value / 100;
 		_musicPlayer.VolumeLinear = _musicVolume;
+		masterVolume = ((SettingsEntry.Float)SettingsModel.Instance.Settings["audio.master_volume"]).Value;
 	}
 
 	public override void _Process(double delta)

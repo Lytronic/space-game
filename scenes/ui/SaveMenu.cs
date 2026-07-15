@@ -1,6 +1,7 @@
 using Godot;
 using System;
 
+namespace Microgravity.util;
 public partial class SaveMenu : HBoxContainer
 {
 	private LineEdit _saveFileName;
@@ -15,12 +16,15 @@ public partial class SaveMenu : HBoxContainer
 		};
 		GetNode<TextureButton>("VBoxContainerRight/SaveListBg/NewGameButton").Pressed += () => {
 				_soundManager.PlaySound(0,0);
-				/*var vars = new Stats
+				var vars = new Stats
 				{
 					// change something so we can identify this object when we load a game with it
-					Score = 1290,
-					CurrentHealth = 67.0f,
-					Round = 123,
+					Score = 0,
+					CurrentHealth = PlayerVariables.Stats.MaxHealth,
+					CurrentShield = PlayerVariables.Stats.MaxShield,
+					Energy = PlayerVariables.Stats.MaxEnergy,
+					Fuel = PlayerVariables.Stats.MaxFuel,
+					Round = 1,
 				};
 
 				var data = new SaveData
@@ -29,14 +33,14 @@ public partial class SaveMenu : HBoxContainer
 					ActiveParts = [ new SavedPart("WeaponPartArc", 1.0f) ]
 				};
 
-				DB.SaveGame(_saveFileName.Text, data);*/
+				DB.SaveGame(_saveFileName.Text, data);
 				GetTree().ChangeSceneToFile("res://scenes/main/game.tscn");
 			};
 			
 
 		_saveFileName = GetNode<LineEdit>("VBoxContainerRight/SaveListBg/SaveFileName");
 		_CurrentDateandTime = Time.GetDatetimeStringFromSystem();
-		_saveFileName.Text = "MICROGRAVITY-SAVE-" + _CurrentDateandTime;
+		_saveFileName.Text = "SAVE-" + _CurrentDateandTime;
 	}
 
 	
