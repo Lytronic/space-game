@@ -37,8 +37,7 @@ public partial class GameMenu : HBoxContainer
 		};
 		GetNode<TextureButton>("VBoxContainerRight/TextureRect/NewGame").Pressed += () => {
 			_soundManager.PlaySound(0,0);
-			_soundManager.Fight();
-			GetTree().ChangeSceneToFile("res://scenes/main/game.tscn");
+			GetTree().ChangeSceneToFile("res://scenes/ui/SaveMenu.tscn");
 		};
 	}
 

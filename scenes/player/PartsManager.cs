@@ -29,7 +29,7 @@ public partial class PartsManager : Node2D
 
 	public void SwitchToWeapon(int weaponType)
 	{
-        GD.Print($"switched weapoon to: {weaponType}");
+        GD.Print($"switched weapoon to: {weaponType} " + Weapons[weaponType]);
         player.Weapon = Weapons[weaponType];
 		
 	}

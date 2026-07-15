@@ -381,7 +381,7 @@ public partial class Player : CharacterBody2D
 	{
 		_damageTintCooldown = GetTree().CreateTimer(Mathf.Clamp(amount / 100.0f, 0.25f, 2.0f));
 		
-		PlayerVariables.Instance.ApplyDamage(amount);
+		//PlayerVariables.Instance.ApplyDamage(amount);
 	}
 
 	/// <summary>
@@ -489,31 +489,31 @@ public partial class Player : CharacterBody2D
 	{
 		if (@event is InputEventKey keyEvent && keyEvent.Pressed && !keyEvent.Echo)
 		{
-			if (keyEvent.Keycode == Key.Q)
+			if (keyEvent.Keycode == Key.Key1)
 			{
 				partsManager.SwitchToWeapon(0);
 			}
-			if (keyEvent.Keycode == Key.Key1)
+			if (keyEvent.Keycode == Key.Key2)
 			{
 				partsManager.SwitchToWeapon(1);
 			}
-			if (keyEvent.Keycode == Key.Key2)
+			if (keyEvent.Keycode == Key.Key3)
 			{
 				partsManager.SwitchToWeapon(2);
 			}
-			if (keyEvent.Keycode == Key.Key3)
+			if (keyEvent.Keycode == Key.Key4)
 			{
 				partsManager.SwitchToWeapon(3);
 			}
-			if (keyEvent.Keycode == Key.Key4)
+			if (keyEvent.Keycode == Key.Key5)
 			{
 				partsManager.SwitchToWeapon(4);
 			}
-			if (keyEvent.Keycode == Key.Key5)
+			if (keyEvent.Keycode == Key.Key6)
 			{
 				partsManager.SwitchToWeapon(5);
 			}
-			if (keyEvent.Keycode == Key.Key6)
+			if (keyEvent.Keycode == Key.Key7)
 			{
 				partsManager.SwitchToWeapon(6);
 			}

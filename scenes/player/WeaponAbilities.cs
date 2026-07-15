@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.ComponentModel;
 
 public partial class WeaponAbilities : HBoxContainer
 {
@@ -22,15 +23,19 @@ public partial class WeaponAbilities : HBoxContainer
 	[Export] public Texture2D TextureEMPOff;
 
 	public int selectedAbilityNr;
-	public ShipPart selectedAbilityName;
+	public BaseWeapon selectedAbilityName;
 
-	public ShipPart[] Abilities; // Array for the order of abilities
+	public BaseWeapon[] Abilities; // Array for the order of abilities
 	public TextureRect[] ChildSprites;
 
+	private Player _player;
+	private PartsManager _partsManager;
 
 	public override void _Ready()
 	{
-		
+		_player = GetNode<Player>("/root/game/Player");
+		_partsManager = GetNode<PartsManager>("/root/game/Player/PartsManager");
+		GD.Print(_player);
 		foreach (Node child in GetChildren()) // Hide the abilities without adding them to an array
 		{
 			if (child is Control control)
@@ -38,7 +43,7 @@ public partial class WeaponAbilities : HBoxContainer
 				control.Hide();
 			}
 		}	
-		Abilities = new ShipPart[8];
+		Abilities = new BaseWeapon[8];
 		ChildSprites = new TextureRect[8];
 		for (int i = 0; i < ChildSprites.Length; i++)
 		{
@@ -58,14 +63,14 @@ public partial class WeaponAbilities : HBoxContainer
 	// Function to update the ability hud
 	private void UpdateAbilities()
 	{
-		var _updater = 0;
+		var _updater = 1;
 		Array.Clear(Abilities, 0, Abilities.Length);
 		if(true)
 		{
 			//ChildSprites[0].Show();
 			ChildSprites[1].Show();
-			//Abilities[_updater] = 
-			_updater += 2;
+			Abilities[_updater] = _partsManager.Weapons[0];
+			_updater += 1;
 		}
 		else
 		{
@@ -75,21 +80,163 @@ public partial class WeaponAbilities : HBoxContainer
 		if(true)
 		{
 			ChildSprites[2].Show();
-			//Abilities[_updater] = 
+			Abilities[_updater] = _partsManager.Weapons[1];
 			_updater += 1;
 		}
 		else
 		{
 			ChildSprites[2].Hide();
 		}
+		if(true)
+		{
+			ChildSprites[3].Show();
+			Abilities[_updater] = _partsManager.Weapons[2];
+			_updater += 1;
+		}
+		else
+		{
+			ChildSprites[3].Hide();
+		}
+		if(true)
+		{
+			ChildSprites[4].Show();
+			Abilities[_updater] = _partsManager.Weapons[3];
+			_updater += 1;
+		}
+		else
+		{
+			ChildSprites[4].Hide();
+		}
+		if(true)
+		{
+			ChildSprites[5].Show();
+			Abilities[_updater] = _partsManager.Weapons[4];
+			_updater += 1;
+		}
+		else
+		{
+			ChildSprites[5].Hide();
+		}
+		if(true)
+		{
+			ChildSprites[6].Show();
+			Abilities[_updater] = _partsManager.Weapons[5];
+			_updater += 1;
+		}
+		else
+		{
+			ChildSprites[6].Hide();
+		}
+		if(true)
+		{
+			ChildSprites[7].Show();
+			Abilities[_updater] = _partsManager.Weapons[6];
+			_updater += 1;
+		}
+		else
+		{
+			ChildSprites[7].Hide();
+		}
+
+		ChildSprites[0].Texture = TextureSwapOff;
+		
+		ChildSprites[3].Texture = TextureSlugOff;
+
+		ChildSprites[6].Texture = TextureMissileOff;
+
+		ChildSprites[7].Texture = TextureTorpedoOff;
+			
+		ChildSprites[1].Texture = TexturePlasmaOff;
+		
+		ChildSprites[5].Texture = TextureLaserOff;
+			
+		ChildSprites[2].Texture = TextureArcOff;
+			
+		ChildSprites[4].Texture = TextureEMPOff;
+
+
 	}
 	private void ChangeAbility(int AbilityNr)
 	{
+		GD.Print("Changing Ability!" + AbilityNr);
 		if (Abilities[AbilityNr] != null)
 		{
 			selectedAbilityNr = AbilityNr;
 			selectedAbilityName = Abilities[AbilityNr];
+			for (int i = 0; i < ChildSprites.Length; i++)
+			{
+				if(i == AbilityNr)
+				{
+					if(ChildSprites[i].Texture == TexturePlasma || ChildSprites[i].Texture == TexturePlasmaOff)
+					{
+						ChildSprites[i].Texture = TexturePlasma;
+					}
+					if(ChildSprites[i].Texture == TextureArc || ChildSprites[i].Texture == TextureArcOff)
+					{
+						ChildSprites[i].Texture = TextureArc;
+					}
+					if(ChildSprites[i].Texture == TextureSwap || ChildSprites[i].Texture == TextureSwapOff)
+					{
+						ChildSprites[i].Texture = TextureSwap;
+					}
+					if(ChildSprites[i].Texture == TextureSlug || ChildSprites[i].Texture == TextureSlugOff)
+					{
+						ChildSprites[i].Texture = TextureSlug;
+					}
+					if(ChildSprites[i].Texture == TextureMissile || ChildSprites[i].Texture == TextureMissileOff)
+					{
+						ChildSprites[i].Texture = TextureMissile;
+					}
+					if(ChildSprites[i].Texture == TextureTorpedo || ChildSprites[i].Texture == TextureTorpedoOff)
+					{
+						ChildSprites[i].Texture = TextureTorpedo;
+					}
+					if(ChildSprites[i].Texture == TextureLaser || ChildSprites[i].Texture == TextureLaserOff)
+					{
+						ChildSprites[i].Texture = TextureLaser;
+					}
+					if(ChildSprites[i].Texture == TextureEMP || ChildSprites[i].Texture == TextureEMPOff)
+					{
+						ChildSprites[i].Texture = TextureEMP;
+					}
+				}
+				else
+				{
+					if(ChildSprites[i].Texture == TexturePlasma || ChildSprites[i].Texture == TexturePlasmaOff)
+					{
+						ChildSprites[i].Texture = TexturePlasmaOff;
+					}
+					if(ChildSprites[i].Texture == TextureArc || ChildSprites[i].Texture == TextureArcOff)
+					{
+						ChildSprites[i].Texture = TextureArcOff;
+					}
+					if(ChildSprites[i].Texture == TextureSwap || ChildSprites[i].Texture == TextureSwapOff)
+					{
+						ChildSprites[i].Texture = TextureSwapOff;
+					}
+					if(ChildSprites[i].Texture == TextureSlug || ChildSprites[i].Texture == TextureSlugOff)
+					{
+						ChildSprites[i].Texture = TextureSlugOff;
+					}
+					if(ChildSprites[i].Texture == TextureMissile || ChildSprites[i].Texture == TextureMissileOff)
+					{
+						ChildSprites[i].Texture = TextureMissileOff;
+					}
+					if(ChildSprites[i].Texture == TextureTorpedo || ChildSprites[i].Texture == TextureTorpedoOff)
+					{
+						ChildSprites[i].Texture = TextureTorpedoOff;
+					}
+					if(ChildSprites[i].Texture == TextureLaser || ChildSprites[i].Texture == TextureLaserOff)
+					{
+						ChildSprites[i].Texture = TextureLaserOff;
+					}
+					if(ChildSprites[i].Texture == TextureEMP || ChildSprites[i].Texture == TextureEMPOff)
+					{
+						ChildSprites[i].Texture = TextureEMPOff;
+				}			
+			}
 		}
+	}
 	}
 
 	public override void _Input(InputEvent @event)

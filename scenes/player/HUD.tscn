@@ -328,9 +328,29 @@ layout_mode = 2
 texture = ExtResource("10_edggo")
 expand_mode = 2
 
+[node name="WeaponPlasma" type="TextureRect" parent="Weapons/WeaponAbilities" unique_id=1448792254]
+layout_mode = 2
+texture = ExtResource("6_h35ih")
+expand_mode = 2
+
+[node name="WeaponArc" type="TextureRect" parent="Weapons/WeaponAbilities" unique_id=1257636955]
+layout_mode = 2
+texture = ExtResource("3_fn62s")
+expand_mode = 2
+
 [node name="WeaponCannon" type="TextureRect" parent="Weapons/WeaponAbilities" unique_id=145832826]
 layout_mode = 2
 texture = ExtResource("9_7ntgm")
+expand_mode = 2
+
+[node name="WeaponPulse" type="TextureRect" parent="Weapons/WeaponAbilities" unique_id=2027330446]
+layout_mode = 2
+texture = ExtResource("7_n1mye")
+expand_mode = 2
+
+[node name="WeaponLaser" type="TextureRect" parent="Weapons/WeaponAbilities" unique_id=1878213473]
+layout_mode = 2
+texture = ExtResource("4_edggo")
 expand_mode = 2
 
 [node name="WeaponMissile" type="TextureRect" parent="Weapons/WeaponAbilities" unique_id=855626043]
@@ -341,26 +361,6 @@ expand_mode = 2
 [node name="WeaponTorpedo" type="TextureRect" parent="Weapons/WeaponAbilities" unique_id=1715061441]
 layout_mode = 2
 texture = ExtResource("8_7x8q2")
-expand_mode = 2
-
-[node name="WeaponPlasma" type="TextureRect" parent="Weapons/WeaponAbilities" unique_id=1448792254]
-layout_mode = 2
-texture = ExtResource("6_h35ih")
-expand_mode = 2
-
-[node name="WeaponLaser" type="TextureRect" parent="Weapons/WeaponAbilities" unique_id=1878213473]
-layout_mode = 2
-texture = ExtResource("4_edggo")
-expand_mode = 2
-
-[node name="WeaponArc" type="TextureRect" parent="Weapons/WeaponAbilities" unique_id=1257636955]
-layout_mode = 2
-texture = ExtResource("3_fn62s")
-expand_mode = 2
-
-[node name="WeaponPulse" type="TextureRect" parent="Weapons/WeaponAbilities" unique_id=2027330446]
-layout_mode = 2
-texture = ExtResource("7_n1mye")
 expand_mode = 2
 
 [node name="WeaponsCooldown" type="HBoxContainer" parent="Weapons" unique_id=1949189840]
