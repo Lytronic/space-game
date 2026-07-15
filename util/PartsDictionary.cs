@@ -2,9 +2,9 @@ using Godot;
 using System;
 using System.Collections.Generic;
 
-public partial class PartsDicktionaty : Node
+public partial class PartsDictionary : Node
 {
-    public static PartsDicktionaty Instance { get; private set; }
+    public static PartsDictionary Instance { get; private set; }
 
 
     public override void _Ready()

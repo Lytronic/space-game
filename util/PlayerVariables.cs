@@ -116,7 +116,7 @@ public partial class PlayerVariables : Node
 		{
 			foreach (var savedPart in data.ActiveParts)
 			{
-				ShipPart part = PartsDicktionaty.ReconstructParts[savedPart.PartType].Duplicate() as ShipPart;
+				ShipPart part = PartsDictionary.ReconstructParts[savedPart.PartType].Duplicate() as ShipPart;
 				part.randomness = savedPart.PartRandomness;
 				part.GridPosition = new(savedPart.GridX, savedPart.GridY);
 				part.Initialize();
@@ -131,7 +131,7 @@ public partial class PlayerVariables : Node
 		{
 			foreach (var savedPart in data.PassiveParts)
 			{
-				ShipPart part = PartsDicktionaty.ReconstructParts[savedPart.PartType].Duplicate() as ShipPart;
+				ShipPart part = PartsDictionary.ReconstructParts[savedPart.PartType].Duplicate() as ShipPart;
 				part.randomness = savedPart.PartRandomness;
 				part.GridPosition = new(savedPart.GridX, savedPart.GridY);
 				GD.Print(part.GridPosition);
@@ -149,7 +149,7 @@ public partial class PlayerVariables : Node
 		{
 			foreach (var savedPart in data.CollectedParts)
 			{
-				ShipPart part = PartsDicktionaty.ReconstructParts[savedPart.PartType].Duplicate() as ShipPart;
+				ShipPart part = PartsDictionary.ReconstructParts[savedPart.PartType].Duplicate() as ShipPart;
 				part.randomness = savedPart.PartRandomness;
 				part.GridPosition = new(savedPart.GridX, savedPart.GridY);
 				part.Initialize();
