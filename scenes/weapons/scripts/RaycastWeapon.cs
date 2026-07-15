@@ -73,6 +73,7 @@ public partial class RaycastWeapon : BaseWeapon
 
 	public override void _Process(double delta)
 	{
+		GD.Print(_active);
 		if (_active)
 		{
 			if (_parent is PartsManager)
@@ -164,13 +165,14 @@ public partial class RaycastWeapon : BaseWeapon
 
 		_active = true;
 		_direction = direction;
+		FireSound();
 	}
 
 	public override void Release()
 	{
 		CooldownTimer = GetTree().CreateTimer(Cooldown);
 		_active = false;
-
+		FiringSoundPlayer.Stop();
 		QueueRedraw();
 	}
 
