@@ -15,13 +15,18 @@ public partial class RaycastWeapon : BaseWeapon
 	[Export] public float RayWidth;
 	[Export] public float StunTime = 0.0f;
 	[Export] public string FiringSoundPath;
+	[Export] public bool Reflectable = false;
 	public AudioStreamPlayer2D FiringSoundPlayer;
 
 	// whether the weapon is currently shooting
 	private bool _active = false;
+	private bool _reflecting = false;
 	private Node _parent;
+	private Node2D _reflector;
 	private Vector2 _targetPos;
+	private Vector2 _reflectionPos;
 	private Vector2 _direction;
+	private Vector2 _reflectingDirection;
 
 	private SoundManager _soundManager;
 
@@ -35,21 +40,35 @@ public partial class RaycastWeapon : BaseWeapon
 
 	public override void _Draw()
 	{
+		// Draw commands need local space coordinates, so we need to transform our world space coordinates
+		// using custom transformation matrices.
+		// We could just draw a line using DrawLine(), but it wouldn't have UV coordinates for its shader.
+		// This means we need to draw an axis aligned rectangle and rotate it by the correct angle for each ray.
 		if (_active)
-		{
-			// Draw commands need local space coordinates, so we need to transform our world space coordinates
-			// using the inverse of the global transform matrix.
-			var transform = GetGlobalTransform().AffineInverse();
+	    {
+	        var weaponInverse = GetGlobalTransform().AffineInverse();
 
-			// We could just draw a line using DrawLine(), but it wouldn't have UV coordinates for its shader.
-			// This means we need to draw an axis aligned rectangle and rotate it by the correct angle.
-			float sign = Mathf.Sign(_direction.Y);
-			DrawSetTransformMatrix(transform.Rotated(sign * Mathf.Acos(_direction.Dot(Vector2.Right))));
-				
-			var rect = new Rect2(GlobalPosition + new Vector2(0.0f, RayWidth / 2),
-				(Vector2.Right * (_targetPos - GlobalPosition).Length()) - new Vector2(0.0f, RayWidth));	
-			DrawRect(rect, Colors.Red);
-		}
+	        // Primary ray
+	        float angle1 = Mathf.Sign(_direction.Y) * Mathf.Acos(_direction.Dot(Vector2.Right));
+	        var worldXform1 = new Transform2D(angle1, GlobalPosition);
+	        DrawSetTransformMatrix(weaponInverse * worldXform1);
+
+	        float length1 = (_targetPos - GlobalPosition).Length();
+	        var rect1 = new Rect2(0.0f, -RayWidth / 2, length1, RayWidth);
+	        DrawRect(rect1, Colors.Red);
+
+	        if (_reflecting)
+	        {
+	            // Reflected ray - origin is the reflector, not the weapon
+	            float angle2 = Mathf.Sign(_reflectingDirection.Y) * Mathf.Acos(_reflectingDirection.Dot(Vector2.Right));
+	            var worldXform2 = new Transform2D(angle2, _targetPos);
+	            DrawSetTransformMatrix(weaponInverse * worldXform2);
+
+	            float length2 = (_reflectionPos - _targetPos).Length(); 
+	            var rect2 = new Rect2(0.0f, -RayWidth / 2, length2, RayWidth);
+	            DrawRect(rect2, Colors.Red);
+	        }
+	    }
 	}
 
 	public override void _Process(double delta)
@@ -68,25 +87,56 @@ public partial class RaycastWeapon : BaseWeapon
 				{
 					PlayerVariables.Instance.UseEnergy(energyUse);
 				}
-		}
-			
+			}
+
 			var spaceState = GetWorld2D().DirectSpaceState;
 
 			Vector2 rayEnd = GlobalPosition + (_direction * Range);
 
 			var query = PhysicsRayQueryParameters2D.Create(GlobalPosition, rayEnd);
-			query.Exclude = [ _parent is PartsManager pm ? pm.player.GetRid() : ((CollisionObject2D)_parent).GetRid() ];
+			query.Exclude = [_parent is PartsManager pm ? pm.player.GetRid() : ((CollisionObject2D)_parent).GetRid()];
 			query.CollideWithAreas = true;
-		
+
 			var result = spaceState.IntersectRay(query);
 
 			if (result.ContainsKey("position"))
 			{
 				_targetPos = (Vector2)result["position"];
+				var target = (GodotObject)result["collider"];
+
+				// render a reflected ray if the player has a mirror
+				if (target is Player player && PlayerVariables.Instance.HasPart<Mirror>())
+				{
+					_reflecting = true;
+					_reflectingDirection = (-_direction).Reflect((Vector2)result["normal"]); 
+					_reflector = player;
+					rayEnd = _targetPos + _reflectingDirection * Range;
+				    query.From = _targetPos;   
+					query.To = rayEnd;
+					query.Exclude = [ player.GetRid() ];
+					result = spaceState.IntersectRay(query);
+
+
+					if (result.ContainsKey("position"))
+					{
+						_reflectionPos = (Vector2)result["position"];
+
+						// the new damage target is what the second ray hits
+						target = (GodotObject)result["collider"];
+					}
+					else
+					{
+						_reflectionPos = rayEnd;
+						goto SkipDamage;
+					}
+				}
+				else
+				{
+					_reflecting = false;
+				}
 
 				// Use HasMethod in this case because the collider could be any physics object
-				// and not all of them have our TakeDamage() method.
-				var target = (GodotObject)result["collider"];
+				// and not all of them have our TakeDamage() method.				
 				if (target.HasMethod("TakeDamage"))
 				{
 					target.Call("TakeDamage", DamagePerSecond * delta);
@@ -101,6 +151,7 @@ public partial class RaycastWeapon : BaseWeapon
 			{
 				_targetPos = rayEnd;
 			}
+		SkipDamage:
 
 			QueueRedraw();
 		}
@@ -125,9 +176,9 @@ public partial class RaycastWeapon : BaseWeapon
 
 	public async void FireSound()
 	{
-		if(_active)
+		if (_active)
 		{
-			if(FiringSoundPlayer.Playing)
+			if (FiringSoundPlayer.Playing)
 			{
 				await ToSignal(FiringSoundPlayer, AudioStreamPlayer.SignalName.Finished);
 				_playFiringSound();

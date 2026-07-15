@@ -4,9 +4,9 @@
 [ext_resource type="Script" uid="uid://rh28g860bekh" path="res://scenes/enemies/scripts/BaseEnemy.cs" id="1_xyabd"]
 [ext_resource type="Texture2D" uid="uid://tw30mygcuye6" path="res://scenes/enemies/BunniTest.png" id="2_ob6f1"]
 [ext_resource type="Script" uid="uid://crbskh2rywuhb" path="res://scenes/enemies/scripts/BaseEnemyAI.cs" id="4_kcbdb"]
-[ext_resource type="Material" uid="uid://b4oofdtxch87f" path="res://util/materials/explosion_canvas.tres" id="4_yvmku"]
+[ext_resource type="Material" uid="uid://b4oofdtxch87f" path="res://gfx/materials/explosion_canvas.tres" id="4_yvmku"]
 [ext_resource type="Texture2D" uid="uid://d2c3gkua0wlbx" path="res://gfx/game/particle/explosion_grid.png" id="5_6n23a"]
-[ext_resource type="Material" uid="uid://gosildff47nc" path="res://util/materials/explosion_process.tres" id="6_sj000"]
+[ext_resource type="Material" uid="uid://gosildff47nc" path="res://gfx/materials/explosion_process.tres" id="6_sj000"]
 
 [node name="CharacterBody2D" type="CharacterBody2D" unique_id=217211211]
 motion_mode = 1

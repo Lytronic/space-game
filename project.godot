@@ -31,11 +31,6 @@ PartsDicktionaty="*uid://cb06nmvtb2jd6"
 
 project/assembly_name="Microgravity"
 
-[editor]
-
-version_control/plugin_name="GitPlugin"
-version_control/autoload_on_startup=true
-
 [physics]
 
 2d/physics_engine="GodotPhysics2D"

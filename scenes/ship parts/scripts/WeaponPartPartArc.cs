@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Collections;
 
 public partial class WeaponPartArc : ShipPart
 {
@@ -15,7 +16,13 @@ public partial class WeaponPartArc : ShipPart
 	[Export] public override string SpriteTexturePath { get; set; } = "res://gfx/gui/parts/weapon_arc.png";
 	[Export] public override string MenuTexturePath { get; set; } = "res://gfx/gui/construction/icon/weaponry/weapon_arc.png";
 
-	public override void changeStats(bool add)
+    public override BitArray Shape { get; set; } = new(new bool[]{
+        true, true, false,
+        true, true, false,
+        true, true, false
+    });
+
+    public override void changeStats(bool add)
 	{
 		PlayerVariables.Instance.WeaponList[1] += addOrSubtractInt(add);
 	}

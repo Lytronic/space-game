@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Collections;
 
 public partial class WeaponPartEmp : ShipPart
 {
@@ -14,6 +15,11 @@ public partial class WeaponPartEmp : ShipPart
 
     [Export] public override string SpriteTexturePath { get; set; } = "res://gfx/gui/parts/weapon_emp.png";
     [Export] public override string MenuTexturePath { get; set; } = "res://gfx/gui/construction/icon/weaponry/weapon_pulse.png";
+    public override BitArray Shape { get; set; } = new(new bool[]{
+        true, true, false,
+        true, true, false,
+        true, true, false
+    });
 
     public override void changeStats(bool add)
     {
