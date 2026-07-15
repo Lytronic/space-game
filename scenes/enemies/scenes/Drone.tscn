@@ -12,6 +12,7 @@ scale_min = 0.5
 scale_max = 0.59999996
 
 [node name="CharacterBody2D" unique_id=217211211 instance=ExtResource("1_odoqa")]
+enemyType = "Drone"
 Speed = 250.0
 Health = 15
 Damage = 5.0

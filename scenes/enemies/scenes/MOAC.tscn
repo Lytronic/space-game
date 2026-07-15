@@ -18,6 +18,7 @@ gravity = Vector3(0, 98, 0)
 scale_max = 1.1999999
 
 [node name="CharacterBody2D" unique_id=217211211 instance=ExtResource("1_ggyiy")]
+enemyType = "MOAC"
 Speed = 200.0
 Health = 300
 ScoreValue = 150

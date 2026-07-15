@@ -13,7 +13,7 @@ scale_min = 0.04
 scale_max = 0.04
 
 [node name="CharacterBody2D" unique_id=217211211 instance=ExtResource("1_myra6")]
-lootTable = Array[Object]([])
+enemyType = "Oculox"
 Speed = 300.0
 Health = 100
 MinimumRound = 2

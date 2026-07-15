@@ -11,7 +11,8 @@ public partial class BaseEnemy : CharacterBody2D
 {
 	//here is the public loot table that EnemySalvage uses to choose a drop from; any object in here is gonna be unique
 	[Export] public NodePath salvagePath = "EnemySalvage";
-	[Export] public ShipPart[] lootTable { get; set; }
+	[Export] public String enemyType;
+	public ShipPart[] lootTable { get; set; }
 
 	public const float ScalingPerDangerLevel = 1.1f;
 
@@ -57,9 +58,28 @@ public partial class BaseEnemy : CharacterBody2D
 
 	public virtual void CreateLootTable()
 	{
-		// if you don't order these by smallest rarity first, I'm murdering you; the first one must be 'null' unlesss the enemy has guaranteed drops
-		lootTable = [null, new DebugMultitool(), new DebugMultitool(), new DebugMultitool(), new DebugMultitool(), new Mirror()];
-	}
+
+		if(enemyType == null)
+		{
+            // if you don't order these by smallest rarity first, I'm murdering you; the first one must be 'null' unlesss the enemy has guaranteed drops
+            lootTable = [null, new DebugMultitool(), new DebugMultitool(), new DebugMultitool(), new DebugMultitool(), new Mirror()];
+
+        }
+		else if (enemyType == "Drone")
+		{
+            lootTable = [null, new WeaponPartMissile()];
+			
+        }
+		else if(enemyType == "MOAC")
+		{
+            lootTable = [null, new WeaponPartTorpedo() , new WeaponPartArc()];
+        }
+		else if(enemyType == "Oculox")
+		{
+            lootTable = [null, new WeaponPartPlasma() , new WeaponPartPlasma() , new WeaponPartLaser()];
+        }
+		else { lootTable = [null]; }
+    }
 
 	public void GenerateDropStats()
 	{
