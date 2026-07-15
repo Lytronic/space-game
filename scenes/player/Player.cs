@@ -415,10 +415,6 @@ public partial class Player : CharacterBody2D
 	private void ManageEngineParticles()
 	{
 		float currentSpeed = Velocity.Length();
-		/*bool isMoving = Velocity.Length() > ParticleMinThrust;
-		_engineParticles0.Emitting = isMoving;
-		_engineParticles1.Emitting = isMoving;
-		_engineParticles2.Emitting = isMoving;*/
 		float maxSpeed = MaxThrottleSpeed;
 		float speedRatio = Mathf.Clamp(currentSpeed / maxSpeed, 0.0f, 1.0f);
 		if (currentSpeed < 5.0f) 

@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://iyvcdamrq7j2"]
 
+[ext_resource type="Shader" uid="uid://40v316ef6xib" path="res://gfx/shaders/Background.gdshader" id="1_8od17"]
 [ext_resource type="Script" uid="uid://cu4bocxu6qnps" path="res://scenes/ui/SaveMenu.cs" id="1_edlhp"]
 [ext_resource type="Texture2D" uid="uid://brehfrdmmlon1" path="res://gfx/gui/menu/back.png" id="2_8od17"]
 [ext_resource type="Texture2D" uid="uid://chomid451xw22" path="res://gfx/gui/menu/back_hover.png" id="3_hijey"]
@@ -8,18 +9,34 @@
 [ext_resource type="Texture2D" uid="uid://c34wyifbyxdro" path="res://gfx/gui/menu/option_pause.png" id="6_kp0th"]
 [ext_resource type="Texture2D" uid="uid://fh4unt4slaa7" path="res://gfx/gui/menu/option_pause_hover.png" id="7_v2uo7"]
 
-[node name="SaveMenu" type="HBoxContainer" unique_id=374265641]
-offset_left = 13.683
-offset_top = 8.0
-offset_right = 1081.0
-offset_bottom = 642.0
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hijey"]
+shader = ExtResource("1_8od17")
+
+[node name="ColorRect" type="ColorRect" unique_id=87927175]
+material = SubResource("ShaderMaterial_hijey")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SaveMenu" type="HBoxContainer" parent="." unique_id=374265641]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.025
+anchor_top = 0.025
+anchor_right = 0.95
+anchor_bottom = 0.95
+grow_horizontal = 2
+grow_vertical = 2
 size_flags_horizontal = 4
+size_flags_vertical = 4
 script = ExtResource("1_edlhp")
 
-[node name="VBoxContainerLeft" type="VBoxContainer" parent="." unique_id=1705762875]
+[node name="VBoxContainerLeft" type="VBoxContainer" parent="SaveMenu" unique_id=1705762875]
 layout_mode = 2
 
-[node name="BackButton" type="TextureButton" parent="VBoxContainerLeft" unique_id=244298836]
+[node name="BackButton" type="TextureButton" parent="SaveMenu/VBoxContainerLeft" unique_id=244298836]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 texture_normal = ExtResource("2_8od17")
@@ -28,21 +45,21 @@ texture_hover = ExtResource("3_hijey")
 ignore_texture_size = true
 stretch_mode = 0
 
-[node name="VBoxContainerRight" type="VBoxContainer" parent="." unique_id=860529686]
+[node name="VBoxContainerRight" type="VBoxContainer" parent="SaveMenu" unique_id=860529686]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Label" type="Label" parent="VBoxContainerRight" unique_id=1111379247]
+[node name="Label" type="Label" parent="SaveMenu/VBoxContainerRight" unique_id=1111379247]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("4_5qsye")
 theme_override_font_sizes/font_size = 32
 text = "NEW GAME"
 horizontal_alignment = 1
 
-[node name="Spacer" type="Control" parent="VBoxContainerRight" unique_id=1692087176]
+[node name="Spacer" type="Control" parent="SaveMenu/VBoxContainerRight" unique_id=1692087176]
 layout_mode = 2
 
-[node name="SaveListBg" type="TextureRect" parent="VBoxContainerRight" unique_id=1975080587]
+[node name="SaveListBg" type="TextureRect" parent="SaveMenu/VBoxContainerRight" unique_id=1975080587]
 clip_children = 2
 y_sort_enabled = true
 layout_mode = 2
@@ -50,7 +67,7 @@ size_flags_vertical = 3
 texture = ExtResource("5_6goau")
 expand_mode = 2
 
-[node name="NewGameButton" type="TextureButton" parent="VBoxContainerRight/SaveListBg" unique_id=1627941735]
+[node name="NewGameButton" type="TextureButton" parent="SaveMenu/VBoxContainerRight/SaveListBg" unique_id=1627941735]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -69,7 +86,7 @@ texture_hover = ExtResource("7_v2uo7")
 ignore_texture_size = true
 stretch_mode = 4
 
-[node name="Label" type="Label" parent="VBoxContainerRight/SaveListBg/NewGameButton" unique_id=203758991]
+[node name="Label" type="Label" parent="SaveMenu/VBoxContainerRight/SaveListBg/NewGameButton" unique_id=203758991]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -88,7 +105,7 @@ text = "START GAME"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="SaveFileName" type="LineEdit" parent="VBoxContainerRight/SaveListBg" unique_id=414865550]
+[node name="SaveFileName" type="LineEdit" parent="SaveMenu/VBoxContainerRight/SaveListBg" unique_id=414865550]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -103,7 +120,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_fonts/font = ExtResource("4_5qsye")
 
-[node name="Label" type="Label" parent="VBoxContainerRight/SaveListBg/SaveFileName" unique_id=467782888]
+[node name="Label" type="Label" parent="SaveMenu/VBoxContainerRight/SaveListBg/SaveFileName" unique_id=467782888]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5

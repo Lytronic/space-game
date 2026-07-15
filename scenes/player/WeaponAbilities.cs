@@ -30,12 +30,14 @@ public partial class WeaponAbilities : HBoxContainer
 
 	private Player _player;
 	private PartsManager _partsManager;
+	private WeaponsControls _weaponsControls;
+	
 
 	public override void _Ready()
 	{
+		_weaponsControls = GetNode<WeaponsControls>("/root/game/CanvasLayer/HUD/Weapons/WeaponsControls");
 		_player = GetNode<Player>("/root/game/Player");
 		_partsManager = GetNode<PartsManager>("/root/game/Player/PartsManager");
-		GD.Print(_player);
 		foreach (Node child in GetChildren()) // Hide the abilities without adding them to an array
 		{
 			if (child is Control control)
@@ -49,9 +51,8 @@ public partial class WeaponAbilities : HBoxContainer
 		{
 			ChildSprites[i] = GetChild<TextureRect>(i);
 		}
-		GD.Print(ChildSprites);
 		UpdateAbilities();
-		
+		_weaponsControls.updateControls();
 	}
 
 	
@@ -61,11 +62,11 @@ public partial class WeaponAbilities : HBoxContainer
 	}
 
 	// Function to update the ability hud
-	private void UpdateAbilities()
+	public void UpdateAbilities()
 	{
 		var _updater = 1;
 		Array.Clear(Abilities, 0, Abilities.Length);
-		if(true)
+		if(PlayerVariables.Instance.WeaponList[0] != 0)
 		{
 			//ChildSprites[0].Show();
 			ChildSprites[1].Show();
@@ -77,7 +78,7 @@ public partial class WeaponAbilities : HBoxContainer
 			ChildSprites[0].Hide();
 			ChildSprites[1].Hide();
 		}
-		if(true)
+		if(PlayerVariables.Instance.WeaponList[1] != 0)
 		{
 			ChildSprites[2].Show();
 			Abilities[_updater] = _partsManager.Weapons[1];
@@ -87,7 +88,7 @@ public partial class WeaponAbilities : HBoxContainer
 		{
 			ChildSprites[2].Hide();
 		}
-		if(true)
+		if(PlayerVariables.Instance.WeaponList[2] != 0)
 		{
 			ChildSprites[3].Show();
 			Abilities[_updater] = _partsManager.Weapons[2];
@@ -97,7 +98,7 @@ public partial class WeaponAbilities : HBoxContainer
 		{
 			ChildSprites[3].Hide();
 		}
-		if(true)
+		if(PlayerVariables.Instance.WeaponList[3] != 0)
 		{
 			ChildSprites[4].Show();
 			Abilities[_updater] = _partsManager.Weapons[3];
@@ -107,7 +108,7 @@ public partial class WeaponAbilities : HBoxContainer
 		{
 			ChildSprites[4].Hide();
 		}
-		if(true)
+		if(PlayerVariables.Instance.WeaponList[4] != 0)
 		{
 			ChildSprites[5].Show();
 			Abilities[_updater] = _partsManager.Weapons[4];
@@ -117,7 +118,7 @@ public partial class WeaponAbilities : HBoxContainer
 		{
 			ChildSprites[5].Hide();
 		}
-		if(true)
+		if(PlayerVariables.Instance.WeaponList[5] != 0)
 		{
 			ChildSprites[6].Show();
 			Abilities[_updater] = _partsManager.Weapons[5];
@@ -127,7 +128,7 @@ public partial class WeaponAbilities : HBoxContainer
 		{
 			ChildSprites[6].Hide();
 		}
-		if(true)
+		if(PlayerVariables.Instance.WeaponList[6] != 0)
 		{
 			ChildSprites[7].Show();
 			Abilities[_updater] = _partsManager.Weapons[6];
@@ -156,7 +157,7 @@ public partial class WeaponAbilities : HBoxContainer
 
 
 	}
-	private void ChangeAbility(int AbilityNr)
+	public void ChangeAbility(int AbilityNr)
 	{
 		GD.Print("Changing Ability!" + AbilityNr);
 		if (Abilities[AbilityNr] != null)

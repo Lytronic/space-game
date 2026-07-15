@@ -8,7 +8,7 @@ public partial class WeaponsControls : HBoxContainer
 
 	public override void _Ready()
 	{
-		_weaponAbilities = GetParent().GetNode<HBoxContainer>("WeaponAbilities") as WeaponAbilities;
+		_weaponAbilities = GetNode<WeaponAbilities>("/root/game/CanvasLayer/HUD/Weapons/WeaponAbilities");
 		ControlKeys = new Label[8]; // Initialize ControlKeys Array
 		ControlKeys[0] = GetChild(0) as Label; // Add the Q key label to the array
 		for (int i = 1; i < ControlKeys.Length; i++)
@@ -20,7 +20,6 @@ public partial class WeaponsControls : HBoxContainer
 			ControlKeys[i].Hide();
 		}
 		//updateControls();
-		GD.Print(ControlKeys);
 	}
 
 
@@ -28,7 +27,8 @@ public partial class WeaponsControls : HBoxContainer
 	{
 	}
 	
-	/*public void updateControls() {
+	public void updateControls() {
+		GD.Print(_weaponAbilities.Abilities);
 		for (int i = 0; i < ControlKeys.Length; i++)
 		{
 			if(_weaponAbilities.Abilities[i] != null)
@@ -39,6 +39,6 @@ public partial class WeaponsControls : HBoxContainer
 			{
 				ControlKeys[i].Hide();
 			}
-		}	
-	}*/
+		}
+	}
 }
