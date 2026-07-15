@@ -95,5 +95,5 @@ void fragment() {
 	float brightness = clamp(randomf(SCREEN_UV + 42.324), 0.0f, 1.0f);
 	
 	// add even more randomness and a sine wave to make some stars twinkle
-	COLOR = vec4(kcol * brightness * v.r * (sin(TIME * length(random(SCREEN_UV) * 5.0)) + 1.0), 1.0);
+	COLOR = vec4(kcol * brightness * v.r * (sin(TIME * length(random(SCREEN_UV) * 7.5)) + 1.0), 1.0);
 }
